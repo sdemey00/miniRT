@@ -18,6 +18,7 @@ FLAGS	= -Wall -Wextra -Werror
 BLDD	= build
 SRCD	= src
 LIBD	= libs
+INCD	= includes
 
 MLXD	= $(LIBD)/mlx
 MLXN	= $(MLXD)/libmlx_Linux.a
@@ -27,7 +28,7 @@ LFTN	= $(LFTD)/libft.a
 
 SRCS	= $(shell find $(SRCD) -type f -name "*.c")
 OBJS	= $(patsubst %.c, $(BLDD)/%.o, $(SRCS))
-INCS	= -I $(SRCD) -I $(MLXD) -I $(LFTD)
+INCS	= -I $(SRCD) -I $(MLXD) -I $(LFTD) -I $(INCD)
 LNKS	= -L $(MLXD) -L $(LFTD)
 LIBS	= -lmlx -lX11 -lXext -lft -lm
 DEPS	= $(OBJS:.o=.d)
@@ -61,7 +62,7 @@ fclean: clean
 	$(MAKE) -C $(MLXD) clean &> /dev/null
 	$(MAKE) -C $(LFTD) $@ -s
 
-re: fclean
+re: fclean all
 
 norm:
 	@ ! norminette $(SRCD) | grep -v "OK"

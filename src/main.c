@@ -39,10 +39,29 @@ static int	event_handler(int key, void *ctx)
 	return (0);
 }
 
-int	main(void)
+static void init_scene(t_scene *scene)
+{
+	scene->planes_idx = 0;
+	scene->spheres_idx = 0;
+	scene->cylinders_idx = 0;
+}
+
+int	main(int argc, char **argv)
 {
 	t_ectx	ctx;
+	t_scene	scene;
 
+	if (argc != 2)
+	{
+		ft_dprintf(2, "Usage: ./miniRT <scene.rt>");
+		return (0);
+	}
+	init_scene(&scene);
+	parse_file(argv[1], &scene);
+	printf("Scene parsed\n");
+	print_scene_infos(&scene);
+	// print_spheres_infos(&scene);
+	return (0);
 	if (!gctx_init(&ctx.g))
 		exit(1);
 	mlx_hook(ctx.g.win, WIN_CLOSE, 0, ectx_close, &ctx);

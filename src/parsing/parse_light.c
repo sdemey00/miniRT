@@ -1,0 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_light.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sdemey <sdemey@student.s19.be>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/29 12:32:54 by sdemey            #+#    #+#             */
+/*   Updated: 2025/10/29 12:32:56 by sdemey           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minirt.h"
+
+void	parse_light(char **split, t_scene *scene)
+{
+	t_light	light;
+
+	if (scene->light.set)
+		ft_dprintf(2, "Multiple light source definitions are not allowed");
+	if (!split[1] || !split[2] || !split[3])
+		ft_dprintf(2, "Light source: invalid number of arguments");
+	light.pos = parse_vec(split[1]);
+	light.brightness = ft_atof(split[2]);
+	light.color = parse_color(split[3]);
+	scene->light = light;
+	scene->light.set = 1;
+}
+
+void	print_light_infos(t_scene *scene)
+{
+	printf("Light source position: %.2f, %.2f, %.2f\n",
+		scene->light.pos.x, scene->light.pos.y, scene->light.pos.z);
+	printf("Light source brightness: %.2f\n",
+		scene->light.brightness);
+	printf("Light source color: %d, %d, %d\n",
+		scene->ambiant.color.r, scene->ambiant.color.g, scene->ambiant.color.b);
+}

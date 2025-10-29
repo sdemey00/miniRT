@@ -37,7 +37,11 @@
 
 # include "libft.h"
 # include "mlx.h"
+# include "structs.h"
+# include "parsing.h"
 # include <math.h>
+# include <stdio.h>
+# include <fcntl.h>
 
 /* MLX controller event codes */
 # define WIN_CLOSE 17
