@@ -26,18 +26,28 @@ void	parse_sphere(char **split, t_scene *scene)
 
 void	print_spheres_infos(t_scene *scene)
 {
-	int			i;
+	int	i;
 
 	i = 0;
+	if (scene->spheres_idx == 0)
+	{
+		printf("There is no spheres\n");
+		return ;
+	}
+	printf("\tThere is %d spheres set\n", scene->spheres_idx);
+	printf("- - - - - - - - - - - - - - - - - - - -\n");
 	while (i < scene->spheres_idx)
 	{
-		printf("Sphere %d center: %.2f, %.2f, %.2f\n", i,
-			scene->spheres[i].center.x, scene->spheres[i].center.y, scene->spheres[i].center.z);
-		printf("Sphere %d diameter: %.2f\n", i, scene->spheres[i].diameter);
-		printf("Sphere %d color: %d, %d, %d\n", i,
-			scene->spheres[i].color.r, scene->spheres[i].color.g, scene->spheres[i].color.b);
+		printf("Sphere %d center: %17.2f, %.2f, %.2f\n", i + 1,
+			scene->spheres[i].center.x, scene->spheres[i].center.y,
+			scene->spheres[i].center.z);
+		printf("Sphere %d diameter: %16.2f\n", i + 1,
+			scene->spheres[i].diameter);
+		printf("Sphere %d color: %16d, %d, %d\n", i + 1,
+			scene->spheres[i].color.r, scene->spheres[i].color.g,
+			scene->spheres[i].color.b);
+		if (i != scene->spheres_idx - 1)
+			printf("- - - - - - - - - - - - - - - - - - - -\n");
 		i++;
-		if (i != scene->spheres_idx)
-			printf("- - - - - - - - - - - - - - - - - - - - - - -\n");
 	}
 }

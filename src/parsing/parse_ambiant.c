@@ -28,7 +28,12 @@ void	parse_ambiant(char **split, t_scene *scene)
 
 void	print_ambiant_infos(t_scene *scene)
 {
-	printf("Ambiant light ratio: %.2f\n", scene->ambiant.ratio);
-	printf("Ambiant light color: %d, %d, %d\n", scene->ambiant.color.r,
+	if (scene->ambiant.set != 1)
+	{
+		printf("There is no ambiant light\n");
+		return ;
+	}
+	printf("Ambiant light ratio: %13.2f\n", scene->ambiant.ratio);
+	printf("Ambiant light color: %12d, %d, %d\n", scene->ambiant.color.r,
 		scene->ambiant.color.g, scene->ambiant.color.b);
 }

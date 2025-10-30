@@ -29,10 +29,15 @@ void	parse_light(char **split, t_scene *scene)
 
 void	print_light_infos(t_scene *scene)
 {
-	printf("Light source position: %.2f, %.2f, %.2f\n",
+	if (scene->light.set != 1)
+	{
+		printf("There is no light source\n");
+		return ;
+	}
+	printf("Light source position: %13.2f, %.2f, %.2f\n",
 		scene->light.pos.x, scene->light.pos.y, scene->light.pos.z);
-	printf("Light source brightness: %.2f\n",
+	printf("Light source brightness: %9.2f\n",
 		scene->light.brightness);
-	printf("Light source color: %d, %d, %d\n",
+	printf("Light source color: %13d, %d, %d\n",
 		scene->ambiant.color.r, scene->ambiant.color.g, scene->ambiant.color.b);
 }

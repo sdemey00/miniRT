@@ -32,20 +32,29 @@ void	parse_plane(char **split, t_scene *scene)
 
 void	print_planes_infos(t_scene *scene)
 {
-	int			i;
-
+	int	i;
 
 	i = 0;
+	if (scene->planes_idx == 0)
+	{
+		printf("There is no planes\n");
+		return ;
+	}
+	printf("\tThere is %d planes set\n", scene->planes_idx);
+	printf("- - - - - - - - - - - - - - - - - - - -\n");
 	while (i < scene->planes_idx)
 	{
-		printf("Plane %d point: %.2f, %.2f, %.2f\n", i,
-			scene->planes[i].point.x, scene->planes[i].point.y, scene->planes[i].point.z);
-		printf("Plane %d normal: %.2f, %.2f, %.2f\n", i,
-			scene->planes[i].normal.x, scene->planes[i].normal.y, scene->planes[i].normal.z);
-		printf("Plane %d color: %d, %d, %d\n", i,
-			scene->planes[i].color.r, scene->planes[i].color.g, scene->planes[i].color.b);
-		if (i != scene->planes_idx)
-			printf("- - - - - - - - - - - - - - - - - - - - - - -\n");
+		printf("Plane %d point: %19.2f, %.2f, %.2f\n", i + 1,
+			scene->planes[i].point.x, scene->planes[i].point.y,
+			scene->planes[i].point.z);
+		printf("Plane %d normal: %18.2f, %.2f, %.2f\n", i + 1,
+			scene->planes[i].normal.x, scene->planes[i].normal.y,
+			scene->planes[i].normal.z);
+		printf("Plane %d color: %16d, %d, %d\n", i + 1,
+			scene->planes[i].color.r, scene->planes[i].color.g,
+			scene->planes[i].color.b);
+		if (i != scene->planes_idx - 1)
+			printf("- - - - - - - - - - - - - - - - - - - -\n");
 		i++;
 	}
 }

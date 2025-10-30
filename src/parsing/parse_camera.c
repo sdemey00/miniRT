@@ -36,9 +36,14 @@ void	parse_camera(char **split, t_scene *scene)
 
 void	print_camera_infos(t_scene *scene)
 {
-	printf("Camera position: %.2f, %.2f, %.2f\n",
+	if (scene->camera.set != 1)
+	{
+		printf("There is no camera\n");
+		return ;
+	}
+	printf("Camera position: %19.2f, %.2f, %.2f\n",
 		scene->camera.pos.x, scene->camera.pos.y, scene->camera.pos.z);
-	printf("Camera direction: %.2f, %.2f, %.2f\n",
+	printf("Camera direction: %16.2f, %.2f, %.2f\n",
 		scene->camera.dir.x, scene->camera.dir.y, scene->camera.dir.z);
-	printf("Camera FOV: %.2f\n", scene->camera.fov);
+	printf("Camera FOV: %23.2f\n", scene->camera.fov);
 }

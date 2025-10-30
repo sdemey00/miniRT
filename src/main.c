@@ -39,7 +39,7 @@ static int	event_handler(int key, void *ctx)
 	return (0);
 }
 
-static void init_scene(t_scene *scene)
+static void	init_scene(t_scene *scene)
 {
 	scene->planes_idx = 0;
 	scene->spheres_idx = 0;
@@ -60,7 +60,6 @@ int	main(int argc, char **argv)
 	parse_file(argv[1], &scene);
 	printf("Scene parsed\n");
 	print_scene_infos(&scene);
-	// print_spheres_infos(&scene);
 	return (0);
 	if (!gctx_init(&ctx.g))
 		exit(1);
