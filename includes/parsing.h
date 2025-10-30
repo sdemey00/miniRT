@@ -4,20 +4,20 @@
 #include "minirt.h"
 
 int		parse_file(char *filename, t_scene *scene);
-void	parse_line(char *line, t_scene *scene);
+int		parse_line(char *line, t_scene *scene);
 
-void	parse_ambiant(char **split, t_scene *scene);
-void	parse_camera(char **split, t_scene *scene);
-void	parse_light(char **split, t_scene *scene);
-void	parse_sphere(char **split, t_scene *scene);
-void	parse_plane(char **split, t_scene *scene);
-void	parse_cylinder(char **split, t_scene *scene);
+int		parse_ambiant(char **split, t_scene *scene);
+int		parse_camera(char **split, t_scene *scene);
+int		parse_light(char **split, t_scene *scene);
+int		parse_sphere(char **split, t_scene *scene);
+int		parse_plane(char **split, t_scene *scene);
+int		parse_cylinder(char **split, t_scene *scene);
 
 // UTILS
-t_vec	parse_vec(char *str);
-t_color	parse_color(char *str);
-void	check_range_double(double val, double min, double max, char *msg);
-void	check_range_int(int val, int min, int max, char *msg);
+int		parse_vec(char *str, t_vec *v);
+int		parse_color(char *str, t_color *c);
+int		check_range_double(double val, double min, double max, char *msg);
+int		check_range_int(int val, int min, int max, char *msg);
 double	ft_atof(const char *str);
 void	ft_free_split(char **tab);
 // PRINT
