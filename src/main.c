@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
 #include "minirt.h"
 
 static t_bool	key_handler(int key, void *ctx)
@@ -38,7 +36,7 @@ static int	event_handler(int key, void *ctx)
 	}
 	return (0);
 }
-
+*/
 static void	init_scene(t_scene *scene)
 {
 	scene->planes_idx = 0;
@@ -57,7 +55,8 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	init_scene(&scene);
-	parse_file(argv[1], &scene);
+	if (parse_file(argv[1], &scene) == -1)
+		return (ft_dprintf(2, "Error occured during parsing\n"), -1);
 	printf("Scene parsed\n");
 	print_scene_infos(&scene);
 	return (0);

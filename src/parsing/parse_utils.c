@@ -26,47 +26,57 @@ void	ft_free_split(char **tab)
 	tab = NULL;
 }
 
-void	check_range_double(double val, double min, double max, char *msg)
+int	check_range_double(double val, double min, double max, char *msg)
 {
 	if (val < min || val > max)
-		ft_dprintf(2, msg);
+		return (ft_dprintf(2, msg), 0);
+	return (1);
 }
 
-void	check_range_int(int val, int min, int max, char *msg)
+int	check_range_int(int val, int min, int max, char *msg)
 {
 	if (val < min || val > max)
-		ft_dprintf(2, msg);
+		return (ft_dprintf(2, msg), 0);
+	return (1);
 }
 
-t_vec	parse_vec(char *str)
+int	parse_vec(char *str, t_vec *v)
 {
 	char	**tab;
-	t_vec	v;
 
 	tab = ft_split(str, ',');
 	if (!tab[0] || !tab[1] || !tab[2])
-		ft_dprintf(2, "Invalid vector format");
-	v.x = ft_atof(tab[0]);
-	v.y = ft_atof(tab[1]);
-	v.z = ft_atof(tab[2]);
+	{
+		ft_free_split(tab);
+		return (ft_dprintf(2, "Invalid vector format\n"), -1);
+	}
+	v->x = ft_atof(tab[0]);
+	v->y = ft_atof(tab[1]);
+	v->z = ft_atof(tab[2]);
 	ft_free_split(tab);
-	return (v);
+	return (0);
 }
 
-t_color	parse_color(char *str)
+int	parse_color(char *str, t_color *c)
 {
 	char	**tab;
-	t_color	c;
 
 	tab = ft_split(str, ',');
 	if (!tab[0] || !tab[1] || !tab[2])
-		ft_dprintf(2, "Invalid color format");
-	c.r = ft_atoi(tab[0]);
-	c.g = ft_atoi(tab[1]);
-	c.b = ft_atoi(tab[2]);
-	check_range_int(c.r, 0, 255, "Invalid color range");
-	check_range_int(c.g, 0, 255, "Invalid color range");
-	check_range_int(c.b, 0, 255, "Invalid color range");
+	{
+		ft_free_split(tab);
+		return (ft_dprintf(2, "Invalid color format\n"), -1);
+	}
+	c->r = ft_atoi(tab[0]);
+	c->g = ft_atoi(tab[1]);
+	c->b = ft_atoi(tab[2]);
+	if (!check_range_int(c->r, 0, 255, "Invalid color range\n")
+		|| !check_range_int(c->g, 0, 255, "Invalid color range\n")
+		|| !check_range_int(c->b, 0, 255, "Invalid color range\n"))
+	{
+		ft_free_split(tab);
+		return(-1);
+	}
 	ft_free_split(tab);
-	return (c);
+	return (0);
 }

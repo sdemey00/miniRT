@@ -12,24 +12,27 @@
 
 #include "minirt.h"
 
-void	parse_cylinder(char **split, t_scene *scene)
+int	parse_cylinder(char **split, t_scene *scene)
 {
 	t_cylinder	cylinder;
 
 	if (!split[1] || !split[2] || !split[3] || !split[4] || !split[5])
-		ft_dprintf(2, "Cylinder: invalid number of arguments");
-	cylinder.center = parse_vec(split[1]);
-	cylinder.axis = parse_vec(split[2]);
-	check_range_int(cylinder.axis.x, -1, 1,
-		"Cylinder: direction vector out of range [-1,1]");
-	check_range_int(cylinder.axis.y, -1, 1,
-		"Cylinder: direction vector out of range [-1,1]");
-	check_range_int(cylinder.axis.z, -1, 1,
-		"Cylinder: direction vector out of range [-1,1]");
+		ft_dprintf(2, "Cylinder: invalid number of arguments\n");
+	if (parse_vec(split[1], &cylinder.center) == -1 
+		|| parse_vec(split[2], &cylinder.axis) == -1
+		|| parse_color(split[5], &cylinder.color) == -1)
+		return (-1);
+	if (!check_range_int(cylinder.axis.x, -1, 1,
+		"Cylinder: direction vector out of range [-1,1]\n")
+		|| !check_range_int(cylinder.axis.y, -1, 1,
+		"Cylinder: direction vector out of range [-1,1]\n")
+		|| !check_range_int(cylinder.axis.z, -1, 1,
+		"Cylinder: direction vector out of range [-1,1]\n"))
+		return (-1);
 	cylinder.diameter = ft_atof(split[3]);
 	cylinder.height = ft_atof(split[4]);
-	cylinder.color = parse_color(split[5]);
 	scene->cylinders[scene->cylinders_idx++] = cylinder;
+	return (0);
 }
 
 void	print_cylinder_infos(t_cylinder cylinder, int i)

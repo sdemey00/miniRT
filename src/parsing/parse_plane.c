@@ -12,22 +12,25 @@
 
 #include "minirt.h"
 
-void	parse_plane(char **split, t_scene *scene)
+int	parse_plane(char **split, t_scene *scene)
 {
 	t_plane	plane;
 
 	if (!split[1] || !split[2] || !split[3])
-		ft_dprintf(2, "Plane: invalid number of arguments");
-	plane.point = parse_vec(split[1]);
-	plane.normal = parse_vec(split[2]);
-	check_range_int(plane.normal.x, -1, 1,
-		"Plane: normal vector out of range [-1,1]");
-	check_range_int(plane.normal.y, -1, 1,
-		"Plane: normal vector out of range [-1,1]");
-	check_range_int(plane.normal.z, -1, 1,
-		"Plane: normal vector out of range [-1,1]");
-	plane.color = parse_color(split[3]);
+		return (ft_dprintf(2, "Plane: invalid number of arguments\n"), -1);
+	if (parse_vec(split[1], &plane.point) == -1
+		|| parse_vec(split[2], &plane.normal) == -1
+		|| parse_color(split[3], &plane.color) == -1)
+		return (-1);
+	if (!check_range_int(plane.normal.x, -1, 1,
+		"Plane: normal vector out of range [-1,1]\n")
+		|| !check_range_int(plane.normal.y, -1, 1,
+		"Plane: normal vector out of range [-1,1]\n")
+		|| !check_range_int(plane.normal.z, -1, 1,
+		"Plane: normal vector out of range [-1,1]\n"))
+		return (-1);
 	scene->planes[scene->planes_idx++] = plane;
+	return (0);
 }
 
 void	print_planes_infos(t_scene *scene)

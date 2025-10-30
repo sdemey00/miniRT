@@ -17,22 +17,29 @@ int	parse_file(char *filename, t_scene *scene)
 	int		fd;
 	char	*line;
 
+	if (!filename || !*filename)
+		return (-1);
+	if (ft_strlen(filename) < 4 || ft_strcmp(&filename[ft_strlen(filename) - 3], ".rt") != 0)
+		return (ft_dprintf(2, "%s: not a .rt file\n", filename), -1);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		ft_dprintf(2, "Cannot open .rt file");
+		return (ft_dprintf(2, "Cannot open .rt file\n"), -1);
 	line = ft_gnl(fd);
 	if (line)
 	{
 		while ((line))
 		{
 			if (line[0] != '\n' && line[0] != '#')
-				parse_line(line, scene);
+			{
+				if(parse_line(line, scene) == -1)
+					return (free(line), -1);
+			}
 			free(line);
 			line = ft_gnl(fd);
 		}
 	}
 	else
-		ft_dprintf(2, "Empty file");
+		return (ft_dprintf(2, "Empty file\n"), 0);
 	close(fd);
 	return (0);
 }
