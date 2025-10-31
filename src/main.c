@@ -36,8 +36,8 @@ static int	event_handler(int key, void *ctx)
 	}
 	return (0);
 }
-*/
-static void	init_scene(t_scene *scene)
+
+static void	scene_init(t_scene *scene)
 {
 	scene->planes_idx = 0;
 	scene->spheres_idx = 0;
@@ -54,7 +54,7 @@ int	main(int argc, char **argv)
 		ft_dprintf(2, "Usage: ./miniRT <scene.rt>");
 		return (0);
 	}
-	init_scene(&scene);
+	scene_init(&scene);
 	if (parse_file(argv[1], &scene) == -1)
 		return (ft_dprintf(2, "Error occured during parsing\n"), -1);
 	printf("Scene parsed\n");
