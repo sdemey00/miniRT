@@ -15,37 +15,37 @@
 
 typedef struct s_color
 {
-	int	r;
-	int	g;
-	int	b;
+	t_ssuint	r;
+	t_ssuint	g;
+	t_ssuint	b;
 }	t_color;
 
 typedef struct s_ambiant
 {
-	double	ratio;
+	float	ratio;
 	t_color	color;
-	int		set;
+	t_bool		set;
 }	t_ambiant;
 
 typedef struct s_camera
 {
 	t_vec	pos;
 	t_vec	dir;
-	double	fov;
-	int		set;
+	float	fov;
+	t_bool		set;
 }	t_camera;
 
 typedef struct s_light
 {
 	t_vec	pos;
-	double	brightness;
+	float	brightness;
 	t_color	color;
 }	t_light;
 
 typedef struct s_sphere
 {
 	t_vec				center;
-	double				diameter;
+	float				diameter;
 	t_color				color;
 }	t_sphere;
 
@@ -60,8 +60,8 @@ typedef struct s_cylinder
 {
 	t_vec				center;
 	t_vec				axis;
-	double				diameter;
-	double				height;
+	float				diameter;
+	float				height;
 	t_color				color;
 }	t_cylinder;
 
