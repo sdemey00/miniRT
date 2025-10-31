@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sdemey <sdemey@student.s19.be>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/31 12:38:18 by sdemey            #+#    #+#             */
+/*   Updated: 2025/10/31 12:38:20 by sdemey           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSING_H
 # define PARSING_H
 
-#include "minirt.h"
+# include "minirt.h"
 
 int		parse_file(char *filename, t_scene *scene);
 int		parse_line(char *line, t_scene *scene);
@@ -28,7 +40,5 @@ void	print_light_infos(t_scene *scene);
 void	print_spheres_infos(t_scene *scene);
 void	print_planes_infos(t_scene *scene);
 void	print_cylinders_infos(t_scene *scene);
-//void	normalize_vec(t_vec *v);
-
 
 #endif
