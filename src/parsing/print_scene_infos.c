@@ -19,7 +19,7 @@ void	print_scene_infos(t_scene *scene)
 	printf("________________________________________\n\n");
 	print_camera_infos(scene);
 	printf("________________________________________\n\n");
-	print_light_infos(scene);
+	print_lights_infos(scene);
 	printf("________________________________________\n\n");
 	print_spheres_infos(scene);
 	printf("________________________________________\n\n");

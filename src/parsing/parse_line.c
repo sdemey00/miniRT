@@ -12,15 +12,15 @@
 
 #include "minirt.h"
 
-int	parse_line(char *line, t_scene *scene)
+t_bool	parse_line(char *line, t_scene *scene)
 {
 	char	**split;
-	int		status;
+	t_bool		status;
 
-	status = 0;
+	status = 1;
 	split = ft_split(line, ' ');
 	if (!split || !split[0])
-		return (-1);
+		return (0);
 	if (ft_strcmp(split[0], "A") == 0)
 		status = parse_ambiant(split, scene);
 	if (ft_strcmp(split[0], "C") == 0)

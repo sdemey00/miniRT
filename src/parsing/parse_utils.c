@@ -26,21 +26,21 @@ void	ft_free_split(char **tab)
 	tab = NULL;
 }
 
-int	check_range_double(double val, double min, double max, char *msg)
+t_bool	check_range_double(double val, double min, double max, char *msg)
 {
 	if (val < min || val > max)
 		return (ft_dprintf(2, msg), 0);
 	return (1);
 }
 
-int	check_range_int(int val, int min, int max, char *msg)
+t_bool	check_range_int(int val, int min, int max, char *msg)
 {
 	if (val < min || val > max)
 		return (ft_dprintf(2, msg), 0);
 	return (1);
 }
 
-int	parse_vec(char *str, t_vec *v)
+t_bool	parse_vec(char *str, t_vec *v)
 {
 	char	**tab;
 
@@ -48,16 +48,16 @@ int	parse_vec(char *str, t_vec *v)
 	if (!tab[0] || !tab[1] || !tab[2])
 	{
 		ft_free_split(tab);
-		return (ft_dprintf(2, "Invalid vector format\n"), -1);
+		return (ft_dprintf(2, "Invalid vector format\n"), 0);
 	}
 	v->x = ft_atof(tab[0]);
 	v->y = ft_atof(tab[1]);
 	v->z = ft_atof(tab[2]);
 	ft_free_split(tab);
-	return (0);
+	return (1);
 }
 
-int	parse_color(char *str, t_color *c)
+t_bool	parse_color(char *str, t_color *c)
 {
 	char	**tab;
 
@@ -75,8 +75,8 @@ int	parse_color(char *str, t_color *c)
 		|| !check_range_int(c->b, 0, 255, "Invalid color range\n"))
 	{
 		ft_free_split(tab);
-		return (-1);
+		return (0);
 	}
 	ft_free_split(tab);
-	return (0);
+	return (1);
 }

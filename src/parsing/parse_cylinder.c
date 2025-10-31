@@ -12,30 +12,30 @@
 
 #include "minirt.h"
 
-int	parse_cylinder(char **split, t_scene *scene)
+t_bool	parse_cylinder(char **split, t_scene *scene)
 {
 	t_cylinder	cylinder;
 
 	if (!split[1] || !split[2] || !split[3] || !split[4] || !split[5])
 		ft_dprintf(2, "Cylinder: invalid number of arguments\n");
-	if (parse_vec(split[1], &cylinder.center) == -1
-		|| parse_vec(split[2], &cylinder.axis) == -1
-		|| parse_color(split[5], &cylinder.color) == -1)
-		return (-1);
+	if (!parse_vec(split[1], &cylinder.center)
+		|| !parse_vec(split[2], &cylinder.axis)
+		|| !parse_color(split[5], &cylinder.color))
+		return (0);
 	if (!check_range_int(cylinder.axis.x, -1, 1,
 			"Cylinder: direction vector out of range [-1,1]\n")
 		|| !check_range_int(cylinder.axis.y, -1, 1,
 			"Cylinder: direction vector out of range [-1,1]\n")
 		|| !check_range_int(cylinder.axis.z, -1, 1,
 			"Cylinder: direction vector out of range [-1,1]\n"))
-		return (-1);
+		return (0);
 	cylinder.diameter = ft_atof(split[3]);
 	cylinder.height = ft_atof(split[4]);
 	scene->cylinders[scene->cylinders_idx++] = cylinder;
-	return (0);
+	return (1);
 }
 
-void	print_cylinder_infos(t_cylinder cylinder, int i)
+void	print_cylinder_infos(t_cylinder cylinder, t_ssuint i)
 {
 	printf("Cylinder %d center: %16.2f, %.2f, %.2f\n", i + 1,
 		cylinder.center.x, cylinder.center.y,
@@ -54,7 +54,7 @@ void	print_cylinder_infos(t_cylinder cylinder, int i)
 
 void	print_cylinders_infos(t_scene *scene)
 {
-	int	i;
+	t_ssuint	i;
 
 	i = 0;
 	if (scene->cylinders_idx == 0)

@@ -12,26 +12,26 @@
 
 #include "minirt.h"
 
-int	parse_ambiant(char **split, t_scene *scene)
+t_bool	parse_ambiant(char **split, t_scene *scene)
 {
 	t_ambiant	ambiant;
 
 	if (scene->ambiant.set)
 	{
 		ft_dprintf(2, "Multiple ambiant light definitions are not allowed\n");
-		return (-1);
+		return (0);
 	}
 	if (!split[1] || !split[2])
 	{
 		ft_dprintf(2, "Ambiant light: invalid number of arguments\n");
-		return (-1);
+		return (0);
 	}
 	ambiant.ratio = ft_atof(split[1]);
-	if (parse_color(split[2], &ambiant.color) == -1)
-		return (-1);
+	if (!parse_color(split[2], &ambiant.color))
+		return (0);
 	scene->ambiant = ambiant;
 	scene->ambiant.set = 1;
-	return (0);
+	return (1);
 }
 
 void	print_ambiant_infos(t_scene *scene)

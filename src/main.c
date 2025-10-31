@@ -42,6 +42,7 @@ static void	scene_init(t_scene *scene)
 	scene->planes_idx = 0;
 	scene->spheres_idx = 0;
 	scene->cylinders_idx = 0;
+	scene->lights_idx = 0;
 }
 
 int	main(int argc, char **argv)
@@ -55,7 +56,7 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	scene_init(&scene);
-	if (parse_file(argv[1], &scene) == -1)
+	if (!parse_file(argv[1], &scene))
 		return (ft_dprintf(2, "Error occured during parsing\n"), -1);
 	printf("Scene parsed\n");
 	print_scene_infos(&scene);

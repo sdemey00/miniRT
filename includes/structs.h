@@ -40,7 +40,6 @@ typedef struct s_light
 	t_vec	pos;
 	double	brightness;
 	t_color	color;
-	int		set;
 }	t_light;
 
 typedef struct s_sphere
@@ -70,7 +69,8 @@ typedef struct s_scene
 {
 	t_ambiant	ambiant;
 	t_camera	camera;
-	t_light		light;
+	t_light		light[1280];
+	t_ssuint 	lights_idx;
 	t_sphere	spheres[128];
 	t_ssuint	spheres_idx;
 	t_plane		planes[128];

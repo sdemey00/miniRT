@@ -12,31 +12,31 @@
 
 #include "minirt.h"
 
-int	parse_file(char *filename, t_scene *scene)
+t_bool	parse_file(char *filename, t_scene *scene)
 {
 	int		fd;
 	char	*line;
 
 	if (!filename || !*filename)
-		return (-1);
+		return (0);
 	if (ft_strlen(filename) < 4
 		|| ft_strcmp(&filename[ft_strlen(filename) - 3], ".rt") != 0)
-		return (ft_dprintf(2, "%s: not a .rt file\n", filename), -1);
+		return (ft_dprintf(2, "%s: not a .rt file\n", filename), 0);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (ft_dprintf(2, "Cannot open .rt file\n"), -1);
+		return (ft_dprintf(2, "Cannot open .rt file\n"), 0);
 	line = ft_gnl(fd);
 	if (!line)
-		return (ft_dprintf(2, "Empty file\n"), -1);
+		return (ft_dprintf(2, "Empty file\n"), 0);
 	while (line)
 	{
 		if (line[0] != '\n' && line[0] != '#')
 		{
-			if (parse_line(line, scene) == -1)
-				return (free(line), -1);
+			if (!parse_line(line, scene))
+				return (free(line), 0);
 		}
 		free(line);
 		line = ft_gnl(fd);
 	}
-	return (close(fd), 0);
+	return (close(fd), 1);
 }
