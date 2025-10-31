@@ -18,16 +18,16 @@ int	parse_cylinder(char **split, t_scene *scene)
 
 	if (!split[1] || !split[2] || !split[3] || !split[4] || !split[5])
 		ft_dprintf(2, "Cylinder: invalid number of arguments\n");
-	if (parse_vec(split[1], &cylinder.center) == -1 
+	if (parse_vec(split[1], &cylinder.center) == -1
 		|| parse_vec(split[2], &cylinder.axis) == -1
 		|| parse_color(split[5], &cylinder.color) == -1)
 		return (-1);
 	if (!check_range_int(cylinder.axis.x, -1, 1,
-		"Cylinder: direction vector out of range [-1,1]\n")
+			"Cylinder: direction vector out of range [-1,1]\n")
 		|| !check_range_int(cylinder.axis.y, -1, 1,
-		"Cylinder: direction vector out of range [-1,1]\n")
+			"Cylinder: direction vector out of range [-1,1]\n")
 		|| !check_range_int(cylinder.axis.z, -1, 1,
-		"Cylinder: direction vector out of range [-1,1]\n"))
+			"Cylinder: direction vector out of range [-1,1]\n"))
 		return (-1);
 	cylinder.diameter = ft_atof(split[3]);
 	cylinder.height = ft_atof(split[4]);

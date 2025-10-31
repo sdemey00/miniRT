@@ -19,7 +19,8 @@ int	parse_file(char *filename, t_scene *scene)
 
 	if (!filename || !*filename)
 		return (-1);
-	if (ft_strlen(filename) < 4 || ft_strcmp(&filename[ft_strlen(filename) - 3], ".rt") != 0)
+	if (ft_strlen(filename) < 4
+		|| ft_strcmp(&filename[ft_strlen(filename) - 3], ".rt") != 0)
 		return (ft_dprintf(2, "%s: not a .rt file\n", filename), -1);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
@@ -31,7 +32,7 @@ int	parse_file(char *filename, t_scene *scene)
 		{
 			if (line[0] != '\n' && line[0] != '#')
 			{
-				if(parse_line(line, scene) == -1)
+				if (parse_line(line, scene) == -1)
 					return (free(line), -1);
 			}
 			free(line);

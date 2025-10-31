@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minirt.h"
+
 int	parse_sphere(char **split, t_scene *scene)
 {
 	t_sphere	sp;
@@ -18,7 +19,7 @@ int	parse_sphere(char **split, t_scene *scene)
 	if (!split[1] || !split[2] || !split[3])
 		return (ft_dprintf(2, "Sphere: invalid number of arguments\n"), -1);
 	if (parse_vec(split[1], &sp.center) == -1
-	|| parse_color(split[3], &sp.color) == -1)
+		|| parse_color(split[3], &sp.color) == -1)
 		return (-1);
 	sp.diameter = ft_atof(split[2]);
 	scene->spheres[scene->spheres_idx++] = sp;

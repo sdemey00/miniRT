@@ -75,7 +75,7 @@ int	parse_color(char *str, t_color *c)
 		|| !check_range_int(c->b, 0, 255, "Invalid color range\n"))
 	{
 		ft_free_split(tab);
-		return(-1);
+		return (-1);
 	}
 	ft_free_split(tab);
 	return (0);

@@ -23,11 +23,11 @@ int	parse_plane(char **split, t_scene *scene)
 		|| parse_color(split[3], &plane.color) == -1)
 		return (-1);
 	if (!check_range_int(plane.normal.x, -1, 1,
-		"Plane: normal vector out of range [-1,1]\n")
+			"Plane: normal vector out of range [-1,1]\n")
 		|| !check_range_int(plane.normal.y, -1, 1,
-		"Plane: normal vector out of range [-1,1]\n")
+			"Plane: normal vector out of range [-1,1]\n")
 		|| !check_range_int(plane.normal.z, -1, 1,
-		"Plane: normal vector out of range [-1,1]\n"))
+			"Plane: normal vector out of range [-1,1]\n"))
 		return (-1);
 	scene->planes[scene->planes_idx++] = plane;
 	return (0);
