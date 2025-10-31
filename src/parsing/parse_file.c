@@ -26,21 +26,17 @@ int	parse_file(char *filename, t_scene *scene)
 	if (fd < 0)
 		return (ft_dprintf(2, "Cannot open .rt file\n"), -1);
 	line = ft_gnl(fd);
-	if (line)
+	if (!line)
+		return (ft_dprintf(2, "Empty file\n"), -1);
+	while (line)
 	{
-		while ((line))
+		if (line[0] != '\n' && line[0] != '#')
 		{
-			if (line[0] != '\n' && line[0] != '#')
-			{
-				if (parse_line(line, scene) == -1)
-					return (free(line), -1);
-			}
-			free(line);
-			line = ft_gnl(fd);
+			if (parse_line(line, scene) == -1)
+				return (free(line), -1);
 		}
+		free(line);
+		line = ft_gnl(fd);
 	}
-	else
-		return (ft_dprintf(2, "Empty file\n"), 0);
-	close(fd);
-	return (0);
+	return (close(fd), 0);
 }
