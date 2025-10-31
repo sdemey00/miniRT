@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec1.c                                             :+:      :+:    :+:   */
+/*   ft_frombin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/10 22:47:54 by mmichele          #+#    #+#             */
-/*   Updated: 2025/07/11 23:22:47 by mmichele         ###   ########.fr       */
+/*   Created: 2025/06/13 21:53:06 by mmichele          #+#    #+#             */
+/*   Updated: 2025/10/29 23:08:38 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	vec_print(const t_vec *v)
+void	ft_frombin(void *res, char *bin, const t_len len, \
+	const t_bool little_endian)
 {
-	ft_printf("%f, %f, %f\n", v->x, v->y, v->z);
-}
+	(void)little_endian;
+	t_byte			*bytes;
+	const t_suint	loops = (len / 8) + 1;
+	t_suint			i;
+	t_suint			j;
+	t_suint			k;
 
-double	vec_mag(const t_vec *v)
-{
-	return (ft_sqrt(vec_dot(v, v)));
-}
-
-double	vec_dot(const t_vec *a, const t_vec *b)
-{
-	return (a->x * b->x + a->y * b->y + a->z * b->z);
+	bytes = (t_byte *)res;
+	i = 0;
+	j = len % 8;
+	k = 0;
+	while (i < loops)
+	{
+		while (j < 8)
+		{
+			bytes[i] &= (((bin[k++]) - '0') << j);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
 }

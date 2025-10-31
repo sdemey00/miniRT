@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 17:12:46 by mmichele          #+#    #+#             */
-/*   Updated: 2025/06/03 14:04:42 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/10/29 16:12:38 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ size_t	t_flags_init(t_flags *flags, t_idxstr *is, int fd)
 	flags->fd = fd;
 	if (is->s[is->i] == '%')
 		return (set_base_case(flags, is));
-	while (is->s[is->i] && ft_strchr("cspdiuxX", is->s[is->i]) < 0 && \
+	while (is->s[is->i] && ft_strchr("cspdiuxXf", is->s[is->i]) < 0 && \
 	ft_strchr(map, is->s[is->i]) >= 0)
 	{
 		flags->map[ft_strchr(map, is->s[is->i])] = 1;
@@ -55,7 +55,7 @@ size_t	t_flags_init(t_flags *flags, t_idxstr *is, int fd)
 		flags->precision = custom_atoi(is->s, &is->i);
 	}
 	flags->format = is->s[is->i];
-	if (ft_strchr("cspdiuxX%", is->s[is->i]) < 0)
+	if (ft_strchr("cspdiuxX%f", is->s[is->i]) < 0)
 		return (0);
 	return (is->i);
 }
