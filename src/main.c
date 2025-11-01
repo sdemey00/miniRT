@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
 #include "minirt.h"
 
 static t_bool	key_handler(int key, void *window)
@@ -40,10 +38,21 @@ static int	event_handler(int key, void *window)
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
+	t_scene		s;
 	t_window	w;
 
+	if (argc != 2)
+	{
+		ft_dprintf(2, "Usage: ./miniRT <scene.rt>\n");
+		return (0);
+	}
+	scene_init(&s);
+	if (!parse_file(argv[1], &s))
+		return (ft_dprintf(2, "Error occured during parsing\n"), -1);
+	printf("Scene parsed\n");
+	print_scene_infos(&s);
 	if (!window_init(&w))
 		return (1);
 	window_draw(&w);

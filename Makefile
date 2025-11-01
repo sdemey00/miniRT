@@ -14,7 +14,7 @@ NAME	= miniRT
 
 WIDTH	?= 0
 HEIGHT	?= 0
-FILE	?= ""
+FILE	?=
 
 CC		= cc
 FLAGS	= -Wall -Wextra -Werror -D WIDTH=$(WIDTH) -D HEIGHT=$(HEIGHT)
@@ -22,6 +22,7 @@ FLAGS	= -Wall -Wextra -Werror -D WIDTH=$(WIDTH) -D HEIGHT=$(HEIGHT)
 BLDD	= build
 SRCD	= src
 LIBD	= libs
+INCD	= includes
 
 MLXD	= $(LIBD)/mlx
 MLXN	= $(MLXD)/libmlx_Linux.a
@@ -31,12 +32,12 @@ LFTN	= $(LFTD)/libft.a
 
 SRCS	= $(shell find $(SRCD) -type f -name "*.c")
 OBJS	= $(patsubst %.c, $(BLDD)/%.o, $(SRCS))
-INCS	= -I $(SRCD) -I $(MLXD) -I $(LFTD)
+INCS	= -I $(SRCD) -I $(MLXD) -I $(LFTD) -I $(INCD)
 LNKS	= -L $(MLXD) -L $(LFTD)
 LIBS	= -lmlx -lX11 -lXext -lft -lm
 DEPS	= $(OBJS:.o=.d)
 
-.PHONY: $(MLXN) $(LFTN) clean fclean re norm san valgrind verbose prod
+.PHONY: $(MLXN) $(LFTN) clean fclean re norm san valgrind verbose fast clear
 
 all: $(MLXN) $(LFTN) $(NAME)
 
@@ -82,5 +83,8 @@ valgrind:
 verbose: FLAGS += -D VERBOSE
 verbose: all
 
-prod: FLAGS = -Ofast
-prod: all
+fast: FLAGS = -Ofast
+fast: all
+
+clear: clean
+	rm -rf $(NAME)

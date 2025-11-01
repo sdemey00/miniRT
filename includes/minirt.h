@@ -35,9 +35,15 @@
 #  define HEIGHT 900
 # endif
 
+# include <math.h>
+# include <stdio.h>
+# include <fcntl.h>
+
 # include "libft.h"
 # include "mlx.h"
-# include <math.h>
+
+# include "structs.h"
+# include "parsing.h"
 
 /* MLX controller event codes */
 # define WIN_CLOSE 17
@@ -64,12 +70,11 @@ typedef struct s_window
 // graphics/window.c
 t_bool	window_init(t_window *w);
 void	window_draw(t_window *w);
-void	window_draw_pixel(t_window *w, unsigned int x, unsigned int y, \
-	int color);
+void	window_draw_pixel(t_window *w, t_uint x, t_uint y, int color);
 t_bool	window_free(t_window *w);
 int		window_close(void *window);
 
-//graphic/raytracing.c
+// graphic/raytracing.c
 void	raytracing(t_window *w);
 
 #endif // MINIRT_H
