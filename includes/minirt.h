@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:02:14 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/01 14:20:49 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/01 18:28:19 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@
 # endif
 
 # ifdef WIDTH
-#  if WIDTH < 100 || 1920 < WIDTH
+#  if WIDTH < 100 || 3800 < WIDTH
 #   undef WIDTH
 #  endif
 # endif
 # ifndef WIDTH
-#  define WIDTH 1600
+#  define WIDTH 3800
 # endif
 
 # ifdef HEIGHT
-#  if HEIGHT < 100 || 1080 < HEIGHT
+#  if HEIGHT < 100 || 2000 < HEIGHT
 #   undef HEIGHT
 #  endif
 # endif
 # ifndef HEIGHT
-#  define HEIGHT 900
+#  define HEIGHT 2000
 # endif
 
 # include <math.h>
@@ -69,12 +69,15 @@ typedef struct s_window
 
 // graphics/window.c
 t_bool	window_init(t_window *w);
-void	window_draw(t_window *w);
+void	window_draw(t_window *w, t_scene *s);
 void	window_draw_pixel(t_window *w, t_uint x, t_uint y, int color);
 t_bool	window_free(t_window *w);
 int		window_close(void *window);
 
+// graphics/color.c
+int		color_int(t_color *c);
+
 // graphic/raytracing.c
-void	raytracing(t_window *w);
+void	raytracing(t_window *w, t_scene *s);
 
 #endif // MINIRT_H

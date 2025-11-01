@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 08:50:17 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/01 14:25:03 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/01 16:58:27 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,11 @@ int	main(int argc, char **argv)
 	}
 	scene_init(&s);
 	if (!parse_file(argv[1], &s))
-		return (ft_dprintf(2, "Error occured during parsing\n"), -1);
-	printf("Scene parsed\n");
+		return (ft_dprintf(2, "Error\n"), -1);
 	print_scene_infos(&s);
 	if (!window_init(&w))
 		return (1);
-	window_draw(&w);
+	window_draw(&w, &s);
 	mlx_hook(w.win, WIN_CLOSE, 0, window_close, &w);
 	mlx_key_hook(w.win, event_handler, &w);
 	mlx_loop(w.mlx);

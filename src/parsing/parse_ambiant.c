@@ -6,7 +6,7 @@
 /*   By: sdemey <sdemey@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:32:26 by sdemey            #+#    #+#             */
-/*   Updated: 2025/10/29 12:32:28 by sdemey           ###   ########.fr       */
+/*   Updated: 2025/11/01 17:24:24 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	print_ambiant_infos(t_scene *scene)
 		return ;
 	}
 	printf("Ambiant light ratio: %13.2f\n", scene->ambiant.ratio);
-	printf("Ambiant light color: %12d, %d, %d\n", scene->ambiant.color.r,
-		scene->ambiant.color.g, scene->ambiant.color.b);
+	printf("Ambiant light color: %12d, %d, %d\n",
+		(t_ssuint)scene->ambiant.color.x, (t_ssuint)scene->ambiant.color.y,
+		(t_ssuint)scene->ambiant.color.z);
 }

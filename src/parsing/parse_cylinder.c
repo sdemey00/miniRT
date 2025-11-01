@@ -48,8 +48,8 @@ void	print_cylinder_infos(t_cylinder cylinder, t_ssuint i)
 	printf("Cylinder %d height: %16.2f\n", i + 1,
 		cylinder.height);
 	printf("Cylinder %d color: %14d, %d, %d\n", i + 1,
-		cylinder.color.r, cylinder.color.g,
-		cylinder.color.b);
+		(t_ssuint)cylinder.color.x, (t_ssuint)cylinder.color.y,
+		(t_ssuint)cylinder.color.z);
 }
 
 void	print_cylinders_infos(t_scene *scene)

@@ -6,7 +6,7 @@
 /*   By: sdemey <sdemey@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 12:38:33 by sdemey            #+#    #+#             */
-/*   Updated: 2025/10/31 12:38:36 by sdemey           ###   ########.fr       */
+/*   Updated: 2025/11/01 17:29:58 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,7 @@ typedef struct s_ray
 	t_vec	dir;
 }	t_ray;
 
-typedef struct s_color
-{
-	t_ssuint	r;
-	t_ssuint	g;
-	t_ssuint	b;
-}	t_color;
+typedef t_vec	t_color;
 
 typedef struct s_ambiant
 {

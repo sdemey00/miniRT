@@ -35,8 +35,8 @@ void	print_light_infos(t_light light, t_ssuint i)
 		light.pos.x, light.pos.y, light.pos.z);
 	printf("Light source %d brightness: %9.2f\n", i,
 		light.brightness);
-	printf("Light source %d color: %13d, %d, %d\n", i,
-		light.color.r, light.color.g, light.color.b);
+	printf("Light source %d color: %13d, %d, %d\n", i, (t_ssuint)light.color.x,
+		(t_ssuint)light.color.y, (t_ssuint)light.color.z);
 }
 
 void	print_lights_infos(t_scene *scene)

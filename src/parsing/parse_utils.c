@@ -67,12 +67,12 @@ t_bool	parse_color(char *str, t_color *c)
 		ft_free_split(tab);
 		return (ft_dprintf(2, "Invalid color format\n"), -1);
 	}
-	c->r = ft_atoi(tab[0]);
-	c->g = ft_atoi(tab[1]);
-	c->b = ft_atoi(tab[2]);
-	if (!check_range_int(c->r, 0, 255, "Invalid color range\n")
-		|| !check_range_int(c->g, 0, 255, "Invalid color range\n")
-		|| !check_range_int(c->b, 0, 255, "Invalid color range\n"))
+	c->x = ft_atoi(tab[0]);
+	c->y = ft_atoi(tab[1]);
+	c->z = ft_atoi(tab[2]);
+	if (!check_range_int(c->x, 0, 255, "Invalid color range\n")
+		|| !check_range_int(c->y, 0, 255, "Invalid color range\n")
+		|| !check_range_int(c->z, 0, 255, "Invalid color range\n"))
 	{
 		ft_free_split(tab);
 		return (0);

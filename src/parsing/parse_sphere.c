@@ -33,9 +33,8 @@ void	print_sphere_infos(t_sphere sphere, t_ssuint i)
 		sphere.center.z);
 	printf("Sphere %d diameter: %16.2f\n", i + 1,
 		sphere.diameter);
-	printf("Sphere %d color: %16d, %d, %d\n", i + 1,
-		sphere.color.r, sphere.color.g,
-		sphere.color.b);
+	printf("Sphere %d color: %16d, %d, %d\n", i + 1, (t_ssuint)sphere.color.x,
+		(t_ssuint)sphere.color.y, (t_ssuint)sphere.color.z);
 }
 
 void	print_spheres_infos(t_scene *scene)

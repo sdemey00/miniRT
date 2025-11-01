@@ -6,7 +6,7 @@
 /*   By: sdemey <sdemey@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:33:09 by sdemey            #+#    #+#             */
-/*   Updated: 2025/10/29 12:33:10 by sdemey           ###   ########.fr       */
+/*   Updated: 2025/11/01 18:29:03 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,8 @@ void	print_plane_infos(t_plane plane, t_ssuint i)
 	printf("Plane %d normal: %18.2f, %.2f, %.2f\n", i + 1,
 		plane.normal.x, plane.normal.y,
 		plane.normal.z);
-	printf("Plane %d color: %16d, %d, %d\n", i + 1,
-		plane.color.r, plane.color.g,
-		plane.color.b);
+	printf("Plane %d color: %16d, %d, %d\n", i + 1, (t_ssuint)plane.color.x,
+		(t_ssuint)plane.color.y, (t_ssuint)plane.color.z);
 }
 
 void	print_planes_infos(t_scene *scene)
