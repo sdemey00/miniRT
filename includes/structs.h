@@ -35,10 +35,10 @@ typedef struct s_ambiant
 
 typedef struct s_camera
 {
-	t_vec	pos;
-	t_vec	dir;
+	t_vec		pos;
+	t_vec		dir;
 	t_ssuint	fov;
-	t_bool	set;
+	t_bool		set;
 }	t_camera;
 
 typedef struct s_light

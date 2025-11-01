@@ -27,25 +27,16 @@ t_bool	parse_file(char *filename, t_scene *scene)
 		return (ft_dprintf(2, "Cannot open .rt file\n"), 0);
 	line = ft_gnl(fd);
 	if (!line)
-	{
-		close(fd);
-		ft_dprintf(2, "Empty file\n");
-		return (0);
-	}
+		return (close(fd), ft_dprintf(2, "Empty file\n"), 0);
 	while (line)
 	{
 		if (line[0] != '\n' && line[0] != '#')
 		{
 			if (!parse_line(line, scene))
-			{
-				close(fd);
-				free(line);
-				return (0);
-			}
+				return (close(fd), free(line), 0);
 		}
 		free(line);
 		line = ft_gnl(fd);
 	}
-	close(fd);
-	return (1);
+	return (close(fd), 1);
 }
