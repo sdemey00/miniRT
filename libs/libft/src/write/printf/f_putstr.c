@@ -22,7 +22,7 @@ int	f_putstr(const char *str, const t_flags *flags)
 	else if (!str && flags->precision < (6 * flags->map[E_DOT]))
 		return (f_putstr("", flags));
 	len = 0;
-	while (str[len])
+	while (len < flags->precision && str[len])
 		len++;
 	if (flags->map[E_DOT] && flags->precision < len)
 		len = flags->precision;

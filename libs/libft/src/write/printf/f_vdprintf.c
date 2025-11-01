@@ -24,7 +24,7 @@ static t_bool	print_invalid_format(t_idxstr *is, int *bytes, t_flags *flags)
 	}
 	first_prec = 0;
 	*bytes += write(flags->fd, "%", 1);
-	while (is->s[is->i] && ft_strchr("cspdiuxX%", is->s[is->i]) < 0)
+	while (is->s[is->i] && ft_strchr("cspdiuxXf%", is->s[is->i]) < 0)
 	{
 		if (is->s[is->i] == '.' && !first_prec)
 		{
@@ -65,6 +65,8 @@ static t_bool	format(t_idxstr *is, int *bytes, va_list ap, int fd)
 		*bytes += f_puthex(va_arg(ap, long unsigned int), &flags);
 	else if (flags.format == '%')
 		*bytes += write(fd, "%", 1);
+	else if (flags.format == 'f')
+		*bytes += f_putdbl(va_arg(ap, double), &flags);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:34:40 by mmichele          #+#    #+#             */
-/*   Updated: 2025/05/31 15:17:23 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/10/29 16:03:55 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ size_t			t_flags_init(t_flags *flags, t_idxstr *is, int fd);
 unsigned int	f_pad(int fd, int size, const unsigned char iszero);
 unsigned int	f_putnbr(int nbr, const t_flags *flags);
 unsigned int	f_putchar(const char chr, const t_flags *flags);
+unsigned int	f_putdbl(const double val, const t_flags *flags);
 int				f_putstr(const char *str, const t_flags *flags);
 unsigned int	f_puthex(unsigned int hex, const t_flags *flags);
 unsigned int	f_putptr(long unsigned int ptr, const t_flags *flags);

@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 08:50:17 by mmichele          #+#    #+#             */
-/*   Updated: 2025/10/29 15:12:48 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/10/31 14:20:05 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static t_bool	key_handler(int key, void *ctx)
 		ectx_close(c);
 	if (key == 'w' || key == 'a' || key == 's' || key == 'd')
 	{
+		if (VERBOSE)
+			ft_printf("key pressed : %c\n", key);
 		//camera_move();
 		return (1);
 	}
@@ -32,7 +34,6 @@ static int	event_handler(int key, void *ctx)
 	if (key_handler(key, ctx))
 	{
 		//redraw image after valid key move
-		printf("Hello\n;");
 	}
 	return (0);
 }

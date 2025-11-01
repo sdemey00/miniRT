@@ -6,7 +6,7 @@
 #    By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 08:33:05 by mmichele          #+#    #+#              #
-#    Updated: 2025/10/29 12:45:05 by mmichele         ###   ########.fr        #
+#    Updated: 2025/10/31 14:10:39 by mmichele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ $(MLXN):
 $(LFTN):
 	@ echo "Compiling LibFT"
 	@ $(MAKE) -C $(LFTD) -s
+	@ echo "Compiling miniRT"
 
 $(NAME): $(OBJS)
 	$(CC) $(FLAGS) $^ -o $@ $(INCS) $(LNKS) $(LIBS)

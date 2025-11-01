@@ -16,7 +16,7 @@
 # include "libft.h"
 # include <math.h>
 
-# define FT_PI 3.141593
+# define FT_PI 3.141592653589793116
 
 typedef float	t_rad;
 
