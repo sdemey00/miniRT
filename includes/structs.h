@@ -13,6 +13,12 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+typedef struct s_ray
+{
+	t_vec	origin;
+	t_vec	dir;
+}	t_ray;
+
 typedef struct s_color
 {
 	t_ssuint	r;
@@ -24,7 +30,7 @@ typedef struct s_ambiant
 {
 	float	ratio;
 	t_color	color;
-	t_bool		set;
+	t_bool	set;
 }	t_ambiant;
 
 typedef struct s_camera
@@ -32,7 +38,7 @@ typedef struct s_camera
 	t_vec	pos;
 	t_vec	dir;
 	float	fov;
-	t_bool		set;
+	t_bool	set;
 }	t_camera;
 
 typedef struct s_light
@@ -44,33 +50,33 @@ typedef struct s_light
 
 typedef struct s_sphere
 {
-	t_vec				center;
-	float				diameter;
-	t_color				color;
+	t_vec	center;
+	float	diameter;
+	t_color	color;
 }	t_sphere;
 
 typedef struct s_plane
 {
-	t_vec				point;
-	t_vec				normal;
-	t_color				color;
+	t_vec	point;
+	t_vec	normal;
+	t_color	color;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	t_vec				center;
-	t_vec				axis;
-	float				diameter;
-	float				height;
-	t_color				color;
+	t_vec	center;
+	t_vec	axis;
+	float	diameter;
+	float	height;
+	t_color	color;
 }	t_cylinder;
 
 typedef struct s_scene
 {
 	t_ambiant	ambiant;
 	t_camera	camera;
-	t_light		light[1280];
-	t_ssuint 	lights_idx;
+	t_light		lights[1280];
+	t_ssuint	lights_idx;
 	t_sphere	spheres[128];
 	t_ssuint	spheres_idx;
 	t_plane		planes[128];

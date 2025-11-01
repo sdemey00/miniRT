@@ -26,6 +26,18 @@ t_bool	parse_sphere(char **split, t_scene *scene)
 	return (1);
 }
 
+void	print_sphere_infos(t_sphere sphere, t_ssuint i)
+{
+	printf("Sphere %d center: %17.2f, %.2f, %.2f\n", i + 1,
+		sphere.center.x, sphere.center.y,
+		sphere.center.z);
+	printf("Sphere %d diameter: %16.2f\n", i + 1,
+		sphere.diameter);
+	printf("Sphere %d color: %16d, %d, %d\n", i + 1,
+		sphere.color.r, sphere.color.g,
+		sphere.color.b);
+}
+
 void	print_spheres_infos(t_scene *scene)
 {
 	t_ssuint	i;
@@ -40,14 +52,7 @@ void	print_spheres_infos(t_scene *scene)
 	printf("- - - - - - - - - - - - - - - - - - - -\n");
 	while (i < scene->spheres_idx)
 	{
-		printf("Sphere %d center: %17.2f, %.2f, %.2f\n", i + 1,
-			scene->spheres[i].center.x, scene->spheres[i].center.y,
-			scene->spheres[i].center.z);
-		printf("Sphere %d diameter: %16.2f\n", i + 1,
-			scene->spheres[i].diameter);
-		printf("Sphere %d color: %16d, %d, %d\n", i + 1,
-			scene->spheres[i].color.r, scene->spheres[i].color.g,
-			scene->spheres[i].color.b);
+		print_sphere_infos(scene->spheres[i], i);
 		if (i != scene->spheres_idx - 1)
 			printf("- - - - - - - - - - - - - - - - - - - -\n");
 		i++;

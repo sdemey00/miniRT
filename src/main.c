@@ -43,6 +43,8 @@ static void	scene_init(t_scene *scene)
 	scene->spheres_idx = 0;
 	scene->cylinders_idx = 0;
 	scene->lights_idx = 0;
+	scene->camera.set = 0;
+	scene->ambiant.set = 0;
 }
 
 int	main(int argc, char **argv)

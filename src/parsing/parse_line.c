@@ -15,7 +15,7 @@
 t_bool	parse_line(char *line, t_scene *scene)
 {
 	char	**split;
-	t_bool		status;
+	t_bool	status;
 
 	status = 1;
 	split = ft_split(line, ' ');
