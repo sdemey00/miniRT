@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:02:14 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/01 18:28:19 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/02 00:38:53 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #  endif
 # endif
 # ifndef WIDTH
-#  define WIDTH 3800
+#  define WIDTH 1600
 # endif
 
 # ifdef HEIGHT
@@ -32,7 +32,7 @@
 #  endif
 # endif
 # ifndef HEIGHT
-#  define HEIGHT 2000
+#  define HEIGHT 900
 # endif
 
 # include <math.h>

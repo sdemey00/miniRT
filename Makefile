@@ -6,15 +6,15 @@
 #    By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 08:33:05 by mmichele          #+#    #+#              #
-#    Updated: 2025/11/01 18:18:32 by mmichele         ###   ########.fr        #
+#    Updated: 2025/11/02 00:49:07 by mmichele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= miniRT
 
-W	?= 0
-H	?= 0
-F	?=
+W		?= 0
+H		?= 0
+F		?=
 
 CC		= cc
 FLAGS	= -Wall -Wextra -Werror -D WIDTH=$(W) -D HEIGHT=$(H)
@@ -43,7 +43,7 @@ all: $(MLXN) $(LFTN) $(NAME)
 
 $(MLXN):
 	@ echo "Compiling MiniLibX"
-	@ $(MAKE) -C $(MLXD) &> /dev/null
+	@ $(MAKE) -C $(MLXD) > /dev/null 2>&1
 
 $(LFTN):
 	@ echo "Compiling LibFT"
@@ -61,17 +61,17 @@ $(BLDD)/%.o: %.c
 
 clean:
 	rm -rf $(BLDD)
+	@ $(MAKE) -C $(MLXD) clean > /dev/null 2>&1
+	@ $(MAKE) -C $(LFTD) $@ >  /dev/null 2>&1
 
 fclean: clean
 	rm -rf $(NAME)
-	$(MAKE) -C $(MLXD) clean &> /dev/null
-	$(MAKE) -C $(LFTD) $@ -s
 
 re: fclean all
 
 norm:
 	@ ! norminette $(SRCD) | grep -v "OK"
-	@ $(MAKE) -C $(LFTD) $@ -s
+	@ $(MAKE) -C $(LFTD) $@
 	@ echo "Project at norm"
 
 san: FLAGS += -g -fsanitize=address,leak,undefined
@@ -84,7 +84,7 @@ verbose: FLAGS += -D VERBOSE
 verbose: all
 
 fast: FLAGS = -Ofast -D WIDTH=$(W) -D HEIGHT=$(H)
-fast: $(LFTN) all
+fast: all
 
 clear: clean
 	rm -rf $(NAME)

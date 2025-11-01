@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 08:50:17 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/01 16:58:27 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/02 00:26:34 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static t_bool	key_handler(int key, void *window)
 {
-	t_window	*w;
-
-	w = (t_window *)window;
 	if (key == KEY_ESC)
 		window_close(window);
 	if (key == 'w' || key == 'a' || key == 's' || key == 'd')
