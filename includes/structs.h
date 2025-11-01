@@ -37,7 +37,7 @@ typedef struct s_camera
 {
 	t_vec	pos;
 	t_vec	dir;
-	float	fov;
+	t_ssuint	fov;
 	t_bool	set;
 }	t_camera;
 
@@ -75,7 +75,7 @@ typedef struct s_scene
 {
 	t_ambiant	ambiant;
 	t_camera	camera;
-	t_light		lights[1280];
+	t_light		lights[128];
 	t_ssuint	lights_idx;
 	t_sphere	spheres[128];
 	t_ssuint	spheres_idx;
