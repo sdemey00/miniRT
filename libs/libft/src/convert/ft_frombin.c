@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 21:53:06 by mmichele          #+#    #+#             */
-/*   Updated: 2025/10/29 23:08:38 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/01 00:03:28 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	ft_frombin(void *res, char *bin, const t_len len, \
 	const t_bool little_endian)
 {
-	(void)little_endian;
 	t_byte			*bytes;
 	const t_suint	loops = (len / 8) + 1;
 	t_suint			i;
 	t_suint			j;
 	t_suint			k;
 
+	(void)little_endian;
 	bytes = (t_byte *)res;
 	i = 0;
 	j = len % 8;

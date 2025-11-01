@@ -6,7 +6,7 @@
 #    By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/20 16:29:07 by mmichele          #+#    #+#              #
-#    Updated: 2025/08/05 15:04:15 by mmichele         ###   ########.fr        #
+#    Updated: 2025/10/31 23:52:24 by mmichele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,3 +94,6 @@ san: $(NAME)
 
 norm:
 	@ ! norminette libft.h includes src | grep -v "OK!"
+
+fast: FLAGS = -Ofast
+fast: all

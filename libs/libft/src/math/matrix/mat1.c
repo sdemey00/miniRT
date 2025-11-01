@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:31:39 by mmichele          #+#    #+#             */
-/*   Updated: 2025/07/11 23:51:06 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/10/31 23:54:28 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@ void	mat_print(const t_mat *m)
 	i = 0;
 	while (i < 3)
 	{
-		ft_printf("%d, %d, %d\n", (long int)m->v[i].x, (long int)m->v[i].y, \
-			(long int)m->v[i].z);
+		ft_printf("%f, %f, %f\n", m->v[i].x, m->v[i].y, m->v[i].z);
 		i++;
 	}
 }
 
-t_mat	mat_scal(const t_mat m, const double scalar)
+t_mat	mat_scal(const t_mat m, const float scalar)
 {
 	t_mat	res;
 
@@ -34,7 +33,7 @@ t_mat	mat_scal(const t_mat m, const double scalar)
 	return (res);
 }
 
-void	mat_iscal(t_mat *m, const double scalar)
+void	mat_iscal(t_mat *m, const float scalar)
 {
 	vec_iscal(&m->v[0], scalar);
 	vec_iscal(&m->v[1], scalar);

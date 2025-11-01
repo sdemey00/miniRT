@@ -6,14 +6,18 @@
 #    By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 08:33:05 by mmichele          #+#    #+#              #
-#    Updated: 2025/10/31 14:10:39 by mmichele         ###   ########.fr        #
+#    Updated: 2025/11/01 14:26:41 by mmichele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= miniRT
 
+WIDTH	?= 0
+HEIGHT	?= 0
+FILE	?= ""
+
 CC		= cc
-FLAGS	= -Wall -Wextra -Werror
+FLAGS	= -Wall -Wextra -Werror -D WIDTH=$(WIDTH) -D HEIGHT=$(HEIGHT)
 
 BLDD	= build
 SRCD	= src
@@ -73,7 +77,7 @@ san: FLAGS += -g -fsanitize=address,leak,undefined
 san: all
 
 valgrind:
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(FILE)
 
 verbose: FLAGS += -D VERBOSE
 verbose: all

@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:02:50 by mmichele          #+#    #+#             */
-/*   Updated: 2025/10/29 23:59:32 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/01 00:12:19 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ unsigned int	f_putdbl(const double val, const t_flags *flags)
 	(void)flags;
 
 	ft_dprintf(flags->fd, "%d.", (long int)(val));
-	ft_dprintf(flags->fd, "%d", (int)((val - (int)val) * 10000000) * (ft_pow(-1, (val < 0))));
+	ft_dprintf(flags->fd, "%d", (int)((val - (int)val) * 1000) * (ft_pow(-1, (val < 0))));
 	return (0);
 }

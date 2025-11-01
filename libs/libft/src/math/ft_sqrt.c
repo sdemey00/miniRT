@@ -6,20 +6,20 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 00:27:23 by mmichele          #+#    #+#             */
-/*   Updated: 2025/07/11 23:13:14 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/10/31 23:54:59 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-double	ft_sqrt(const double value)
+float	ft_sqrt(const float value)
 {
 	t_ssuint	approx;
-	double		res;
+	float		res;
 
 	approx = 10;
 	res = 1;
 	while (approx--)
-		res = (1.0 / 2.0) * (res + ((double)value / (res)));
+		res = (1.0 / 2.0) * (res + ((float)value / (res)));
 	return (res);
 }

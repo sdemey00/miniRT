@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:52:09 by mmichele          #+#    #+#             */
-/*   Updated: 2025/07/12 01:17:27 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/10/31 23:53:10 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,24 @@ typedef float	t_rad;
 /* 3D vector with {x, y, z} components. */
 typedef struct s_vec
 {
-	double	x;
-	double	y;
-	double	z;
+	float	x;
+	float	y;
+	float	z;
 }	t_vec;
 // vec1.c
 void	vec_print(const t_vec *v);
-double	vec_mag(const t_vec *v);
-double	vec_dot(const t_vec *a, const t_vec *b);
+float	vec_mag(const t_vec *v);
+float	vec_dot(const t_vec *a, const t_vec *b);
 // vec2.c
 t_vec	vec_sum(const t_vec a, const t_vec b);
 t_vec	vec_sub(const t_vec a, const t_vec b);
 void	vec_isum(t_vec *dst, const t_vec src);
 void	vec_isub(t_vec *dst, const t_vec src);
 // vec3.c
-t_vec	vec_scal(const t_vec v, const double scalar);
-t_vec	vec_rscal(const t_vec v, const double scalar);
-void	vec_iscal(t_vec *src, const double scalar);
-void	vec_irscal(t_vec *src, const double scalar);
+t_vec	vec_scal(const t_vec v, const float scalar);
+t_vec	vec_rscal(const t_vec v, const float scalar);
+void	vec_iscal(t_vec *src, const float scalar);
+void	vec_irscal(t_vec *src, const float scalar);
 // rotx.c
 t_vec	vec_rotx(const t_vec v, const t_rad a);
 void	vec_irotx(t_vec *v, const t_rad a);
@@ -58,17 +58,17 @@ typedef struct s_mat
 }	t_mat;
 // mat1.c
 void	mat_print(const t_mat *m);
-t_mat	mat_scal(const t_mat m, const double scalar);
-void	mat_iscal(t_mat *m, const double scalar);
+t_mat	mat_scal(const t_mat m, const float scalar);
+void	mat_iscal(t_mat *m, const float scalar);
 t_vec	mat_mul_vec(const t_mat m, const t_vec v);
 void	mat_imul_vec(const t_mat m, t_vec *v);
 
-double	ft_abs(double value);
-t_bool	fts_abs(double *value);
+float	ft_abs(float value);
+t_bool	fts_abs(float *value);
 t_luint	ft_fact(const t_uint n);
 t_luint	ft_pow(const t_uint base, t_uint exp);
 int		ft_round(float value);
 float	ft_pythagoras(const float a, const float b);
-double	ft_sqrt(const double value);
+float	ft_sqrt(const float value);
 
 #endif //FT_MATH_H

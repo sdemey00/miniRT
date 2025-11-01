@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:02:14 by mmichele          #+#    #+#             */
-/*   Updated: 2025/10/29 15:15:52 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/01 14:20:49 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,33 @@
 # define WIN_CLOSE 17
 # define KEY_ESC 65307
 
-/* Graphical library context */
-typedef struct s_gctx
+/* MLX pixel grid manipulation */
+typedef struct s_image
+{
+	void	*ptr;
+	char	*address;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+}	t_image;
+
+/* Graphical library contexti -> MLX */
+typedef struct s_window
 {
 	void	*mlx;
 	void	*win;
-	void	*img;
-}	t_gctx;
+	t_image	img;
+}	t_window;
 
-/* Execution context */
-typedef struct s_ectx
-{
-	t_gctx	g;
-}	t_ectx;
+// graphics/window.c
+t_bool	window_init(t_window *w);
+void	window_draw(t_window *w);
+void	window_draw_pixel(t_window *w, unsigned int x, unsigned int y, \
+	int color);
+t_bool	window_free(t_window *w);
+int		window_close(void *window);
 
-// winctx.c
-t_bool	gctx_init(t_gctx *g);
-t_bool	gctx_free(t_gctx *g);
-int		ectx_close(void *ectx);
+//graphic/raytracing.c
+void	raytracing(t_window *w);
 
 #endif // MINIRT_H
