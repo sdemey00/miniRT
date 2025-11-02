@@ -39,3 +39,19 @@ t_bool	is_valid_float(char *s)
 	}
 	return (1);
 }
+
+float	parse_float(char *str, char *out)
+{
+	if (!is_valid_float(str))
+		return (0);
+	*out = ft_atof(str);
+	return (ft_atof(str));
+}
+
+t_bool	parse_int(char *str, int *out)
+{
+	if (!is_valid_int(str))
+		return (0);
+	*out = ft_atoi(str);
+	return (1);
+}
