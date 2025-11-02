@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-static void normalize_whitespace(char line)
+static void	normalize_whitespace(char *line)
 {
 	int	i;
 

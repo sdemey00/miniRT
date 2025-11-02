@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-t_bool is_valid_int(char *s)
+t_bool	is_valid_int(char *s)
 {
 	if (!s || !*s)
 		return (0);
@@ -17,7 +17,7 @@ t_bool is_valid_int(char *s)
 	return (1);
 }
 
-t_bool is_valid_float(char *s)
+t_bool	is_valid_float(char *s)
 {
 	int	dot;
 
