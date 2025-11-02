@@ -63,7 +63,8 @@ SRCS		= src/char/ft_isalnum.c src/char/ft_isalpha.c \
 			  src/write/printf/f_putchar.c src/write/printf/f_putdbl.c \
 			  src/write/printf/f_puthex.c src/write/printf/f_putnbr.c \
 			  src/write/printf/f_putptr.c src/write/printf/f_putstr.c \
-			  src/write/printf/f_putuint.c src/write/printf/f_vdprintf.c
+			  src/write/printf/f_putuint.c src/write/printf/f_s_double.c \
+			  src/write/printf/f_vdprintf.c
 OBJS		= $(patsubst $(SRC_DIR)/%.c, $(BLD_DIR)/%.o, $(SRCS))
 INCS		= -I .
 DEPS		= $(OBJS:.o=.d)

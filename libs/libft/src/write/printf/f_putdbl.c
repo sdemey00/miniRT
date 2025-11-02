@@ -6,41 +6,79 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:02:50 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/01 00:12:19 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:01:27 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "f_printf.h"
 
-//ft_printf("%.1s.%.11s.%.52s\n", bin, &bin[1], &bin[12]);
-//ft_printf("%.8s.%.8s.%.8s.%.8s.%.8s.%.8s.%.8s.%.8s\n", bin, &bin[8], &bin[16], &bin[24], &bin[32], &bin[40], &bin[48], &bin[56]);
-/* 
-unsigned int	f_putdbl(const double val, const t_flags *flags)
+static t_flags	flags_default(const int fd)
 {
-	(void)flags;
-	char			bin[64];
-	char			res[326];
-	const short int	exp;
-	const t_luint	mantissa;
+	t_flags	res;
 
-	res[0] = 0;
-	if (val == INFINITY || val == -INFINITY)
-		ft_memcpy(res, "inf", 4);
-	//ft_tobin((char *)bin, (void *)&val, sizeof(double), 1);
-	//ft_frombin((void *)&exp, (void *)&bin[1], 11, 1);
-	//ft_frombin((void *)&mantissa, (void *)&bin[12], 52, 1);
-	ft_printf("exp : %d mantiassa : %d\n", exp, mantissa);
-	return (0);
+	ft_bzero(&res, sizeof(t_flags));
+	res.fd = fd;
+	res.format = 'f';
+	return (res);
 }
- */
 
-#include <stdio.h>
+static unsigned int	t_put_dec_part(t_quad dec, const t_flags *flags)
+{
+	unsigned int	res;
+	t_ssuint		i;
+	char			dgt;
+
+	res = write(flags->fd, ".", 1);
+	i = 6;
+	if (flags->map[E_DOT])
+		i = flags->precision;
+	while (i--)
+	{
+		dec -= (t_ssuint)dec;
+		dec *= 10;
+		dgt = (t_ssuint)dec + '0';
+		write(flags->fd, &dgt, 1);
+	}
+	return (res);
+}
+
+static unsigned int	base_case(const struct s_double *dbl, const t_flags *flags)
+{
+	const t_flags	dflt = flags_default(flags->fd);
+	unsigned int	res;
+	t_quad			dec;
+	t_ssuint		i;
+
+	res = 0;
+	dec = 0;
+	i = 1;
+	while (i < 52)
+	{
+		dec += ((dbl->mant >> (52 - i)) & 1) * ft_lpow(2.0L, -i);
+		i++;
+	}
+	res += f_putuint(1 + ft_lpow(2, dbl->exp - BIASED_EXP), &dflt);
+	res += t_put_dec_part(dec * ft_lpow(2.0L, dbl->exp - BIASED_EXP), flags);
+	return (res);
+}
 
 unsigned int	f_putdbl(const double val, const t_flags *flags)
 {
-	(void)flags;
+	const struct s_double	dbl = s_double_init(val);
+	unsigned int			res;
 
-	ft_dprintf(flags->fd, "%d.", (long int)(val));
-	ft_dprintf(flags->fd, "%d", (int)((val - (int)val) * 1000) * (ft_pow(-1, (val < 0))));
-	return (0);
+	res = 0;
+	if (dbl.sign)
+		res += write(flags->fd, "-", 1);
+	if (dbl.exp == 0 && dbl.mant == 0)
+		res += write(flags->fd, "0", 1);
+	else if (dbl.exp == ((1 << 10) - 1))
+		res += write(flags->fd, "1", 1);
+	else if (dbl.exp == ((1 << 11) - 1) && dbl.mant == 0)
+		res += write(flags->fd, "inf", 3);
+	else if (dbl.exp == ((1 << 11) - 1) && dbl.mant == (1ULL << 51))
+		res += write(flags->fd, "nan", 3);
+	else
+		res += base_case(&dbl, flags);
+	return (res);
 }

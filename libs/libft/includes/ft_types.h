@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 23:27:53 by mmichele          #+#    #+#             */
-/*   Updated: 2025/08/03 19:18:00 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/02 12:55:30 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,9 @@ typedef short unsigned int	t_suint;	// 16 bit unsigned int
 typedef unsigned int		t_uint;		// 32 bit unsigned int
 typedef long unsigned int	t_luint;	// 64 bit unsigned int
 
+typedef signed char			t_ssint;	// 8  bit int
+typedef short int			t_sint;		// 16 bit int
+typedef long int			t_lint;		// 64 bit int
+
+typedef long double			t_quad;		// quadruple precision float
 #endif // FT_TYPES_H

@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:31:39 by mmichele          #+#    #+#             */
-/*   Updated: 2025/10/31 23:54:28 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:07:06 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	mat_print(const t_mat *m)
 	i = 0;
 	while (i < 3)
 	{
-		ft_printf("%f, %f, %f\n", m->v[i].x, m->v[i].y, m->v[i].z);
+		ft_printf("%.2f, %.2f, %.2f\n", m->v[i].x, m->v[i].y, m->v[i].z);
 		i++;
 	}
 }

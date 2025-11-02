@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 08:05:14 by mmichele          #+#    #+#             */
-/*   Updated: 2025/06/23 23:01:56 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/02 11:27:34 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*ft_allocate(unsigned char sign, unsigned int i, char digits[])
 		j++;
 		i++;
 	}
-	result[j] = '\0';
+	result[j] = 0;
 	return (result);
 }
 
@@ -90,7 +90,7 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 
 	if (!f_valid_base(base_from, &basef_n) || \
 		!f_valid_base(base_to, &baset_n))
-		return (NULL);
+		return (0);
 	while (('\t' <= *nbr && *nbr <= '\r') || *nbr == ' ')
 		nbr++;
 	sign = 1;
