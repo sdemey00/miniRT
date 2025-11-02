@@ -40,12 +40,12 @@ t_bool	is_valid_float(char *s)
 	return (1);
 }
 
-float	parse_float(char *str, char *out)
+t_bool	parse_float(char *str, char *out)
 {
 	if (!is_valid_float(str))
 		return (0);
 	*out = ft_atof(str);
-	return (ft_atof(str));
+	return (1);
 }
 
 t_bool	parse_int(char *str, int *out)
