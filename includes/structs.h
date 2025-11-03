@@ -32,7 +32,16 @@ typedef struct s_camera
 {
 	t_vec		pos;
 	t_vec		dir;
-	t_ssuint	fov;
+	// t_ssuint	fov;
+	float		fov;
+	int			hsize;
+	int			vsize;
+	int			aspect;
+	float		half_view;
+	float		half_width;
+	float		half_height;
+	float		pixel_size;
+	t_mat		transform;
 	t_bool		set;
 }	t_camera;
 

@@ -57,5 +57,5 @@ void	print_camera_infos(t_scene *scene)
 		scene->camera.pos.x, scene->camera.pos.y, scene->camera.pos.z);
 	printf("Camera direction: %.2f, %.2f, %.2f\n",
 		scene->camera.dir.x, scene->camera.dir.y, scene->camera.dir.z);
-	printf("Camera FOV: %d\n", scene->camera.fov);
+	printf("Camera FOV: %f\n", scene->camera.fov);
 }

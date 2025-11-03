@@ -35,7 +35,7 @@ static int	event_handler(int key, void *window)
 	return (0);
 }
 
-int	main(int argc, char **argv)
+int	false_main(int argc, char **argv)
 {
 	t_scene		s;
 	t_window	w;
