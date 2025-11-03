@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sqrt.c                                          :+:      :+:    :+:   */
+/*   ray_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/26 00:27:23 by mmichele          #+#    #+#             */
-/*   Updated: 2025/10/31 23:54:59 by mmichele         ###   ########.fr       */
+/*   Created: 2025/11/03 14:16:11 by mmichele          #+#    #+#             */
+/*   Updated: 2025/11/03 19:04:49 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minirt.h"
 
-float	ft_sqrt(const float value)
+t_bool	ray_sphere(const t_ray *r, const t_sphere *s)
 {
-	t_ssuint	approx;
-	float		res;
-
-	approx = 12;
-	res = 1;
-	while (approx--)
-		res = (1.0 / 2.0) * (res + ((float)value / (res)));
-	return (res);
+	const t_vec	oc = vec_sub(r->origin, s->center);
+	const float	a = vec_dot(&r->dir, &r->dir);
+	const float	b = 2.0 * (vec_dot(&r->dir, &oc));
+	const float	c = vec_dot(&oc, &oc) - ft_pow(s->diameter / 2.0, 2);
+	const float delta = ft_pow(b, 2) - (4 * a * c);
+	const float	d = -b + ft_sqrt(delta) / (2 * a);
+	(void)d;
+	return (delta >= 0);
 }

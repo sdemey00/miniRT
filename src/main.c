@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 08:50:17 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/02 00:26:34 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/03 19:06:12 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	main(int argc, char **argv)
 	scene_init(&s);
 	if (!parse_file(argv[1], &s))
 		return (ft_dprintf(2, "Error\n"), -1);
-	print_scene_infos(&s);
+	if (VERBOSE)
+		print_scene_infos(&s);
 	if (!window_init(&w))
 		return (1);
 	window_draw(&w, &s);

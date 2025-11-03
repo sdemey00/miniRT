@@ -6,7 +6,7 @@
 /*   By: sdemey <sdemey@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 12:38:18 by sdemey            #+#    #+#             */
-/*   Updated: 2025/10/31 12:38:20 by sdemey           ###   ########.fr       */
+/*   Updated: 2025/11/03 18:12:08 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	print_lights_infos(t_scene *scene);
 // parsing/parse_sphere.c
 t_bool	parse_sphere(char **split, t_scene *scene);
 void	print_spheres_infos(t_scene *scene);
+void	print_sphere_infos(t_sphere sphere, t_ssuint i);
 
 // parsing/parse_plane.c
 t_bool	parse_plane(char **split, t_scene *scene);

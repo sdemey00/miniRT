@@ -31,6 +31,8 @@ typedef struct s_vec
 void	vec_print(const t_vec *v);
 float	vec_mag(const t_vec *v);
 float	vec_dot(const t_vec *a, const t_vec *b);
+void	vec_inorm(t_vec *a);
+t_vec	vec_norm(const t_vec *a);
 // vec2.c
 t_vec	vec_sum(const t_vec a, const t_vec b);
 t_vec	vec_sub(const t_vec a, const t_vec b);
