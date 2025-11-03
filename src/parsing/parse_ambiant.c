@@ -38,7 +38,7 @@ t_bool	parse_ambiant(char **split, t_scene *scene)
 	return (1);
 }
 
-void	print_ambiant_infos(t_scene *scene)
+void	ambiant_print(t_scene *scene)
 {
 	if (scene->ambiant.set != 1)
 	{

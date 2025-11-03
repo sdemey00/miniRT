@@ -36,19 +36,31 @@ t_bool	parse_plane(char **split, t_scene *scene)
 	return (1);
 }
 
-void	print_plane_infos(t_plane plane, t_ssuint i)
+void	plane_print(t_plane plane)
 {
-	printf("Plane %d point: %.2f, %.2f, %.2f\n", i + 1,
+	printf("Plane point: %.2f, %.2f, %.2f\n",
 		plane.point.x, plane.point.y,
 		plane.point.z);
-	printf("Plane %d normal: %.2f, %.2f, %.2f\n", i + 1,
+	printf("Plane normal: %.2f, %.2f, %.2f\n",
 		plane.normal.x, plane.normal.y,
 		plane.normal.z);
-	printf("Plane %d color: %d, %d, %d\n", i + 1, (t_ssuint)plane.color.x,
+	printf("Plane color: %d, %d, %d\n",(t_ssuint)plane.color.x,
 		(t_ssuint)plane.color.y, (t_ssuint)plane.color.z);
 }
 
-void	print_planes_infos(t_scene *scene)
+// void	print_plane_infos(t_plane plane, t_ssuint i)
+// {
+// 	printf("Plane %d point: %.2f, %.2f, %.2f\n", i + 1,
+// 		plane.point.x, plane.point.y,
+// 		plane.point.z);
+// 	printf("Plane %d normal: %.2f, %.2f, %.2f\n", i + 1,
+// 		plane.normal.x, plane.normal.y,
+// 		plane.normal.z);
+// 	printf("Plane %d color: %d, %d, %d\n", i + 1, (t_ssuint)plane.color.x,
+// 		(t_ssuint)plane.color.y, (t_ssuint)plane.color.z);
+// }
+
+void	planes_print(t_scene *scene)
 {
 	t_ssuint	i;
 
@@ -62,7 +74,8 @@ void	print_planes_infos(t_scene *scene)
 	printf("- - - - - - - - - - - - - - - - - - - -\n");
 	while (i < scene->planes_idx)
 	{
-		print_plane_infos(scene->planes[i], i);
+		printf("Plane %d\n", i);
+		plane_print(scene->planes[i]);
 		if (i != scene->planes_idx - 1)
 			printf("- - - - - - - - - - - - - - - - - - - -\n");
 		i++;

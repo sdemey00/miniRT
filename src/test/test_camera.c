@@ -8,16 +8,20 @@ t_vec vec3(float x, float y, float z)
 
 float get(t_mat m, int i, int j)
 {
-	if (j == 0) return m.v[i].x;
+	if (j == 0) 
+		return (m.v[i].x);
 	if (j == 1) return m.v[i].y;
-	return m.v[i].z;
+	return (m.v[i].z);
 }
 
 void set(t_mat *m, int i, int j, float val)
 {
-	if (j == 0) m->v[i].x = val;
-	else if (j == 1) m->v[i].y = val;
-	else m->v[i].z = val;
+	if (j == 0) 
+		m->v[i].x = val;
+	else if (j == 1) 
+		m->v[i].y = val;
+	else 
+		m->v[i].z = val;
 }
 
 void normalize(t_vec *p )
@@ -34,11 +38,9 @@ void normalize(t_vec *p )
 float determinant(t_mat a, int n)
 {
 	if (n == 1)
-		return get(a, 0, 0);
-
+		return (get(a, 0, 0));
 	float det = 0;
 	int sign = 1;
-
 	for (int c = 0; c < n; c++)
 	{
 		t_mat sub;
@@ -72,11 +74,13 @@ void cofactor(t_mat a, t_mat *cofac, int n)
 			int subi = 0;
 			for (int i = 0; i < n; i++)
 			{
-				if (i == q) continue;
+				if (i == q)
+					continue;
 				int subj = 0;
 				for (int j = 0; j < n; j++)
 				{
-					if (j == p) continue;
+					if (j == p)
+						continue;
 					set(&sub, subi, subj, get(a, i, j));
 					subj++;
 				}
@@ -115,10 +119,8 @@ t_ray	ray_for_pixel(t_camera camera, float px, float py)
 {
 	float xoffset = (px + 0.5f) * camera.pixel_size;
 	float yoffset = (py + 0.5f) * camera.pixel_size;
-
 	float world_x = camera.half_width - xoffset;
 	float world_y = camera.half_height - yoffset;
-
 	t_vec pixel_camera = vec3(world_x, world_y, -1);
 	// float inv[3][3];
 	t_mat inv;
@@ -155,10 +157,11 @@ void	construct_camera(t_camera *camera)
 	camera->pixel_size = (camera->half_width * 2) / camera->hsize;
 }
 
-int	main(void)
+int	false_main(void)
 {
 	t_camera camera;
 	camera.fov = FT_PI / 2;
 	construct_camera(&camera);
 	printf("fov: %f\nhalf_view: %f\naspect: %d\nheight: %f\nwidth: %f\npixel_size: %f\n", camera.fov, camera.half_view, camera.aspect, camera.half_height * 2, camera.half_width * 2, camera.pixel_size);
+	return (0);
 }

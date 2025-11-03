@@ -12,19 +12,19 @@
 
 #include "minirt.h"
 
-void	print_scene_infos(t_scene *scene)
+void	scene_print(t_scene *scene)
 {
 	printf("________________________________________\n\n");
-	print_ambiant_infos(scene);
+	ambiant_print(scene);
 	printf("________________________________________\n\n");
-	print_camera_infos(scene);
+	camera_print(scene);
 	printf("________________________________________\n\n");
-	print_lights_infos(scene);
+	lights_print(scene);
 	printf("________________________________________\n\n");
-	print_spheres_infos(scene);
+	spheres_print(scene);
 	printf("________________________________________\n\n");
-	print_planes_infos(scene);
+	planes_print(scene);
 	printf("________________________________________\n\n");
-	print_cylinders_infos(scene);
+	cylinders_print(scene);
 	printf("________________________________________\n");
 }

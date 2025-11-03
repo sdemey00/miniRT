@@ -33,17 +33,27 @@ t_bool	parse_light(char **split, t_scene *scene)
 	return (1);
 }
 
-void	print_light_infos(t_light light, t_ssuint i)
+void	light_print(t_light light)
 {
-	printf("Light source %d position: %.2f, %.2f, %.2f\n", i + 1,
+	printf("Light source position: %.2f, %.2f, %.2f\n",
 		light.pos.x, light.pos.y, light.pos.z);
-	printf("Light source %d brightness: %.2f\n", i + 1,
+	printf("Light source brightness: %.2f\n",
 		light.brightness);
-	printf("Light source %d color: %d, %d, %d\n", i + 1, (t_ssuint)light.color.x,
+	printf("Light source color: %d, %d, %d\n", (t_ssuint)light.color.x,
 		(t_ssuint)light.color.y, (t_ssuint)light.color.z);
 }
 
-void	print_lights_infos(t_scene *scene)
+// void	print_light_infos(t_light light, t_ssuint i)
+// {
+// 	printf("Light source %d position: %.2f, %.2f, %.2f\n", i + 1,
+// 		light.pos.x, light.pos.y, light.pos.z);
+// 	printf("Light source %d brightness: %.2f\n", i + 1,
+// 		light.brightness);
+// 	printf("Light source %d color: %d, %d, %d\n", i + 1, (t_ssuint)light.color.x,
+// 		(t_ssuint)light.color.y, (t_ssuint)light.color.z);
+// }
+
+void	lights_print(t_scene *scene)
 {
 	t_ssuint	i;
 
@@ -57,7 +67,8 @@ void	print_lights_infos(t_scene *scene)
 	printf("- - - - - - - - - - - - - - - - - - - -\n");
 	while (i < scene->lights_idx)
 	{
-		print_light_infos(scene->lights[i], i);
+		printf("Light source %d\n", i);
+		light_print(scene->lights[i]);
 		if (i != scene->lights_idx - 1)
 			printf("- - - - - - - - - - - - - - - - - - - -\n");
 		i++;

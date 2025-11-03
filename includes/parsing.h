@@ -26,27 +26,31 @@ t_bool	parse_line(char *line, t_scene *scene);
 
 // parsing/parse_ambiant.c
 t_bool	parse_ambiant(char **split, t_scene *scene);
-void	print_ambiant_infos(t_scene *scene);
+void	ambiant_print(t_scene *scene);
 
 // parsing/parse_camera.c
 t_bool	parse_camera(char **split, t_scene *scene);
-void	print_camera_infos(t_scene *scene);
+void	camera_print(t_scene *scene);
 
 // parsing/parse_light.c
 t_bool	parse_light(char **split, t_scene *scene);
-void	print_lights_infos(t_scene *scene);
+void	lights_print(t_scene *scene);
+void	light_print(t_light light);
 
 // parsing/parse_sphere.c
 t_bool	parse_sphere(char **split, t_scene *scene);
-void	print_spheres_infos(t_scene *scene);
+void	spheres_print(t_scene *scene);
+void	sphere_print(t_sphere sphere);
 
 // parsing/parse_plane.c
 t_bool	parse_plane(char **split, t_scene *scene);
-void	print_planes_infos(t_scene *scene);
+void	planes_print(t_scene *scene);
+void	plane_print(t_plane plane);
 
 // parsing/parse_cylinder.c
 t_bool	parse_cylinder(char **split, t_scene *scene);
-void	print_cylinders_infos(t_scene *scene);
+void	cylinders_print(t_scene *scene);
+void	cylinder_print(t_cylinder cylinder);
 
 // parsing/parse_utils.c
 void	ft_free_split(char **tab);
@@ -63,6 +67,6 @@ t_bool	parse_int(char *src, int *out);
 double	ft_atof(const char *str);
 
 // parsing/print/scene_infos.c
-void	print_scene_infos(t_scene *scene);
+void	scene_print(t_scene *scene);
 
 #endif // PARSING_H

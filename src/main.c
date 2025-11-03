@@ -35,7 +35,7 @@ static int	event_handler(int key, void *window)
 	return (0);
 }
 
-int	false_main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_scene		s;
 	t_window	w;
@@ -48,7 +48,7 @@ int	false_main(int argc, char **argv)
 	scene_init(&s);
 	if (!parse_file(argv[1], &s))
 		return (ft_dprintf(2, "Error\n"), -1);
-	print_scene_infos(&s);
+	scene_print(&s);
 	return (0);
 	if (!window_init(&w))
 		return (1);

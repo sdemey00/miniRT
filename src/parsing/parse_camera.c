@@ -46,7 +46,7 @@ t_bool	parse_camera(char **split, t_scene *scene)
 	return (1);
 }
 
-void	print_camera_infos(t_scene *scene)
+void	camera_print(t_scene *scene)
 {
 	if (scene->camera.set != 1)
 	{
