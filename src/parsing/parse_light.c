@@ -24,18 +24,22 @@ t_bool	parse_light(char **split, t_scene *scene)
 	if (!parse_vec(split[1], &light.pos)
 		|| !parse_color(split[3], &light.color))
 		return (0);
-	light.brightness = ft_atof(split[2]);
+	if (!parse_float(split[2], &light.brightness))
+	{
+		ft_dprintf(2, "Invalid vector format\n");
+		return (0);
+	}
 	scene->lights[scene->lights_idx++] = light;
 	return (1);
 }
 
 void	print_light_infos(t_light light, t_ssuint i)
 {
-	printf("Light source %d position: %13.2f, %.2f, %.2f\n", i,
+	printf("Light source %d position: %.2f, %.2f, %.2f\n", i + 1,
 		light.pos.x, light.pos.y, light.pos.z);
-	printf("Light source %d brightness: %9.2f\n", i,
+	printf("Light source %d brightness: %.2f\n", i + 1,
 		light.brightness);
-	printf("Light source %d color: %13d, %d, %d\n", i, (t_ssuint)light.color.x,
+	printf("Light source %d color: %d, %d, %d\n", i + 1, (t_ssuint)light.color.x,
 		(t_ssuint)light.color.y, (t_ssuint)light.color.z);
 }
 

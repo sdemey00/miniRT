@@ -49,6 +49,7 @@ int	main(int argc, char **argv)
 	if (!parse_file(argv[1], &s))
 		return (ft_dprintf(2, "Error\n"), -1);
 	print_scene_infos(&s);
+	return (0);
 	if (!window_init(&w))
 		return (1);
 	window_draw(&w, &s);

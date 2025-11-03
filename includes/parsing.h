@@ -55,6 +55,10 @@ t_bool	check_range_int(int val, int min, int max, char *msg);
 t_bool	parse_vec(char *str, t_vec *v);
 t_bool	parse_color(char *str, t_color *c);
 
+// parsing/is_valid_format.c
+t_bool	parse_float(char *src, float *out);
+t_bool	parse_int(char *src, int *out);
+
 // parsing/ft_atof.c
 double	ft_atof(const char *str);
 

@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-t_bool	is_valid_int(char *s)
+static t_bool	is_valid_int(char *s)
 {
 	if (!s || !*s)
 		return (0);
@@ -17,7 +17,7 @@ t_bool	is_valid_int(char *s)
 	return (1);
 }
 
-t_bool	is_valid_float(char *s)
+static t_bool	is_valid_float(char *s)
 {
 	int	dot;
 
@@ -40,18 +40,18 @@ t_bool	is_valid_float(char *s)
 	return (1);
 }
 
-t_bool	parse_float(char *str, char *out)
+t_bool	parse_float(char *src, float *out)
 {
-	if (!is_valid_float(str))
+	if (!is_valid_float(src))
 		return (0);
-	*out = ft_atof(str);
+	*out = ft_atof(src);
 	return (1);
 }
 
-t_bool	parse_int(char *str, int *out)
+t_bool	parse_int(char *src, int *out)
 {
-	if (!is_valid_int(str))
+	if (!is_valid_int(src))
 		return (0);
-	*out = ft_atoi(str);
+	*out = ft_atoi(src);
 	return (1);
 }

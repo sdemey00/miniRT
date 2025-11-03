@@ -17,7 +17,10 @@ t_bool	parse_plane(char **split, t_scene *scene)
 	t_plane	plane;
 
 	if (!split[1] || !split[2] || !split[3])
-		return (ft_dprintf(2, "Plane: invalid number of arguments\n"), 0);
+	{
+		ft_dprintf(2, "Plane: invalid number of arguments\n");
+		return (0);
+	}
 	if (!parse_vec(split[1], &plane.point)
 		|| !parse_vec(split[2], &plane.normal)
 		|| !parse_color(split[3], &plane.color))
@@ -35,13 +38,13 @@ t_bool	parse_plane(char **split, t_scene *scene)
 
 void	print_plane_infos(t_plane plane, t_ssuint i)
 {
-	printf("Plane %d point: %19.2f, %.2f, %.2f\n", i + 1,
+	printf("Plane %d point: %.2f, %.2f, %.2f\n", i + 1,
 		plane.point.x, plane.point.y,
 		plane.point.z);
-	printf("Plane %d normal: %18.2f, %.2f, %.2f\n", i + 1,
+	printf("Plane %d normal: %.2f, %.2f, %.2f\n", i + 1,
 		plane.normal.x, plane.normal.y,
 		plane.normal.z);
-	printf("Plane %d color: %16d, %d, %d\n", i + 1, (t_ssuint)plane.color.x,
+	printf("Plane %d color: %d, %d, %d\n", i + 1, (t_ssuint)plane.color.x,
 		(t_ssuint)plane.color.y, (t_ssuint)plane.color.z);
 }
 

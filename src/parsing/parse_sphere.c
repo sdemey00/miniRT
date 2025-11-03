@@ -17,23 +17,30 @@ t_bool	parse_sphere(char **split, t_scene *scene)
 	t_sphere	sp;
 
 	if (!split[1] || !split[2] || !split[3])
-		return (ft_dprintf(2, "Sphere: invalid number of arguments\n"), 0);
+	{
+		ft_dprintf(2, "Sphere: invalid number of arguments\n");
+		return (0);
+	}
 	if (!parse_vec(split[1], &sp.center)
 		|| !parse_color(split[3], &sp.color))
 		return (0);
-	sp.diameter = ft_atof(split[2]);
+	if (!parse_float(split[2], &sp.diameter))
+	{
+		ft_dprintf(2, "Invalid vector format\n");
+		return (0);
+	}
 	scene->spheres[scene->spheres_idx++] = sp;
 	return (1);
 }
 
 void	print_sphere_infos(t_sphere sphere, t_ssuint i)
 {
-	printf("Sphere %d center: %17.2f, %.2f, %.2f\n", i + 1,
+	printf("Sphere %d center: %.2f, %.2f, %.2f\n", i + 1,
 		sphere.center.x, sphere.center.y,
 		sphere.center.z);
-	printf("Sphere %d diameter: %16.2f\n", i + 1,
+	printf("Sphere %d diameter: %.2f\n", i + 1,
 		sphere.diameter);
-	printf("Sphere %d color: %16d, %d, %d\n", i + 1, (t_ssuint)sphere.color.x,
+	printf("Sphere %d color: %d, %d, %d\n", i + 1, (t_ssuint)sphere.color.x,
 		(t_ssuint)sphere.color.y, (t_ssuint)sphere.color.z);
 }
 

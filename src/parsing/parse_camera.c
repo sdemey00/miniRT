@@ -22,10 +22,17 @@ t_bool	parse_camera(char **split, t_scene *scene)
 		return (0);
 	}
 	if (!split[1] || !split[2] || !split[3])
-		return (ft_dprintf(2, "Camera: invalid number of arguments\n"), -1);
+	{
+		ft_dprintf(2, "Camera: invalid number of arguments\n");
+		return (1);
+	}
 	if (!parse_vec(split[1], &cam.pos) || !parse_vec(split[2], &cam.dir))
 		return (0);
-	cam.fov = ft_atof(split[3]);
+	if (!parse_int(split[3], (int *)&cam.fov))
+	{
+		ft_dprintf(2, "Invalid vector format\n");
+		return (0);
+	}
 	if (!check_range_double(cam.fov, 0.0, 180.0, "Camera: FOV out of range\n")
 		|| !check_range_int(cam.dir.x, -1, 1,
 			"Camera: direction vector out of range [-1,1]\n")
@@ -46,9 +53,9 @@ void	print_camera_infos(t_scene *scene)
 		printf("There is no camera\n");
 		return ;
 	}
-	printf("Camera position: %19.2f, %.2f, %.2f\n",
+	printf("Camera position: %.2f, %.2f, %.2f\n",
 		scene->camera.pos.x, scene->camera.pos.y, scene->camera.pos.z);
-	printf("Camera direction: %16.2f, %.2f, %.2f\n",
+	printf("Camera direction: %.2f, %.2f, %.2f\n",
 		scene->camera.dir.x, scene->camera.dir.y, scene->camera.dir.z);
-	printf("Camera FOV: %23d\n", scene->camera.fov);
+	printf("Camera FOV: %d\n", scene->camera.fov);
 }
