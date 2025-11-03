@@ -42,7 +42,7 @@ static unsigned int	t_put_dec_part(t_quad dec, const t_flags *flags)
 	return (res);
 }
 
-static unsigned int	base_case(const struct s_double *dbl, const t_flags *flags)
+static t_quad	base_case(const struct s_double *dbl, const t_flags *flags)
 {
 	const t_flags	dflt = flags_default(flags->fd);
 	unsigned int	res;
@@ -57,7 +57,8 @@ static unsigned int	base_case(const struct s_double *dbl, const t_flags *flags)
 		dec += ((dbl->mant >> (52 - i)) & 1) * ft_lpow(2.0L, -i);
 		i++;
 	}
-	res += f_putuint(1 + ft_lpow(2, dbl->exp - BIASED_EXP), &dflt);
+	res += f_putuint((1.0L + dec) * ft_lpow(2.0L, dbl->exp - BIASED_EXP), \
+		&dflt);
 	res += t_put_dec_part(dec * ft_lpow(2.0L, dbl->exp - BIASED_EXP), flags);
 	return (res);
 }
