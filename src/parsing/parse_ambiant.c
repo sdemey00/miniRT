@@ -33,7 +33,8 @@ t_bool	parse_ambiant(char **split, t_scene *scene)
 	}
 	if (!parse_color(split[2], &ambiant.color))
 		return (0);
-	if (!check_range_double(ambiant.ratio, 0, 1, "Ambiant light: ratio out of range [0, 1]\n"))
+	if (!check_range_double(ambiant.ratio, 0, 1,
+			"Ambiant light: ratio out of range [0, 1]\n"))
 		return (0);
 	scene->ambiant = ambiant;
 	scene->ambiant.set = 1;

@@ -44,7 +44,7 @@ void	plane_print(t_plane plane)
 	ft_printf("Plane normal: %.2f, %.2f, %.2f\n",
 		plane.normal.x, plane.normal.y,
 		plane.normal.z);
-	ft_printf("Plane color: %d, %d, %d\n",(t_ssuint)plane.color.x,
+	ft_printf("Plane color: %d, %d, %d\n", (t_ssuint)plane.color.x,
 		(t_ssuint)plane.color.y, (t_ssuint)plane.color.z);
 }
 

@@ -14,37 +14,39 @@
 
 t_bool	parse_cylinder(char **split, t_scene *scene)
 {
-	t_cylinder	cylinder;
+	t_cylinder	cy;
 
-	if (!split[1] || !split[2] || !split[3] || !split[4] || !split[5] || split[6])
+	if (!split[1] || !split[2] || !split[3] || !split[4] || !split[5]
+		|| split[6])
 	{
 		print_error("Cylinder: invalid number of arguments\n");
 		return (0);
 	}
-	if (!parse_vec(split[1], &cylinder.center)
-		|| !parse_vec(split[2], &cylinder.axis)
-		|| !parse_color(split[5], &cylinder.color))
+	if (!parse_vec(split[1], &cy.center)
+		|| !parse_vec(split[2], &cy.axis)
+		|| !parse_color(split[5], &cy.color))
 		return (0);
-	if (!check_range_int(cylinder.axis.x, -1, 1,
+	if (!check_range_int(cy.axis.x, -1, 1,
 			"Cylinder: direction vector out of range [-1,1]\n")
-		|| !check_range_int(cylinder.axis.y, -1, 1,
+		|| !check_range_int(cy.axis.y, -1, 1,
 			"Cylinder: direction vector out of range [-1,1]\n")
-		|| !check_range_int(cylinder.axis.z, -1, 1,
+		|| !check_range_int(cy.axis.z, -1, 1,
 			"Cylinder: direction vector out of range [-1,1]\n"))
 		return (0);
-	if (!parse_float(split[3], &cylinder.diameter) || !parse_float(split[4], &cylinder.height))
+	if (!parse_float(split[3], &cy.diameter)
+		|| !parse_float(split[4], &cy.height))
 	{
 		print_error("Cylinder: invalid float format\n");
 		return (0);
 	}
-	if ((cylinder.axis.x == 0 && cylinder.axis.y == 0 && cylinder.axis.z == 0)
-		|| (cylinder.axis.x == 1 && (cylinder.axis.y == 1 || cylinder.axis.z == 1))
-		|| (cylinder.axis.z == 1 && (cylinder.axis.x == 1 || cylinder.axis.y == 1)))
+	if ((cy.axis.x == 0 && cy.axis.y == 0 && cy.axis.z == 0)
+		|| (cy.axis.x == 1 && (cy.axis.y == 1 || cy.axis.z == 1))
+		|| (cy.axis.z == 1 && (cy.axis.x == 1 || cy.axis.y == 1)))
 	{
 		print_error("Cylinder: invalid direction vector\n");
 		return (0);
 	}
-	scene->cylinders[scene->cylinders_idx++] = cylinder;
+	scene->cylinders[scene->cylinders_idx++] = cy;
 	return (1);
 }
 

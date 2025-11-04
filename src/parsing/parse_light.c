@@ -29,7 +29,8 @@ t_bool	parse_light(char **split, t_scene *scene)
 		print_error("Light source: invalid float format\n");
 		return (0);
 	}
-	if (!check_range_double(light.brightness, 0, 1, "Light source: brightness out of range [0, 1]\n"))
+	if (!check_range_double(light.brightness, 0, 1,
+			"Light source: brightness out of range [0, 1]\n"))
 		return (0);
 	scene->lights[scene->lights_idx++] = light;
 	return (1);
