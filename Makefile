@@ -6,7 +6,7 @@
 #    By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 08:33:05 by mmichele          #+#    #+#              #
-#    Updated: 2025/11/02 00:49:07 by mmichele         ###   ########.fr        #
+#    Updated: 2025/11/03 19:00:20 by mmichele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ H		?= 0
 F		?=
 
 CC		= cc
-FLAGS	= -Wall -Wextra -Werror -D WIDTH=$(W) -D HEIGHT=$(H)
+FLAGS	= -Wall -Wextra -Werror -g -D WIDTH=$(W) -D HEIGHT=$(H)
 
 BLDD	= build
 SRCD	= src
@@ -61,11 +61,11 @@ $(BLDD)/%.o: %.c
 
 clean:
 	rm -rf $(BLDD)
-	@ $(MAKE) -C $(MLXD) clean > /dev/null 2>&1
-	@ $(MAKE) -C $(LFTD) $@ >  /dev/null 2>&1
 
 fclean: clean
 	rm -rf $(NAME)
+	@ $(MAKE) -C $(MLXD) clean > /dev/null 2>&1
+	@ $(MAKE) -C $(LFTD) $@ >  /dev/null 2>&1
 
 re: fclean all
 

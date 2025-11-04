@@ -17,7 +17,7 @@ float	ft_sqrt(const float value)
 	t_ssuint	approx;
 	float		res;
 
-	approx = 10;
+	approx = 12;
 	res = 1;
 	while (approx--)
 		res = (1.0 / 2.0) * (res + ((float)value / (res)));

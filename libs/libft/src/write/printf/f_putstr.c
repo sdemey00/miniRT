@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 23:17:31 by mmichele          #+#    #+#             */
-/*   Updated: 2025/05/31 15:20:02 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/04 14:19:11 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	f_putstr(const char *str, const t_flags *flags)
 	else if (!str && flags->precision < (6 * flags->map[E_DOT]))
 		return (f_putstr("", flags));
 	len = 0;
-	while (len < flags->precision && str[len])
+	while (str[len])
 		len++;
 	if (flags->map[E_DOT] && flags->precision < len)
 		len = flags->precision;
