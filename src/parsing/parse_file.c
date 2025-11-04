@@ -14,13 +14,14 @@
 
 static t_bool	open_file(char *filename, int *fd)
 {
+	char	*ext;
 	if (!filename || !*filename)
 	{
 		print_error("No filename\n");
 		return (0);
 	}
-	if (ft_strlen(filename) < 4
-		|| ft_strcmp(&filename[ft_strlen(filename) - 3], ".rt") != 0)
+	ext = ft_strrchr(filename, '.');
+	if (!ext || ft_strcmp(ext, ".rt") != 0)
 	{
 		ft_dprintf(2, "Error\n%s: not a .rt file\n", filename);
 		return (0);
