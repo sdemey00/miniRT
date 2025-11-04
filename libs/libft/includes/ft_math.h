@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:52:09 by mmichele          #+#    #+#             */
-/*   Updated: 2025/10/31 23:53:10 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/02 14:27:59 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft.h"
 # include <math.h>
 
-# define FT_PI 3.141592653589793116
+# define FT_PI 3.141592653589793
 
 typedef float	t_rad;
 
@@ -67,6 +67,7 @@ float	ft_abs(float value);
 t_bool	fts_abs(float *value);
 t_luint	ft_fact(const t_uint n);
 t_luint	ft_pow(const t_uint base, t_uint exp);
+t_quad	ft_lpow(const t_quad base, int exp);
 int		ft_round(float value);
 float	ft_pythagoras(const float a, const float b);
 float	ft_sqrt(const float value);

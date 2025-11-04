@@ -1,44 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pow.c                                           :+:      :+:    :+:   */
+/*   f_s_double.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/20 17:45:11 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/02 13:09:30 by mmichele         ###   ########.fr       */
+/*   Created: 2025/11/02 14:53:19 by mmichele          #+#    #+#             */
+/*   Updated: 2025/11/02 14:54:10 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "f_printf.h"
 
-t_quad	ft_lpow(const t_quad base, int exp)
+void	s_double_print(const struct s_double *d)
 {
-	t_quad	res;
+	char	bin[64];
 
-	res = 1;
-	if (exp > 0)
-	{
-		while (exp--)
-			res *= base;
-	}
-	else if (exp < 0)
-	{
-		while (exp++)
-			res /= base;
-	}
-	return (res);
+	ft_tobin((char *)bin, (void *)&d->val, sizeof(double), 1);
+	ft_printf("%.1s.%.11s.%.52s\n", bin, &bin[1], &bin[12]);
 }
 
-t_luint	ft_pow(const t_uint base, t_uint exp)
+struct s_double	s_double_init(const double value)
 {
-	t_luint	res;
+	struct s_double	res;
 
-	res = 1;
-	while (exp > 0)
-	{
-		res *= base;
-		exp--;
-	}
+	res.val = value;
+	res.sign = (res.bits >> 63) & 1;
+	res.exp = ((res.bits >> 52) & 0x7ff);
+	res.mant = res.bits & ((1ULL << 52) - 1);
 	return (res);
 }
