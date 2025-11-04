@@ -68,5 +68,5 @@ double	ft_atof(const char *str);
 
 // parsing/print/scene_infos.c
 void	scene_print(t_scene *scene);
-
+void    print_error(char *msg); 
 #endif // PARSING_H

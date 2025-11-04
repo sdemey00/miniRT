@@ -18,17 +18,17 @@ t_bool	parse_ambiant(char **split, t_scene *scene)
 
 	if (scene->ambiant.set)
 	{
-		ft_dprintf(2, "Multiple ambiant light definitions are not allowed\n");
+		print_error("Multiple ambiant light definitions are not allowed\n");
 		return (0);
 	}
 	if (!split[1] || !split[2] || split[3])
 	{
-		ft_dprintf(2, "Ambiant light: invalid number of arguments\n");
+		print_error("Ambiant light: invalid number of arguments\n");
 		return (0);
 	}
 	if (!parse_float(split[1], &ambiant.ratio))
 	{
-		ft_dprintf(2, "Ambiant light: invalid vector format\n");
+		print_error("Ambiant light: invalid vector format\n");
 		return (0);
 	}
 	if (!parse_color(split[2], &ambiant.color))
@@ -44,11 +44,11 @@ void	ambiant_print(t_scene *scene)
 {
 	if (scene->ambiant.set != 1)
 	{
-		printf("There is no ambiant light\n");
+		ft_printf("There is no ambiant light\n");
 		return ;
 	}
-	printf("Ambiant light ratio: %.2f\n", scene->ambiant.ratio);
-	printf("Ambiant light color: %d, %d, %d\n",
+	ft_printf("Ambiant light ratio: %.2f\n", scene->ambiant.ratio);
+	ft_printf("Ambiant light color: %d, %d, %d\n",
 		(t_ssuint)scene->ambiant.color.x, (t_ssuint)scene->ambiant.color.y,
 		(t_ssuint)scene->ambiant.color.z);
 }

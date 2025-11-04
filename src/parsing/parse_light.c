@@ -18,7 +18,7 @@ t_bool	parse_light(char **split, t_scene *scene)
 
 	if (!split[1] || !split[2] || !split[3] || split[4])
 	{
-		ft_dprintf(2, "Light source: invalid number of arguments\n");
+		print_error("Light source: invalid number of arguments\n");
 		return (0);
 	}
 	if (!parse_vec(split[1], &light.pos)
@@ -26,7 +26,7 @@ t_bool	parse_light(char **split, t_scene *scene)
 		return (0);
 	if (!parse_float(split[2], &light.brightness))
 	{
-		ft_dprintf(2, "Light source: invalid float format\n");
+		print_error("Light source: invalid float format\n");
 		return (0);
 	}
 	if (!check_range_double(light.brightness, 0, 1, "Light source: brightness out of range [0, 1]\n"))
@@ -37,11 +37,11 @@ t_bool	parse_light(char **split, t_scene *scene)
 
 void	light_print(t_light light)
 {
-	printf("Light source position: %.2f, %.2f, %.2f\n",
+	ft_printf("Light source position: %.2f, %.2f, %.2f\n",
 		light.pos.x, light.pos.y, light.pos.z);
-	printf("Light source brightness: %.2f\n",
+	ft_printf("Light source brightness: %.2f\n",
 		light.brightness);
-	printf("Light source color: %d, %d, %d\n", (t_ssuint)light.color.x,
+	ft_printf("Light source color: %d, %d, %d\n", (t_ssuint)light.color.x,
 		(t_ssuint)light.color.y, (t_ssuint)light.color.z);
 }
 
@@ -52,17 +52,17 @@ void	lights_print(t_scene *scene)
 	i = 0;
 	if (scene->lights_idx == 0)
 	{
-		printf("There is no light sources\n");
+		ft_printf("There is no light sources\n");
 		return ;
 	}
-	printf("\tThere is %d light sources set\n", scene->lights_idx);
-	printf("- - - - - - - - - - - - - - - - - - - -\n");
+	ft_printf("\tThere is %d light sources set\n", scene->lights_idx);
+	ft_printf("- - - - - - - - - - - - - - - - - - - -\n");
 	while (i < scene->lights_idx)
 	{
-		printf("Light source %d\n", i + 1);
+		ft_printf("Light source %d\n", i + 1);
 		light_print(scene->lights[i]);
 		if (i != scene->lights_idx - 1)
-			printf("- - - - - - - - - - - - - - - - - - - -\n");
+			ft_printf("- - - - - - - - - - - - - - - - - - - -\n");
 		i++;
 	}
 }

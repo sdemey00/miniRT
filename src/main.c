@@ -42,12 +42,12 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_dprintf(2, "Usage: ./miniRT <scene.rt>\n");
+		print_error("Usage: ./miniRT <scene.rt>\n");
 		return (0);
 	}
 	scene_init(&s);
 	if (!parse_file(argv[1], &s))
-		return (ft_dprintf(2, "Error\n"), -1);
+		return (-1);
 	scene_print(&s);
 	return (0);
 	if (!window_init(&w))

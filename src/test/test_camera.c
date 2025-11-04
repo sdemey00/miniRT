@@ -103,7 +103,7 @@ int inverse(t_mat a, t_mat *inv, int n)
 	float det = determinant(a, n);
 	if (det == 0)
 	{
-		printf("La matrice n’est pas inversible (det = 0)\n");
+		ft_printf("La matrice n’est pas inversible (det = 0)\n");
 		return (0);
 	}
 	t_mat cofac, cofac_T;
@@ -162,6 +162,6 @@ int	false_main(void)
 	t_camera camera;
 	camera.fov = FT_PI / 2;
 	construct_camera(&camera);
-//	printf("fov: %f\nhalf_view: %f\naspect: %d\nheight: %f\nwidth: %f\npixel_size: %f\n", camera.fov, camera.half_view, camera.aspect, camera.half_height * 2, camera.half_width * 2, camera.pixel_size);
+//	ft_printf("fov: %f\nhalf_view: %f\naspect: %d\nheight: %f\nwidth: %f\npixel_size: %f\n", camera.fov, camera.half_view, camera.aspect, camera.half_height * 2, camera.half_width * 2, camera.pixel_size);
 	return (0);
 }

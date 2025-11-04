@@ -18,7 +18,7 @@ t_bool	parse_plane(char **split, t_scene *scene)
 
 	if (!split[1] || !split[2] || !split[3] || split[4])
 	{
-		ft_dprintf(2, "Plane: invalid number of arguments\n");
+		print_error("Plane: invalid number of arguments\n");
 		return (0);
 	}
 	if (!parse_vec(split[1], &plane.point)
@@ -38,13 +38,13 @@ t_bool	parse_plane(char **split, t_scene *scene)
 
 void	plane_print(t_plane plane)
 {
-	printf("Plane point: %.2f, %.2f, %.2f\n",
+	ft_printf("Plane point: %.2f, %.2f, %.2f\n",
 		plane.point.x, plane.point.y,
 		plane.point.z);
-	printf("Plane normal: %.2f, %.2f, %.2f\n",
+	ft_printf("Plane normal: %.2f, %.2f, %.2f\n",
 		plane.normal.x, plane.normal.y,
 		plane.normal.z);
-	printf("Plane color: %d, %d, %d\n",(t_ssuint)plane.color.x,
+	ft_printf("Plane color: %d, %d, %d\n",(t_ssuint)plane.color.x,
 		(t_ssuint)plane.color.y, (t_ssuint)plane.color.z);
 }
 
@@ -55,17 +55,17 @@ void	planes_print(t_scene *scene)
 	i = 0;
 	if (scene->planes_idx == 0)
 	{
-		printf("There is no planes\n");
+		ft_printf("There is no planes\n");
 		return ;
 	}
-	printf("\tThere is %d planes set\n", scene->planes_idx);
-	printf("- - - - - - - - - - - - - - - - - - - -\n");
+	ft_printf("\tThere is %d planes set\n", scene->planes_idx);
+	ft_printf("- - - - - - - - - - - - - - - - - - - -\n");
 	while (i < scene->planes_idx)
 	{
-		printf("Plane %d\n", i + 1);
+		ft_printf("Plane %d\n", i + 1);
 		plane_print(scene->planes[i]);
 		if (i != scene->planes_idx - 1)
-			printf("- - - - - - - - - - - - - - - - - - - -\n");
+			ft_printf("- - - - - - - - - - - - - - - - - - - -\n");
 		i++;
 	}
 }

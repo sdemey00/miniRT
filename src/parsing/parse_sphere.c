@@ -18,7 +18,7 @@ t_bool	parse_sphere(char **split, t_scene *scene)
 
 	if (!split[1] || !split[2] || !split[3] || split[4])
 	{
-		ft_dprintf(2, "Sphere: invalid number of arguments\n");
+		print_error("Sphere: invalid number of arguments\n");
 		return (0);
 	}
 	if (!parse_vec(split[1], &sp.center)
@@ -26,7 +26,7 @@ t_bool	parse_sphere(char **split, t_scene *scene)
 		return (0);
 	if (!parse_float(split[2], &sp.rayon))
 	{
-		ft_dprintf(2, "Sphere: invalid float format\n");
+		print_error("Sphere: invalid float format\n");
 		return (0);
 	}
 	sp.rayon /= 2;
@@ -36,11 +36,11 @@ t_bool	parse_sphere(char **split, t_scene *scene)
 
 void	sphere_print(t_sphere sphere)
 {
-	printf("Sphere center: %.2f, %.2f, %.2f\n",
+	ft_printf("Sphere center: %.2f, %.2f, %.2f\n",
 		sphere.center.x, sphere.center.y,
 		sphere.center.z);
-	printf("Sphere rayon: %.2f\n", sphere.rayon);
-	printf("Sphere color: %d, %d, %d\n", (t_ssuint)sphere.color.x,
+	ft_printf("Sphere rayon: %.2f\n", sphere.rayon);
+	ft_printf("Sphere color: %d, %d, %d\n", (t_ssuint)sphere.color.x,
 		(t_ssuint)sphere.color.y, (t_ssuint)sphere.color.z);
 }
 
@@ -51,17 +51,17 @@ void	spheres_print(t_scene *scene)
 	i = 0;
 	if (scene->spheres_idx == 0)
 	{
-		printf("There is no spheres\n");
+		ft_printf("There is no spheres\n");
 		return ;
 	}
-	printf("\tThere is %d spheres set\n", scene->spheres_idx);
-	printf("- - - - - - - - - - - - - - - - - - - -\n");
+	ft_printf("\tThere is %d spheres set\n", scene->spheres_idx);
+	ft_printf("- - - - - - - - - - - - - - - - - - - -\n");
 	while (i < scene->spheres_idx)
 	{
-		printf("Sphere %d\n", i + 1);
+		ft_printf("Sphere %d\n", i + 1);
 		sphere_print(scene->spheres[i]);
 		if (i != scene->spheres_idx - 1)
-			printf("- - - - - - - - - - - - - - - - - - - -\n");
+			ft_printf("- - - - - - - - - - - - - - - - - - - -\n");
 		i++;
 	}
 }
