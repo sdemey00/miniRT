@@ -32,8 +32,8 @@ typedef struct s_camera
 {
 	t_vec		pos;
 	t_vec		dir;
-	// t_ssuint	fov;
-	float		fov;
+	t_ssuint	fov;
+	//float		fov;
 	int			hsize;
 	int			vsize;
 	int			aspect;
@@ -55,7 +55,7 @@ typedef struct s_light
 typedef struct s_sphere
 {
 	t_vec	center;
-	float	diameter;
+	float	rayon;
 	t_color	color;
 }	t_sphere;
 

@@ -16,7 +16,7 @@ t_bool	parse_cylinder(char **split, t_scene *scene)
 {
 	t_cylinder	cylinder;
 
-	if (!split[1] || !split[2] || !split[3] || !split[4] || !split[5])
+	if (!split[1] || !split[2] || !split[3] || !split[4] || !split[5] || split[6])
 	{
 		ft_dprintf(2, "Cylinder: invalid number of arguments\n");
 		return (0);
@@ -34,7 +34,14 @@ t_bool	parse_cylinder(char **split, t_scene *scene)
 		return (0);
 	if (!parse_float(split[3], &cylinder.diameter) || !parse_float(split[4], &cylinder.height))
 	{
-		ft_dprintf(2, "Invalid vector format\n");
+		ft_dprintf(2, "Cylinder: invalid float format\n");
+		return (0);
+	}
+	if ((cylinder.axis.x == 0 && cylinder.axis.y == 0 && cylinder.axis.z == 0)
+		|| (cylinder.axis.x == 1 && (cylinder.axis.y == 1 || cylinder.axis.z == 1))
+		|| (cylinder.axis.z == 1 && (cylinder.axis.x == 1 || cylinder.axis.y == 1)))
+	{
+		ft_dprintf(2, "Cylinder: invalid direction vector\n");
 		return (0);
 	}
 	scene->cylinders[scene->cylinders_idx++] = cylinder;
@@ -58,23 +65,6 @@ void	cylinder_print(t_cylinder cylinder)
 		(t_ssuint)cylinder.color.z);
 }
 
-// void	print_cylinder_infos(t_cylinder cylinder, t_ssuint i)
-// {
-// 	printf("Cylinder %d center: %.2f, %.2f, %.2f\n", i + 1,
-// 		cylinder.center.x, cylinder.center.y,
-// 		cylinder.center.z);
-// 	printf("Cylinder %d axis: %.2f, %.2f, %.2f\n", i + 1,
-// 		cylinder.axis.x, cylinder.axis.y,
-// 		cylinder.axis.z);
-// 	printf("Cylinder %d diameter: %.2f\n", i + 1,
-// 		cylinder.diameter);
-// 	printf("Cylinder %d height: %.2f\n", i + 1,
-// 		cylinder.height);
-// 	printf("Cylinder %d color: %d, %d, %d\n", i + 1,
-// 		(t_ssuint)cylinder.color.x, (t_ssuint)cylinder.color.y,
-// 		(t_ssuint)cylinder.color.z);
-// }
-
 void	cylinders_print(t_scene *scene)
 {
 	t_ssuint	i;
@@ -89,7 +79,7 @@ void	cylinders_print(t_scene *scene)
 	printf("- - - - - - - - - - - - - - - - - - - -\n");
 	while (i < scene->cylinders_idx)
 	{
-		printf("Cylinder %d\n", i);
+		printf("Cylinder %d\n", i + 1);
 		cylinder_print(scene->cylinders[i]);
 		if (i != scene->cylinders_idx - 1)
 			printf("- - - - - - - - - - - - - - - - - - - -\n");

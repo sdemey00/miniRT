@@ -47,16 +47,16 @@ t_bool	parse_vec(char *str, t_vec *v)
 	tab = ft_split(str, ',');
 	if (!tab)
 		return (0);
-	if (!tab[0] || !tab[1] || !tab[2])
+	if (!tab[0] || !tab[1] || !tab[2] || tab[3])
 	{
 		ft_free_split(tab);
-		ft_dprintf(2, "Invalid vector format\n");
+		ft_dprintf(2, "Invalid vector format: invalide number of arguments\n");
 		return (0);
 	}
 	if (!parse_float(tab[0], &v->x) || !parse_float(tab[1], &v->y) || !parse_float(tab[2], &v->z))
 	{
 		ft_free_split(tab);
-		ft_dprintf(2, "Invalid vector format\n");
+		ft_dprintf(2, "Invalid vector format: float format\n");
 		return (0);
 	}
 	ft_free_split(tab);
@@ -70,21 +70,21 @@ t_bool	parse_color(char *str, t_color *c)
 	tab = ft_split(str, ',');
 	if (!tab)
 		return (0);
-	if (!tab[0] || !tab[1] || !tab[2])
+	if (!tab[0] || !tab[1] || !tab[2] || tab[3])
 	{
 		ft_free_split(tab);
-		ft_dprintf(2, "Invalid color format\n");
+		ft_dprintf(2, "Invalid color format: invalid number of arguments\n");
 		return (0);
 	}
 	if (!parse_float(tab[0], &c->x) || !parse_float(tab[1], &c->y) || !parse_float(tab[2], &c->z))
 	{
 		ft_free_split(tab);
-		ft_dprintf(2, "Invalid vector format\n");
+		ft_dprintf(2, "Invalid color format: float format\n");
 		return (0);
 	}
-	if (!check_range_int(c->x, 0, 255, "Invalid color range\n")
-		|| !check_range_int(c->y, 0, 255, "Invalid color range\n")
-		|| !check_range_int(c->z, 0, 255, "Invalid color range\n"))
+	if (!check_range_int(c->x, 0, 255, "Invalid color range [0, 255]\n")
+		|| !check_range_int(c->y, 0, 255, "Invalid color range [0, 255]\n")
+		|| !check_range_int(c->z, 0, 255, "Invalid color range [0, 255]\n"))
 	{
 		ft_free_split(tab);
 		return (0);

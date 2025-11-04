@@ -1,17 +1,17 @@
 # brightness > 1.0
+#A 1.5 255,255,255             
 
-A 1.5 255,255,255             
 # orientation vector invalid (not normalized)
-C 0,0,0 0,0,1.5 70      
+#C 0,0,0 0,0,1.5 70      
 
 # negative brightness
-L 0,0,0 -0.5 255,255,255      
+#L 0,0,0 -0.5 255,255,255      
 
  # invalid float
-sp 0,0,20 abc 255,0,0        
+#sp 0,0,20 abc 255,0,0        
 
 # too many values in vector
 pl 0,0,0 0,1,0,1 255,0,0      
 
 # malformed float
-cy 0,0,0 0,0,1 14.2.3 21.42 10,0,255 
+#cy 0,0,0 0,0,1 14.2.3 21.42 10,0,255 

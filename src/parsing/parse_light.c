@@ -16,7 +16,7 @@ t_bool	parse_light(char **split, t_scene *scene)
 {
 	t_light	light;
 
-	if (!split[1] || !split[2] || !split[3])
+	if (!split[1] || !split[2] || !split[3] || split[4])
 	{
 		ft_dprintf(2, "Light source: invalid number of arguments\n");
 		return (0);
@@ -26,9 +26,11 @@ t_bool	parse_light(char **split, t_scene *scene)
 		return (0);
 	if (!parse_float(split[2], &light.brightness))
 	{
-		ft_dprintf(2, "Invalid vector format\n");
+		ft_dprintf(2, "Light source: invalid float format\n");
 		return (0);
 	}
+	if (!check_range_double(light.brightness, 0, 1, "Light source: brightness out of range [0, 1]\n"))
+		return (0);
 	scene->lights[scene->lights_idx++] = light;
 	return (1);
 }
@@ -42,16 +44,6 @@ void	light_print(t_light light)
 	printf("Light source color: %d, %d, %d\n", (t_ssuint)light.color.x,
 		(t_ssuint)light.color.y, (t_ssuint)light.color.z);
 }
-
-// void	print_light_infos(t_light light, t_ssuint i)
-// {
-// 	printf("Light source %d position: %.2f, %.2f, %.2f\n", i + 1,
-// 		light.pos.x, light.pos.y, light.pos.z);
-// 	printf("Light source %d brightness: %.2f\n", i + 1,
-// 		light.brightness);
-// 	printf("Light source %d color: %d, %d, %d\n", i + 1, (t_ssuint)light.color.x,
-// 		(t_ssuint)light.color.y, (t_ssuint)light.color.z);
-// }
 
 void	lights_print(t_scene *scene)
 {
@@ -67,7 +59,7 @@ void	lights_print(t_scene *scene)
 	printf("- - - - - - - - - - - - - - - - - - - -\n");
 	while (i < scene->lights_idx)
 	{
-		printf("Light source %d\n", i);
+		printf("Light source %d\n", i + 1);
 		light_print(scene->lights[i]);
 		if (i != scene->lights_idx - 1)
 			printf("- - - - - - - - - - - - - - - - - - - -\n");

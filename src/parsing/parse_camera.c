@@ -21,16 +21,16 @@ t_bool	parse_camera(char **split, t_scene *scene)
 		ft_dprintf(2, "Multiple camera definitions are not allowed\n");
 		return (0);
 	}
-	if (!split[1] || !split[2] || !split[3])
+	if (!split[1] || !split[2] || !split[3] || split[4])
 	{
 		ft_dprintf(2, "Camera: invalid number of arguments\n");
-		return (1);
+		return (0);
 	}
 	if (!parse_vec(split[1], &cam.pos) || !parse_vec(split[2], &cam.dir))
 		return (0);
 	if (!parse_int(split[3], (int *)&cam.fov))
 	{
-		ft_dprintf(2, "Invalid vector format\n");
+		ft_dprintf(2, "Camera: FOV invalid int format\n");
 		return (0);
 	}
 	if (!check_range_double(cam.fov, 0.0, 180.0, "Camera: FOV out of range\n")
@@ -41,6 +41,13 @@ t_bool	parse_camera(char **split, t_scene *scene)
 		|| !check_range_int(cam.dir.z, -1, 1,
 			"Camera: direction vector out of range [-1,1]\n"))
 		return (0);
+	if ((cam.dir.x == 0 && cam.dir.y == 0 && cam.dir.z == 0)
+		|| (cam.dir.x == 1 && (cam.dir.y == 1 || cam.dir.z == 1))
+		|| (cam.dir.z == 1 && (cam.dir.x == 1 || cam.dir.y == 1)))
+	{
+		ft_dprintf(2, "Camera: invalid direction vector\n");
+		return (0);
+	}
 	scene->camera = cam;
 	scene->camera.set = 1;
 	return (1);
@@ -57,5 +64,5 @@ void	camera_print(t_scene *scene)
 		scene->camera.pos.x, scene->camera.pos.y, scene->camera.pos.z);
 	printf("Camera direction: %.2f, %.2f, %.2f\n",
 		scene->camera.dir.x, scene->camera.dir.y, scene->camera.dir.z);
-	printf("Camera FOV: %f\n", scene->camera.fov);
+	printf("Camera FOV: %d\n", scene->camera.fov);
 }

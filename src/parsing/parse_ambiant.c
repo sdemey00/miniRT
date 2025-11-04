@@ -21,17 +21,19 @@ t_bool	parse_ambiant(char **split, t_scene *scene)
 		ft_dprintf(2, "Multiple ambiant light definitions are not allowed\n");
 		return (0);
 	}
-	if (!split[1] || !split[2])
+	if (!split[1] || !split[2] || split[3])
 	{
 		ft_dprintf(2, "Ambiant light: invalid number of arguments\n");
 		return (0);
 	}
 	if (!parse_float(split[1], &ambiant.ratio))
 	{
-		ft_dprintf(2, "Invalid vector format\n");
+		ft_dprintf(2, "Ambiant light: invalid vector format\n");
 		return (0);
 	}
 	if (!parse_color(split[2], &ambiant.color))
+		return (0);
+	if (!check_range_double(ambiant.ratio, 0, 1, "Ambiant light: ratio out of range [0, 1]\n"))
 		return (0);
 	scene->ambiant = ambiant;
 	scene->ambiant.set = 1;
