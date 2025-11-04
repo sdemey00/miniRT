@@ -6,13 +6,13 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:16:11 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/04 16:06:27 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:48:28 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_bool	ray_hit_sphere(const t_ray *r, const t_sphere *s)
+t_bool	ray_hit_sphere(const t_ray *r, const t_sphere *s, float *dist)
 {
 	const t_vec	oc = vec_sub(r->origin, s->center);
 	const float	a = vec_dot(&r->dir, &r->dir);
@@ -24,10 +24,16 @@ t_bool	ray_hit_sphere(const t_ray *r, const t_sphere *s)
 
 	if (delta < 0)
 		return (0);
-	return (t[0] >= 0 || t[1] >= 0);
+	if (0 < t[0] && t[0] < t[1])
+		*dist = t[0];
+	else if (0 < t[1] && t[1] < t[0])
+		*dist = t[1];
+	else if (t[0] >= 0 || t[1] >= 0)
+		return (1);
+	return (0);
 }
 
-t_bool	ray_hit_plane(const t_ray *r, const t_plane *p)
+t_bool	ray_hit_plane(const t_ray *r, const t_plane *p, float *dist)
 {
 	const t_vec	po = vec_sub(p->point, r->origin);
 	const float	num = vec_dot(&po, &p->normal);
@@ -39,6 +45,7 @@ t_bool	ray_hit_plane(const t_ray *r, const t_plane *p)
 	t = num / den;
 	if (t < 0)
 		return (0);
+	*dist = t;
 	return (1);
 }
 

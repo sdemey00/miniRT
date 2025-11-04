@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:02:14 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/04 15:20:44 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:48:47 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		color_int(t_color *c);
 void	raytracing(t_window *w, t_scene *s);
 
 // math/ray_hits.c
-t_bool	ray_hit_sphere(const t_ray *r, const t_sphere *s);
-t_bool	ray_hit_plane(const t_ray *r, const t_plane *p);
+t_bool	ray_hit_sphere(const t_ray *r, const t_sphere *s, float* dist);
+t_bool	ray_hit_plane(const t_ray *r, const t_plane *p, float *dist);
 
 #endif // MINIRT_H
