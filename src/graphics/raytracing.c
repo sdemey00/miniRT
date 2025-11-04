@@ -12,11 +12,11 @@
 
 #include "minirt.h"
 
-t_ray get_ray(int i, int j, double fov) 
+static t_ray get_ray(int i, int j, double fov) 
 {
     double aspect = (double)WIDTH / HEIGHT;
-    double x = (2 * ((i + 0.5) / WIDTH) - 1) * aspect * tan(fov * M_PI / 180 / 2);
-    double y = (1 - 2*((j + 0.5)/HEIGHT)) * tan(fov * M_PI / 180 / 2);
+    double x = (2 * ((i + 0.5) / WIDTH) - 1) * aspect * tan(fov * FT_PI / 180 / 2);
+    double y = (1 - 2 * ((j + 0.5) / HEIGHT)) * tan(fov * FT_PI / 180 / 2);
 	t_vec norm_dir = (t_vec){x, y, -1};
     t_vec dir = vec_norm(&norm_dir);
     return ((t_ray){(t_vec){0,0,0}, dir});
@@ -72,7 +72,7 @@ void	raytracing(t_window *w, t_scene *s)
 		x = 0;
 		while (x < WIDTH)
 		{
-			r = get_ray(x , y , 90);
+			r = get_ray(x , y , 70);
 			c = ray_color(r);
 			window_draw_pixel(w, x, y, color_int(&c));
 			x += 1;
