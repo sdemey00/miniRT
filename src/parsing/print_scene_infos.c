@@ -15,7 +15,7 @@
 void	print_error(char *msg)
 {
 	ft_dprintf(2, "Error\n");
-	ft_dprintf(2, "%s\n", msg);
+	ft_dprintf(2, "%s", msg);
 }
 
 void	scene_print(t_scene *scene)

@@ -12,6 +12,26 @@
 
 #include "minirt.h"
 
+static t_bool	check_camera_ranges(t_camera cam)
+{
+	if (!check_range_double(cam.fov, 0.0, 180.0, "Camera: FOV out of range\n")
+		|| !check_range_int(cam.dir.x, -1, 1,
+			"Camera: direction vector out of range [-1,1]\n")
+		|| !check_range_int(cam.dir.y, -1, 1,
+			"Camera: direction vector out of range [-1,1]\n")
+		|| !check_range_int(cam.dir.z, -1, 1,
+			"Camera: direction vector out of range [-1,1]\n"))
+		return (0);
+	if ((cam.dir.x == 0 && cam.dir.y == 0 && cam.dir.z == 0)
+		|| (cam.dir.x == 1 && (cam.dir.y == 1 || cam.dir.z == 1))
+		|| (cam.dir.z == 1 && (cam.dir.x == 1 || cam.dir.y == 1)))
+	{
+		print_error("Camera: invalid direction vector\n");
+		return (0);
+	}
+	return (1);
+}
+
 t_bool	parse_camera(char **split, t_scene *scene)
 {
 	t_camera	cam;
@@ -33,21 +53,8 @@ t_bool	parse_camera(char **split, t_scene *scene)
 		print_error("Camera: FOV invalid int format\n");
 		return (0);
 	}
-	if (!check_range_double(cam.fov, 0.0, 180.0, "Camera: FOV out of range\n")
-		|| !check_range_int(cam.dir.x, -1, 1,
-			"Camera: direction vector out of range [-1,1]\n")
-		|| !check_range_int(cam.dir.y, -1, 1,
-			"Camera: direction vector out of range [-1,1]\n")
-		|| !check_range_int(cam.dir.z, -1, 1,
-			"Camera: direction vector out of range [-1,1]\n"))
+	if (!check_camera_ranges(cam))
 		return (0);
-	if ((cam.dir.x == 0 && cam.dir.y == 0 && cam.dir.z == 0)
-		|| (cam.dir.x == 1 && (cam.dir.y == 1 || cam.dir.z == 1))
-		|| (cam.dir.z == 1 && (cam.dir.x == 1 || cam.dir.y == 1)))
-	{
-		print_error("Camera: invalid direction vector\n");
-		return (0);
-	}
 	scene->camera = cam;
 	scene->camera.set = 1;
 	return (1);

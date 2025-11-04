@@ -78,8 +78,7 @@ t_bool	parse_color(char *str, t_color *c)
 		print_error("Invalid color format: invalid number of arguments\n");
 		return (0);
 	}
-	if (!parse_float(tab[0], &c->x)
-		|| !parse_float(tab[1], &c->y)
+	if (!parse_float(tab[0], &c->x) || !parse_float(tab[1], &c->y)
 		|| !parse_float(tab[2], &c->z))
 	{
 		ft_free_split(tab);
@@ -89,10 +88,6 @@ t_bool	parse_color(char *str, t_color *c)
 	if (!check_range_int(c->x, 0, 255, "Invalid color range [0, 255]\n")
 		|| !check_range_int(c->y, 0, 255, "Invalid color range [0, 255]\n")
 		|| !check_range_int(c->z, 0, 255, "Invalid color range [0, 255]\n"))
-	{
-		ft_free_split(tab);
-		return (0);
-	}
-	ft_free_split(tab);
-	return (1);
+		return (ft_free_split(tab), 0);
+	return (ft_free_split(tab), 1);
 }

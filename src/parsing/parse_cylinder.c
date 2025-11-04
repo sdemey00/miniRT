@@ -12,6 +12,25 @@
 
 #include "minirt.h"
 
+static t_bool	check_cylinder_ranges(t_cylinder cy)
+{
+	if (!check_range_int(cy.axis.x, -1, 1,
+			"Cylinder: direction vector out of range [-1,1]\n")
+		|| !check_range_int(cy.axis.y, -1, 1,
+			"Cylinder: direction vector out of range [-1,1]\n")
+		|| !check_range_int(cy.axis.z, -1, 1,
+			"Cylinder: direction vector out of range [-1,1]\n"))
+		return (0);
+	if ((cy.axis.x == 0 && cy.axis.y == 0 && cy.axis.z == 0)
+		|| (cy.axis.x == 1 && (cy.axis.y == 1 || cy.axis.z == 1))
+		|| (cy.axis.z == 1 && (cy.axis.x == 1 || cy.axis.y == 1)))
+	{
+		print_error("Cylinder: invalid direction vector\n");
+		return (0);
+	}
+	return (1);
+}
+
 t_bool	parse_cylinder(char **split, t_scene *scene)
 {
 	t_cylinder	cy;
@@ -26,26 +45,14 @@ t_bool	parse_cylinder(char **split, t_scene *scene)
 		|| !parse_vec(split[2], &cy.axis)
 		|| !parse_color(split[5], &cy.color))
 		return (0);
-	if (!check_range_int(cy.axis.x, -1, 1,
-			"Cylinder: direction vector out of range [-1,1]\n")
-		|| !check_range_int(cy.axis.y, -1, 1,
-			"Cylinder: direction vector out of range [-1,1]\n")
-		|| !check_range_int(cy.axis.z, -1, 1,
-			"Cylinder: direction vector out of range [-1,1]\n"))
-		return (0);
 	if (!parse_float(split[3], &cy.diameter)
 		|| !parse_float(split[4], &cy.height))
 	{
 		print_error("Cylinder: invalid float format\n");
 		return (0);
 	}
-	if ((cy.axis.x == 0 && cy.axis.y == 0 && cy.axis.z == 0)
-		|| (cy.axis.x == 1 && (cy.axis.y == 1 || cy.axis.z == 1))
-		|| (cy.axis.z == 1 && (cy.axis.x == 1 || cy.axis.y == 1)))
-	{
-		print_error("Cylinder: invalid direction vector\n");
+	if (!check_cylinder_ranges(cy))
 		return (0);
-	}
 	scene->cylinders[scene->cylinders_idx++] = cy;
 	return (1);
 }
