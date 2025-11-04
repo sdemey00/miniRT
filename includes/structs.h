@@ -55,7 +55,7 @@ typedef struct s_light
 typedef struct s_sphere
 {
 	t_vec	center;
-	float	rayon;
+	float	radius;
 	t_color	color;
 }	t_sphere;
 

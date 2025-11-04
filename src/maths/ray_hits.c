@@ -17,7 +17,7 @@ t_bool	ray_hit_sphere(const t_ray *r, const t_sphere *s, float *t)
 	const t_vec	oc = vec_sub(r->origin, s->center);
 	const float	a = vec_dot(&r->dir, &r->dir);
 	const float	b = 2.0 * (vec_dot(&r->dir, &oc));
-	const float	c = vec_dot(&oc, &oc) - ft_pow(s->rayon, 2);
+	const float	c = vec_dot(&oc, &oc) - ft_pow(s->radius, 2);
 	const float	delta = ft_pow(b, 2) - (4 * a * c);
 
 	if (delta < 0)
