@@ -1,0 +1,21 @@
+# negative ratio
+#A -0.2 255,255,255     
+# > 1.0
+#A 2.0 255,255,255         
+
+C 0,0,0 1,1,0 70           
+
+# zero orientation vector
+#C 0,0,0 0,0,0 70           
+
+# brightness > 1
+L 0,0,0 1.2 255,255,255     
+
+# zero diameter
+sp 0,0,0 0 255,0,0         
+
+# invalid normal
+pl 0,0,0 0,0,0 255,255,255     
+
+# negative height
+cy 0,0,0 0,0,1 10 -5 0,0,255   

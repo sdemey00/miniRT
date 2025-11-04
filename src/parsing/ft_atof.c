@@ -40,7 +40,7 @@ double	ft_atof(const char *str)
 		str++;
 	}
 	if (*str != '.')
-		return (result);
+		return (sign * result);
 	str++;
 	while (ft_isdigit(*str))
 	{

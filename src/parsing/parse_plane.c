@@ -16,8 +16,11 @@ t_bool	parse_plane(char **split, t_scene *scene)
 {
 	t_plane	plane;
 
-	if (!split[1] || !split[2] || !split[3])
-		return (ft_dprintf(2, "Plane: invalid number of arguments\n"), 0);
+	if (!split[1] || !split[2] || !split[3] || split[4])
+	{
+		print_error("Plane: invalid number of arguments\n");
+		return (0);
+	}
 	if (!parse_vec(split[1], &plane.point)
 		|| !parse_vec(split[2], &plane.normal)
 		|| !parse_color(split[3], &plane.color))
@@ -33,35 +36,36 @@ t_bool	parse_plane(char **split, t_scene *scene)
 	return (1);
 }
 
-void	print_plane_infos(t_plane plane, t_ssuint i)
+void	plane_print(t_plane plane)
 {
-	printf("Plane %d point: %19.2f, %.2f, %.2f\n", i + 1,
+	ft_printf("Plane point: %.2f, %.2f, %.2f\n",
 		plane.point.x, plane.point.y,
 		plane.point.z);
-	printf("Plane %d normal: %18.2f, %.2f, %.2f\n", i + 1,
+	ft_printf("Plane normal: %.2f, %.2f, %.2f\n",
 		plane.normal.x, plane.normal.y,
 		plane.normal.z);
-	printf("Plane %d color: %16d, %d, %d\n", i + 1, (t_ssuint)plane.color.x,
+	ft_printf("Plane color: %d, %d, %d\n", (t_ssuint)plane.color.x,
 		(t_ssuint)plane.color.y, (t_ssuint)plane.color.z);
 }
 
-void	print_planes_infos(t_scene *scene)
+void	planes_print(t_scene *scene)
 {
 	t_ssuint	i;
 
 	i = 0;
 	if (scene->planes_idx == 0)
 	{
-		printf("There is no planes\n");
+		ft_printf("There is no planes\n");
 		return ;
 	}
-	printf("\tThere is %d planes set\n", scene->planes_idx);
-	printf("- - - - - - - - - - - - - - - - - - - -\n");
+	ft_printf("\tThere is %d planes set\n", scene->planes_idx);
+	ft_printf("- - - - - - - - - - - - - - - - - - - -\n");
 	while (i < scene->planes_idx)
 	{
-		print_plane_infos(scene->planes[i], i);
+		ft_printf("Plane %d\n", i + 1);
+		plane_print(scene->planes[i]);
 		if (i != scene->planes_idx - 1)
-			printf("- - - - - - - - - - - - - - - - - - - -\n");
+			ft_printf("- - - - - - - - - - - - - - - - - - - -\n");
 		i++;
 	}
 }

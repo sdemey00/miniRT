@@ -12,12 +12,26 @@
 
 #include "minirt.h"
 
+static void	normalize_whitespace(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (ft_isspace(line[i]))
+			line[i] = ' ';
+		i++;
+	}
+}
+
 t_bool	parse_line(char *line, t_scene *scene)
 {
 	char	**split;
 	t_bool	status;
 
 	status = 1;
+	normalize_whitespace(line);
 	split = ft_split(line, ' ');
 	if (!split || !split[0])
 		return (0);

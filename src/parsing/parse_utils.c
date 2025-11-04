@@ -29,14 +29,14 @@ void	ft_free_split(char **tab)
 t_bool	check_range_double(double val, double min, double max, char *msg)
 {
 	if (val < min || val > max)
-		return (ft_dprintf(2, msg), 0);
+		return (print_error(msg), 0);
 	return (1);
 }
 
 t_bool	check_range_int(int val, int min, int max, char *msg)
 {
 	if (val < min || val > max)
-		return (ft_dprintf(2, msg), 0);
+		return (print_error(msg), 0);
 	return (1);
 }
 
@@ -45,14 +45,22 @@ t_bool	parse_vec(char *str, t_vec *v)
 	char	**tab;
 
 	tab = ft_split(str, ',');
-	if (!tab[0] || !tab[1] || !tab[2])
+	if (!tab)
+		return (0);
+	if (!tab[0] || !tab[1] || !tab[2] || tab[3])
 	{
 		ft_free_split(tab);
-		return (ft_dprintf(2, "Invalid vector format\n"), 0);
+		print_error("Invalid vector format: invalid number of arguments\n");
+		return (0);
 	}
-	v->x = ft_atof(tab[0]);
-	v->y = ft_atof(tab[1]);
-	v->z = ft_atof(tab[2]);
+	if (!parse_float(tab[0], &v->x)
+		|| !parse_float(tab[1], &v->y)
+		|| !parse_float(tab[2], &v->z))
+	{
+		ft_free_split(tab);
+		print_error("Invalid vector format: invalid float format\n");
+		return (0);
+	}
 	ft_free_split(tab);
 	return (1);
 }
@@ -62,21 +70,24 @@ t_bool	parse_color(char *str, t_color *c)
 	char	**tab;
 
 	tab = ft_split(str, ',');
-	if (!tab[0] || !tab[1] || !tab[2])
+	if (!tab)
+		return (0);
+	if (!tab[0] || !tab[1] || !tab[2] || tab[3])
 	{
 		ft_free_split(tab);
-		return (ft_dprintf(2, "Invalid color format\n"), -1);
-	}
-	c->x = ft_atoi(tab[0]);
-	c->y = ft_atoi(tab[1]);
-	c->z = ft_atoi(tab[2]);
-	if (!check_range_int(c->x, 0, 255, "Invalid color range\n")
-		|| !check_range_int(c->y, 0, 255, "Invalid color range\n")
-		|| !check_range_int(c->z, 0, 255, "Invalid color range\n"))
-	{
-		ft_free_split(tab);
+		print_error("Invalid color format: invalid number of arguments\n");
 		return (0);
 	}
-	ft_free_split(tab);
-	return (1);
+	if (!parse_float(tab[0], &c->x) || !parse_float(tab[1], &c->y)
+		|| !parse_float(tab[2], &c->z))
+	{
+		ft_free_split(tab);
+		print_error("Invalid color format: invalid float format\n");
+		return (0);
+	}
+	if (!check_range_int(c->x, 0, 255, "Invalid color range [0, 255]\n")
+		|| !check_range_int(c->y, 0, 255, "Invalid color range [0, 255]\n")
+		|| !check_range_int(c->z, 0, 255, "Invalid color range [0, 255]\n"))
+		return (ft_free_split(tab), 0);
+	return (ft_free_split(tab), 1);
 }

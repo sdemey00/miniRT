@@ -42,14 +42,14 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_dprintf(2, "Usage: ./miniRT <scene.rt>\n");
+		print_error("Usage: ./miniRT <scene.rt>\n");
 		return (0);
 	}
 	scene_init(&s);
 	if (!parse_file(argv[1], &s))
-		return (ft_dprintf(2, "Error\n"), -1);
+		return (-1);
 	if (VERBOSE)
-		print_scene_infos(&s);
+		scene_print(&s);
 	if (!window_init(&w))
 		return (1);
 	window_draw(&w, &s);
