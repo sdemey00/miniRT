@@ -49,6 +49,7 @@ t_color ray_color(t_ray r)
     return (t_color){135,206,235}; // fond bleu ciel
 }
 
+int	compute_lights(t_scene *s);
 void	raytracing(t_window *w, t_scene *s)
 {
 	t_idx	x;
@@ -62,7 +63,8 @@ void	raytracing(t_window *w, t_scene *s)
 		while (x < WIDTH)
 		{
 			c = ray_color(get_ray(x, y, &s->camera));
-			window_draw_pixel(w, x, y, color_int(&c));
+			window_draw_pixel(w, x, y, color_int(&c) * compute_lights(s));
+			//window_draw_pixel(w, x, y, color_int(&c));
 			x += 1;
 		}
 		y += 1;

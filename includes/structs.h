@@ -23,7 +23,7 @@ typedef t_vec	t_color;
 
 typedef struct s_ambiant
 {
-	float	ratio;
+	float	intensity;
 	t_color	color;
 	t_bool	set;
 }	t_ambiant;
@@ -39,7 +39,7 @@ typedef struct s_camera
 typedef struct s_light
 {
 	t_vec	pos;
-	float	brightness;
+	float	intensity;
 	t_color	color;
 }	t_light;
 
