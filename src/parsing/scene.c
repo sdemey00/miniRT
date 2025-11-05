@@ -14,10 +14,8 @@
 
 void	scene_init(t_scene *scene)
 {
-	scene->planes_idx = 0;
-	scene->spheres_idx = 0;
-	scene->cylinders_idx = 0;
-	scene->lights_idx = 0;
-	scene->camera.set = 0;
 	scene->ambiant.set = 0;
+	scene->camera.set = 0;
+	scene->lights_len = 0;
+	scene->objs_len = 0;
 }

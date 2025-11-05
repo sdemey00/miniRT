@@ -41,15 +41,15 @@ t_bool	parse_ambiant(char **split, t_scene *scene)
 	return (1);
 }
 
-void	ambiant_print(t_scene *scene)
+void	ambiant_print(t_ambiant ambiant)
 {
-	if (scene->ambiant.set != 1)
+	if (ambiant.set != 1)
 	{
 		ft_printf("There is no ambiant light\n");
 		return ;
 	}
-	ft_printf("Ambiant light ratio: %.2f\n", scene->ambiant.ratio);
+	ft_printf("Ambiant light ratio: %.2f\n", ambiant.ratio);
 	ft_printf("Ambiant light color: %d, %d, %d\n",
-		(t_ssuint)scene->ambiant.color.x, (t_ssuint)scene->ambiant.color.y,
-		(t_ssuint)scene->ambiant.color.z);
+		(t_ssuint)ambiant.color.x, (t_ssuint)ambiant.color.y,
+		(t_ssuint)ambiant.color.z);
 }

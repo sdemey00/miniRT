@@ -33,15 +33,6 @@ typedef struct s_camera
 	t_vec		pos;
 	t_vec		dir;
 	t_ssuint	fov;
-	//float		fov;
-	int			hsize;
-	int			vsize;
-	int			aspect;
-	float		half_view;
-	float		half_width;
-	float		half_height;
-	float		pixel_size;
-	t_mat		transform;
 	t_bool		set;
 }	t_camera;
 
@@ -52,41 +43,29 @@ typedef struct s_light
 	t_color	color;
 }	t_light;
 
-typedef struct s_sphere
+typedef struct s_obj
 {
-	t_vec	center;
+	enum
+	{
+		SPHERE,
+		PLANE,
+		CYLINDER
+	}	e_type;
+	t_vec	pos;
+	t_vec	dir;
+	t_color	color;
 	float	radius;
-	t_color	color;
-}	t_sphere;
-
-typedef struct s_plane
-{
-	t_vec	point;
-	t_vec	normal;
-	t_color	color;
-}	t_plane;
-
-typedef struct s_cylinder
-{
-	t_vec	center;
-	t_vec	axis;
-	float	diameter;
 	float	height;
-	t_color	color;
-}	t_cylinder;
+}	t_obj;
 
 typedef struct s_scene
 {
 	t_ambiant	ambiant;
 	t_camera	camera;
 	t_light		lights[128];
-	t_ssuint	lights_idx;
-	t_sphere	spheres[128];
-	t_ssuint	spheres_idx;
-	t_plane		planes[128];
-	t_ssuint	planes_idx;
-	t_cylinder	cylinders[128];
-	t_ssuint	cylinders_idx;
+	t_ssuint	lights_len;
+	t_obj		objs[128];
+	t_ssuint	objs_len;
 }	t_scene;
 
 #endif // STRUCTS_H

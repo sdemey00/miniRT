@@ -48,8 +48,8 @@ int	main(int argc, char **argv)
 	scene_init(&s);
 	if (!parse_file(argv[1], &s))
 		return (-1);
-	if (VERBOSE)
-		scene_print(&s);
+	//if (VERBOSE)
+	scene_print(&s);
 	if (!window_init(&w))
 		return (1);
 	window_draw(&w, &s);

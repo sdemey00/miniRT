@@ -22,9 +22,7 @@ static t_bool	check_camera_ranges(t_camera cam)
 		|| !check_range_int(cam.dir.z, -1, 1,
 			"Camera: direction vector out of range [-1,1]\n"))
 		return (0);
-	if ((cam.dir.x == 0 && cam.dir.y == 0 && cam.dir.z == 0)
-		|| (cam.dir.x == 1 && (cam.dir.y == 1 || cam.dir.z == 1))
-		|| (cam.dir.z == 1 && (cam.dir.x == 1 || cam.dir.y == 1)))
+	if (cam.dir.x == 0 && cam.dir.y == 0 && cam.dir.z == 0)
 	{
 		print_error("Camera: invalid direction vector\n");
 		return (0);
@@ -60,16 +58,16 @@ t_bool	parse_camera(char **split, t_scene *scene)
 	return (1);
 }
 
-void	camera_print(t_scene *scene)
+void	camera_print(t_camera camera)
 {
-	if (scene->camera.set != 1)
+	if (camera.set != 1)
 	{
 		ft_printf("There is no camera\n");
 		return ;
 	}
 	ft_printf("Camera position: %.2f, %.2f, %.2f\n",
-		scene->camera.pos.x, scene->camera.pos.y, scene->camera.pos.z);
+		camera.pos.x, camera.pos.y, camera.pos.z);
 	ft_printf("Camera direction: %.2f, %.2f, %.2f\n",
-		scene->camera.dir.x, scene->camera.dir.y, scene->camera.dir.z);
-	ft_printf("Camera FOV: %d\n", scene->camera.fov);
+		camera.dir.x, camera.dir.y, camera.dir.z);
+	ft_printf("Camera FOV: %d\n", camera.fov);
 }

@@ -32,7 +32,7 @@ t_bool	parse_light(char **split, t_scene *scene)
 	if (!check_range_double(light.brightness, 0, 1,
 			"Light source: brightness out of range [0, 1]\n"))
 		return (0);
-	scene->lights[scene->lights_idx++] = light;
+	scene->lights[scene->lights_len++] = light;
 	return (1);
 }
 
@@ -46,23 +46,23 @@ void	light_print(t_light light)
 		(t_ssuint)light.color.y, (t_ssuint)light.color.z);
 }
 
-void	lights_print(t_scene *scene)
+void	lights_print(t_light *lights, t_ssuint lights_len)
 {
 	t_ssuint	i;
 
 	i = 0;
-	if (scene->lights_idx == 0)
+	if (lights_len == 0)
 	{
 		ft_printf("There is no light sources\n");
 		return ;
 	}
-	ft_printf("\tThere is %d light sources set\n", scene->lights_idx);
+	ft_printf("\tThere is %d light sources set\n", lights_len);
 	ft_printf("- - - - - - - - - - - - - - - - - - - -\n");
-	while (i < scene->lights_idx)
+	while (i < lights_len)
 	{
 		ft_printf("Light source %d\n", i + 1);
-		light_print(scene->lights[i]);
-		if (i != scene->lights_idx - 1)
+		light_print(lights[i]);
+		if (i != lights_len - 1)
 			ft_printf("- - - - - - - - - - - - - - - - - - - -\n");
 		i++;
 	}

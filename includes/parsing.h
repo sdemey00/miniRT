@@ -16,7 +16,7 @@
 # include "minirt.h"
 
 // parsing/scene.c
-void	scene_init();
+void	scene_init(t_scene *scene);
 
 // parsing/parse_file.c
 t_bool	parse_file(char *filename, t_scene *scene);
@@ -26,31 +26,28 @@ t_bool	parse_line(char *line, t_scene *scene);
 
 // parsing/parse_ambiant.c
 t_bool	parse_ambiant(char **split, t_scene *scene);
-void	ambiant_print(t_scene *scene);
+void	ambiant_print(t_ambiant ambiant);
 
 // parsing/parse_camera.c
 t_bool	parse_camera(char **split, t_scene *scene);
-void	camera_print(t_scene *scene);
+void	camera_print(t_camera camera);
 
 // parsing/parse_light.c
 t_bool	parse_light(char **split, t_scene *scene);
-void	lights_print(t_scene *scene);
+void	lights_print(t_light *ligths, t_ssuint lights_len);
 void	light_print(t_light light);
 
 // parsing/parse_sphere.c
 t_bool	parse_sphere(char **split, t_scene *scene);
-void	spheres_print(t_scene *scene);
-void	sphere_print(t_sphere sphere);
+void	sphere_print(t_obj sphere);
 
 // parsing/parse_plane.c
 t_bool	parse_plane(char **split, t_scene *scene);
-void	planes_print(t_scene *scene);
-void	plane_print(t_plane plane);
+void	plane_print(t_obj plane);
 
 // parsing/parse_cylinder.c
 t_bool	parse_cylinder(char **split, t_scene *scene);
-void	cylinders_print(t_scene *scene);
-void	cylinder_print(t_cylinder cylinder);
+void	cylinder_print(t_obj cylinder);
 
 // parsing/parse_utils.c
 void	ft_free_split(char **tab);
@@ -68,5 +65,7 @@ double	ft_atof(const char *str);
 
 // parsing/print/scene_infos.c
 void	scene_print(t_scene *scene);
-void    print_error(char *msg); 
+void	print_error(char *msg);
+void	objs_print(t_obj *objs, t_ssuint objs_len);
+
 #endif // PARSING_H

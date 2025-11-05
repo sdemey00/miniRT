@@ -15,6 +15,7 @@
 static t_bool	open_file(char *filename, int *fd)
 {
 	char	*ext;
+
 	if (!filename || !*filename)
 	{
 		print_error("No filename\n");

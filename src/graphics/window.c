@@ -47,7 +47,8 @@ t_bool	window_free(t_window *w)
 
 void	window_draw(t_window *w, t_scene *s)
 {
-	raytracing(w, s);
+	(void)s;
+	//raytracing(w, s);
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr, 0, 0);
 }
 

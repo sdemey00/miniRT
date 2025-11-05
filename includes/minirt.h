@@ -78,10 +78,10 @@ int		window_close(void *window);
 int		color_int(t_color *c);
 
 // graphic/raytracing.c
-void	raytracing(t_window *w, t_scene *s);
+//void	raytracing(t_window *w, t_scene *s);
 
 // math/ray_hits.c
-t_bool	ray_hit_sphere(const t_ray *r, const t_sphere *s);
-t_bool	ray_hit_plane(const t_ray *r, const t_plane *p);
+//t_bool	ray_hit_sphere(const t_ray *r, const t_sphere *s);
+//t_bool	ray_hit_plane(const t_ray *r, const t_plane *p);
 
 #endif // MINIRT_H
