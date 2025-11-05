@@ -21,7 +21,7 @@ static t_ray get_ray(unsigned int i, unsigned int j, t_camera *c)
 
 	//printf("x before:%d\ty before:%d\n", i, j);
 	//printf("x after:%f\ty after:%f\n", x, y);
-	t_vec dir = (t_vec){x, y, 1}; // -1 ??
+	t_vec dir = (t_vec){x, y, -1}; // -1 ??
     //t_vec norm_dir = vec_norm(&dir);
     return ((t_ray){c->pos, dir});
 }
@@ -35,11 +35,17 @@ t_color ray_color(t_ray r)
 		(t_vec){1, 1, 1}, (t_color){128, 0, 128}};
 	*/
 	t_obj sphere;
-	sphere.dir = (t_vec){0.5,0,-5};
+	sphere.pos = (t_vec){0.5,0,-5};
 	sphere.radius = 1;
 	sphere.color = (t_color){255,0,0};
+	// t_obj plane;
+	// plane.pos = (t_vec){0, 0, 0};
+	// plane.dir = (t_vec){1, 1, 1};
+	// plane.color = (t_color){128,0,128};
     if (ray_hit_sphere(&r, &sphere))
-        return (sphere.color);
+		return (sphere.color);
+	// if (ray_hit_plane(&r, &plane))
+    //     return (plane.color);
     return (t_color){135,206,235}; // fond bleu ciel
 }
 
