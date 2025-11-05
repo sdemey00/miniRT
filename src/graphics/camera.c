@@ -12,17 +12,39 @@
 
 #include "minirt.h"
 
+t_vec	vec_cross(const t_vec *a, const t_vec *b)
+{
+	t_vec	res;
+
+	res.x = a->y * b->z - a->z * b->y;
+	res.y = a->z * b->x - a->x * b->z;
+	res.z = a->x * b->y - a->y * b->x;
+	return (res);
+}
+
 t_ray camera_ray(t_camera *c, t_idx i, t_idx j)
 {
 	const double	flen = tan(c->fov * FT_PI / 180 / 2);
 	const double	ratio = (double)WIDTH / HEIGHT;
 	double			x = (2 * ((i + 0.5) / WIDTH) - 1) * ratio * flen;
 	double			y = (1 - 2 * ((j + 0.5) / HEIGHT)) * flen;
-
+	
+	t_vec forward = vec_norm(&c->dir);
+	t_vec world_up = {0, 1, 0};
+	t_vec temp = vec_cross(&world_up, &forward);
+	t_vec right = vec_norm(&temp);
+	t_vec up = vec_cross(&forward, &right);
 	//printf("x before:%d\ty before:%d\n", i, j);
 	//printf("x after:%f\ty after:%f\n", x, y);
-	t_vec dir = (t_vec){x, y, -1}; // -1 ??
-	//t_vec norm_dir = vec_norm(&dir);
+	t_vec dir_cam = {x, y, -1}; // -1??
+	t_vec dir = vec_norm(&(
+		(t_vec){
+			right.x * dir_cam.x + up.x * dir_cam.y + forward.x * dir_cam.z,
+			right.y * dir_cam.x + up.y * dir_cam.y + forward.y * dir_cam.z,
+			right.z * dir_cam.x + up.z * dir_cam.y + forward.z * dir_cam.z
+		}
+	));
+	//t_vec norm_dir = vec_norm(&dir); --> matrice de rotation
 	return ((t_ray){c->pos, dir});
 }
 
