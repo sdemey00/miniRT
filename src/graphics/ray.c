@@ -14,11 +14,16 @@
 
 t_color	ray_color(t_ray *r, t_scene *s)
 {
-	float closest_t = INFINITY;
-	t_obj *hit_obj = NULL;
-	for (t_idx i = 0; i < s->objs_len; i++)
+	t_obj	*hit_obj;
+	float	closest_t;
+	float	t;
+	t_idx	i;
+
+	closest_t = INFINITY;
+	hit_obj = NULL;
+	i = 0;
+	while (i < s->objs_len)
 	{
-		float t;
 		if (s->objs[i].e_type == SPHERE && ray_hit_sphere(r, &s->objs[i], &t))
 		{
 			if (t < closest_t)
@@ -35,8 +40,8 @@ t_color	ray_color(t_ray *r, t_scene *s)
 				hit_obj = &s->objs[i];
 			}
 		}
+		i++;
 	}
-	if (hit_obj)
-		return (hit_obj->color);
-	return ((t_color){135,206,235});
+	if (!hit_obj)
+		return ((t_color){135, 206, 235});
 }

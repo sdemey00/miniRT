@@ -100,4 +100,6 @@ t_bool	ray_hit_plane(const t_ray *r, const t_obj *p, float *t);
 t_bool	ray_hit_sphere(const t_ray *r, const t_obj *s, float *t);
 t_bool	ray_hit_cylinder(const t_ray *r, const t_obj *c);
 
+// graphics/lights.c
+float	compute_lights(t_scene *s, t_vec P, t_vec N);
 #endif // MINIRT_H
