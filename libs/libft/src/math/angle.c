@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pow.c                                           :+:      :+:    :+:   */
+/*   angle.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/20 17:45:11 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/05 22:28:49 by mmichele         ###   ########.fr       */
+/*   Created: 2025/11/05 21:49:34 by mmichele          #+#    #+#             */
+/*   Updated: 2025/11/05 22:14:17 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-float	ft_pow(const float base, int exp)
+inline t_rad	deg_rad(t_deg d)
 {
-	float	res;
+	return (d * (FT_PI / 180.0));
+}
 
-	res = 1;
-	if (exp > 0)
-	{
-		while (exp--)
-			res *= base;
-	}
-	else if (exp < 0)
-	{
-		while (exp++)
-			res /= base;
-	}
-	return (res);
+inline t_deg	rad_deg(t_rad r)
+{
+	return (r * (180.0 / FT_PI));
 }

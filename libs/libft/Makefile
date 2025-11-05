@@ -33,13 +33,14 @@ SRCS		= src/char/ft_isalnum.c src/char/ft_isalpha.c \
 			  src/list/ft_lstdelone.c src/list/ft_lstiter.c \
 			  src/list/ft_lstlast.c src/list/ft_lstmap.c \
 			  src/list/ft_lstnew.c src/list/ft_lstsize.c \
-			  src/math/ft_abs.c src/math/ft_fact.c \
-			  src/math/ft_pow.c src/math/ft_pythagoras.c \
-			  src/math/ft_round.c src/math/ft_sqrt.c \
-			  src/math/matrix/mat1.c src/math/vector/rotx.c \
-			  src/math/vector/roty.c src/math/vector/rotz.c \
-			  src/math/vector/vec1.c src/math/vector/vec2.c \
-			  src/math/vector/vec3.c src/memory/ft_bzero.c \
+			  src/math/angle.c src/math/ft_abs.c \
+			  src/math/ft_fact.c src/math/ft_pow.c \
+			  src/math/ft_pythagoras.c src/math/ft_round.c \
+			  src/math/ft_sqrt.c src/math/matrix/mat1.c \
+			  src/math/vector/rotx.c src/math/vector/roty.c \
+			  src/math/vector/rotz.c src/math/vector/vec1.c \
+			  src/math/vector/vec2.c src/math/vector/vec3.c \
+			  src/math/vector/vec4.c src/memory/ft_bzero.c \
 			  src/memory/ft_calloc.c src/memory/ft_free.c \
 			  src/memory/ft_malloc.c src/memory/ft_memadd.c \
 			  src/memory/ft_memchr.c src/memory/ft_memcpy.c \
