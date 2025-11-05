@@ -34,7 +34,10 @@ t_color ray_color(t_ray r)
 	const t_plane	plane = (t_plane){(t_vec){0, 0, 0}, \
 		(t_vec){1, 1, 1}, (t_color){128, 0, 128}};
 	*/
-    t_sphere sphere = {(t_vec){0.5,0,-5}, 1, {255,0,0}};
+	t_obj sphere;
+	sphere.dir = (t_vec){0.5,0,-5};
+	sphere.radius = 1;
+	sphere.color = (t_color){255,0,0};
     if (ray_hit_sphere(&r, &sphere))
         return (sphere.color);
     return (t_color){135,206,235}; // fond bleu ciel

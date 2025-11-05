@@ -32,7 +32,7 @@ static int	event_handler(int key, void *ctx)
 	c = (struct s_ctx *)ctx;
 	if (key_handler(key, ctx))
 	{
-		camera_print(&c->s);
+		camera_print(c->s.camera);
 		window_draw(&c->w, &c->s);
 	}
 	return (0);
