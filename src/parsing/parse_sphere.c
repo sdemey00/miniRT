@@ -24,12 +24,12 @@ t_bool	parse_sphere(char **split, t_scene *scene)
 	if (!parse_vec(split[1], &sp.center)
 		|| !parse_color(split[3], &sp.color))
 		return (0);
-	if (!parse_float(split[2], &sp.rayon))
+	if (!parse_float(split[2], &sp.radius))
 	{
 		print_error("Sphere: invalid float format\n");
 		return (0);
 	}
-	sp.rayon /= 2;
+	sp.radius /= 2;
 	scene->spheres[scene->spheres_idx++] = sp;
 	return (1);
 }
@@ -39,7 +39,7 @@ void	sphere_print(t_sphere sphere)
 	ft_printf("Sphere center: %.2f, %.2f, %.2f\n",
 		sphere.center.x, sphere.center.y,
 		sphere.center.z);
-	ft_printf("Sphere rayon: %.2f\n", sphere.rayon);
+	ft_printf("Sphere radius: %.2f\n", sphere.radius);
 	ft_printf("Sphere color: %d, %d, %d\n", (t_ssuint)sphere.color.x,
 		(t_ssuint)sphere.color.y, (t_ssuint)sphere.color.z);
 }

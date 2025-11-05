@@ -81,7 +81,7 @@ int		color_int(t_color *c);
 void	raytracing(t_window *w, t_scene *s);
 
 // math/ray_hits.c
-t_bool	ray_hit_sphere(const t_ray *r, const t_sphere *s, float* dist);
-t_bool	ray_hit_plane(const t_ray *r, const t_plane *p, float *dist);
+t_bool	ray_hit_sphere(const t_ray *r, const t_sphere *s);
+t_bool	ray_hit_plane(const t_ray *r, const t_plane *p);
 
 #endif // MINIRT_H
