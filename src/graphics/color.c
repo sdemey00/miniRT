@@ -14,11 +14,5 @@
 
 int	color_int(t_color *c)
 {
-	if (c->x < 0 || 255 < c->x)
-		c->x = 255;
-	if (c->y < 0 || 255 < c->y)
-		c->y = 255;
-	if (c->z < 0 || 255 < c->z)
-		c->z = 255;
 	return (((t_ssuint)c->x << 16) | ((t_ssuint)c->y << 8) | (t_ssuint)c->z);
 }
