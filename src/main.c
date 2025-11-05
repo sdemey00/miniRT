@@ -12,49 +12,51 @@
 
 #include "minirt.h"
 
-static t_bool	key_handler(int key, void *window)
+static t_bool	key_handler(int key, struct s_ctx *c)
 {
-	if (key == KEY_ESC)
-		window_close(window);
-	if (key == 'w' || key == 'a' || key == 's' || key == 'd')
-	{
-		if (VERBOSE)
-			ft_printf("key pressed : %c\n", key);
-		//camera_move();
-		return (1);
-	}
+	if (VERBOSE)
+		ft_printf("key pressed : %d\n", key);
+	if (key == K_ESC)
+		window_close((void *)&c->w);
+	if (key == 'w' || key == 'a' || key == 's' || key == 'd' || \
+		key == 'q' || key == 'e' || key == K_UP || key == K_DOWN || \
+		key == K_RIGHT || key == K_DOWN)
+		return (camera_change(&c->s.camera, key));
 	return (0);
 }
 
-static int	event_handler(int key, void *window)
+static int	event_handler(int key, void *ctx)
 {
-	if (key_handler(key, window))
+	struct s_ctx	*c;
+
+	c = (struct s_ctx *)ctx;
+	if (key_handler(key, ctx))
 	{
-		//redraw image after valid key move
+		camera_print(&c->s);
+		window_draw(&c->w, &c->s);
 	}
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	t_scene		s;
-	t_window	w;
+	struct s_ctx	c;
 
 	if (argc != 2)
 	{
 		print_error("Usage: ./miniRT <scene.rt>\n");
 		return (0);
 	}
-	scene_init(&s);
-	if (!parse_file(argv[1], &s))
+	scene_init(&c.s);
+	if (!parse_file(argv[1], &c.s))
 		return (-1);
-	//if (VERBOSE)
-	scene_print(&s);
-	if (!window_init(&w))
+	if (VERBOSE)
+		scene_print(&c.s);
+	if (!window_init(&c.w))
 		return (1);
-	window_draw(&w, &s);
-	mlx_hook(w.win, WIN_CLOSE, 0, window_close, &w);
-	mlx_key_hook(w.win, event_handler, &w);
-	mlx_loop(w.mlx);
+	window_draw(&c.w, &c.s);
+	mlx_hook(c.w.win, WIN_CLOSE, 0, window_close, &c);
+	mlx_key_hook(c.w.win, event_handler, &c);
+	mlx_loop(c.w.mlx);
 	return (0);
 }
