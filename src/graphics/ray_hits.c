@@ -36,19 +36,19 @@ t_bool	ray_hit_plane(const t_ray *r, const t_obj *p)
 	const t_vec	po = vec_sub(p->pos, r->origin);
 	const float	num = vec_dot(&po, &p->dir);
 	const float	den = vec_dot(&r->dir, &p->dir);
+	float		t;
 
 	if (num == 0 || den == 0)
 		return (0);
-	/*
 	t = num / den;
 	if (t < 0)
 		return (0);
-	*dist = t;
-	*/
 	return (1);
 }
 
-// t_bool ray_hit_cylinder(const t_ray *r, const t_cylinder *c)
-// {
-//
-// }
+t_bool ray_hit_cylinder(const t_ray *r, const t_obj *c)
+{
+	(void)r;
+	(void)c;
+	return (0);
+}

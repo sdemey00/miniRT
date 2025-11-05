@@ -18,9 +18,7 @@ static t_bool	key_handler(int key, struct s_ctx *c)
 		ft_printf("key pressed : %d\n", key);
 	if (key == K_ESC)
 		window_close((void *)&c->w);
-	if (key == 'w' || key == 'a' || key == 's' || key == 'd' || \
-		key == 'q' || key == 'e' || key == K_UP || key == K_DOWN || \
-		key == K_RIGHT || key == K_DOWN)
+	if (ft_strchr("qweasduiojkl", key) >= 0)
 		return (camera_change(&c->s.camera, key));
 	return (0);
 }
@@ -32,7 +30,8 @@ static int	event_handler(int key, void *ctx)
 	c = (struct s_ctx *)ctx;
 	if (key_handler(key, ctx))
 	{
-		camera_print(c->s.camera);
+		if (VERBOSE)
+			camera_print(c->s.camera);
 		window_draw(&c->w, &c->s);
 	}
 	return (0);
