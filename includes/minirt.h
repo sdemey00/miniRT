@@ -48,10 +48,8 @@
 /* MLX controller event codes */
 # define WIN_CLOSE	17
 # define K_ESC		65307
-# define K_UP		65362
-# define K_LEFT		65361
-# define K_DOWN		65364
-# define K_RIGHT	65363
+
+# define MOVE_SPEED	2
 
 /* MLX pixel grid manipulation */
 typedef struct s_image
@@ -90,11 +88,16 @@ int		color_int(t_color *c);
 // graphics/raytracing.c
 void	raytracing(t_window *w, t_scene *s);
 
-// graphics/camera.c
-t_bool	camera_change(t_camera *c, short unsigned int key);
+// graphics/ray.c
+t_color	ray_color(t_ray *r, t_scene *s);
 
-// math/ray_hits.c
+// graphics/camera.c
+t_ray	camera_ray(t_camera *c, t_idx i, t_idx j);
+t_bool	camera_change(t_camera *c, unsigned int key);
+
+// graphics/ray_hits.c
 t_bool	ray_hit_sphere(const t_ray *r, const t_obj *s);
 t_bool	ray_hit_plane(const t_ray *r, const t_obj *p);
+t_bool	ray_hit_cylinder(const t_ray *r, const t_obj *c);
 
 #endif // MINIRT_H

@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:02:50 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/02 15:01:27 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/05 16:40:39 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static unsigned int	t_put_dec_part(t_quad dec, const t_flags *flags)
 		dec -= (t_ssuint)dec;
 		dec *= 10;
 		dgt = (t_ssuint)dec + '0';
-		write(flags->fd, &dgt, 1);
+		res += write(flags->fd, &dgt, 1);
 	}
 	return (res);
 }
@@ -57,9 +57,9 @@ static t_quad	base_case(const struct s_double *dbl, const t_flags *flags)
 		dec += ((dbl->mant >> (52 - i)) & 1) * ft_lpow(2.0L, -i);
 		i++;
 	}
-	res += f_putuint((1.0L + dec) * ft_lpow(2.0L, dbl->exp - BIASED_EXP), \
-		&dflt);
-	res += t_put_dec_part(dec * ft_lpow(2.0L, dbl->exp - BIASED_EXP), flags);
+	dec = (1.0L + dec) * ft_lpow(2.0L, dbl->exp - BIASED_EXP);
+	res += f_putuint((long unsigned int)dec, &dflt);
+	res += t_put_dec_part(dec - (long unsigned int)dec, flags);
 	return (res);
 }
 
@@ -71,11 +71,7 @@ unsigned int	f_putdbl(const double val, const t_flags *flags)
 	res = 0;
 	if (dbl.sign)
 		res += write(flags->fd, "-", 1);
-	if (dbl.exp == 0 && dbl.mant == 0)
-		res += write(flags->fd, "0", 1);
-	else if (dbl.exp == ((1 << 10) - 1))
-		res += write(flags->fd, "1", 1);
-	else if (dbl.exp == ((1 << 11) - 1) && dbl.mant == 0)
+	if (dbl.exp == ((1 << 11) - 1) && dbl.mant == 0)
 		res += write(flags->fd, "inf", 3);
 	else if (dbl.exp == ((1 << 11) - 1) && dbl.mant == (1ULL << 51))
 		res += write(flags->fd, "nan", 3);

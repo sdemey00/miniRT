@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raytracing.c                                       :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/01 15:31:38 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/04 17:59:50 by mmichele         ###   ########.fr       */
+/*   Created: 2025/11/05 17:06:21 by mmichele          #+#    #+#             */
+/*   Updated: 2025/11/05 17:06:30 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	raytracing(t_window *w, t_scene *s)
+t_color ray_color(t_ray *r, t_scene *s)
 {
 	t_idx	i;
-	t_idx	j;
-	t_color	c;
-	t_ray	r;
 
-	j = 0;
-	while (j < HEIGHT)
+	i = 0;
+	while (i < s->objs_len)
 	{
-		i = 0;
-		while (i < WIDTH)
-		{
-			r = camera_ray(&s->camera, i, j);
-			c = ray_color(&r, s);
-			window_draw_pixel(w, i, j, color_int(&c));
-			i += 1;
-		}
-		j += 1;
+		if ((s->objs[i].e_type == SPHERE && ray_hit_sphere(r, &s->objs[i])) || \
+			(s->objs[i].e_type == PLANE && ray_hit_plane(r, &s->objs[i])) || \
+			(s->objs[i].e_type == CYLINDER && ray_hit_cylinder(r, &s->objs[i])))
+			return (s->objs[i].color);
+		i++;
 	}
+    return (t_color){135,206,235};
 }
