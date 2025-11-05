@@ -4,6 +4,7 @@
 //N = P - closest_sphere.center  // Compute sphere normal at intersection
 //N = N / length(N)
 //return closest_sphere.color * ComputeLighting(P, N)
+
 // t_vec N;
 // t_vec P;
 
