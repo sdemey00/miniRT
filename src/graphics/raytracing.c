@@ -12,19 +12,21 @@
 
 #include "minirt.h"
 
-static t_ray get_ray(int i, int j, double fov) 
+static t_ray get_ray(unsigned int i, unsigned int j, double fov) 
 {
     double aspect = (double)WIDTH / HEIGHT;
     double x = (2 * ((i + 0.5) / WIDTH) - 1) * aspect * tan(fov * FT_PI / 180 / 2);
     double y = (1 - 2 * ((j + 0.5) / HEIGHT)) * tan(fov * FT_PI / 180 / 2);
-	t_vec norm_dir = (t_vec){x, y, -1};
-    t_vec dir = vec_norm(&norm_dir);
-    return ((t_ray){(t_vec){0,0,0}, dir});
+	//printf("x before:%d\ty before:%d\n", i, j);
+	//printf("x after:%f\ty after:%f\n", x, y);
+	t_vec dir = (t_vec){x, y, -1}; // -1 ??
+    //t_vec norm_dir = vec_norm(&dir);
+    return ((t_ray){(t_vec){0,0,0}, norm_dir});
 }
 
 t_color ray_color(t_ray r) 
 {
-    t_sphere sphere = {(t_vec){0,0,-5}, 1, {255,0,0}};
+    t_sphere sphere = {(t_vec){0.5,0,-5}, 1, {255,0,0}};
     if (ray_hit_sphere(&r, &sphere))
         return (sphere.color);
     return (t_color){135,206,235}; // fond bleu ciel
@@ -72,7 +74,7 @@ void	raytracing(t_window *w, t_scene *s)
 		x = 0;
 		while (x < WIDTH)
 		{
-			r = get_ray(x , y , 70);
+			r = get_ray(x, y, 70);
 			c = ray_color(r);
 			window_draw_pixel(w, x, y, color_int(&c));
 			x += 1;
