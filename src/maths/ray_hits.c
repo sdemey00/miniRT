@@ -22,7 +22,6 @@ t_bool	ray_hit_sphere(const t_ray *r, const t_obj *s)
 
 	if (delta < 0) 
 		return (0);
-	return (1);
 	float t0 = (-b - sqrt(delta)) / (2*a);
 	float t1 = (-b + sqrt(delta)) / (2*a);
 	if (t0 > 0) 
