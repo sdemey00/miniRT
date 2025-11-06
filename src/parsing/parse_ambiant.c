@@ -48,8 +48,7 @@ void	ambiant_print(t_ambiant ambiant)
 		ft_printf("There is no ambiant light\n");
 		return ;
 	}
-	//ft_printf("Ambiant light ratio: %f\n", ambiant.intensity);
-	printf("Ambiant light ratio: %f\n", ambiant.intensity);
+	ft_printf("Ambiant light ratio: %f\n", ambiant.intensity);
 	ft_printf("Ambiant light color: %d, %d, %d\n",
 		(t_ssuint)ambiant.color.x, (t_ssuint)ambiant.color.y,
 		(t_ssuint)ambiant.color.z);
