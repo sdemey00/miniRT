@@ -12,15 +12,15 @@
 
 #include "minirt.h"
 
-t_vec	vec_cross(const t_vec *a, const t_vec *b)
-{
-	t_vec	res;
-
-	res.x = a->y * b->z - a->z * b->y;
-	res.y = a->z * b->x - a->x * b->z;
-	res.z = a->x * b->y - a->y * b->x;
-	return (res);
-}
+// t_vec	vec_cross(const t_vec *a, const t_vec *b)
+// {
+// 	t_vec	res;
+//
+// 	res.x = a->y * b->z - a->z * b->y;
+// 	res.y = a->z * b->x - a->x * b->z;
+// 	res.z = a->x * b->y - a->y * b->x;
+// 	return (res);
+// }
 
 t_ray camera_ray(t_camera *c, t_idx i, t_idx j)
 {
@@ -31,9 +31,9 @@ t_ray camera_ray(t_camera *c, t_idx i, t_idx j)
 	
 	t_vec forward = vec_norm(&c->dir);
 	t_vec world_up = {0, 1, 0};
-	t_vec temp = vec_cross(&world_up, &forward);
+	t_vec temp = vec_cross(world_up, forward);
 	t_vec right = vec_norm(&temp);
-	t_vec up = vec_cross(&forward, &right);
+	t_vec up = vec_cross(forward, right);
 	//printf("x before:%d\ty before:%d\n", i, j);
 	//printf("x after:%f\ty after:%f\n", x, y);
 	t_vec dir_cam = {x, y, -1}; // -1??
