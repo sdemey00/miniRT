@@ -6,7 +6,7 @@
 /*   By: sdemey <sdemey@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 12:38:33 by sdemey            #+#    #+#             */
-/*   Updated: 2025/11/01 17:29:58 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:43:17 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_camera
 	t_vec		right;
 	t_vec		up;
 	t_bool		set;
+	float		ratio;		// Screen ratio
+	float		flen;		// Focal length
 }	t_camera;
 
 typedef struct s_light

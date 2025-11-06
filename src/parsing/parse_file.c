@@ -6,28 +6,28 @@
 /*   By: sdemey <sdemey@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:32:37 by sdemey            #+#    #+#             */
-/*   Updated: 2025/10/29 12:32:53 by sdemey           ###   ########.fr       */
+/*   Updated: 2025/11/06 18:47:28 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static t_bool	open_file(char *filename, int *fd)
+static t_bool	open_file(const char *fpath, int *fd)
 {
 	char	*ext;
 
-	if (!filename || !*filename)
+	if (!fpath || !*fpath)
 	{
-		print_error("No filename\n");
+		print_error("No fpath\n");
 		return (0);
 	}
-	ext = ft_strrchr(filename, '.');
+	ext = ft_strrchr(fpath, '.');
 	if (!ext || ft_strcmp(ext, ".rt") != 0)
 	{
-		ft_dprintf(2, "Error\n%s: not a .rt file\n", filename);
+		ft_dprintf(2, "Error\n%s: not a .rt file\n", fpath);
 		return (0);
 	}
-	*fd = open(filename, O_RDONLY);
+	*fd = open(fpath, O_RDONLY);
 	if (*fd < 0)
 	{
 		print_error("Cannot open .rt file\n");
@@ -65,11 +65,11 @@ static t_bool	parse_all_lines(int fd, t_scene *scene)
 	return (1);
 }
 
-t_bool	parse_file(char *filename, t_scene *scene)
+t_bool	parse_file(const char *fpath, t_scene *scene)
 {
 	int		fd;
 
-	if (!open_file(filename, &fd))
+	if (!open_file(fpath, &fd))
 		return (0);
 	if (!parse_all_lines(fd, scene))
 		return (0);

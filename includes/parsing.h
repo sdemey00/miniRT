@@ -6,7 +6,7 @@
 /*   By: sdemey <sdemey@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 12:38:18 by sdemey            #+#    #+#             */
-/*   Updated: 2025/11/03 18:12:08 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:44:39 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include "minirt.h"
 
 // parsing/scene.c
-void	scene_init(t_scene *scene);
+t_bool	scene_init(t_scene *s, const char *fpath);
 
 // parsing/parse_file.c
-t_bool	parse_file(char *filename, t_scene *scene);
+t_bool	parse_file(const char *fpath, t_scene *scene);
 
 // parsing/parse_line.c
 t_bool	parse_line(char *line, t_scene *scene);

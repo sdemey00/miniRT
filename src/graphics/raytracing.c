@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:31:38 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/06 12:47:23 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:24:38 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,13 @@ static void	draw_grid(t_window *w, t_idx x, t_idx y, int color, const short unsi
 	}
 }
 
-// Use this function to show something after moving, and draw only real render
-// when no key pressed after a given amount of time, or something.
 void	blurtracing(t_window *w, t_scene *s)
 {
-	t_idx	i;
-	t_idx	j;
-	t_color	c;
-	t_ray	r;
-	const short unsigned int res = 1; // Should be at least 1
+	const t_suint	res = 10;
+	t_idx			i;
+	t_idx			j;
+	t_color			c;
+	t_ray			r;
 
 	j = (res * 2) - 1;
 	while (j < HEIGHT - 1)

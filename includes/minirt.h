@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:02:14 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/04 17:48:47 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:32:09 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,13 @@
 #  define HEIGHT 900
 # endif
 
+// Does not optimize execution time because just expanding where it's called.
+# define RATIO (float)WIDTH / (float)HEIGHT
+
 # include <math.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <sys/time.h>
 
 # include "libft.h"
 # include "mlx.h"
@@ -73,11 +77,15 @@ struct s_ctx
 {
 	t_window	w;
 	t_scene		s;
+	t_luint		t;	// Contains the time of the last translation.
 };
+
+// time.c
+t_luint	time_now(void);
 
 // graphics/window.c
 t_bool	window_init(t_window *w);
-void	window_draw(t_window *w, t_scene *s);
+void	window_draw(t_window *w, t_scene *s, void (*f)(t_window *, t_scene *));
 void	window_draw_pixel(t_window *w, t_uint x, t_uint y, int color);
 t_bool	window_free(t_window *w);
 int		window_close(void *window);
@@ -86,6 +94,7 @@ int		window_close(void *window);
 int		color_int(t_color *c);
 
 // graphics/raytracing.c
+void	blurtracing(t_window *w, t_scene *s);
 void	raytracing(t_window *w, t_scene *s);
 
 // graphics/ray.c

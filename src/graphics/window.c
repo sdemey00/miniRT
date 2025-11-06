@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:06:09 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/01 16:55:17 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/06 15:24:35 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ t_bool	window_free(t_window *w)
 	return (0);
 }
 
-void	window_draw(t_window *w, t_scene *s)
+void	window_draw(t_window *w, t_scene *s, void (*f)(t_window *, t_scene *))
 {
-	raytracing(w, s);
+	f(w, s);
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr, 0, 0);
 }
 

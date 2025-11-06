@@ -6,7 +6,7 @@
 #    By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 08:33:05 by mmichele          #+#    #+#              #
-#    Updated: 2025/11/03 19:00:20 by mmichele         ###   ########.fr        #
+#    Updated: 2025/11/06 17:38:25 by mmichele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ LNKS	= -L $(MLXD) -L $(LFTD)
 LIBS	= -lmlx -lX11 -lXext -lft -lm
 DEPS	= $(OBJS:.o=.d)
 
-.PHONY: $(MLXN) $(LFTN) clean fclean re norm san valgrind verbose fast clear
+.PHONY: $(MLXN) $(LFTN) $(LFTN)-fast clean fclean re norm san valgrind verbose fast clear
 
 all: $(MLXN) $(LFTN) $(NAME)
 
@@ -47,7 +47,12 @@ $(MLXN):
 
 $(LFTN):
 	@ echo "Compiling LibFT"
-	@ $(MAKE) -C $(LFTD) -s
+	@ $(MAKE) -C $(LFTD) --no-print-directory
+	@ echo "Compiling miniRT"
+
+$(LFTN)-fast:
+	@ echo "Compiling LibFT fast"
+	@ $(MAKE) -C $(LFTD) fast --no-print-directory
 	@ echo "Compiling miniRT"
 
 $(NAME): $(OBJS)
@@ -84,7 +89,7 @@ verbose: FLAGS += -D VERBOSE
 verbose: all
 
 fast: FLAGS = -Ofast -D WIDTH=$(W) -D HEIGHT=$(H)
-fast: all
+fast: $(MLXN) $(LFTN)-fast $(NAME)
 
 clear: clean
 	rm -rf $(NAME)
