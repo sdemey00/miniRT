@@ -17,7 +17,7 @@ t_ray camera_ray(t_camera *c, t_idx i, t_idx j)
 	float	x = (2 * ((i + 0.5) / WIDTH) - 1) * RATIO * c->flen;
 	float	y = (1 - 2 * ((j + 0.5) / HEIGHT)) * c->flen;
 
-	t_vec forward = vec_norm(&c->dir);
+	t_vec forward = c->dir;
 	t_vec world_up = {0, 1, 0};
 	t_vec temp = vec_cross(world_up, forward);
 	t_vec right = vec_norm(&temp);
@@ -30,48 +30,46 @@ t_ray camera_ray(t_camera *c, t_idx i, t_idx j)
 			right.z * dir_cam.x + up.z * dir_cam.y + forward.z * dir_cam.z
 		}
 	));
-	//t_vec norm_dir = vec_norm(&dir); --> matrice de rotation
 	return ((t_ray){c->pos, dir});
 }
 
 
 static void	camera_translate(t_camera *c, unsigned int key)
 {
-	if (key == 'q')
-		c->pos.z -= MOVE_SPEED;
-	else if (key == 'e')
-		c->pos.z += MOVE_SPEED;
-	else if (key == 's')
-		c->pos.y -= MOVE_SPEED;
+	if (key == 's')
+		vec_isub(&c->pos, c->dir);
 	else if (key == 'w')
-		c->pos.y += MOVE_SPEED;
+		vec_isum(&c->pos, c->dir);
 	else if (key == 'a')
-		c->pos.x -= MOVE_SPEED;
+		c->pos.x -= 1;
 	else if (key == 'd')
-		c->pos.x += MOVE_SPEED;
+		c->pos.x += 1;
+	else if (key == ' ')
+		c->pos.z -= 1;
+	else if (key == 'c')
+		c->pos.z += 1;
 }
 
 static void	camera_rotate(t_camera *c, unsigned int key)
 {
 	if (key == 'o')
-		c->dir.z -= MOVE_SPEED - 0.5;
+		c->dir.z -= 1 - 0.5;
 	else if (key == 'u')
-		c->dir.z += MOVE_SPEED - 0.5;
+		c->dir.z += 1 - 0.5;
 	else if (key == 'i')
-		c->dir.y -= MOVE_SPEED - 0.5;
+		c->dir.y -= 1 - 0.5;
 	else if (key == 'k')
-		c->dir.y += MOVE_SPEED - 0.5;
+		c->dir.y += 1 - 0.5;
 	else if (key == 'l')
-		c->dir.x -= MOVE_SPEED - 0.5;
+		c->dir.x -= 1 - 0.5;
 	else if (key == 'j')
-		c->dir.x += MOVE_SPEED - 0.5;
+		c->dir.x += 1 - 0.5;
 }
 
-t_bool	camera_change(t_camera *c, unsigned int key)
+void	camera_change(t_camera *c, unsigned int key)
 {
 	if (ft_strchr("qweasd", key) >= 0)
 		camera_translate(c, key);
 	else if (ft_strchr("uiojkl", key) >= 0)
 		camera_rotate(c, key);
-	return (1);
 }

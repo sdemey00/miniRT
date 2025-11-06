@@ -53,8 +53,6 @@
 # define WIN_CLOSE	17
 # define K_ESC		65307
 
-# define MOVE_SPEED	2
-
 /* MLX pixel grid manipulation */
 typedef struct s_image
 {
@@ -80,6 +78,18 @@ struct s_ctx
 	t_luint		t;	// Contains the time of the last translation.
 };
 
+// events/mouse.c
+int		mouse_handler(int key, int x, int y, struct s_ctx *c);
+
+// events/key.c
+int		key_handler(int key, struct s_ctx *ctx);
+
+// events/loop.c
+int		loop_handler(struct s_ctx *c);
+
+// events/close.c
+int		window_close(t_window *w);
+
 // time.c
 t_luint	time_now(void);
 
@@ -88,7 +98,6 @@ t_bool	window_init(t_window *w);
 void	window_draw(t_window *w, t_scene *s, void (*f)(t_window *, t_scene *));
 void	window_draw_pixel(t_window *w, t_uint x, t_uint y, int color);
 t_bool	window_free(t_window *w);
-int		window_close(void *window);
 
 // graphics/color.c
 int		color_int(t_color *c);
@@ -102,7 +111,7 @@ t_color	ray_color(t_ray *r, t_scene *s);
 
 // graphics/camera.c
 t_ray	camera_ray(t_camera *c, t_idx i, t_idx j);
-t_bool	camera_change(t_camera *c, unsigned int key);
+void	camera_change(t_camera *c, unsigned int key);
 
 // graphics/ray_hits.c
 t_bool	ray_hit_plane(const t_ray *r, const t_obj *p, float *t);
@@ -111,4 +120,5 @@ t_bool	ray_hit_cylinder(const t_ray *r, const t_obj *c);
 
 // graphics/lights.c
 t_color	ray_light_color(t_scene *s, t_ray *r, t_obj *hit_obj, float closest_t);
+
 #endif // MINIRT_H

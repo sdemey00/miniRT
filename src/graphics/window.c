@@ -61,12 +61,3 @@ void	window_draw_pixel(t_window *w, t_uint x, t_uint y, int color)
 		x * (w->img.bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
-
-int	window_close(void *window)
-{
-	t_window	*w;
-
-	w = (t_window *)window;
-	window_free(w);
-	exit(0);
-}

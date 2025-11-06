@@ -28,6 +28,9 @@ Bonus ++ :
 
 - Print a message on program startup with keybinds
 
+- Bind the scroll wheel for editing the FOV. Ranging from ]0:180]
+	- Check that the FOV is parsed as an 8bit int
+
 sdemey :
 - Handle color with light
 - Fix specular and diffuse reflection
@@ -35,4 +38,5 @@ sdemey :
 mmichele :
 - Handle camera movements properly, like FPS
 - Minor visual fix on blur tracing
-	- Enhance blur tracing by make it more to less blurry
+	- Enhance blur tracing by make it more to less blurry with time
+	- Not recalculate fine pixels that were previously calculated when blur tracing

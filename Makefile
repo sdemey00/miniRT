@@ -6,7 +6,7 @@
 #    By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 08:33:05 by mmichele          #+#    #+#              #
-#    Updated: 2025/11/06 17:38:25 by mmichele         ###   ########.fr        #
+#    Updated: 2025/11/06 21:18:31 by mmichele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,21 +39,18 @@ DEPS	= $(OBJS:.o=.d)
 
 .PHONY: $(MLXN) $(LFTN) $(LFTN)-fast clean fclean re norm san valgrind verbose fast clear
 
+MAKEFLAGS += --no-print-directory
+
 all: $(MLXN) $(LFTN) $(NAME)
 
 $(MLXN):
-	@ echo "Compiling MiniLibX"
 	@ $(MAKE) -C $(MLXD) > /dev/null 2>&1
 
 $(LFTN):
-	@ echo "Compiling LibFT"
-	@ $(MAKE) -C $(LFTD) --no-print-directory
-	@ echo "Compiling miniRT"
+	@ $(MAKE) -C $(LFTD)
 
 $(LFTN)-fast:
-	@ echo "Compiling LibFT fast"
-	@ $(MAKE) -C $(LFTD) fast --no-print-directory
-	@ echo "Compiling miniRT"
+	@ $(MAKE) -C $(LFTD) fast
 
 $(NAME): $(OBJS)
 	$(CC) $(FLAGS) $^ -o $@ $(INCS) $(LNKS) $(LIBS)
@@ -66,6 +63,7 @@ $(BLDD)/%.o: %.c
 
 clean:
 	rm -rf $(BLDD)
+	$(MAKE) -C $(LFTD) clean
 
 fclean: clean
 	rm -rf $(NAME)
@@ -91,5 +89,5 @@ verbose: all
 fast: FLAGS = -Ofast -D WIDTH=$(W) -D HEIGHT=$(H)
 fast: $(MLXN) $(LFTN)-fast $(NAME)
 
-clear: clean
-	rm -rf $(NAME)
+clear:
+	rm -rf $(BLDD)
