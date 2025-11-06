@@ -1,0 +1,38 @@
+Mandatory :
+- Cylinder object
+- Turning using keybinds locks rotation at given point ~180 degree
+- Projected shadows
+	- Diffused projected shadows
+Bonus :
+- Checker pattern
+- Bumping texture
+- Phong lightening
+- Cone object / Torus object
+
+Bonus ++ :
+- Handle mouse for camera
+- Handle key pressed and released for movements
+
+- Using mouse click to edit properties of the aimed object.
+
+- Transparency of the object
+- Mate or shady surface
+
+- Show coordinates on screen
+
+- Cube object
+- Klein bottle
+- Mobius band
+
+- One mirrored plane
+
+- Print a message on program startup with keybinds
+
+sdemey :
+- Handle color with light
+- Fix specular and diffuse reflection
+
+mmichele :
+- Handle camera movements properly, like FPS
+- Minor visual fix on blur tracing
+	- Enhance blur tracing by make it more to less blurry
