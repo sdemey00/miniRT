@@ -42,9 +42,7 @@ t_color	ray_color(t_ray *r, t_scene *s)
 		}
 		i++;
 	}
-	// if (!hit_obj)
-	// 	return ((t_color){135, 206, 235});
 	if (hit_obj)
-		return (hit_obj->color);
+		return (ray_light_color(s, r, hit_obj, closest_t));
 	return ((t_color){135, 206, 235});
 	}

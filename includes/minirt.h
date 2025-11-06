@@ -101,5 +101,5 @@ t_bool	ray_hit_sphere(const t_ray *r, const t_obj *s, float *t);
 t_bool	ray_hit_cylinder(const t_ray *r, const t_obj *c);
 
 // graphics/lights.c
-float	compute_lights(t_scene *s, t_vec P, t_vec N);
+t_color	ray_light_color(t_scene *s, t_ray *r, t_obj *hit_obj, float closest_t);
 #endif // MINIRT_H
