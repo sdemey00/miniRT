@@ -12,17 +12,6 @@
 
 #include "minirt.h"
 
-static void	get_camera_math(t_camera *c)
-{
-	t_vec	temp;
-
-	c->forward = vec_norm(&c->dir);
-	c->world_up = (t_vec){0, 1, 0};
-	temp = vec_cross(c->world_up, c->forward);
-	c->right = vec_norm(&temp);
-	c->up = vec_cross(c->forward, c->right);
-}
-
 static t_bool	check_camera_ranges(t_camera cam)
 {
 	if (!check_range_double(cam.fov, 0.0, 180.0, "Camera: FOV out of range\n")
@@ -64,7 +53,6 @@ t_bool	parse_camera(char **split, t_scene *scene)
 	}
 	if (!check_camera_ranges(cam))
 		return (0);
-	get_camera_math(&cam);
 	scene->camera = cam;
 	scene->camera.set = 1;
 	return (1);
