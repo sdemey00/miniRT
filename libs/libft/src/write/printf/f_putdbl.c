@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:02:50 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/05 16:40:39 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/05 23:20:14 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ static t_quad	base_case(const struct s_double *dbl, const t_flags *flags)
 	i = 1;
 	while (i < 52)
 	{
-		dec += ((dbl->mant >> (52 - i)) & 1) * ft_lpow(2.0L, -i);
+		dec += ((dbl->mant >> (52 - i)) & 1) * ft_pow(2.0L, -i);
 		i++;
 	}
-	dec = (1.0L + dec) * ft_lpow(2.0L, dbl->exp - BIASED_EXP);
+	dec = (1.0L + dec) * ft_pow(2.0L, dbl->exp - BIASED_EXP);
 	res += f_putuint((long unsigned int)dec, &dflt);
 	res += t_put_dec_part(dec - (long unsigned int)dec, flags);
 	return (res);

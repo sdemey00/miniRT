@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 13:56:58 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/06 11:30:13 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/05 18:14:32 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,25 @@ t_ray camera_ray(t_camera *c, t_idx i, t_idx j)
 	double			x = (2 * ((i + 0.5) / WIDTH) - 1) * ratio * flen;
 	double			y = (1 - 2 * ((j + 0.5) / HEIGHT)) * flen;
 
+	t_vec forward = vec_norm(&c->dir);
+	t_vec world_up = {0, 1, 0};
+	t_vec temp = vec_cross(world_up, forward);
+	t_vec right = vec_norm(&temp);
+	t_vec up = vec_cross(forward, right);
 	//printf("x before:%d\ty before:%d\n", i, j);
 	//printf("x after:%f\ty after:%f\n", x, y);
-	t_vec dir = (t_vec){x, y, -1}; // -1 ??
-	//t_vec norm_dir = vec_norm(&dir);
+	t_vec dir_cam = {x, y, -1}; // -1??
+	t_vec dir = vec_norm(&(
+		(t_vec){
+			right.x * dir_cam.x + up.x * dir_cam.y + forward.x * dir_cam.z,
+			right.y * dir_cam.x + up.y * dir_cam.y + forward.y * dir_cam.z,
+			right.z * dir_cam.x + up.z * dir_cam.y + forward.z * dir_cam.z
+		}
+	));
+	//t_vec norm_dir = vec_norm(&dir); --> matrice de rotation
 	return ((t_ray){c->pos, dir});
 }
+
 
 static void	camera_translate(t_camera *c, unsigned int key)
 {
@@ -44,17 +57,17 @@ static void	camera_translate(t_camera *c, unsigned int key)
 
 static void	camera_rotate(t_camera *c, unsigned int key)
 {
-	if (key == 'o')
+	if (key == 'u')
 		c->dir.z -= MOVE_SPEED;
-	else if (key == 'u')
+	else if (key == 'o')
 		c->dir.z += MOVE_SPEED;
-	else if (key == 'i')
-		c->dir.y -= MOVE_SPEED;
 	else if (key == 'k')
+		c->dir.y -= MOVE_SPEED;
+	else if (key == 'i')
 		c->dir.y += MOVE_SPEED;
-	else if (key == 'l')
-		c->dir.x -= MOVE_SPEED;
 	else if (key == 'j')
+		c->dir.x -= MOVE_SPEED;
+	else if (key == 'l')
 		c->dir.x += MOVE_SPEED;
 }
 

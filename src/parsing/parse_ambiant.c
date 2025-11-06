@@ -26,14 +26,14 @@ t_bool	parse_ambiant(char **split, t_scene *scene)
 		print_error("Ambiant light: invalid number of arguments\n");
 		return (0);
 	}
-	if (!parse_float(split[1], &ambiant.ratio))
+	if (!parse_float(split[1], &ambiant.intensity))
 	{
-		print_error("Ambiant light: invalid vector format\n");
+		print_error("Ambiant light: invalid ratio format\n");
 		return (0);
 	}
 	if (!parse_color(split[2], &ambiant.color))
 		return (0);
-	if (!check_range_double(ambiant.ratio, 0, 1,
+	if (!check_range_double(ambiant.intensity, 0, 1,
 			"Ambiant light: ratio out of range [0, 1]\n"))
 		return (0);
 	scene->ambiant = ambiant;
@@ -48,7 +48,7 @@ void	ambiant_print(t_ambiant ambiant)
 		ft_printf("There is no ambiant light\n");
 		return ;
 	}
-	ft_printf("Ambiant light ratio: %.2f\n", ambiant.ratio);
+	ft_printf("Ambiant light ratio: %f\n", ambiant.intensity);
 	ft_printf("Ambiant light color: %d, %d, %d\n",
 		(t_ssuint)ambiant.color.x, (t_ssuint)ambiant.color.y,
 		(t_ssuint)ambiant.color.z);

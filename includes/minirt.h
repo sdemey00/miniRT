@@ -96,8 +96,10 @@ t_ray	camera_ray(t_camera *c, t_idx i, t_idx j);
 t_bool	camera_change(t_camera *c, unsigned int key);
 
 // graphics/ray_hits.c
-t_bool	ray_hit_sphere(const t_ray *r, const t_obj *s);
-t_bool	ray_hit_plane(const t_ray *r, const t_obj *p);
+t_bool	ray_hit_plane(const t_ray *r, const t_obj *p, float *t);
+t_bool	ray_hit_sphere(const t_ray *r, const t_obj *s, float *t);
 t_bool	ray_hit_cylinder(const t_ray *r, const t_obj *c);
 
+// graphics/lights.c
+t_color	ray_light_color(t_scene *s, t_ray *r, t_obj *hit_obj, float closest_t);
 #endif // MINIRT_H

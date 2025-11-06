@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-t_bool	ray_hit_sphere(const t_ray *r, const t_obj *s)
+t_bool	ray_hit_sphere(const t_ray *r, const t_obj *s, float *t)
 {
 	const t_vec	oc = vec_sub(r->origin, s->pos);
 	const float	a = vec_dot(&r->dir, &r->dir);
@@ -25,23 +25,24 @@ t_bool	ray_hit_sphere(const t_ray *r, const t_obj *s)
 	float t0 = (-b - sqrt(delta)) / (2*a);
 	float t1 = (-b + sqrt(delta)) / (2*a);
 	if (t0 > 0)
-		return (1);
-	if (t1 > 0)
-		return 1;
-	return (0);
+		*t = t0;
+	else if (t1 > 0)
+		*t = t1;
+	else
+		return (0);
+	return (1);
 }
 
-t_bool	ray_hit_plane(const t_ray *r, const t_obj *p)
+t_bool	ray_hit_plane(const t_ray *r, const t_obj *p, float *t)
 {
 	const t_vec	po = vec_sub(p->pos, r->origin);
 	const float	num = vec_dot(&po, &p->dir);
 	const float	den = vec_dot(&r->dir, &p->dir);
-	float		t;
 
 	if (num == 0 || den == 0)
 		return (0);
-	t = num / den;
-	if (t < 0)
+	*t = num / den;
+	if (*t < 0)
 		return (0);
 	return (1);
 }
