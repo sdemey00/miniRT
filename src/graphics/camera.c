@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 13:56:58 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/05 18:14:32 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/06 11:30:13 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ static void	camera_translate(t_camera *c, unsigned int key)
 
 static void	camera_rotate(t_camera *c, unsigned int key)
 {
-	if (key == 'u')
+	if (key == 'o')
 		c->dir.z -= MOVE_SPEED;
-	else if (key == 'o')
+	else if (key == 'u')
 		c->dir.z += MOVE_SPEED;
-	else if (key == 'k')
-		c->dir.y -= MOVE_SPEED;
 	else if (key == 'i')
+		c->dir.y -= MOVE_SPEED;
+	else if (key == 'k')
 		c->dir.y += MOVE_SPEED;
-	else if (key == 'j')
-		c->dir.x -= MOVE_SPEED;
 	else if (key == 'l')
+		c->dir.x -= MOVE_SPEED;
+	else if (key == 'j')
 		c->dir.x += MOVE_SPEED;
 }
 
