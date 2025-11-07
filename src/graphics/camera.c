@@ -12,27 +12,39 @@
 
 #include "minirt.h"
 
-t_ray camera_ray(t_camera *c, t_idx i, t_idx j)
+static t_vec	camera_space(t_camera *c, t_vec dir_cam)
 {
-	float	x = (2 * ((i + 0.5) / WIDTH) - 1) * RATIO * c->flen;
-	float	y = (1 - 2 * ((j + 0.5) / HEIGHT)) * c->flen;
+	t_vec forward;
+	t_vec world_up;
+	t_vec right;
+	t_vec up;
+	t_vec temp;
 
-	t_vec forward = c->dir;
-	t_vec world_up = {0, 1, 0};
-	t_vec temp = vec_cross(world_up, forward);
-	t_vec right = vec_norm(&temp);
-	t_vec up = vec_cross(forward, right);
-	t_vec dir_cam = {x, y, -1}; // -1??
-	t_vec dir = vec_norm(&(
+	world_up = (t_vec){0, 1, 0};
+	forward = vec_norm(&c->dir);
+	temp = vec_cross(world_up, forward);
+	right = vec_norm(&temp);
+	up = vec_cross(forward, right);
+	return (
 		(t_vec){
 			right.x * dir_cam.x + up.x * dir_cam.y + forward.x * dir_cam.z,
 			right.y * dir_cam.x + up.y * dir_cam.y + forward.y * dir_cam.z,
 			right.z * dir_cam.x + up.z * dir_cam.y + forward.z * dir_cam.z
-		}
-	));
-	return ((t_ray){c->pos, dir});
+		});
 }
 
+t_ray	camera_ray(t_camera *c, t_idx x, t_idx y)
+{
+	float	u;
+	float	v;
+	t_vec	world_dir;
+
+	u = (2.0 * ((x + 0.5) / WIDTH) - 1.0) * RATIO * c->flen;
+	v = (1.0 - 2.0 * ((y + 0.5) / HEIGHT)) * c->flen;
+	world_dir = camera_space(c, (t_vec){u, v, -1.0});
+	world_dir = vec_norm(&world_dir);
+	return ((t_ray){c->pos, world_dir});
+}
 
 static void	camera_translate(t_camera *c, unsigned int key)
 {

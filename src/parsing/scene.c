@@ -26,3 +26,4 @@ t_bool	scene_init(t_scene *s, const char *fpath)
 		scene_print(s);
 	return (1);
 }
+//init obj.dir pour sphere 

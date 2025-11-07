@@ -40,6 +40,15 @@ t_obj	*get_closest_hit(t_vec origin, t_vec dir, float *closest_t, t_scene *s)
 				hit_obj = &s->objs[i];
 			}
 		}
+		// else if (s->objs[i].e_type == CYLINDER
+        // 	&& ray_hit_cylinder(origin, dir, &s->objs[i], &t))
+		// {			
+		// 	if (t < *closest_t)
+		// 	{
+		// 		*closest_t = t;
+		// 		hit_obj = &s->objs[i];
+		// 	}
+		// }
 		i++;
 	}
 	return (hit_obj);

@@ -59,20 +59,20 @@ static float	lights_intensity(t_scene *s, t_vec P, t_vec N)
 
 t_color	ray_light_color(t_scene *s, t_ray *r, t_obj *hit_obj, float closest_t)
 {
-	t_vec	N;
-	t_vec	P;
+	t_vec	surface_normal;
+	t_vec	hit_point;
 	t_vec	tmp;
 
-	P = vec_sum(r->origin, vec_scal(r->dir, closest_t));
+	hit_point = vec_sum(r->origin, vec_scal(r->dir, closest_t));
 	if (hit_obj->e_type == SPHERE)
 	{
-		tmp = vec_sub(P, hit_obj->pos);
-		N = vec_norm(&tmp);
+		tmp = vec_sub(hit_point, hit_obj->pos);
+		surface_normal = vec_norm(&tmp);
 	}
 	else if (hit_obj->e_type == PLANE)
-		N = vec_norm(&hit_obj->dir);
+		surface_normal = vec_norm(&hit_obj->dir);
 	else
-		N = (t_vec){0, 1, 0};
-	float intensity = lights_intensity(s, P, N);
+		surface_normal = (t_vec){0, 1, 0};
+	float intensity = lights_intensity(s, hit_point, surface_normal);
 	return ((t_color){hit_obj->color.x * intensity, hit_obj->color.y * intensity, hit_obj->color.z * intensity});
 }
