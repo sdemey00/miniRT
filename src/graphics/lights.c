@@ -32,11 +32,11 @@ static float	lights_intensity(t_scene *s, t_vec P, t_vec N)
 
 		// 	BROKEN
 		//shadow
-		// t_obj	*shadow_obj;
-		// float	shadow_t;
-		// shadow_obj get_closest_hit(P, light_dir, &shadow_t, s);
-		// if (shadow_obj != NULL)
-		// 	continue ;
+		t_obj	*shadow_obj;
+		float	shadow_t;
+		shadow_obj = get_closest_hit(P, light_dir, &shadow_t, s);
+		if (shadow_obj != NULL)
+			continue ;
 
 		//diffuse
 		float n_dot_l = vec_dot(&N, &light_dir);
@@ -45,10 +45,10 @@ static float	lights_intensity(t_scene *s, t_vec P, t_vec N)
 
 		// SEMI BROKEN
 		//specular
-		t_vec R = vec_scal(vec_scal(N, 2), vec_dot(&N, &light_dir));
-		float r_dot_v = vec_dot(&R, &light_dir);
-		if (r_dot_v > 0)
-			i += s->lights[j].intensity * ft_pow(r_dot_v, 2);
+		// t_vec R = vec_scal(vec_scal(N, 2), vec_dot(&N, &light_dir));
+		// float r_dot_v = vec_dot(&R, &light_dir);
+		// if (r_dot_v > 0)
+		// 	i += s->lights[j].intensity * ft_pow(r_dot_v, 2);
 		//
 		j++;
 	}
