@@ -68,7 +68,7 @@ clean:
 fclean: clean
 	rm -rf $(NAME)
 	@ $(MAKE) -C $(MLXD) clean > /dev/null 2>&1
-	@ $(MAKE) -C $(LFTD) $@ >  /dev/null 2>&1
+	rm -rf $(LFTN)
 
 re: fclean all
 

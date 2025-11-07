@@ -6,13 +6,13 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:31:38 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/06 18:24:38 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:53:19 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	draw_grid(t_window *w, t_idx x, t_idx y, int color, const short unsigned int res)
+static void	draw_grid(t_window *w, t_idx x, t_idx y, int color, const t_suint res)
 {
 	t_ridx	i;
 	t_ridx	j;
@@ -32,7 +32,7 @@ static void	draw_grid(t_window *w, t_idx x, t_idx y, int color, const short unsi
 
 void	blurtracing(t_window *w, t_scene *s)
 {
-	const t_suint	res = 10;
+	const t_suint	res = WIDTH * HEIGHT / 900000;
 	t_idx			i;
 	t_idx			j;
 	t_color			c;

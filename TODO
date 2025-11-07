@@ -3,6 +3,12 @@ Mandatory :
 - Turning using keybinds locks rotation at given point ~180 degree
 - Projected shadows
 	- Diffused projected shadows
+- Set a MAX_OBJS macro, "setable" via -D compile flag. This macro has to
+be ckecked inside the parsing.
+- Set a BLUR_LVL macro, "setable" via -D compile flag. It has to check that
+the flag is set in a valid range (at least 1, but max ?)
+default would be (WIDTH * HEIGHT / 1000000) ?
+
 Bonus :
 - Checker pattern
 - Bumping texture
@@ -36,6 +42,7 @@ sdemey :
 - Fix specular and diffuse reflection
 
 mmichele :
+- Fix camera rotations
 - Handle camera movements properly, like FPS
 - Minor visual fix on blur tracing
 	- Enhance blur tracing by make it more to less blurry with time
