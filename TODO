@@ -3,6 +3,8 @@ Mandatory :
 - Turning using keybinds locks rotation at given point ~180 degree
 - Projected shadows
 	- Diffused projected shadows
+- Deep test parsing
+
 Bonus :
 - Checker pattern
 - Bumping texture
