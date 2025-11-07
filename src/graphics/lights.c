@@ -13,26 +13,43 @@
 
 static float	lights_intensity(t_scene *s, t_vec P, t_vec N)
 {
-	float	i = 0.0;
-	t_idx	j = 0;
+	float	i;
+	t_idx	j;
+	t_vec	light_dir;
 
+	i = 0.0;
+	j = 0.0;
 	if (s->ambiant.set == 1)
 		i += s->ambiant.intensity;
 	while (j < s->lights_len)
 	{
-		t_light *L = &s->lights[j];
-		t_vec	light_dir;
-		light_dir = vec_sub(L->pos, P);
+		// if (light.type == point)
+		light_dir = vec_sub(s->lights[j].pos, P);
 		light_dir = vec_norm(&light_dir);
+
+		//if (light.type == directionnal
+		// light_dir = s->lights[j].dir; //no dir for now
+
+		// 	BROKEN
+		//shadow
+		// t_obj	*shadow_obj;
+		// float	shadow_t;
+		// shadow_obj get_closest_hit(P, light_dir, &shadow_t, s);
+		// if (shadow_obj != NULL)
+		// 	continue ;
+
 		//diffuse
-		// float n_dot_l = vec_dot(&N, &light_dir);
-		// if (n_dot_l > 0)
-		// 	i += L->intensity * n_dot_l;
+		float n_dot_l = vec_dot(&N, &light_dir);
+		if (n_dot_l > 0)
+			i += s->lights[j].intensity * n_dot_l;
+
+		// SEMI BROKEN
 		//specular
-		t_vec R = vec_scal(vec_scal(N, 2), vec_dot(&N, &light_dir));
-		float r_dot_v = vec_dot(&R, &light_dir);
-		if (r_dot_v > 0)
-			i += L->intensity * ft_pow(r_dot_v, 2);
+		// t_vec R = vec_scal(vec_scal(N, 2), vec_dot(&N, &light_dir));
+		// float r_dot_v = vec_dot(&R, &light_dir);
+		// if (r_dot_v > 0)
+		// 	i += s->lights[j].intensity * ft_pow(r_dot_v, 2);
+		//
 		j++;
 	}
 	if (i > 1.0)
