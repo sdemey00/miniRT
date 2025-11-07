@@ -14,12 +14,11 @@
 
 static t_vec	camera_space(t_camera *c, t_vec cam_dir)
 {
+	const t_vec world_up = (t_vec){0, 1, 0};
 	t_vec forward;
-	t_vec world_up;
 	t_vec right;
 	t_vec up;
 
-	world_up = (t_vec){0, 1, 0};
 	forward = vec_norm(&c->dir); //si pas de vec_norm -> bug fov
 	right = vec_cross(world_up, forward);
 	up = vec_cross(forward, right);
