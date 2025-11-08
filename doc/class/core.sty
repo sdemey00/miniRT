@@ -1,0 +1,91 @@
+% ---------------------------------------------------------------------------- %
+% ft-latex/core.sty                                                            %
+%                                                                              %
+% MICHELETTI Matteo (https://github.com/TotemaM)                               %
+%                                                                              %
+% This file is under MIT Licence                                               %
+% ---------------------------------------------------------------------------- %
+
+\usepackage{graphicx}           % To include images
+\usepackage[table]{xcolor}      % Color cells of a table
+\usepackage{amsmath}            % Equations
+\usepackage{amssymb}            % Symbols
+\usepackage{multirow}           % Custom tables
+\usepackage{array}              % Custom tables
+\usepackage[none]{hyphenat}     % No hyphenation
+\usepackage{listingsutf8}       % For code snippets
+
+% Code snippets visual customization.
+\lstdefinestyle{custom}{
+    frame=single,
+    breaklines=true,
+    breakatwhitespace=false,
+    basicstyle=\ttfamily,
+    inputencoding=utf8/latin1,
+    keywordstyle=\bfseries\color{violet!70!white},
+    commentstyle=\itshape\color{green!50!black},
+    basicstyle=\ttfamily\footnotesize,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=7pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\setlength{\parindent}{0pt}     % Deletes alineas (= no paragraph indentation)
+
+\newcommand{\Custombox}[1] {
+	\begin{center}
+		\fbox{\parbox{0.987\linewidth}{#1}}
+	\end{center}
+}
+
+% Line break
+\newcommand{\Lb} {\vspace{11pt}}
+
+% Make a vertical split in the page
+\newcommand{\Doublebox}[5] {
+	\begin{minipage}{#3\textwidth}{#1}
+	\end{minipage}
+
+	\begin{minipage}{#4\textwidth}{\(\)}
+	\end{minipage}
+
+	\begin{minipage}{#5\textwidth}{#2}
+	\end{minipage}
+}
+
+% Load an image that will fit pages textwidth
+\newcommand{\Image}[1] {
+	\includegraphics[width=\textwidth]{#1}
+}
+
+% Better list command.
+\newcommand{\List}[1]{
+	\begin{itemize}
+		#1
+	\end{itemize}
+}
+
+% List item.
+\newcommand{\ListItem}{
+	\item[\textcolor{black}{--}]
+}
+
+% Better tabular
+\newcommand{\Table}[2]{
+	\begin{tabular}{#1}
+		#2
+	\end{tabular}
+}
+
+% Code snippet command.
+\newcommand{\Code}[4]{ % 1: path, 2: firstline, 3: lastline, 4: language
+    \lstset{style=custom, language=#4} % Java, Python, C, C++, etc.
+    \lstinputlisting[firstline=#2, lastline=#3]{#1}
+}

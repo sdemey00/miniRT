@@ -8,3 +8,8 @@ build
 
 .vscode
 *.swp
+
+*.aux
+*.log
+*.out
+*.toc

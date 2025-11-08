@@ -1,0 +1,28 @@
+% ---------------------------------------------------------------------------- %
+% ft-latex/ft-beamer.sty                                                       %
+%                                                                              %
+% MICHELETTI Matteo (https://github.com/TotemaM)                               %
+%                                                                              %
+% This file is under MIT Licence                                               %
+% ---------------------------------------------------------------------------- %
+
+\usepackage{core}
+
+%Add the slide count at the bottom of each frame.
+\newcommand{\SetFramecount}{
+	\setbeamertemplate{footline}{
+		\leavevmode\hbox{
+	    	\begin{beamercolorbox}[wd=\paperwidth,ht=0px,dp=8px,right]{black}
+	      	\insertframenumber{}/\inserttotalframenumber
+	      	\hspace{9px}
+	    	\end{beamercolorbox}
+		}
+	}
+}
+
+% Better slide frame command.
+\newcommand{\Frame}[2]{
+	\begin{frame}{#1}
+		#2
+	\end{frame}
+}

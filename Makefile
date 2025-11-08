@@ -10,26 +10,38 @@
 #                                                                              #
 # **************************************************************************** #
 
+# Be carefull that switching from compile target might require a clear or a clean !
+
+# Source program name
 NAME	= miniRT
 
-W		?= 0
-H		?= 0
+# Program compile macro variables
+W		?= 0		# $(NAME)'s screen width
+H		?= 0		# $(NAME)'s screen height
+
+# Only used with "valgrind" target
 F		?=
 
+# Source program compiler settings
 CC		= cc
 FLAGS	= -Wall -Wextra -Werror -g -D WIDTH=$(W) -D HEIGHT=$(H)
 
+# Directories
 BLDD	= build
 SRCD	= src
 LIBD	= libs
 INCD	= includes
+DOCD	= doc
 
+# MiniLibX
 MLXD	= $(LIBD)/mlx
 MLXN	= $(MLXD)/libmlx_Linux.a
 
+# LibFT
 LFTD	= $(LIBD)/libft
 LFTN	= $(LFTD)/libft.a
 
+# Source compile variables
 SRCS	= $(shell find $(SRCD) -type f -name "*.c")
 OBJS	= $(patsubst %.c, $(BLDD)/%.o, $(SRCS))
 INCS	= -I $(SRCD) -I $(MLXD) -I $(LFTD) -I $(INCD)
@@ -37,7 +49,9 @@ LNKS	= -L $(MLXD) -L $(LFTD)
 LIBS	= -lmlx -lX11 -lXext -lft -lm
 DEPS	= $(OBJS:.o=.d)
 
-.PHONY: $(MLXN) $(LFTN) $(LFTN)-fast clean fclean re norm san valgrind verbose fast clear
+# Fake targets
+.PHONY: $(MLXN) $(LFTN) $(LFTN)-fast clean fclean re norm \
+		san valgrind verbose fast clear doc doc-clean
 
 MAKEFLAGS += --no-print-directory
 
@@ -65,7 +79,7 @@ clean:
 	rm -rf $(BLDD)
 	$(MAKE) -C $(LFTD) clean
 
-fclean: clean
+fclean: clean doc-clean
 	rm -rf $(NAME)
 	@ $(MAKE) -C $(MLXD) clean > /dev/null 2>&1
 	rm -rf $(LFTN)
@@ -91,3 +105,9 @@ fast: $(MLXN) $(LFTN)-fast $(NAME)
 
 clear:
 	rm -rf $(BLDD)
+
+doc:
+	cd $(DOCD) && bash build.sh
+
+doc-clean:
+	rm -rf $(DOCD)/$(BLDD)
