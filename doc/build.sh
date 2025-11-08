@@ -6,7 +6,7 @@
 #    By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by o PDF using       #+#    #+#              #
-#    Updated: 2025/11/08 00:59:24 by mmichele         ###   ########.fr        #
+#    Updated: 2025/11/08 10:18:29 by mmichele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ compile() {
 if [ $# -eq 0 ]; then
     files=$(find . -type f -name "*.tex")
 else
-    # TODO Check if file passed as argument exists
+    # todo Check if file passed as argument exists
     files=$@
 fi
 

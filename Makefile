@@ -16,8 +16,8 @@
 NAME	= miniRT
 
 # Program compile macro variables
-W		?= 0		# $(NAME)'s screen width
-H		?= 0		# $(NAME)'s screen height
+W		?= 0
+H		?= 0
 
 # Only used with "valgrind" target
 F		?=
