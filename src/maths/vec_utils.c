@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key.c                                              :+:      :+:    :+:   */
+/*   vec_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/07 13:01:45 by sdemey            #+#    #+#             */
-/*   Updated: 2025/11/08 11:30:30 by mmichele         ###   ########.fr       */
+/*   Created: 2025/11/08 12:37:45 by mmichele          #+#    #+#             */
+/*   Updated: 2025/11/08 15:16:58 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	key_handler(int key, struct s_ctx *c)
+inline t_vec	vec_proj(const t_vec *v, const t_vec *w)
 {
-	if (VERBOSE)
-		ft_printf("key pressed : %d\n", key);
-	if (key == K_ESC)
-		window_close(&c->w);
-	else if (ft_strchr("swad cijkl", key) >= 0)
-	{
-		camera_change(&c->s.camera, key);
-		c->t = time_now();
-		window_draw(&c->w, &c->s, blurtracing);
-	}
-	return (0);
+	return (vec_scal(*w, vec_dot(v, w)));
+}
+
+inline t_vec	vec_perp(const t_vec *v, const t_vec *w)
+{
+	return (vec_sub(*v, vec_proj(v, w)));
+}
+
+/*
+Rotate an vector v around an normalized orthogonal vector w with an angle of a.
+*/
+inline t_vec	vec_rot(const t_vec *v, const t_vec *w, const t_rad a)
+{
+	return (vec_sum(vec_scal(*v, cos(a)), vec_scal(vec_cross(*w, *v), sin(a))));
 }

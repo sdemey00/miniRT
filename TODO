@@ -1,6 +1,5 @@
 Mandatory :
 - Cylinder object
-- Turning using keybinds locks rotation at given point ~180 degree
 - Projected shadows
 	- Diffused projected shadows
 - Set a MAX_OBJS macro, "setable" via -D compile flag. This macro has to
@@ -43,7 +42,6 @@ sdemey :
 - Fix specular and diffuse reflection
 
 mmichele :
-- Fix camera rotations
 - Handle camera movements properly, like FPS
 - Minor visual fix on blur tracing
 	- Enhance blur tracing by make it more to less blurry with time

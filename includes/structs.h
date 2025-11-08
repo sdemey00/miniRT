@@ -13,6 +13,8 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+# define SPACE_UP (t_vec){0, 1, 0}
+
 typedef struct s_ray
 {
 	t_vec	origin;
@@ -36,6 +38,8 @@ typedef struct s_camera
 	t_bool		set;
 	float		ratio;		// Screen ratio
 	float		flen;		// Focal length
+	t_vec		up;			// Camera up direction
+	t_vec		right;		// Camera right direction
 }	t_camera;
 
 typedef struct s_light

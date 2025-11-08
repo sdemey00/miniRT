@@ -17,6 +17,7 @@ static float	lights_intensity(t_scene *s, t_vec hit_point, t_vec normal, t_ray *
 	t_idx	idx;
 	t_vec	light_dir;
 	t_obj	*shadow_obj;
+	t_ray	new_ray;
 
 	i = 0.0;
 	idx = 0;
@@ -29,7 +30,8 @@ static float	lights_intensity(t_scene *s, t_vec hit_point, t_vec normal, t_ray *
 
 		//shadow
 		float	shadow_t = INFINITY;
-		shadow_obj = get_closest_hit(hit_point, light_dir, &shadow_t, s); //decaler le hit_point sinon il retouche l'objet direct ?
+		new_ray = (t_ray){hit_point, light_dir};
+		shadow_obj = get_closest_hit(&new_ray, &shadow_t, s); //decaler le hit_point sinon il retouche l'objet direct ?
 		if (shadow_obj != NULL)
 		{
 			idx++;

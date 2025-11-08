@@ -35,9 +35,6 @@
 #  define HEIGHT 900
 # endif
 
-// Does not optimize execution time because just expanding where it's called.
-# define RATIO (float)WIDTH / (float)HEIGHT
-
 # include <math.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -107,7 +104,7 @@ void	blurtracing(t_window *w, t_scene *s);
 void	raytracing(t_window *w, t_scene *s);
 
 // graphics/ray.c
-t_obj	*get_closest_hit(t_vec origin, t_vec dir, float *closest_t, t_scene *s);
+t_obj	*get_closest_hit(const t_ray *r, float *closest_t, t_scene *s);
 t_color	ray_color(t_ray *r, t_scene *s);
 
 // graphics/camera.c
@@ -115,11 +112,16 @@ t_ray	camera_ray(t_camera *c, t_idx x, t_idx y);
 void	camera_change(t_camera *c, unsigned int key);
 
 // graphics/ray_hits.c
-t_bool	ray_hit_sphere(const t_vec origin, const t_vec dir, const t_obj *s, float *t);
-t_bool	ray_hit_plane(const t_vec origin, const t_vec dir, const t_obj *p, float *t);
-t_bool	ray_hit_cylinder(const t_ray *r, const t_obj *c);
+t_bool	ray_hit_sphere(const t_ray *r, const t_obj *s, float *t);
+t_bool	ray_hit_plane(const t_ray *r, const t_obj *p, float *t);
+t_bool	ray_hit_cylinder(const t_ray *r, const t_obj *cy, float *t);
 
 // graphics/lights.c
 t_color	ray_light_color(t_scene *s, t_ray *r, t_obj *hit_obj, float closest_t);
+
+// maths/vec_utils.c
+t_vec	vec_proj(const t_vec *v, const t_vec *w);
+t_vec	vec_perp(const t_vec *v, const t_vec *w);
+t_vec	vec_rot(const t_vec *v, const t_vec *w, const t_rad a);
 
 #endif // MINIRT_H

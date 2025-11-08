@@ -12,77 +12,72 @@
 
 #include "minirt.h"
 
-static t_vec	camera_space(t_camera *c, t_vec cam_dir)
-{
-	const t_vec world_up = (t_vec){0, 1, 0};
-	t_vec forward;
-	t_vec right;
-	t_vec up;
-
-	forward = vec_norm(&c->dir); //si pas de vec_norm -> bug fov
-	right = vec_cross(world_up, forward);
-	up = vec_cross(forward, right);
-	return ((t_vec){
-		right.x * cam_dir.x + up.x * cam_dir.y + forward.x * cam_dir.z,
-		right.y * cam_dir.x + up.y * cam_dir.y + forward.y * cam_dir.z,
-		right.z * cam_dir.x + up.z * cam_dir.y + forward.z * cam_dir.z
-	});
-}
-
 t_ray	camera_ray(t_camera *c, t_idx x, t_idx y)
 {
-	float	u;
-	float	v;
-	t_vec	space_dir;
+	const float	u = (2.0 * ((x + 0.5) / WIDTH) - 1.0) * c->ratio * c->flen;
+	const float	v = (1.0 - 2.0 * ((y + 0.5) / HEIGHT)) * c->flen;
+	const t_vec	cam_dir = (t_vec){u, v, 1.0};
+	t_vec		ray_dir;
 
-	u = (2.0 * ((x + 0.5) / WIDTH) - 1.0) * c->ratio * c->flen;
-	v = (1.0 - 2.0 * ((y + 0.5) / HEIGHT)) * c->flen;
-	space_dir = camera_space(c, (t_vec){u, v, 1.0});
-	space_dir = vec_norm(&space_dir);
-	return ((t_ray){c->pos, space_dir});
+	c->right = vec_cross(SPACE_UP, c->dir);
+	vec_inorm(&c->right);
+	c->up = vec_cross(c->dir, c->right);
+	vec_inorm(&c->up);
+	ray_dir = (t_vec){
+		c->right.x * cam_dir.x + c->up.x * cam_dir.y + c->dir.x * cam_dir.z,
+		c->right.y * cam_dir.x + c->up.y * cam_dir.y + c->dir.y * cam_dir.z,
+		c->right.z * cam_dir.x + c->up.z * cam_dir.y + c->dir.z * cam_dir.z
+	};
+	vec_inorm(&ray_dir);
+	return ((t_ray){c->pos, ray_dir});
 }
 
 static void	camera_translate(t_camera *c, unsigned int key)
 {
-	//const t_vec	right = vec_roty(c->dir, -FT_PI / 2);
-	//const t_vec up = vec_rotx(c->dir, -FT_PI / 2);
-
-	t_vec right = {1, 0, 0};
-	t_vec up = {0, 1, 0};
 	if (key == 'w')
 		vec_isum(&c->pos, c->dir);
 	else if (key == 's')
 		vec_isub(&c->pos, c->dir);
 	else if (key == 'd')
-		vec_isum(&c->pos, right);
+		vec_isum(&c->pos, c->right);
 	else if (key == 'a')
-		vec_isub(&c->pos, right);
+		vec_isub(&c->pos, c->right);
 	else if (key == ' ')
-		vec_isum(&c->pos, up);
+		vec_isum(&c->pos, SPACE_UP);
 	else if (key == 'c')
-		vec_isub(&c->pos, up);
+		vec_isub(&c->pos, SPACE_UP);
 }
 
 static void	camera_rotate(t_camera *c, unsigned int key)
 {
-	if (key == 'o')
-		c->dir.z -= 1 - 0.5;
-	else if (key == 'u')
-		c->dir.z += 1 - 0.5;
-	else if (key == 'i')
-		c->dir.y -= 1 - 0.5;
+	const float	angle = FT_PI / 16;
+	t_vec		new;
+
+	if (key == 'i')
+	{
+		new = vec_rot(&c->dir, &c->right, -angle);
+		if ((c->dir.x > 0 && new.x > 0) || (c->dir.x < 0 && new.x < 0))
+			c->dir = new;
+	}
 	else if (key == 'k')
-		c->dir.y += 1 - 0.5;
+	{
+		new = vec_rot(&c->dir, &c->right, angle);
+		if ((c->dir.x > 0 && new.x > 0) || (c->dir.x < 0 && new.x < 0))
+			c->dir = new;
+	}
 	else if (key == 'l')
-		c->dir.x -= 1 - 0.5;
+		vec_iroty(&c->dir, angle);
 	else if (key == 'j')
-		c->dir.x += 1 - 0.5;
+		vec_iroty(&c->dir, -angle);
+	vec_inorm(&c->dir);
 }
 
 void	camera_change(t_camera *c, unsigned int key)
 {
+	if (VERBOSE)
+		camera_print(*c);
 	if (ft_strchr("wsda c", key) >= 0)
 		camera_translate(c, key);
-	else if (ft_strchr("ouiklj", key) >= 0)
+	else if (ft_strchr("iklj", key) >= 0)
 		camera_rotate(c, key);
 }

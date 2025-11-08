@@ -6,13 +6,14 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:31:38 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/07 15:53:19 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/08 12:17:51 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	draw_grid(t_window *w, t_idx x, t_idx y, int color, const t_suint res)
+static void	draw_grid(t_window *w, const t_idx c[2], int color, \
+	const t_suint res)
 {
 	t_ridx	i;
 	t_ridx	j;
@@ -23,7 +24,7 @@ static void	draw_grid(t_window *w, t_idx x, t_idx y, int color, const t_suint re
 		i = -res;
 		while (i <= res)
 		{
-			window_draw_pixel(w, x + i, y + j, color);
+			window_draw_pixel(w, c[0] + i, c[1] + j, color);
 			i++;
 		}
 		j++;
@@ -32,7 +33,7 @@ static void	draw_grid(t_window *w, t_idx x, t_idx y, int color, const t_suint re
 
 void	blurtracing(t_window *w, t_scene *s)
 {
-	const t_suint	res = WIDTH * HEIGHT / 900000;
+	const t_suint	res = WIDTH * HEIGHT / 400000;
 	t_idx			i;
 	t_idx			j;
 	t_color			c;
@@ -46,7 +47,7 @@ void	blurtracing(t_window *w, t_scene *s)
 		{
 			r = camera_ray(&s->camera, i, j);
 			c = ray_color(&r, s);
-			draw_grid(w, i, j, color_int(&c), res);
+			draw_grid(w, (const t_idx[2]){i, j}, color_int(&c), res);
 			i += (res * 2) + 1;
 		}
 		j += (res * 2) + 1;
