@@ -44,8 +44,10 @@ static float	lights_intensity(t_scene *s, t_vec hit_point, t_vec normal, t_ray *
 		//specular
 		t_vec reflect_dir = vec_sub(vec_scal(normal, 2 * vec_dot(&normal, &light_dir)), light_dir);
 		t_vec view_dir = vec_scal(r->dir, -1); // redir vers caméra
-		float spec_angle = fmaxf(vec_dot(&reflect_dir, &view_dir), 0.0); //get max float
-		i += s->lights[idx].intensity * ft_pow(spec_angle, 32);
+		float spec_angle = vec_dot(&reflect_dir, &view_dir);
+		if (spec_angle < 0.0)
+			spec_angle = 0.0;
+		i += s->lights[idx].intensity * ft_pow(spec_angle, 32); //pow exponant = phong intensity
 
 		idx++;
 	}

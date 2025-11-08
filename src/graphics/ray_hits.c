@@ -20,13 +20,13 @@ t_bool	ray_hit_sphere(const t_vec origin, const t_vec dir, const t_obj *s, float
 	const float	c = vec_dot(&oc, &oc) - s->radius * s->radius;
 	const float	delta = b * b - (4 * a * c);
 
-	if (delta < 0)
+	if (delta < 0.001)
 		return (0);
-	float t0 = (-b - sqrt(delta)) / (2*a);
-	float t1 = (-b + sqrt(delta)) / (2*a);
-	if (t0 > 0)
+	float t0 = (-b - sqrt(delta)) / (2 * a);
+	float t1 = (-b + sqrt(delta)) / (2 * a);
+	if (t0 > 0.001)
 		*t = t0;
-	else if (t1 > 0)
+	else if (t1 > 0.001)
 		*t = t1;
 	else
 		return (0);
