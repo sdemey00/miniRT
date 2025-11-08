@@ -23,10 +23,10 @@ static t_vec	camera_space(t_camera *c, t_vec cam_dir)
 	right = vec_cross(world_up, forward);
 	up = vec_cross(forward, right);
 	return ((t_vec){
-			right.x * cam_dir.x + up.x * cam_dir.y + forward.x * cam_dir.z,
-			right.y * cam_dir.x + up.y * cam_dir.y + forward.y * cam_dir.z,
-			right.z * cam_dir.x + up.z * cam_dir.y + forward.z * cam_dir.z
-		});
+		right.x * cam_dir.x + up.x * cam_dir.y + forward.x * cam_dir.z,
+		right.y * cam_dir.x + up.y * cam_dir.y + forward.y * cam_dir.z,
+		right.z * cam_dir.x + up.z * cam_dir.y + forward.z * cam_dir.z
+	});
 }
 
 t_ray	camera_ray(t_camera *c, t_idx x, t_idx y)
@@ -35,9 +35,9 @@ t_ray	camera_ray(t_camera *c, t_idx x, t_idx y)
 	float	v;
 	t_vec	space_dir;
 
-	u = (2.0 * ((x + 0.5) / WIDTH) - 1.0) * RATIO * c->flen;
+	u = (2.0 * ((x + 0.5) / WIDTH) - 1.0) * c->ratio * c->flen;
 	v = (1.0 - 2.0 * ((y + 0.5) / HEIGHT)) * c->flen;
-	space_dir = camera_space(c, (t_vec){u, v, -1.0});
+	space_dir = camera_space(c, (t_vec){u, v, 1.0});
 	space_dir = vec_norm(&space_dir);
 	return ((t_ray){c->pos, space_dir});
 }
