@@ -37,7 +37,7 @@ t_ray	camera_ray(t_camera *c, t_idx x, t_idx y)
 
 	u = (2.0 * ((x + 0.5) / WIDTH) - 1.0) * c->ratio * c->flen;
 	v = (1.0 - 2.0 * ((y + 0.5) / HEIGHT)) * c->flen;
-	space_dir = camera_space(c, (t_vec){u, v, -1.0});
+	space_dir = camera_space(c, (t_vec){u, v, 1.0});
 	space_dir = vec_norm(&space_dir);
 	return ((t_ray){c->pos, space_dir});
 }

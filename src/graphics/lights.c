@@ -48,7 +48,6 @@ static float	lights_intensity(t_scene *s, t_vec hit_point, t_vec normal, t_ray *
 		if (spec_angle < 0.0)
 			spec_angle = 0.0;
 		i += s->lights[idx].intensity * ft_pow(spec_angle, 32); //pow exponant = phong intensity
-
 		idx++;
 	}
 	if (i > 1.0)
