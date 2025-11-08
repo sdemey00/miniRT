@@ -20,13 +20,13 @@ t_bool	ray_hit_sphere(const t_ray *r, const t_obj *s, float *t)
 	const float	c = vec_dot(&oc, &oc) - s->radius * s->radius;
 	const float	delta = b * b - (4 * a * c);
 
-	if (a == 0 || delta < 0)
+	if (a == 0 || delta < 0.001)
 		return (0);
-	const float	t0 = (-b - sqrt(delta)) / (2*a);
-	const float	t1 = (-b + sqrt(delta)) / (2*a);
-	if (t0 > 0)
+	const float t0 = (-b - sqrt(delta)) / (2 * a);
+	const float t1 = (-b + sqrt(delta)) / (2 * a);
+	if (t0 > 0.001)
 		*t = t0;
-	else if (t1 > 0)
+	else if (t1 > 0.001)
 		*t = t1;
 	else
 		return (0);
@@ -42,7 +42,7 @@ t_bool	ray_hit_plane(const t_ray *r, const t_obj *p, float *t)
 	if (num == 0 || den == 0)
 		return (0);
 	*t = num / den;
-	if (*t < 0)
+	if (*t < 0.001)
 		return (0);
 	return (1);
 }
@@ -72,12 +72,12 @@ t_bool	ray_hit_cylinder(const t_ray *r, const t_obj *cy, float *t)
 
 	const float	delta = b * b - (4 * a * c);
 
-	if (a == 0 || delta < 0)
+	if (a == 0 || delta < 0.01)
 		return (0);
-	const float	t0 = (-b - sqrt(delta)) / (2*a);
-	const float	t1 = (-b + sqrt(delta)) / (2*a);
+	const float t0 = (-b - sqrt(delta)) / (2 * a);
+	const float t1 = (-b + sqrt(delta)) / (2 * a);
 
-	if (t0 > 0)
+	if (t0 > 0.01)
 	{
 		t_vec temp1 = vec_sum(op, vec_scal(r->dir, t0));
 		float m = vec_dot(&temp1, &cy->dir);
@@ -86,7 +86,7 @@ t_bool	ray_hit_cylinder(const t_ray *r, const t_obj *cy, float *t)
 			return (1);
 	}
 
-	if (t1 > 0)
+	if (t1 > 0.01)
 	{
 		t_vec temp1 = vec_sum(op, vec_scal(r->dir, t0));
 		float m = vec_dot(&temp1, &cy->dir);
