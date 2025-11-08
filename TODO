@@ -8,6 +8,7 @@ be ckecked inside the parsing.
 - Set a BLUR_LVL macro, "setable" via -D compile flag. It has to check that
 the flag is set in a valid range (at least 1, but max ?)
 default would be (WIDTH * HEIGHT / 1000000) ?
+- Deep test parsing
 
 Bonus :
 - Checker pattern

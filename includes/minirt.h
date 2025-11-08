@@ -107,15 +107,16 @@ void	blurtracing(t_window *w, t_scene *s);
 void	raytracing(t_window *w, t_scene *s);
 
 // graphics/ray.c
+t_obj	*get_closest_hit(t_vec origin, t_vec dir, float *closest_t, t_scene *s);
 t_color	ray_color(t_ray *r, t_scene *s);
 
 // graphics/camera.c
-t_ray	camera_ray(t_camera *c, t_idx i, t_idx j);
+t_ray	camera_ray(t_camera *c, t_idx x, t_idx y);
 void	camera_change(t_camera *c, unsigned int key);
 
 // graphics/ray_hits.c
-t_bool	ray_hit_plane(const t_ray *r, const t_obj *p, float *t);
-t_bool	ray_hit_sphere(const t_ray *r, const t_obj *s, float *t);
+t_bool	ray_hit_sphere(const t_vec origin, const t_vec dir, const t_obj *s, float *t);
+t_bool	ray_hit_plane(const t_vec origin, const t_vec dir, const t_obj *p, float *t);
 t_bool	ray_hit_cylinder(const t_ray *r, const t_obj *c);
 
 // graphics/lights.c
