@@ -52,7 +52,7 @@ t_bool	parse_cylinder(char **split, t_scene *scene)
 	if (!check_cylinder_ranges(cy))
 		return (0);
 	cy.radius /= 2;
-	cy.e_type = CYLINDER;
+	cy.e_type = CYL;
 	scene->objs[scene->objs_len++] = cy;
 	return (1);
 }

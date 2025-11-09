@@ -25,11 +25,11 @@ void	objs_print(t_obj *objs, t_ssuint objs_len)
 	i = 0;
 	while (i < objs_len)
 	{
-		if (objs[i].e_type == SPHERE)
+		if (objs[i].e_type == SPH)
 			sphere_print(objs[i]);
-		if (objs[i].e_type == PLANE)
+		if (objs[i].e_type == PLA)
 			plane_print(objs[i]);
-		if (objs[i].e_type == CYLINDER)
+		if (objs[i].e_type == CYL)
 			cylinder_print(objs[i]);
 		if (i < objs_len - 1)
 			ft_printf("- - - - - - - - - - - - - - - - - - - -\n");

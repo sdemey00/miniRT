@@ -22,9 +22,9 @@ t_obj	*get_closest_hit(const t_ray *r, float *closest_t, t_scene *s)
 	i = 0;
 	while (i < s->objs_len)
 	{
-		if ((s->objs[i].e_type == SPHERE && ray_hit_sphere(r, &s->objs[i], &t)) || \
-			(s->objs[i].e_type == PLANE && ray_hit_plane(r, &s->objs[i], &t)) || \
-			(s->objs[i].e_type == CYLINDER && ray_hit_cylinder(r, &s->objs[i], &t)))
+		if ((s->objs[i].e_type == SPH && ray_hit_sph(r, &s->objs[i], &t)) || \
+			(s->objs[i].e_type == PLA && ray_hit_pla(r, &s->objs[i], &t)) || \
+			(s->objs[i].e_type == CYL && ray_hit_cyl(r, &s->objs[i], &t)))
 		{
 			if (t < *closest_t)
 			{

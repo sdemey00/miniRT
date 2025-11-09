@@ -64,12 +64,12 @@ t_color	ray_light_color(t_scene *s, t_ray *r, t_obj *hit_obj, float closest_t)
 	t_vec	tmp;
 
 	hit_point = vec_sum(r->origin, vec_scal(r->dir, closest_t));
-	if (hit_obj->e_type == SPHERE)
+	if (hit_obj->e_type == SPH)
 	{
 		tmp = vec_sub(hit_point, hit_obj->pos);
 		surface_normal = vec_norm(tmp);
 	}
-	else if (hit_obj->e_type == PLANE)
+	else if (hit_obj->e_type == PLA)
 		surface_normal = vec_norm(hit_obj->dir);
 	else
 		surface_normal = (t_vec){0, 1, 0};

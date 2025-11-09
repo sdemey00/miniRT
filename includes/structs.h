@@ -53,9 +53,9 @@ typedef struct s_obj
 {
 	enum
 	{
-		SPHERE,
-		PLANE,
-		CYLINDER
+		SPH,
+		PLA,
+		CYL
 	}	e_type;
 	t_vec	pos;
 	t_vec	dir;

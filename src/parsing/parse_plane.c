@@ -32,7 +32,7 @@ t_bool	parse_plane(char **split, t_scene *scene)
 		|| !check_range_int(plane.dir.z, -1, 1,
 			"Plane: dir vector out of range [-1,1]\n"))
 		return (0);
-	plane.e_type = PLANE;
+	plane.e_type = PLA;
 	scene->objs[scene->objs_len++] = plane;
 	return (1);
 }
