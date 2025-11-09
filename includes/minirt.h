@@ -120,8 +120,8 @@ t_bool	ray_hit_cylinder(const t_ray *r, const t_obj *cy, float *t);
 t_color	ray_light_color(t_scene *s, t_ray *r, t_obj *hit_obj, float closest_t);
 
 // maths/vec_utils.c
-t_vec	vec_proj(const t_vec *v, const t_vec *w);
-t_vec	vec_perp(const t_vec *v, const t_vec *w);
+t_vec	vec_proj(const t_vec v, const t_vec w);
+t_vec	vec_perp(const t_vec v, const t_vec w);
 t_vec	vec_rot(const t_vec *v, const t_vec *w, const t_rad a);
 
 #endif // MINIRT_H

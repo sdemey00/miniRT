@@ -26,7 +26,7 @@ static float	lights_intensity(t_scene *s, t_vec hit_point, t_vec normal, t_ray *
 	while (idx < s->lights_len)
 	{
 		light_dir = vec_sub(s->lights[idx].pos, hit_point); //rebont
-		light_dir = vec_norm(&light_dir);
+		light_dir = vec_norm(light_dir);
 
 		//shadow
 		float	shadow_t = INFINITY;
@@ -39,14 +39,14 @@ static float	lights_intensity(t_scene *s, t_vec hit_point, t_vec normal, t_ray *
 		}
 
 		//diffuse
-		float n_dot_l = vec_dot(&normal, &light_dir);
+		float n_dot_l = vec_dot(normal, light_dir);
 		if (n_dot_l > 0)
 			i += s->lights[idx].intensity * n_dot_l;
 
 		//specular
-		t_vec reflect_dir = vec_sub(vec_scal(normal, 2 * vec_dot(&normal, &light_dir)), light_dir);
+		t_vec reflect_dir = vec_sub(vec_scal(normal, 2 * vec_dot(normal, light_dir)), light_dir);
 		t_vec view_dir = vec_scal(r->dir, -1); // redir vers caméra
-		float spec_angle = vec_dot(&reflect_dir, &view_dir);
+		float spec_angle = vec_dot(reflect_dir, view_dir);
 		if (spec_angle < 0.0)
 			spec_angle = 0.0;
 		i += s->lights[idx].intensity * ft_pow(spec_angle, 32); //pow exponant = phong intensity
@@ -67,10 +67,10 @@ t_color	ray_light_color(t_scene *s, t_ray *r, t_obj *hit_obj, float closest_t)
 	if (hit_obj->e_type == SPHERE)
 	{
 		tmp = vec_sub(hit_point, hit_obj->pos);
-		surface_normal = vec_norm(&tmp);
+		surface_normal = vec_norm(tmp);
 	}
 	else if (hit_obj->e_type == PLANE)
-		surface_normal = vec_norm(&hit_obj->dir);
+		surface_normal = vec_norm(hit_obj->dir);
 	else
 		surface_normal = (t_vec){0, 1, 0};
 	float intensity = lights_intensity(s, hit_point, surface_normal, r);

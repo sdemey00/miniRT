@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:31:39 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/02 15:07:06 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/08 21:41:10 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	mat_iscal(t_mat *m, const float scalar)
 
 t_vec	mat_mul_vec(const t_mat m, const t_vec v)
 {
-	return ((t_vec){vec_dot(&m.v[0], &v), \
-					vec_dot(&m.v[1], &v), \
-					vec_dot(&m.v[2], &v)});
+	return ((t_vec){vec_dot(m.v[0], v), \
+					vec_dot(m.v[1], v), \
+					vec_dot(m.v[2], v)});
 }
 
 void	mat_imul_vec(const t_mat m, t_vec *v)
