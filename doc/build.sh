@@ -6,7 +6,7 @@
 #    By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by o PDF using       #+#    #+#              #
-#    Updated: 2025/11/08 10:18:29 by mmichele         ###   ########.fr        #
+#    Updated: 2025/11/09 23:48:23 by mmichele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ compile() {
     if [ -d "class" ]; then
         mv "$dir_path"/*.cls "class"/
         mv "$dir_path"/*.sty "class"/
+		mv "$dir_path"/*.png "class"/
     fi
 }
 
