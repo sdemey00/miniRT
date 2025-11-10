@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 13:01:45 by sdemey            #+#    #+#             */
-/*   Updated: 2025/11/08 11:30:30 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/10 14:44:32 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	key_handler(int key, struct s_ctx *c)
 	else if (ft_strchr("swad cijkl", key) >= 0)
 	{
 		camera_change(&c->s.camera, key);
+		c->rendered = 0;
 		c->t = time_now();
 		window_draw(&c->w, &c->s, blurtracing);
 	}

@@ -6,14 +6,15 @@ be ckecked inside the parsing.
 - Set a BLUR_LVL macro, "setable" via -D compile flag. It has to check that
 the flag is set in a valid range (at least 1, but max ?)
 default would be (WIDTH * HEIGHT / 1000000) ?
-- Deep test parsing
 
 Bonus :
-- Checker pattern
-- Bumping texture
-- Phong lightening
+- Checkerboard pattern
+- Bump map textures
+- Colored lights
 
 Bonus ++ :
+- Deep test parsing
+
 - Handle mouse for camera
 - Handle key pressed and released for movements
 
@@ -36,17 +37,17 @@ Bonus ++ :
 - Bind the scroll wheel for editing the FOV. Ranging from ]0:180]
 	- Check that the FOV is parsed as an 8bit int
 
+- Parse the intersection with a circle.
+
 sdemey :
+- Parse the intersection with a cone.
 - Handle color with light (vector operations should be capped for color [0:255])
 - Fix specular and diffuse reflection
 
 mmichele :
-- Cone object
-- Make a struct for quadratic equation roots
-
+- Intersection with a conic.
 - Handle camera movements properly, like FPS
 - Camera problem on reaching y = 1 or -1 and when passing from x > 0 and z > 0 to x < 0 and z < 0
 - Minor visual fix on blur tracing
 	- Enhance blur tracing by make it more to less blurry with time
 	- Not recalculate fine pixels that were previously calculated when blur tracing
-- t_bool ft_in_range(float min, float value, float max);

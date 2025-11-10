@@ -55,7 +55,8 @@ typedef struct s_obj
 	{
 		SPH,
 		PLA,
-		CYL
+		CYL,
+		CON
 	}	e_type;
 	t_vec	pos;
 	t_vec	dir;

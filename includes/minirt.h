@@ -46,7 +46,7 @@
 # include "structs.h"
 # include "parsing.h"
 
-# define EPSILON 1e-3
+# define EPSILON 1e-2
 
 /* MLX controller event codes */
 # define WIN_CLOSE	17
@@ -74,7 +74,8 @@ struct s_ctx
 {
 	t_window	w;
 	t_scene		s;
-	t_luint		t;	// Contains the time of the last translation.
+	t_luint		t;
+	t_bool		rendered;
 };
 
 // events/mouse.c
@@ -116,6 +117,10 @@ void	camera_change(t_camera *c, unsigned int key);
 // graphics/ray_hits.c
 t_bool	ray_hit_sph(const t_ray *r, const t_obj *s, float *t);
 t_bool	ray_hit_pla(const t_ray *r, const t_obj *p, float *t);
+t_bool	ray_hit_cir(const t_ray *r, const t_obj *ci, float *t);
+t_bool	ray_hit_con(const t_ray *r, const t_obj *cy, float *t);
+
+// graphics/ray_hit_cyl.c
 t_bool	ray_hit_cyl(const t_ray *r, const t_obj *cy, float *t);
 
 // graphics/lights.c
