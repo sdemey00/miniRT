@@ -74,4 +74,13 @@ typedef struct s_scene
 	t_ssuint	objs_len;
 }	t_scene;
 
+typedef struct s_eq2
+{
+	float	a;
+	float	b;
+	float	c;
+	float	d;
+	float	t[2];
+}	t_eq2;
+
 #endif // STRUCTS_H

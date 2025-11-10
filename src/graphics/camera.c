@@ -51,19 +51,15 @@ static void	camera_translate(t_camera *c, unsigned int key)
 static void	camera_rotate(t_camera *c, unsigned int key)
 {
 	const float	angle = FT_PI / 16;
-	t_vec		new;
 
+	// TODO Bound the max and min of direction vector when looking up or down.
 	if (key == 'i')
 	{
-		new = vec_rot(&c->dir, &c->right, -angle);
-		if ((c->dir.x > 0 && new.x > 0) || (c->dir.x < 0 && new.x < 0))
-			c->dir = new;
+		c->dir = vec_rot(&c->dir, &c->right, -angle);
 	}
 	else if (key == 'k')
 	{
-		new = vec_rot(&c->dir, &c->right, angle);
-		if ((c->dir.x > 0 && new.x > 0) || (c->dir.x < 0 && new.x < 0))
-			c->dir = new;
+		c->dir = vec_rot(&c->dir, &c->right, angle);
 	}
 	else if (key == 'l')
 		vec_iroty(&c->dir, angle);

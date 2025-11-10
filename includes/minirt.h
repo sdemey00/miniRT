@@ -46,6 +46,8 @@
 # include "structs.h"
 # include "parsing.h"
 
+# define EPSILON 1e-3
+
 /* MLX controller event codes */
 # define WIN_CLOSE	17
 # define K_ESC		65307
@@ -123,5 +125,9 @@ t_color	ray_light_color(t_scene *s, t_ray *r, t_obj *hit_obj, float closest_t);
 t_vec	vec_proj(const t_vec v, const t_vec w);
 t_vec	vec_perp(const t_vec v, const t_vec w);
 t_vec	vec_rot(const t_vec *v, const t_vec *w, const t_rad a);
+
+// maths/eq2.c
+t_eq2	eq2_init(const t_vec oc, const t_vec rdir, const float r);
+void	eq2_set_delta(t_eq2 *e);
 
 #endif // MINIRT_H
