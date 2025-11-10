@@ -38,14 +38,27 @@ t_obj	*get_closest_hit(const t_ray *r, float *closest_t, t_scene *s)
 	return (hit_obj);
 }
 
-t_color	ray_color(t_ray *r, t_scene *s)
+t_color	ray_color(t_ray *r, t_scene *s, int depth)
 {
 	t_obj	*hit_obj;
 	float	closest_t;
+	t_color	color;
+	t_color	reflected_color;
 
+	if (depth > 3)
+		return ((t_color){0, 0, 0});
 	closest_t = INFINITY;
 	hit_obj = get_closest_hit(r, &closest_t, s);
 	if (!hit_obj)
 		return ((t_color){0, 0, 0});
-	return (ray_light_color(s, r, hit_obj, closest_t));
+	color = ray_light_color(s, r, hit_obj, closest_t);
+	if (1) // obj.reflection
+	{
+		reflected_color = compute_reflection(r, s, closest_t, hit_obj, depth);
+		color = vec_sum(
+				vec_scal(color, 1 - 0.6), // obj.reflection
+				vec_scal(reflected_color, 0.6) //same
+				);
+	}
+	return (color);
 }
