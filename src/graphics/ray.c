@@ -46,6 +46,6 @@ t_color	ray_color(t_ray *r, t_scene *s)
 	closest_t = INFINITY;
 	hit_obj = get_closest_hit(r, &closest_t, s);
 	if (!hit_obj)
-		return ((t_color){135, 206, 235});
+		return ((t_color){0, 0, 0});
 	return (ray_light_color(s, r, hit_obj, closest_t));
 }

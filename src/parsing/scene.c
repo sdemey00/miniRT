@@ -12,6 +12,18 @@
 
 #include "parsing.h"
 
+static void	normalize_lights(t_scene *s)
+{
+	t_idx	i;
+
+	i = 0;
+	while (i < s->lights_len)
+	{
+		s->lights[i].light_norm = vec_rscal(s->lights[i].color, 255.0);
+		i++;
+	}
+}
+
 t_bool	scene_init(t_scene *s, const char *fpath)
 {
 	s->ambiant.set = 0;
@@ -22,8 +34,9 @@ t_bool	scene_init(t_scene *s, const char *fpath)
 		return (0);
 	s->camera.ratio = (float)WIDTH / (float)HEIGHT;
 	s->camera.flen = tan(s->camera.fov * FT_PI / 180 / 2);
+	s->ambiant.light_norm = vec_rscal(s->ambiant.color, 255.0);
+	normalize_lights(s);
 	if (VERBOSE)
 		scene_print(s);
 	return (1);
 }
-//init obj.dir pour sphere 

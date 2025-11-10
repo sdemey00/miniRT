@@ -130,9 +130,12 @@ t_color	ray_light_color(t_scene *s, t_ray *r, t_obj *hit_obj, float closest_t);
 t_vec	vec_proj(const t_vec v, const t_vec w);
 t_vec	vec_perp(const t_vec v, const t_vec w);
 t_vec	vec_rot(const t_vec *v, const t_vec *w, const t_rad a);
+void	vec_fmin(t_vec *v, float f);
 
 // maths/eq2.c
 t_eq2	eq2_init(const t_vec oc, const t_vec rdir, const float r);
 void	eq2_set(t_eq2 *e);
 
+t_color compute_ambiant(t_ambiant a);
+t_bool  is_in_shadow(t_scene *s, t_vec hit_point, t_vec normal, t_light light);
 #endif // MINIRT_H
