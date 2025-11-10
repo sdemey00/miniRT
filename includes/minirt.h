@@ -46,7 +46,7 @@
 # include "structs.h"
 # include "parsing.h"
 
-# define EPSILON 1e-2
+# define EPSILON 1e-4
 
 /* MLX controller event codes */
 # define WIN_CLOSE	17
@@ -133,6 +133,6 @@ t_vec	vec_rot(const t_vec *v, const t_vec *w, const t_rad a);
 
 // maths/eq2.c
 t_eq2	eq2_init(const t_vec oc, const t_vec rdir, const float r);
-void	eq2_set_delta(t_eq2 *e);
+void	eq2_set(t_eq2 *e);
 
 #endif // MINIRT_H

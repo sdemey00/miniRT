@@ -1,52 +1,32 @@
 Mandatory :
-- Projected shadows
-	- Diffused projected shadows
 - Set a MAX_OBJS macro, "setable" via -D compile flag. This macro has to
 be ckecked inside the parsing.
 - Set a BLUR_LVL macro, "setable" via -D compile flag. It has to check that
 the flag is set in a valid range (at least 1, but max ?)
 default would be (WIDTH * HEIGHT / 1000000) ?
-
+- PDF
 Bonus :
 - Checkerboard pattern
+	- Parse it
 - Bump map textures
-- Colored lights
+- Be able to change object properties
 
 Bonus ++ :
 - Deep test parsing
 
-- Handle mouse for camera
-- Handle key pressed and released for movements
-
 - Using mouse click to edit properties of the aimed object.
-
-- Transparency of the object
-- Mate or shady surface
 
 - Show coordinates on screen
 
-- Cube object
-- Klein bottle
-- Mobius band
-- Torus (Quartic equation roots (4th order))
-
-- One mirrored plane
-
 - Print a message on program startup with keybinds
 
-- Bind the scroll wheel for editing the FOV. Ranging from ]0:180]
-	- Check that the FOV is parsed as an 8bit int
-
-- Parse the intersection with a circle.
-
 sdemey :
-- Parse the intersection with a cone.
 - Handle color with light (vector operations should be capped for color [0:255])
-- Fix specular and diffuse reflection
 
 mmichele :
 - Intersection with a conic.
-- Handle camera movements properly, like FPS
+- Handle mouse for camera
+- Handle key pressed and released for movements
 - Camera problem on reaching y = 1 or -1 and when passing from x > 0 and z > 0 to x < 0 and z < 0
 - Minor visual fix on blur tracing
 	- Enhance blur tracing by make it more to less blurry with time
