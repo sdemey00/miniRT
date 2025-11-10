@@ -26,9 +26,9 @@ t_bool	ray_hit_sph(const t_ray *r, const t_obj *s, float *t)
 		return (0);
 	t0 = (-b - sqrt(delta)) / (2 * a);
 	t1 = (-b + sqrt(delta)) / (2 * a);
-	if (t0 > 0.001)
+	if (t0 > 0.0)
 		*t = t0;
-	else if (t1 > 0.001)
+	else if (t1 > 0.0)
 		*t = t1;
 	else
 		return (0);
@@ -44,7 +44,7 @@ t_bool	ray_hit_pla(const t_ray *r, const t_obj *p, float *t)
 	if (num == 0 || den == 0)
 		return (0);
 	*t = num / den;
-	if (*t < 0.001)
+	if (*t < 0.0)
 		return (0);
 	return (1);
 }
