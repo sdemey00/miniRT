@@ -6,20 +6,20 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 12:37:45 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/08 15:16:58 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/09 10:57:30 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-inline t_vec	vec_proj(const t_vec *v, const t_vec *w)
+inline t_vec	vec_proj(const t_vec v, const t_vec w)
 {
-	return (vec_scal(*w, vec_dot(v, w)));
+	return (vec_scal(w, vec_dot(v, w)));
 }
 
-inline t_vec	vec_perp(const t_vec *v, const t_vec *w)
+inline t_vec	vec_perp(const t_vec v, const t_vec w)
 {
-	return (vec_sub(*v, vec_proj(v, w)));
+	return (vec_sub(v, vec_proj(v, w)));
 }
 
 /*

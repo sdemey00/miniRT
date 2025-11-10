@@ -112,16 +112,16 @@ t_ray	camera_ray(t_camera *c, t_idx x, t_idx y);
 void	camera_change(t_camera *c, unsigned int key);
 
 // graphics/ray_hits.c
-t_bool	ray_hit_sphere(const t_ray *r, const t_obj *s, float *t);
-t_bool	ray_hit_plane(const t_ray *r, const t_obj *p, float *t);
-t_bool	ray_hit_cylinder(const t_ray *r, const t_obj *cy, float *t);
+t_bool	ray_hit_sph(const t_ray *r, const t_obj *s, float *t);
+t_bool	ray_hit_pla(const t_ray *r, const t_obj *p, float *t);
+t_bool	ray_hit_cyl(const t_ray *r, const t_obj *cy, float *t);
 
 // graphics/lights.c
 t_color	ray_light_color(t_scene *s, t_ray *r, t_obj *hit_obj, float closest_t);
 
 // maths/vec_utils.c
-t_vec	vec_proj(const t_vec *v, const t_vec *w);
-t_vec	vec_perp(const t_vec *v, const t_vec *w);
+t_vec	vec_proj(const t_vec v, const t_vec w);
+t_vec	vec_perp(const t_vec v, const t_vec w);
 t_vec	vec_rot(const t_vec *v, const t_vec *w, const t_rad a);
 
 #endif // MINIRT_H

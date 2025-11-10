@@ -12,18 +12,20 @@
 
 #include "minirt.h"
 
-t_bool	ray_hit_sphere(const t_ray *r, const t_obj *s, float *t)
+t_bool	ray_hit_sph(const t_ray *r, const t_obj *s, float *t)
 {
 	const t_vec	oc = vec_sub(r->origin, s->pos);
-	const float	a = vec_dot(&r->dir, &r->dir);
-	const float	b = 2.0 * (vec_dot(&r->dir, &oc));
-	const float	c = vec_dot(&oc, &oc) - s->radius * s->radius;
+	const float	a = vec_dot(r->dir, r->dir);
+	const float	b = 2.0 * (vec_dot(r->dir, oc));
+	const float	c = vec_dot(oc, oc) - s->radius * s->radius;
 	const float	delta = b * b - (4 * a * c);
+	float		t0;
+	float		t1;
 
-	if (a == 0 || delta < 0.001)
+	if (a == 0 || delta < 0)
 		return (0);
-	const float t0 = (-b - sqrt(delta)) / (2 * a);
-	const float t1 = (-b + sqrt(delta)) / (2 * a);
+	t0 = (-b - sqrt(delta)) / (2 * a);
+	t1 = (-b + sqrt(delta)) / (2 * a);
 	if (t0 > 0.001)
 		*t = t0;
 	else if (t1 > 0.001)
@@ -33,11 +35,11 @@ t_bool	ray_hit_sphere(const t_ray *r, const t_obj *s, float *t)
 	return (1);
 }
 
-t_bool	ray_hit_plane(const t_ray *r, const t_obj *p, float *t)
+t_bool	ray_hit_pla(const t_ray *r, const t_obj *p, float *t)
 {
 	const t_vec	po = vec_sub(p->pos, r->origin);
-	const float	num = vec_dot(&po, &p->dir);
-	const float	den = vec_dot(&r->dir, &p->dir);
+	const float	num = vec_dot(po, p->dir);
+	const float	den = vec_dot(r->dir, p->dir);
 
 	if (num == 0 || den == 0)
 		return (0);
@@ -47,53 +49,69 @@ t_bool	ray_hit_plane(const t_ray *r, const t_obj *p, float *t)
 	return (1);
 }
 
-t_bool	ray_hit_circle(const t_ray *r, const t_obj *ci, float *t)
+t_bool	ray_hit_cir(const t_ray *r, const t_obj *ci, float *t)
 {
 	t_vec	p;
 
-	if (!ray_hit_plane(r, ci, t))
+	if (!ray_hit_pla(r, ci, t))
 		return (0);
 	p = vec_sum(r->origin, vec_scal(r->dir, *t));
-	t_vec	temp = vec_sub(p, ci->pos);
-	if (vec_mag(&temp) <= ci->radius)
+	if (vec_mag(vec_sub(p, ci->pos)) <= ci->radius)
 		return (1);
 	return (0);
 }
 
-t_bool	ray_hit_cylinder(const t_ray *r, const t_obj *cy, float *t)
+t_bool	ray_hit_cyl(const t_ray *r, const t_obj *cy, float *t)
 {
-	const t_vec op = vec_sub(r->origin, cy->pos);
-	const t_vec d_perp = vec_perp(&r->dir, &cy->dir);
-	const t_vec op_perp = vec_perp(&op, &cy->dir);
-
-	const float a = vec_dot(&d_perp, &d_perp);
-	const float b = 2.0 * vec_dot(&d_perp, &op_perp);
-	const float c = vec_dot(&op_perp, &op_perp) - (cy->radius * cy->radius);
-
+	const t_vec	op = vec_sub(r->origin, cy->pos);
+	const t_vec	d_perp = vec_perp(r->dir, cy->dir);
+	const t_vec	op_perp = vec_perp(op, cy->dir);
+	const float	a = vec_dot(d_perp, d_perp);
+	const float	b = 2.0 * vec_dot(d_perp, op_perp);
+	const float	c = vec_dot(op_perp, op_perp) - (cy->radius * cy->radius);
 	const float	delta = b * b - (4 * a * c);
+	float		m;
+	float		t0;
+	float		t1;
+	t_obj		ctop;
+	t_obj		cbot;
 
-	if (a == 0 || delta < 0.01)
+	if (a == 0 || delta < 0)
 		return (0);
-	const float t0 = (-b - sqrt(delta)) / (2 * a);
-	const float t1 = (-b + sqrt(delta)) / (2 * a);
-
-	if (t0 > 0.01)
+	t0 = (-b - sqrt(delta)) / (2 * a);
+	t1 = (-b + sqrt(delta)) / (2 * a);
+	*t = INFINITY;
+	if (t0 > 0.005)
 	{
-		t_vec temp1 = vec_sum(op, vec_scal(r->dir, t0));
-		float m = vec_dot(&temp1, &cy->dir);
-		*t = t0;
-		if (-cy->height <= m && m <= cy->height)
-			return (1);
+		m = vec_dot(vec_sum(op, vec_scal(r->dir, t0)), cy->dir);
+		if (!(-cy->height / 2.0 <= m && m <= cy->height / 2.0))
+			t0 = INFINITY;
 	}
-
-	if (t1 > 0.01)
+	else
+		t0 = INFINITY;
+	if (t1 > 0.005)
 	{
-		t_vec temp1 = vec_sum(op, vec_scal(r->dir, t0));
-		float m = vec_dot(&temp1, &cy->dir);
-		*t = t0;
-		if (0 <= m && m <= cy->height)
-			return (1);
+		m = vec_dot(vec_sum(op, vec_scal(r->dir, t1)), vec_scal(cy->dir, -1));
+		if (!(-cy->height / 2.0 <= m && m <= cy->height / 2.0))
+			t1 = INFINITY;
 	}
-	// TODO calculate hit with cylinder top and bottom circles.
+	else
+		t1 = INFINITY;
+	if (t0 < INFINITY && t0 < t1)
+		*t = t0;
+	else if (t1 < INFINITY && t1 < t0)
+		*t = t1;
+	if (0.005 > *t)
+		*t = INFINITY;
+	ctop = *cy;
+	ctop.pos = vec_sum(cy->pos, vec_scal(cy->dir, cy->height / 2.0));
+	if (ray_hit_cir(r, &ctop, &t0) && t0 < *t && t0 > 0.005)
+		*t = t0;
+	cbot = *cy;
+	cbot.pos = vec_sum(cy->pos, vec_scal(vec_scal(cy->dir, -1), cy->height / 2.0));
+	if (ray_hit_cir(r, &cbot, &t1) && t1 < *t && t1 > 0.005)
+		*t = t1;
+	if (*t < INFINITY)
+		return (1);
 	return (0);
 }

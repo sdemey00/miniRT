@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:52:09 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/05 22:28:52 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/08 21:44:56 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ typedef struct s_vec
 }	t_vec;
 // vec1.c
 void	vec_print(const t_vec *v);
-float	vec_mag(const t_vec *v);
-float	vec_dot(const t_vec *a, const t_vec *b);
-t_vec	vec_norm(const t_vec *a);
+float	vec_mag(const t_vec v);
+float	vec_dot(const t_vec a, const t_vec b);
+t_vec	vec_norm(const t_vec a);
 void	vec_inorm(t_vec *a);
 // vec2.c
 t_vec	vec_sum(const t_vec a, const t_vec b);
@@ -48,8 +48,8 @@ t_vec	vec_rscal(const t_vec v, const float scalar);
 void	vec_iscal(t_vec *src, const float scalar);
 void	vec_irscal(t_vec *src, const float scalar);
 // vec4.c
-t_vec	vec_cross(t_vec a, t_vec b);
-void	vec_icross(t_vec *a, t_vec b);
+t_vec	vec_cross(const t_vec a, const t_vec b);
+void	vec_icross(t_vec *a, const t_vec b);
 // rotx.c
 t_vec	vec_rotx(const t_vec v, const t_rad a);
 void	vec_irotx(t_vec *v, const t_rad a);

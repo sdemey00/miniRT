@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 22:31:24 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/05 23:19:38 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/08 21:43:30 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ inline t_vec	vec_scal(const t_vec v, const float scalar)
 }
 
 /* Returns the division of a vector by a scalar. */
-t_vec	vec_rscal(const t_vec v, const float scalar)
+inline t_vec	vec_rscal(const t_vec v, const float scalar)
 {
 	return ((t_vec){v.x / scalar, v.y / scalar, v.z / scalar});
 }

@@ -6,7 +6,7 @@
 %%   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        %%
 %%                                                +#+#+#+#+#+   +#+           %%
 %%   Created: 2025/11/08 00:54:32 by mmichele          #+#    #+#             %%
-%%   Updated: 2025/11/08 00:54:33 by mmichele         ###   ########.fr       %%
+%%   Updated: 2025/11/10 00:13:53 by mmichele         ###   ########.fr       %%
 %%                                                                            %%
 %% ************************************************************************** %%
 
@@ -22,13 +22,31 @@
 \begin{document}
 
 \maketitle
-\newpage
-
 \tableofcontents
 \newpage
 
-\section{Section}
-\subsection{Subsection}
-\subsubsection{Subsubsection}
+\section{Camera}
+	Given informations :
+	\List {
+		\ListItem $\textbf{C}_{\textbf{pos}}$ : 3D Position as a point.
+		\ListItem $\textbf{C}_{\textbf{dir}}$ : 3D Direction as a normalized vector.
+		\ListItem fov$^\circ$ : Vertical field of view in degrees,
+			ranging from $0^\circ$ to $180^\circ$. 
+	}
+	Deduced informations :
+	\List {
+		\ListItem $\textbf{C}_{\textbf{fov}}$ : Vertical field of view in radians,
+			ranging from $0$ to $\pi$ radians
+			We can define it with the following fomula :
+			\[ \text{C}_{\text{fov}} = \text{fov}^\circ \cdot \dfrac{\pi}{180^\circ} \]
+		\ListItem $\textbf{C}_\textbf{flen}$ : Focal length that can be calculated as follows :
+			\[ \text{C}_\text{flen} = \tan\left(\dfrac{\textbf{C}_{\textbf{fov}}}{2}\right) \]
+	}
+	
+\section{Ray intersections}
+	\subsection{Plane}
+	\subsection{Sphere}
+	\subsection{Circle}
+	\subsection{Cylinder}
 
 \end{document}
