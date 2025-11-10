@@ -1,0 +1,19 @@
+# B - Artistic / Cosmic scene
+
+A 0.15 200,200,255
+
+C 0,0,-15 0,0,1 70
+L 0,10,-10 0.6 255,180,150
+L -5,-3,-5 0.3 150,180,255
+L 5,3,-2 0.3 255,255,180
+
+# Sol sombre
+pl 0,-4,0 0,1,0 40,40,60
+# Sphère centrale rouge brillante
+sp 0,0,5 2.0 255,80,80
+# Sphère vert clair à gauche
+sp -3,-1,7 1.5 120,255,180
+# Sphère violette en hauteur
+sp 3,1,9 1.8 180,120,255 
+# Cylindre en fond, fond spatial
+cy 0,-4,12 0,1,0 1.5 6 80,80,100 

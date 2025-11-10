@@ -28,9 +28,9 @@ static void	normalize_whitespace(char *line)
 t_bool	parse_line(char *line, t_scene *scene)
 {
 	char	**split;
-	t_bool	status;
+	char	status;
 
-	status = 1;
+	status = -1;
 	normalize_whitespace(line);
 	split = ft_split(line, ' ');
 	if (!split || !split[0])
@@ -47,6 +47,12 @@ t_bool	parse_line(char *line, t_scene *scene)
 		status = parse_plane(split, scene);
 	if (ft_strcmp(split[0], "cy") == 0)
 		status = parse_cylinder(split, scene);
+	if (ft_strcmp(split[0], "co") == 0)
+		status = parse_cone(split, scene);
+	if (ft_strcmp(split[0], "ci") == 0)
+		status = parse_circle(split, scene);
 	ft_free_split(split);
+	if (status == -1)
+		return (ft_dprintf(2, "Error\nUnexpected identifier\n"), 0);
 	return (status);
 }

@@ -31,6 +31,10 @@ void	objs_print(t_obj *objs, t_ssuint objs_len)
 			plane_print(objs[i]);
 		if (objs[i].e_type == CYL)
 			cylinder_print(objs[i]);
+		if (objs[i].e_type == CON)
+			cone_print(objs[i]);
+		if (objs[i].e_type == CIR)
+			circle_print(objs[i]);
 		if (i < objs_len - 1)
 			ft_printf("- - - - - - - - - - - - - - - - - - - -\n");
 		i++;

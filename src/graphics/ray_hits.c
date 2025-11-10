@@ -34,7 +34,7 @@ t_bool	ray_hit_pla(const t_ray *r, const t_obj *p, float *t)
 	if (num == 0 || den == 0)
 		return (0);
 	*t = num / den;
-	if (*t < 0.001)
+	if (*t < 0.0)
 		return (0);
 	return (1);
 }

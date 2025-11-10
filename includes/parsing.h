@@ -63,9 +63,16 @@ t_bool	parse_int(char *src, int *out);
 // parsing/ft_atof.c
 double	ft_atof(const char *str);
 
-// parsing/print/scene_infos.c
+// parsing/print_scene_infos.c
 void	scene_print(t_scene *scene);
 void	print_error(char *msg);
 void	objs_print(t_obj *objs, t_ssuint objs_len);
 
+// parsing/parse_cone.c
+t_bool	parse_cone(char **split, t_scene *scene);
+void	cone_print(t_obj cone);
+
+// parsing/parse_circle.c
+t_bool	parse_circle(char **split, t_scene *scene);
+void	circle_print(t_obj circle);
 #endif // PARSING_H
