@@ -16,14 +16,14 @@ t_bool	parse_cone(char **split, t_scene *scene)
 {
 	t_obj	cone;
 
-	if (!split[1] || !split[2] || !split[3] || split[4])
+	if (!check_args_count(split, 3))
 	{
 		print_error("Cone: invalid number of arguments\n");
 		return (0);
 	}
-	if (!parse_vec(split[1], &cone.pos)
-		|| !parse_vec(split[2], &cone.dir)
-		|| !parse_color(split[3], &cone.color))
+	if (!parse_vec(split[0], &cone.pos)
+		|| !parse_vec(split[1], &cone.dir)
+		|| !parse_color(split[2], &cone.color))
 		return (0);
 	if (!check_range_int(cone.dir.x, -1, 1,
 			"Cone: dir vector out of range [-1,1]\n")

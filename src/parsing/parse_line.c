@@ -27,30 +27,26 @@ static void	normalize_whitespace(char *line)
 
 t_bool	parse_line(char *line, t_scene *scene)
 {
-	char	**split;
-	char	status;
+	char				**split;
+	char				status;
+	t_idx				i;
+	const t_obj_build	objects[] = {
+	{"A", parse_ambiant}, {"C", parse_camera}, {"L", parse_light},
+	{"sp", parse_sphere}, {"pl", parse_plane}, {"cy", parse_cylinder},
+	{"co", parse_cone}, {"ci", parse_circle}, {NULL, NULL}};
 
+	i = 0;
 	status = -1;
 	normalize_whitespace(line);
 	split = ft_split(line, ' ');
 	if (!split || !split[0])
 		return (0);
-	if (ft_strcmp(split[0], "A") == 0)
-		status = parse_ambiant(split, scene);
-	if (ft_strcmp(split[0], "C") == 0)
-		status = parse_camera(split, scene);
-	if (ft_strcmp(split[0], "L") == 0)
-		status = parse_light(split, scene);
-	if (ft_strcmp(split[0], "sp") == 0)
-		status = parse_sphere(split, scene);
-	if (ft_strcmp(split[0], "pl") == 0)
-		status = parse_plane(split, scene);
-	if (ft_strcmp(split[0], "cy") == 0)
-		status = parse_cylinder(split, scene);
-	if (ft_strcmp(split[0], "co") == 0)
-		status = parse_cone(split, scene);
-	if (ft_strcmp(split[0], "ci") == 0)
-		status = parse_circle(split, scene);
+	while (objects[i].id)
+	{
+		if (ft_strcmp(split[0], objects[i].id) == 0)
+			status = objects[i].func(&split[1], scene);
+		i++;
+	}
 	ft_free_split(split);
 	if (status == -1)
 		return (ft_dprintf(2, "Error\nUnexpected identifier\n"), 0);

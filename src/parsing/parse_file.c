@@ -39,6 +39,7 @@ static t_bool	open_file(const char *fpath, int *fd)
 static t_bool	parse_all_lines(int fd, t_scene *scene)
 {
 	char	*line;
+	t_idx	i;
 
 	line = ft_gnl(fd);
 	if (!line)
@@ -49,13 +50,19 @@ static t_bool	parse_all_lines(int fd, t_scene *scene)
 	}
 	while (line)
 	{
-		if (line[0] != '\n' && line[0] != '#')
+		if (line[0] && line[0] != '#')
 		{
-			if (!parse_line(line, scene))
+			i = 0;
+			while (ft_isspace(line[i]))
+				i++;
+			if (line[i])
 			{
-				free(line);
-				close(fd);
-				return (0);
+				if (!parse_line(line, scene))
+				{
+					free(line);
+					close(fd);
+					return (0);
+				}
 			}
 		}
 		free(line);

@@ -104,7 +104,7 @@ void	raytracing(t_window *w, t_scene *s);
 
 // graphics/ray.c
 t_obj	*get_closest_hit(const t_ray *r, float *closest_t, t_scene *s);
-t_color	ray_color(t_ray *r, t_scene *s);
+t_color	ray_color(t_ray *r, t_scene *s, int depth);
 
 // graphics/camera.c
 t_ray	camera_ray(t_camera *c, t_idx x, t_idx y);
@@ -127,9 +127,19 @@ t_color	ray_light_color(t_scene *s, t_ray *r, t_obj *hit_obj, float closest_t);
 t_vec	vec_proj(const t_vec v, const t_vec w);
 t_vec	vec_perp(const t_vec v, const t_vec w);
 t_vec	vec_rot(const t_vec *v, const t_vec *w, const t_rad a);
+void	vec_fmin(t_vec *v, float f);
 
 // maths/eq2.c
 t_eq2	eq2_init(const t_vec oc, const t_vec rdir, const float r);
 void	eq2_set(t_eq2 *e);
 
+// graphics/reflection.c
+t_vec	get_surface_normal(t_obj *obj, t_vec hit_point);
+t_color	compute_reflection(t_ray *r, t_scene *s, float closest_t, t_obj *hit_obj, int depth);
+
+// graphics/shadows.c
+t_bool	is_in_shadow(t_scene *s, t_vec hit_point, t_vec normal, t_light light);
+
+// graphics/checkboard_pattern.c
+t_color	checkboard_pattern(t_obj *obj, t_vec hit_point);
 #endif // MINIRT_H

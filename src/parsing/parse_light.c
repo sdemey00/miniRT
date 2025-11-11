@@ -16,15 +16,15 @@ t_bool	parse_light(char **split, t_scene *scene)
 {
 	t_light	light;
 
-	if (!split[1] || !split[2] || !split[3] || split[4])
+	if (!check_args_count(split, 3))
 	{
 		print_error("Light source: invalid number of arguments\n");
 		return (0);
 	}
-	if (!parse_vec(split[1], &light.pos)
-		|| !parse_color(split[3], &light.color))
+	if (!parse_vec(split[0], &light.pos)
+		|| !parse_color(split[2], &light.color))
 		return (0);
-	if (!parse_float(split[2], &light.intensity))
+	if (!parse_float(split[1], &light.intensity))
 	{
 		print_error("Light source: invalid float format\n");
 		return (0);

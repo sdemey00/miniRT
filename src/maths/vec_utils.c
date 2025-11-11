@@ -29,3 +29,10 @@ inline t_vec	vec_rot(const t_vec *v, const t_vec *w, const t_rad a)
 {
 	return (vec_sum(vec_scal(*v, cos(a)), vec_scal(vec_cross(*w, *v), sin(a))));
 }
+
+void	vec_fmin(t_vec *v, float f)
+{
+	v->x = fminf(v->x, f);
+	v->y = fminf(v->y, f);
+	v->z = fminf(v->z, f);
+}

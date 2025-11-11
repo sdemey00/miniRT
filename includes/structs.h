@@ -27,6 +27,7 @@ typedef struct s_ambiant
 {
 	float	intensity;
 	t_color	color;
+	t_color	light_norm;
 	t_bool	set;
 }	t_ambiant;
 
@@ -47,6 +48,7 @@ typedef struct s_light
 	t_vec	pos;
 	float	intensity;
 	t_color	color;
+	t_color	light_norm;
 }	t_light;
 
 typedef struct s_obj

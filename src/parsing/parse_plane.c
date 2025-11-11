@@ -16,14 +16,14 @@ t_bool	parse_plane(char **split, t_scene *scene)
 {
 	t_obj	plane;
 
-	if (!split[1] || !split[2] || !split[3] || split[4])
+	if (!check_args_count(split, 3))
 	{
 		print_error("Plane: invalid number of arguments\n");
 		return (0);
 	}
-	if (!parse_vec(split[1], &plane.pos)
-		|| !parse_vec(split[2], &plane.dir)
-		|| !parse_color(split[3], &plane.color))
+	if (!parse_vec(split[0], &plane.pos)
+		|| !parse_vec(split[1], &plane.dir)
+		|| !parse_color(split[2], &plane.color))
 		return (0);
 	if (!check_range_int(plane.dir.x, -1, 1,
 			"Plane: dir vector out of range [-1,1]\n")

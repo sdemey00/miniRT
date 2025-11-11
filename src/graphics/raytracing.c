@@ -46,7 +46,7 @@ void	blurtracing(t_window *w, t_scene *s)
 		while (i < WIDTH)
 		{
 			r = camera_ray(&s->camera, i, j);
-			c = ray_color(&r, s);
+			c = ray_color(&r, s, 0);
 			draw_grid(w, (const t_idx[2]){i, j}, color_int(&c), ppp);
 			i += ppp;
 		}
@@ -68,7 +68,7 @@ void	raytracing(t_window *w, t_scene *s)
 		while (i < WIDTH)
 		{
 			r = camera_ray(&s->camera, i, j);
-			c = ray_color(&r, s);
+			c = ray_color(&r, s, 0);
 			window_draw_pixel(w, i, j, color_int(&c));
 			i++;
 		}
