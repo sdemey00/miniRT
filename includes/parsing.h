@@ -15,6 +15,14 @@
 
 # include "minirt.h"
 
+typedef t_bool	(*t_obj_build_fn)(char **split, t_scene *scene);
+
+typedef struct s_obj_build
+{
+	char			*id;
+	t_obj_build_fn	func;
+}					t_obj_build;
+
 // parsing/scene.c
 t_bool	scene_init(t_scene *s, const char *fpath);
 
