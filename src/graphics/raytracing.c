@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:31:38 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/10 15:47:16 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/11 17:20:22 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	draw_grid(t_window *w, const t_idx c[2], int color, \
 
 void	blurtracing(t_window *w, t_scene *s)
 {
-	const t_suint	ppp = 15;
+	const t_suint	ppp = 10;
 	t_idx			i;
 	t_idx			j;
 	t_color			c;

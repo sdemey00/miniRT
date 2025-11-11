@@ -74,20 +74,16 @@ struct s_ctx
 {
 	t_window	w;
 	t_scene		s;
-	t_luint		t;
-	t_bool		rendered;
 };
 
 // events/mouse.c
-int		mouse_handler(int key, int x, int y, struct s_ctx *c);
+int		mouse_move(int x, int y, struct s_ctx *c);
+int		mouse_press(int key, int x, int y, struct s_ctx *c);
 
 // events/key.c
-int		key_handler(int key, struct s_ctx *ctx);
+int		key_release(int key, struct s_ctx *c);
 
-// events/loop.c
-int		loop_handler(struct s_ctx *c);
-
-// events/close.c
+// events/window.c
 int		window_close(t_window *w);
 
 // time.c
@@ -112,7 +108,8 @@ t_color	ray_color(t_ray *r, t_scene *s);
 
 // graphics/camera.c
 t_ray	camera_ray(t_camera *c, t_idx x, t_idx y);
-void	camera_change(t_camera *c, unsigned int key);
+void	camera_translate(t_camera *c, const int key);
+void	camera_rotate(t_camera *c, const int key);
 
 // graphics/ray_hits.c
 t_bool	ray_hit_sph(const t_ray *r, const t_obj *s, float *t);

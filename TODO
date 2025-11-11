@@ -5,28 +5,21 @@ be ckecked inside the parsing.
 the flag is set in a valid range (at least 1, but max ?)
 default would be (WIDTH * HEIGHT / 1000000) ?
 - PDF
+
 Bonus :
-- Checkerboard pattern
-	- Parse it
 - Bump map textures
-- Be able to change object properties
 
 Bonus ++ :
 - Deep test parsing
 
-- Using mouse click to edit properties of the aimed object.
-
-- Show coordinates on screen
-
-- Print a message on program startup with keybinds
-
 sdemey :
-- Handle color with light (vector operations should be capped for color [0:255])
+- Checkerboard pattern
+	- Parse it
 
 mmichele :
-- Intersection with a conic.
-- Handle mouse for camera
-- Handle key pressed and released for movements
+- Print a message on program startup with keybinds
+- Be able to change object properties
+	- Using mouse click to edit properties of the aimed object.
 - Camera problem on reaching y = 1 or -1 and when passing from x > 0 and z > 0 to x < 0 and z < 0
 - Minor visual fix on blur tracing
 	- Enhance blur tracing by make it more to less blurry with time

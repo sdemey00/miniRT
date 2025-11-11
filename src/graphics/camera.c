@@ -32,7 +32,7 @@ t_ray	camera_ray(t_camera *c, t_idx x, t_idx y)
 	return ((t_ray){c->pos, ray_dir});
 }
 
-static void	camera_translate(t_camera *c, unsigned int key)
+void	camera_translate(t_camera *c, const int key)
 {
 	if (key == 'w')
 		vec_isum(&c->pos, c->dir);
@@ -48,7 +48,7 @@ static void	camera_translate(t_camera *c, unsigned int key)
 		vec_isub(&c->pos, SPACE_UP);
 }
 
-static void	camera_rotate(t_camera *c, unsigned int key)
+void	camera_rotate(t_camera *c, const int key)
 {
 	const float	angle = FT_PI / 16;
 
@@ -66,14 +66,4 @@ static void	camera_rotate(t_camera *c, unsigned int key)
 	else if (key == 'j')
 		vec_iroty(&c->dir, -angle);
 	vec_inorm(&c->dir);
-}
-
-void	camera_change(t_camera *c, unsigned int key)
-{
-	if (VERBOSE)
-		camera_print(*c);
-	if (ft_strchr("wsda c", key) >= 0)
-		camera_translate(c, key);
-	else if (ft_strchr("iklj", key) >= 0)
-		camera_rotate(c, key);
 }
