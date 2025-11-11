@@ -36,21 +36,21 @@ t_bool	parse_line(char *line, t_scene *scene)
 	if (!split || !split[0])
 		return (0);
 	if (ft_strcmp(split[0], "A") == 0)
-		status = parse_ambiant(split, scene);
+		status = parse_ambiant(&split[1], scene);
 	if (ft_strcmp(split[0], "C") == 0)
-		status = parse_camera(split, scene);
+		status = parse_camera(&split[1], scene);
 	if (ft_strcmp(split[0], "L") == 0)
-		status = parse_light(split, scene);
+		status = parse_light(&split[1], scene);
 	if (ft_strcmp(split[0], "sp") == 0)
-		status = parse_sphere(split, scene);
+		status = parse_sphere(&split[1], scene);
 	if (ft_strcmp(split[0], "pl") == 0)
-		status = parse_plane(split, scene);
+		status = parse_plane(&split[1], scene);
 	if (ft_strcmp(split[0], "cy") == 0)
-		status = parse_cylinder(split, scene);
+		status = parse_cylinder(&split[1], scene);
 	if (ft_strcmp(split[0], "co") == 0)
-		status = parse_cone(split, scene);
+		status = parse_cone(&split[1], scene);
 	if (ft_strcmp(split[0], "ci") == 0)
-		status = parse_circle(split, scene);
+		status = parse_circle(&split[1], scene);
 	ft_free_split(split);
 	if (status == -1)
 		return (ft_dprintf(2, "Error\nUnexpected identifier\n"), 0);

@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-static t_bool	is_valid_int(char *s)
+t_bool	is_valid_int(char *s)
 {
 	if (!s || !*s)
 		return (0);
@@ -29,7 +29,7 @@ static t_bool	is_valid_int(char *s)
 	return (1);
 }
 
-static t_bool	is_valid_float(char *s)
+t_bool	is_valid_float(char *s)
 {
 	int	dot;
 
@@ -52,18 +52,28 @@ static t_bool	is_valid_float(char *s)
 	return (1);
 }
 
-t_bool	parse_float(char *src, float *out)
+t_bool	check_range_double(double val, double min, double max, char *msg)
 {
-	if (!is_valid_float(src))
-		return (0);
-	*out = ft_atof(src);
+	if (val < min || val > max)
+		return (print_error(msg), 0);
 	return (1);
 }
 
-t_bool	parse_int(char *src, int *out)
+t_bool	check_range_int(int val, int min, int max, char *msg)
 {
-	if (!is_valid_int(src))
+	if (val < min || val > max)
+		return (print_error(msg), 0);
+	return (1);
+}
+
+t_bool	check_args_count(char **tab, const unsigned int count)
+{
+	t_idx	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	if ((const unsigned int)i != count)
 		return (0);
-	*out = ft_atoi(src);
 	return (1);
 }

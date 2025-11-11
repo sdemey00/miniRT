@@ -26,17 +26,19 @@ void	ft_free_split(char **tab)
 	tab = NULL;
 }
 
-t_bool	check_range_double(double val, double min, double max, char *msg)
+t_bool	parse_float(char *src, float *out)
 {
-	if (val < min || val > max)
-		return (print_error(msg), 0);
+	if (!is_valid_float(src))
+		return (0);
+	*out = ft_atof(src);
 	return (1);
 }
 
-t_bool	check_range_int(int val, int min, int max, char *msg)
+t_bool	parse_int(char *src, int *out)
 {
-	if (val < min || val > max)
-		return (print_error(msg), 0);
+	if (!is_valid_int(src))
+		return (0);
+	*out = ft_atoi(src);
 	return (1);
 }
 
@@ -47,7 +49,7 @@ t_bool	parse_vec(char *str, t_vec *v)
 	tab = ft_split(str, ',');
 	if (!tab)
 		return (0);
-	if (!tab[0] || !tab[1] || !tab[2] || tab[3])
+	if (!check_args_count(tab, 3))
 	{
 		ft_free_split(tab);
 		print_error("Invalid vector format: invalid number of arguments\n");
@@ -72,7 +74,7 @@ t_bool	parse_color(char *str, t_color *c)
 	tab = ft_split(str, ',');
 	if (!tab)
 		return (0);
-	if (!tab[0] || !tab[1] || !tab[2] || tab[3])
+	if (!check_args_count(tab, 3))
 	{
 		ft_free_split(tab);
 		print_error("Invalid color format: invalid number of arguments\n");

@@ -16,15 +16,15 @@ t_bool	parse_sphere(char **split, t_scene *scene)
 {
 	t_obj	sp;
 
-	if (!split[1] || !split[2] || !split[3] || split[4])
+	if (!check_args_count(split, 3))
 	{
 		print_error("Sphere: invalid number of arguments\n");
 		return (0);
 	}
-	if (!parse_vec(split[1], &sp.pos)
-		|| !parse_color(split[3], &sp.color))
+	if (!parse_vec(split[0], &sp.pos)
+		|| !parse_color(split[2], &sp.color))
 		return (0);
-	if (!parse_float(split[2], &sp.radius))
+	if (!parse_float(split[1], &sp.radius))
 	{
 		print_error("Sphere: invalid float format\n");
 		return (0);

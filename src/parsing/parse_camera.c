@@ -39,14 +39,14 @@ t_bool	parse_camera(char **split, t_scene *scene)
 		print_error("Multiple camera definitions are not allowed\n");
 		return (0);
 	}
-	if (!split[1] || !split[2] || !split[3] || split[4])
+	if (!check_args_count(split, 3))
 	{
 		print_error("Camera: invalid number of arguments\n");
 		return (0);
 	}
-	if (!parse_vec(split[1], &cam.pos) || !parse_vec(split[2], &cam.dir))
+	if (!parse_vec(split[0], &cam.pos) || !parse_vec(split[1], &cam.dir))
 		return (0);
-	if (!parse_int(split[3], (int *)&cam.fov))
+	if (!parse_int(split[2], (int *)&cam.fov))
 	{
 		print_error("Camera: FOV invalid int format\n");
 		return (0);

@@ -33,18 +33,17 @@ t_bool	parse_cylinder(char **split, t_scene *scene)
 {
 	t_obj	cy;
 
-	if (!split[1] || !split[2] || !split[3] || !split[4] || !split[5]
-		|| split[6])
+	if (!check_args_count(split, 5))
 	{
 		print_error("Cylinder: invalid number of arguments\n");
 		return (0);
 	}
-	if (!parse_vec(split[1], &cy.pos)
-		|| !parse_vec(split[2], &cy.dir)
-		|| !parse_color(split[5], &cy.color))
+	if (!parse_vec(split[0], &cy.pos)
+		|| !parse_vec(split[1], &cy.dir)
+		|| !parse_color(split[4], &cy.color))
 		return (0);
-	if (!parse_float(split[3], &cy.radius)
-		|| !parse_float(split[4], &cy.height))
+	if (!parse_float(split[2], &cy.radius)
+		|| !parse_float(split[3], &cy.height))
 	{
 		print_error("Cylinder: invalid float format\n");
 		return (0);

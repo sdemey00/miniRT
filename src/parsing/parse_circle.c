@@ -16,14 +16,14 @@ t_bool	parse_circle(char **split, t_scene *scene)
 {
 	t_obj	circle;
 
-	if (!split[1] || !split[2] || !split[3] || split[4])
+	if (!check_args_count(split, 3))
 	{
 		print_error("Circle: invalid number of arguments\n");
 		return (0);
 	}
-	if (!parse_vec(split[1], &circle.pos)
-		|| !parse_vec(split[2], &circle.dir)
-		|| !parse_color(split[3], &circle.color))
+	if (!parse_vec(split[0], &circle.pos)
+		|| !parse_vec(split[1], &circle.dir)
+		|| !parse_color(split[2], &circle.color))
 		return (0);
 	if (!check_range_int(circle.dir.x, -1, 1,
 			"Circle: dir vector out of range [-1,1]\n")
