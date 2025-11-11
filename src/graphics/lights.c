@@ -44,7 +44,7 @@ static t_color	compute_specular(t_vec normal, t_light light,
 	reflect_dir = vec_norm(reflect_dir);
 	view_dir = vec_scal(ray->dir, -1);
 	spec_angle = fmaxf(vec_dot(reflect_dir, view_dir), 0.0);
-	spec_angle = ft_pow(spec_angle, 32); //exponant = obj.shininess
+	spec_angle = ft_pow(spec_angle, 32); //exponant = hit_obj.shininess
 	return (vec_scal(light.light_norm, spec_angle * light.intensity));
 }
 
@@ -81,15 +81,19 @@ t_color	ray_light_color(t_scene *s, t_ray *r, t_obj *hit_obj, float closest_t)
 	t_vec	surface_normal;
 	t_vec	hit_point;
 	t_color	light_color;
+	t_color base_color;
 	t_color	color;
 
 	hit_point = vec_sum(r->origin, vec_scal(r->dir, closest_t));
 	surface_normal = get_surface_normal(hit_obj, hit_point);
 	light_color = compute_lights(s, hit_point, surface_normal, r);
+	base_color = hit_obj->color;
+	if (1) //checkboard
+		base_color = checkboard_pattern(hit_obj, hit_point);
 	color = (t_color){
-		hit_obj->color.x * light_color.x,
-		hit_obj->color.y * light_color.y,
-		hit_obj->color.z * light_color.z};
+		base_color.x * light_color.x,
+		base_color.y * light_color.y,
+		base_color.z * light_color.z};
 	vec_fmin((t_vec *)&color, 255.0);
 	return (color);
 }

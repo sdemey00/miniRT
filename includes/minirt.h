@@ -140,6 +140,9 @@ void	eq2_set(t_eq2 *e);
 t_vec	get_surface_normal(t_obj *obj, t_vec hit_point);
 t_color	compute_reflection(t_ray *r, t_scene *s, float closest_t, t_obj *hit_obj, int depth);
 
-//graphics/shadows.c
+// graphics/shadows.c
 t_bool	is_in_shadow(t_scene *s, t_vec hit_point, t_vec normal, t_light light);
+
+// graphics/checkboard_pattern.c
+t_color	checkboard_pattern(t_obj *obj, t_vec hit_point);
 #endif // MINIRT_H

@@ -52,12 +52,12 @@ t_color	ray_color(t_ray *r, t_scene *s, int depth)
 	if (!hit_obj)
 		return ((t_color){0, 0, 0});
 	color = ray_light_color(s, r, hit_obj, closest_t);
-	if (1 < 0) // obj.reflection
+	if (-1 < 0) // hit_obj.reflection
 	{
 		reflected_color = compute_reflection(r, s, closest_t, hit_obj, depth);
 		color = vec_sum(
-				vec_scal(color, 1 - 0.6), // obj.reflection
-				vec_scal(reflected_color, 0.6) //same
+				vec_scal(color, 1 - 0.4), // hit_obj.reflection
+				vec_scal(reflected_color, 0.4) //same
 				);
 	}
 	return (color);
