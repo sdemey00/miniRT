@@ -62,7 +62,7 @@ typedef struct s_image
 	int		endian;
 }	t_image;
 
-/* Graphical library contexti -> MLX */
+/* Graphical library context -> MLX */
 typedef struct s_window
 {
 	void	*mlx;
@@ -74,10 +74,10 @@ struct s_ctx
 {
 	t_window	w;
 	t_scene		s;
+	t_bool		rendering;
 };
 
 // events/mouse.c
-int		mouse_move(int x, int y, struct s_ctx *c);
 int		mouse_press(int key, int x, int y, struct s_ctx *c);
 
 // events/key.c
@@ -142,4 +142,5 @@ t_bool	is_in_shadow(t_scene *s, t_vec hit_point, t_vec normal, t_light light);
 
 // graphics/checkboard_pattern.c
 t_color	checkboard_pattern(t_obj *obj, t_vec hit_point);
+
 #endif // MINIRT_H

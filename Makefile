@@ -87,7 +87,7 @@ fclean: clean doc-clean
 re: fclean all
 
 norm:
-	@ ! norminette $(SRCD) | grep -v "OK"
+	@ ! norminette $(INCD) $(SRCD) | grep -v "OK"
 	@ $(MAKE) -C $(LFTD) $@
 	@ echo "Project at norm"
 

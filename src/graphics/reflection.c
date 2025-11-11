@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reflection.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/11 17:35:22 by mmichele          #+#    #+#             */
+/*   Updated: 2025/11/11 17:35:22 by mmichele         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_color	compute_reflection(t_ray *r, t_scene *s, float closest_t, t_obj *hit_obj, int depth)

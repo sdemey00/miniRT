@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_surface_normal.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/11 17:34:52 by mmichele          #+#    #+#             */
+/*   Updated: 2025/11/11 17:34:53 by mmichele         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_vec	get_surface_normal(t_obj *obj, t_vec hit_point)
@@ -21,4 +33,3 @@ t_vec	get_surface_normal(t_obj *obj, t_vec hit_point)
 		normal = (t_vec){0, 1, 0};
 	return (normal);
 }
-

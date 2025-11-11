@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:02:29 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/10 18:56:28 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/11 17:38:47 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ t_bool	ray_hit_cyl(const t_ray *r, const t_obj *cy, float *t)
 		*t = e.t[1];
 	ctop = *cy;
 	ctop.pos = vec_sum(cy->pos, vec_scal(cy->dir, (cy->height / 2.0)));
-	if (ray_hit_cir(r, &ctop, &e.t[0]) && e.t[0] < *t && e.t[0] > 0.005)
+	if (ray_hit_cir(r, &ctop, &e.t[0]) && e.t[0] < *t)
 		*t = e.t[0];
 	cbot = *cy;
 	cbot.pos = vec_sum(cy->pos, vec_scal(vec_scal(cy->dir, -1), (cy->height / 2.0)));
-	if (ray_hit_cir(r, &cbot, &e.t[1]) && e.t[1] < *t && e.t[1] > 0.005)
+	if (ray_hit_cir(r, &cbot, &e.t[1]) && e.t[1] < *t)
 		*t = e.t[1];
 	if (*t < INFINITY)
 		return (1);

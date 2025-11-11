@@ -13,8 +13,6 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# define SPACE_UP (t_vec){0, 1, 0}
-
 typedef struct s_ray
 {
 	t_vec	origin;

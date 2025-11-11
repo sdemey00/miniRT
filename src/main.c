@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 {
 	struct s_ctx	c;
 
+	c.rendering = 0;
 	if (argc != 2)
 		return (!!dprintf(2, "Usage: %s <scene.rt>\n", argv[0]));
 	if (!scene_init(&c.s, argv[1]) || !window_init(&c.w))

@@ -19,7 +19,7 @@ t_ray	camera_ray(t_camera *c, t_idx x, t_idx y)
 	const t_vec	cam_dir = (t_vec){u, v, 1.0};
 	t_vec		ray_dir;
 
-	c->right = vec_cross(SPACE_UP, c->dir);
+	c->right = vec_cross((t_vec){0, 1, 0}, c->dir);
 	vec_inorm(&c->right);
 	c->up = vec_cross(c->dir, c->right);
 	vec_inorm(&c->up);
@@ -43,9 +43,9 @@ void	camera_translate(t_camera *c, const int key)
 	else if (key == 'a')
 		vec_isub(&c->pos, c->right);
 	else if (key == ' ')
-		vec_isum(&c->pos, SPACE_UP);
+		vec_isum(&c->pos, (t_vec){0, 1, 0});
 	else if (key == 'c')
-		vec_isub(&c->pos, SPACE_UP);
+		vec_isub(&c->pos, (t_vec){0, 1, 0});
 }
 
 void	camera_rotate(t_camera *c, const int key)
