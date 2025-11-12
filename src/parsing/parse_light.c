@@ -30,14 +30,14 @@ t_bool	parse_light(char **split, t_scene *scene)
 	return (1);
 }
 
-void	light_print(t_light light)
+void	light_print(t_light *light)
 {
 	ft_printf("Light source position: %.2f, %.2f, %.2f\n",
-		light.pos.x, light.pos.y, light.pos.z);
+		light->pos.x, light->pos.y, light->pos.z);
 	ft_printf("Light source brightness: %.2f\n",
-		light.intensity);
-	ft_printf("Light source color: %d, %d, %d\n", (t_ssuint)light.color.x,
-		(t_ssuint)light.color.y, (t_ssuint)light.color.z);
+		light->intensity);
+	ft_printf("Light source color: %d, %d, %d\n", (t_ssuint)light->color.x,
+		(t_ssuint)light->color.y, (t_ssuint)light->color.z);
 }
 
 void	lights_print(t_light *lights, t_ssuint lights_len)
@@ -55,7 +55,7 @@ void	lights_print(t_light *lights, t_ssuint lights_len)
 	while (i < lights_len)
 	{
 		ft_printf("Light source %d\n", i + 1);
-		light_print(lights[i]);
+		light_print(&lights[i]);
 		if (i != lights_len - 1)
 			ft_printf("- - - - - - - - - - - - - - - - - - - -\n");
 		i++;

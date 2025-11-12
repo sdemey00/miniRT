@@ -35,16 +35,16 @@ t_bool	parse_camera(char **split, t_scene *scene)
 	return (1);
 }
 
-void	camera_print(t_camera camera)
+void	camera_print(t_camera *camera)
 {
-	if (camera.set != 1)
+	if (camera->set != 1)
 	{
 		ft_printf("There is no camera\n");
 		return ;
 	}
 	ft_printf("Camera position: %.2f, %.2f, %.2f\n",
-		camera.pos.x, camera.pos.y, camera.pos.z);
+		camera->pos.x, camera->pos.y, camera->pos.z);
 	ft_printf("Camera direction: %.2f, %.2f, %.2f\n",
-		camera.dir.x, camera.dir.y, camera.dir.z);
-	ft_printf("Camera FOV: %d\n", camera.fov);
+		camera->dir.x, camera->dir.y, camera->dir.z);
+	ft_printf("Camera FOV: %d\n", camera->fov);
 }

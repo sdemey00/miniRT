@@ -36,16 +36,16 @@ t_bool	parse_circle(char **split, t_scene *scene)
 	return (1);
 }
 
-void	circle_print(t_obj circle)
+void	circle_print(t_obj *circle)
 {
 	ft_printf("Circle pos: %.2f, %.2f, %.2f\n",
-		circle.pos.x, circle.pos.y,
-		circle.pos.z);
+		circle->pos.x, circle->pos.y,
+		circle->pos.z);
 	ft_printf("Circle dir: %.2f, %.2f, %.2f\n",
-		circle.dir.x, circle.dir.y,
-		circle.dir.z);
-	ft_printf("Circle color: %d, %d, %d\n", (t_ssuint)circle.color.x,
-		(t_ssuint)circle.color.y, (t_ssuint)circle.color.z);
-	ft_printf("Circle: b=%.2f, r=%.2f, c=%d\n", circle.brightness,
-		circle.reflection, circle.checkboard);
+		circle->dir.x, circle->dir.y,
+		circle->dir.z);
+	ft_printf("Circle color: %d, %d, %d\n", (t_ssuint)circle->color.x,
+		(t_ssuint)circle->color.y, (t_ssuint)circle->color.z);
+	ft_printf("Circle: b=%.2f, r=%.2f, c=%d\n", circle->brightness,
+		circle->reflection, circle->checkboard);
 }

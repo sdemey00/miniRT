@@ -35,16 +35,16 @@ t_bool	parse_cone(char **split, t_scene *scene)
 	return (1);
 }
 
-void	cone_print(t_obj cone)
+void	cone_print(t_obj *cone)
 {
 	ft_printf("Cone pos: %.2f, %.2f, %.2f\n",
-		cone.pos.x, cone.pos.y,
-		cone.pos.z);
+		cone->pos.x, cone->pos.y,
+		cone->pos.z);
 	ft_printf("Cone dir: %.2f, %.2f, %.2f\n",
-		cone.dir.x, cone.dir.y,
-		cone.dir.z);
-	ft_printf("Cone color: %d, %d, %d\n", (t_ssuint)cone.color.x,
-		(t_ssuint)cone.color.y, (t_ssuint)cone.color.z);
-	ft_printf("Cone: b=%.2f, r=%.2f, c=%d\n", cone.brightness,
-		cone.reflection, cone.checkboard);
+		cone->dir.x, cone->dir.y,
+		cone->dir.z);
+	ft_printf("Cone color: %d, %d, %d\n", (t_ssuint)cone->color.x,
+		(t_ssuint)cone->color.y, (t_ssuint)cone->color.z);
+	ft_printf("Cone: b=%.2f, r=%.2f, c=%d\n", cone->brightness,
+		cone->reflection, cone->checkboard);
 }

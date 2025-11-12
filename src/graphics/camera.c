@@ -86,7 +86,7 @@ void	camera_change(struct s_ctx *c, const int key)
 	else if (ft_strchr("-=", key) >= 0)
 		camera_change_fov(&c->s.camera, key == '=');
 	if (VERBOSE)
-		camera_print(c->s.camera);
+		camera_print(&c->s.camera);
 	window_draw(&c->w, &c->s);
 	c->rendering = 0;
 }

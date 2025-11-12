@@ -37,14 +37,14 @@ t_bool	parse_sphere(char **split, t_scene *scene)
 	return (1);
 }
 
-void	sphere_print(t_obj sphere)
+void	sphere_print(t_obj *sphere)
 {
 	ft_printf("Sphere center: %.2f, %.2f, %.2f\n",
-		sphere.pos.x, sphere.pos.y,
-		sphere.pos.z);
-	ft_printf("Sphere radius: %.2f\n", sphere.radius);
-	ft_printf("Sphere color: %d, %d, %d\n", (t_ssuint)sphere.color.x,
-		(t_ssuint)sphere.color.y, (t_ssuint)sphere.color.z);
-	ft_printf("Sphere: b=%.2f, r=%.2f, c=%d\n", sphere.brightness,
-		sphere.reflection, sphere.checkboard);
+		sphere->pos.x, sphere->pos.y,
+		sphere->pos.z);
+	ft_printf("Sphere radius: %.2f\n", sphere->radius);
+	ft_printf("Sphere color: %d, %d, %d\n", (t_ssuint)sphere->color.x,
+		(t_ssuint)sphere->color.y, (t_ssuint)sphere->color.z);
+	ft_printf("Sphere: b=%.2f, r=%.2f, c=%d\n", sphere->brightness,
+		sphere->reflection, sphere->checkboard);
 }

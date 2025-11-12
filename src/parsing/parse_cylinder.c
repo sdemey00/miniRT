@@ -39,21 +39,21 @@ t_bool	parse_cylinder(char **split, t_scene *scene)
 	return (1);
 }
 
-void	cylinder_print(t_obj cylinder)
+void	cylinder_print(t_obj *cylinder)
 {
 	ft_printf("Cylinder center: %.2f, %.2f, %.2f\n",
-		cylinder.pos.x, cylinder.pos.y,
-		cylinder.pos.z);
+		cylinder->pos.x, cylinder->pos.y,
+		cylinder->pos.z);
 	ft_printf("Cylinder axis: %.2f, %.2f, %.2f\n",
-		cylinder.dir.x, cylinder.dir.y,
-		cylinder.dir.z);
+		cylinder->dir.x, cylinder->dir.y,
+		cylinder->dir.z);
 	ft_printf("Cylinder radius: %.2f\n",
-		cylinder.radius);
+		cylinder->radius);
 	ft_printf("Cylinder height: %.2f\n",
-		cylinder.height);
+		cylinder->height);
 	ft_printf("Cylinder color: %d, %d, %d\n",
-		(t_ssuint)cylinder.color.x, (t_ssuint)cylinder.color.y,
-		(t_ssuint)cylinder.color.z);
-	ft_printf("Cylinder: b=%.2f, r=%.2f, c=%d\n", cylinder.brightness,
-		cylinder.reflection, cylinder.checkboard);
+		(t_ssuint)cylinder->color.x, (t_ssuint)cylinder->color.y,
+		(t_ssuint)cylinder->color.z);
+	ft_printf("Cylinder: b=%.2f, r=%.2f, c=%d\n", cylinder->brightness,
+		cylinder->reflection, cylinder->checkboard);
 }

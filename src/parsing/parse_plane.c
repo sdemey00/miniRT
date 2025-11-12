@@ -36,16 +36,16 @@ t_bool	parse_plane(char **split, t_scene *scene)
 	return (1);
 }
 
-void	plane_print(t_obj plane)
+void	plane_print(t_obj *plane)
 {
 	ft_printf("Plane pos: %.2f, %.2f, %.2f\n",
-		plane.pos.x, plane.pos.y,
-		plane.pos.z);
+		plane->pos.x, plane->pos.y,
+		plane->pos.z);
 	ft_printf("Plane dir: %.2f, %.2f, %.2f\n",
-		plane.dir.x, plane.dir.y,
-		plane.dir.z);
-	ft_printf("Plane color: %d, %d, %d\n", (t_ssuint)plane.color.x,
-		(t_ssuint)plane.color.y, (t_ssuint)plane.color.z);
-	ft_printf("Plane: b=%.2f, r=%.2f, c=%d\n", plane.brightness,
-		plane.reflection, plane.checkboard);
+		plane->dir.x, plane->dir.y,
+		plane->dir.z);
+	ft_printf("Plane color: %d, %d, %d\n", (t_ssuint)plane->color.x,
+		(t_ssuint)plane->color.y, (t_ssuint)plane->color.z);
+	ft_printf("Plane: b=%.2f, r=%.2f, c=%d\n", plane->brightness,
+		plane->reflection, plane->checkboard);
 }

@@ -26,15 +26,15 @@ void	objs_print(t_obj *objs, t_ssuint objs_len)
 	while (i < objs_len)
 	{
 		if (objs[i].e_type == SPH)
-			sphere_print(objs[i]);
+			sphere_print(&objs[i]);
 		if (objs[i].e_type == PLA)
-			plane_print(objs[i]);
+			plane_print(&objs[i]);
 		if (objs[i].e_type == CYL)
-			cylinder_print(objs[i]);
+			cylinder_print(&objs[i]);
 		if (objs[i].e_type == CON)
-			cone_print(objs[i]);
+			cone_print(&objs[i]);
 		if (objs[i].e_type == CIR)
-			circle_print(objs[i]);
+			circle_print(&objs[i]);
 		if (i < objs_len - 1)
 			ft_printf("- - - - - - - - - - - - - - - - - - - -\n");
 		i++;
@@ -44,9 +44,9 @@ void	objs_print(t_obj *objs, t_ssuint objs_len)
 void	scene_print(t_scene *scene)
 {
 	ft_printf("________________________________________\n\n");
-	ambiant_print(scene->ambiant);
+	ambiant_print(&scene->ambiant);
 	ft_printf("________________________________________\n\n");
-	camera_print(scene->camera);
+	camera_print(&scene->camera);
 	ft_printf("________________________________________\n\n");
 	lights_print(scene->lights, scene->lights_len);
 	ft_printf("________________________________________\n\n");
