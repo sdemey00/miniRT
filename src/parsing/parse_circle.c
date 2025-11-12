@@ -14,9 +14,9 @@
 
 t_bool	parse_circle(char **split, t_scene *scene)
 {
-	t_obj	circle;
-	const t_ssuint min_args = 3;
-	const t_ssuint max_args = min_args + OPTION_ARGS;
+	const t_ssuint	min_args = 3;
+	const t_ssuint	max_args = min_args + OPTION_ARGS;
+	t_obj			circle;
 
 	if (!check_args_range(split, min_args, max_args))
 	{

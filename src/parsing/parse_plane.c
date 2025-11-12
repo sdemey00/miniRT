@@ -14,15 +14,15 @@
 
 t_bool	parse_plane(char **split, t_scene *scene)
 {
-	t_obj	plane;
-	const t_ssuint min_args = 3;
-	const t_ssuint max_args = min_args + OPTION_ARGS;
+	const t_ssuint	min_args = 3;
+	const t_ssuint	max_args = min_args + OPTION_ARGS;
+	t_obj			plane;
 
 	if (!check_args_range(split, min_args, max_args))
 	{
 		print_error("Plane: invalid number of arguments\n");
 		return (0);
-	}	
+	}
 	plane.brightness = DFLT_BRIGHT;
 	plane.reflection = DFLT_REFLECT;
 	plane.checkboard = 0;

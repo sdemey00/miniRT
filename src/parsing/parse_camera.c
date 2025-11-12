@@ -27,8 +27,8 @@ t_bool	parse_camera(char **split, t_scene *scene)
 		return (0);
 	}
 	if (!parse_vec(split[0], &cam.pos)
-	|| !parse_dir(split[1], &cam.dir)
-	|| !parse_int(split[2], (int *)&cam.fov))
+		|| !parse_dir(split[1], &cam.dir)
+		|| !parse_int(split[2], (int *)&cam.fov))
 		return (0);
 	scene->camera = cam;
 	scene->camera.set = 1;

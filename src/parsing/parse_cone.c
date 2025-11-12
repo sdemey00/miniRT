@@ -14,9 +14,9 @@
 
 t_bool	parse_cone(char **split, t_scene *scene)
 {
-	t_obj	cone;
-	const t_ssuint min_args = 3;
-	const t_ssuint max_args = min_args + OPTION_ARGS;
+	const t_ssuint	min_args = 3;
+	const t_ssuint	max_args = min_args + OPTION_ARGS;
+	t_obj			cone;
 
 	if (!check_args_range(split, min_args, max_args))
 	{
