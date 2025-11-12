@@ -18,13 +18,14 @@ NAME	= miniRT
 # Program compile macro variables
 W		?= 0
 H		?= 0
+M		?= 0
 
 # Only used with "valgrind" target
 F		?=
 
 # Source program compiler settings
 CC		= cc
-FLAGS	= -Wall -Wextra -Werror -g -D WIDTH=$(W) -D HEIGHT=$(H)
+FLAGS	= -Wall -Wextra -Werror -g -D WIDTH=$(W) -D HEIGHT=$(H) -D MAX_OBJS=$(M)
 
 # Directories
 BLDD	= build
@@ -100,7 +101,7 @@ valgrind:
 verbose: FLAGS += -D VERBOSE
 verbose: all
 
-fast: FLAGS = -Ofast -D WIDTH=$(W) -D HEIGHT=$(H)
+fast: FLAGS = -Ofast -D WIDTH=$(W) -D HEIGHT=$(H) -D MAX_OBJS=$(M)
 fast: $(MLXN) $(LFTN)-fast $(NAME)
 
 clear:

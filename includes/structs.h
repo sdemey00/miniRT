@@ -73,9 +73,9 @@ typedef struct s_scene
 {
 	t_ambiant	ambiant;
 	t_camera	camera;
-	t_light		lights[128];
+	t_light		lights[MAX_OBJS];
 	t_ssuint	lights_len;
-	t_obj		objs[128];
+	t_obj		objs[MAX_OBJS];
 	t_ssuint	objs_len;
 	t_obj		*controlled;
 	t_ssuint	blur;

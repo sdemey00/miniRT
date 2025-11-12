@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 11:37:17 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/12 15:15:57 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/12 16:04:29 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static void	obj_resize(t_obj *o, const int key)
 {
 	if (key == 't')
 		o->radius += 0.1;
-	else if (key == 'g')
+	else if (key == 'g' && o->radius > 0.2)
 		o->radius -= 0.1;
 	else if (key == 'y')
 		o->height += 0.5;
-	else if (key == 'h')
+	else if (key == 'h' && o->height > 1)
 		o->height -= 0.5;
 }
 

@@ -35,6 +35,15 @@
 #  define HEIGHT 900
 # endif
 
+# ifdef MAX_OBJS
+#  if MAX_OBJS < 1 || 512 < MAX_OBJS
+#   undef MAX_OBJS
+#  endif
+# endif
+# ifndef MAX_OBJS
+#  define MAX_OBJS 16
+# endif
+
 # include <math.h>
 # include <stdio.h>
 # include <fcntl.h>

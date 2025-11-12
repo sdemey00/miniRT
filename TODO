@@ -1,10 +1,6 @@
 Mandatory :
-- Set a MAX_OBJS macro, "setable" via -D compile flag. This macro has to
-be ckecked inside the parsing.
-- Set a BLUR_LVL macro, "setable" via -D compile flag. It has to check that
-the flag is set in a valid range (at least 1, but max ?)
-default would be (WIDTH * HEIGHT / 1000000) ?
 - PDF
+- Remove file wildcard in Makefile
 
 Bonus :
 - Bump map textures
@@ -13,17 +9,17 @@ Bonus ++ :
 - Deep test parsing
 - Export scene
 
-sdemey :
-- Checkerboard pattern
-	- Parse it
-- Reflection and shininess
 
 FIX :
-- camera_print() function taking a camera copy as parameter ?
 - Camera problem on reaching abs(dir.y) == 1 and when angle is out of [0:pi]
+
+sdemey :
+- Check MAX_OBJS in the parsing.
+- reflection and shininess
+- camera_print() function taking a camera copy as parameter ?
 
 mmichele :
 - Be able to toggle the functionalities, and the quality of image rendering.
 - Be able to cycle trough the light with the arrows.
-- Make a cursor at screen center, toggle able with a key.
+- Make a cursor at screen center, togglable with a key.
 - Rotation of an object does not rotates as expected.
