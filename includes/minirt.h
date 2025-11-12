@@ -162,4 +162,6 @@ t_color	checkboard_pattern(t_obj *obj, t_vec hit_point);
 // graphics/obj_change.c
 void	obj_change(t_obj *o, struct s_ctx *c, const int key);
 
+void	map_sphere(float *u, float *v, t_vec hit_point);
+
 #endif // MINIRT_H

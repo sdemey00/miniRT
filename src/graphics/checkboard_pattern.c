@@ -14,51 +14,48 @@
 
 void	map_sphere(float *u, float *v, t_vec hit_point)
 {
-	float	theta;
-	float	radius;
-	float	phi;
-
-	radius = vec_mag(hit_point);
-	theta = atan2(hit_point.z, hit_point.x);
-	phi = acos(hit_point.y / radius);
+	t_vec p = vec_norm(hit_point);
+	float theta = atan2(p.z, p.x);
+	float phi = acos(p.y);
 	*u = (theta + FT_PI) / (2.0 * FT_PI);
 	*v = phi / FT_PI;
 }
 
-void	map_plane(float *u, float *v, t_vec hit_point)
+void	map_plane(float *u, float *v, t_vec hit_point, t_obj *obj)
 {
-	*u = hit_point.x * 0.1;
-	*v = hit_point.z * 0.1;
+	t_vec tmp_up = fabs(obj->dir.y) > 0.999 ? (t_vec){1, 0, 0} : (t_vec){0, 1, 0};
+	t_vec right = vec_norm(vec_cross(tmp_up, obj->dir));
+	t_vec up = vec_cross(obj->dir, right);
+	*u = vec_dot(hit_point, right) * 0.2;
+	*v = vec_dot(hit_point, up) * 0.2;
 }
 
-void	map_cylinder(float *u, float *v, t_vec hit_point)
+void	map_cylinder(float *u, float *v, t_vec hit_point, t_obj *obj)
 {
-	float	theta;
-
-	theta = atan2(hit_point.x, hit_point.z);
-	*u = 1.0 - (theta / (2.0 * FT_PI) + 0.5);
-	*v = hit_point.y * 0.1;
+	t_vec p = hit_point;
+	float theta = atan2(p.z, p.x);
+	*u = (theta + FT_PI) / (2.0 * FT_PI);
+	*v = fmodf(p.y / obj->height, 1.0f);
+	if (*v < 0)
+		*v += 1.0f;
 }
 
 t_color	checkboard_pattern(t_obj *obj, t_vec hit_point)
 {
-	const float	scale = 15.0;
-	float	u;
-	float	v;
-	t_color color1;
-	t_color color2;
+	float	scale = (obj->e_type == SPH ? 30.0 : obj->e_type == CYL ? 20.0 : 10.0);
+	float	u, v;
+	t_color	color1 = obj->color;
+	t_color	color2 = (t_color){255, 255, 255};
 
-	u = 0;
-	v = 0;
-	color1 = obj->color;
-	color2 = (t_color){255, 255, 255};
+	t_vec local_hit = vec_sub(hit_point, obj->pos);
 	if (obj->e_type == SPH)
-		map_sphere(&u, &v, hit_point);
-	if (obj->e_type == PLA)
-		map_plane(&u, &v, hit_point);
-	if (obj->e_type == CYL)
-		map_cylinder(&u, &v, hit_point);
-	if ((((int)floor(u * scale) + (int)floor(v * scale)) % 2) == 0)
-		return (color1);
-	return (color2);
+		map_sphere(&u, &v, local_hit);
+	else if (obj->e_type == PLA)
+		map_plane(&u, &v, local_hit, obj);
+	else if (obj->e_type == CYL)
+		map_cylinder(&u, &v, local_hit, obj);
+
+	if (((int)floor(u * scale) + (int)floor(v * scale)) % 2 == 0)
+		return color1;
+	return color2;
 }
