@@ -37,7 +37,7 @@ t_bool	parse_sphere(char **split, t_scene *scene)
 	return (1);
 }
 
-void	sphere_print(t_obj *sphere)
+void	sphere_print(const t_obj *sphere)
 {
 	ft_printf("Sphere center: %.2f, %.2f, %.2f\n",
 		sphere->pos.x, sphere->pos.y,

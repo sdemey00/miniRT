@@ -35,36 +35,36 @@ t_bool	parse_line(char *line, t_scene *scene);
 
 // parsing/parse_ambiant.c
 t_bool	parse_ambiant(char **split, t_scene *scene);
-void	ambiant_print(t_ambiant *ambiant);
+void	ambiant_print(const t_ambiant *ambiant);
 
 // parsing/parse_camera.c
 t_bool	parse_camera(char **split, t_scene *scene);
-void	camera_print(t_camera *camera);
+void	camera_print(const t_camera *camera);
 
 // parsing/parse_light.c
 t_bool	parse_light(char **split, t_scene *scene);
-void	lights_print(t_light *ligths, t_ssuint lights_len);
-void	light_print(t_light *light);
+void	lights_print(const t_light *ligths, t_ssuint lights_len);
+void	light_print(const t_light *light);
 
 // parsing/parse_sphere.c
 t_bool	parse_sphere(char **split, t_scene *scene);
-void	sphere_print(t_obj *sphere);
+void	sphere_print(const t_obj *sphere);
 
 // parsing/parse_plane.c
 t_bool	parse_plane(char **split, t_scene *scene);
-void	plane_print(t_obj *plane);
+void	plane_print(const t_obj *plane);
 
 // parsing/parse_cylinder.c
 t_bool	parse_cylinder(char **split, t_scene *scene);
-void	cylinder_print(t_obj *cylinder);
+void	cylinder_print(const t_obj *cylinder);
 
 // parsing/parse_cone.c
 t_bool	parse_cone(char **split, t_scene *scene);
-void	cone_print(t_obj *cone);
+void	cone_print(const t_obj *cone);
 
 // parsing/parse_circle.c
 t_bool	parse_circle(char **split, t_scene *scene);
-void	circle_print(t_obj *circle);
+void	circle_print(const t_obj *circle);
 
 // parsing/parse_optional_args.c
 t_bool	parse_optional_args(char **split, t_obj *obj);
@@ -91,8 +91,8 @@ t_bool	check_args_range(char **tab, const unsigned int min, const unsigned int m
 
 // parsing/print_scene_infos.c
 void	print_error(char *msg);
-void	objs_print(t_obj *objs, t_ssuint objs_len);
-void	scene_print(t_scene *scene);
+void	objs_print(const t_obj *objs, t_ssuint objs_len);
+void	scene_print(const t_scene *scene);
 
 // parsing/ft_atof.c
 double	ft_atof(const char *str);

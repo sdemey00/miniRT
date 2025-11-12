@@ -18,7 +18,7 @@ void	print_error(char *msg)
 	ft_dprintf(2, "%s", msg);
 }
 
-void	objs_print(t_obj *objs, t_ssuint objs_len)
+void	objs_print(const t_obj *objs, t_ssuint objs_len)
 {
 	int	i;
 
@@ -41,7 +41,7 @@ void	objs_print(t_obj *objs, t_ssuint objs_len)
 	}
 }
 
-void	scene_print(t_scene *scene)
+void	scene_print(const t_scene *scene)
 {
 	ft_printf("________________________________________\n\n");
 	ambiant_print(&scene->ambiant);

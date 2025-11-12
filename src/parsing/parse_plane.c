@@ -36,7 +36,7 @@ t_bool	parse_plane(char **split, t_scene *scene)
 	return (1);
 }
 
-void	plane_print(t_obj *plane)
+void	plane_print(const t_obj *plane)
 {
 	ft_printf("Plane pos: %.2f, %.2f, %.2f\n",
 		plane->pos.x, plane->pos.y,

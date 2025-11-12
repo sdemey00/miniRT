@@ -39,7 +39,7 @@ t_bool	parse_cylinder(char **split, t_scene *scene)
 	return (1);
 }
 
-void	cylinder_print(t_obj *cylinder)
+void	cylinder_print(const t_obj *cylinder)
 {
 	ft_printf("Cylinder center: %.2f, %.2f, %.2f\n",
 		cylinder->pos.x, cylinder->pos.y,

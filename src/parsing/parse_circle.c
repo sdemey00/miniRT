@@ -36,7 +36,7 @@ t_bool	parse_circle(char **split, t_scene *scene)
 	return (1);
 }
 
-void	circle_print(t_obj *circle)
+void	circle_print(const t_obj *circle)
 {
 	ft_printf("Circle pos: %.2f, %.2f, %.2f\n",
 		circle->pos.x, circle->pos.y,

@@ -35,7 +35,7 @@ t_bool	parse_cone(char **split, t_scene *scene)
 	return (1);
 }
 
-void	cone_print(t_obj *cone)
+void	cone_print(const t_obj *cone)
 {
 	ft_printf("Cone pos: %.2f, %.2f, %.2f\n",
 		cone->pos.x, cone->pos.y,

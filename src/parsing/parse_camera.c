@@ -35,7 +35,7 @@ t_bool	parse_camera(char **split, t_scene *scene)
 	return (1);
 }
 
-void	camera_print(t_camera *camera)
+void	camera_print(const t_camera *camera)
 {
 	if (camera->set != 1)
 	{

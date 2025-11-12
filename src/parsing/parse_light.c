@@ -30,7 +30,7 @@ t_bool	parse_light(char **split, t_scene *scene)
 	return (1);
 }
 
-void	light_print(t_light *light)
+void	light_print(const t_light *light)
 {
 	ft_printf("Light source position: %.2f, %.2f, %.2f\n",
 		light->pos.x, light->pos.y, light->pos.z);
@@ -40,7 +40,7 @@ void	light_print(t_light *light)
 		(t_ssuint)light->color.y, (t_ssuint)light->color.z);
 }
 
-void	lights_print(t_light *lights, t_ssuint lights_len)
+void	lights_print(const t_light *lights, t_ssuint lights_len)
 {
 	t_ssuint	i;
 
