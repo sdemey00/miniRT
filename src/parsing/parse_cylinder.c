@@ -12,43 +12,26 @@
 
 #include "minirt.h"
 
-static t_bool	check_cylinder_ranges(t_obj cy)
-{
-	if (!check_range_int(cy.dir.x, -1, 1,
-			"Cylinder: direction vector out of range [-1,1]\n")
-		|| !check_range_int(cy.dir.y, -1, 1,
-			"Cylinder: direction vector out of range [-1,1]\n")
-		|| !check_range_int(cy.dir.z, -1, 1,
-			"Cylinder: direction vector out of range [-1,1]\n"))
-		return (0);
-	if (cy.dir.x == 0 && cy.dir.y == 0 && cy.dir.z == 0)
-	{
-		print_error("Cylinder: invalid direction vector\n");
-		return (0);
-	}
-	return (1);
-}
-
 t_bool	parse_cylinder(char **split, t_scene *scene)
 {
 	t_obj	cy;
+	const t_ssuint min_args = 5;
+	const t_ssuint max_args = min_args + OPTION_ARGS;
 
-	if (!check_args_count(split, 5))
+	if (!check_args_range(split, min_args, max_args))
 	{
 		print_error("Cylinder: invalid number of arguments\n");
 		return (0);
 	}
+	cy.brightness = DFLT_BRIGHT;
+	cy.reflection = DFLT_REFLECT;
+	cy.checkboard = 0;
 	if (!parse_vec(split[0], &cy.pos)
-		|| !parse_vec(split[1], &cy.dir)
-		|| !parse_color(split[4], &cy.color))
-		return (0);
-	if (!parse_float(split[2], &cy.radius)
-		|| !parse_float(split[3], &cy.height))
-	{
-		print_error("Cylinder: invalid float format\n");
-		return (0);
-	}
-	if (!check_cylinder_ranges(cy))
+		|| !parse_dir(split[1], &cy.dir)
+		|| !parse_color(split[4], &cy.color)
+		|| !parse_float(split[2], &cy.radius)
+		|| !parse_float(split[3], &cy.height)
+		|| !parse_optional_args(&split[min_args], &cy))
 		return (0);
 	cy.radius /= 2;
 	cy.e_type = CYL;
@@ -71,4 +54,6 @@ void	cylinder_print(t_obj cylinder)
 	ft_printf("Cylinder color: %d, %d, %d\n",
 		(t_ssuint)cylinder.color.x, (t_ssuint)cylinder.color.y,
 		(t_ssuint)cylinder.color.z);
+	ft_printf("Cylinder: b=%.2f, r=%.2f, c=%d\n", cylinder.brightness,
+		cylinder.reflection, cylinder.checkboard);
 }

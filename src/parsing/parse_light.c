@@ -22,15 +22,9 @@ t_bool	parse_light(char **split, t_scene *scene)
 		return (0);
 	}
 	if (!parse_vec(split[0], &light.pos)
-		|| !parse_color(split[2], &light.color))
-		return (0);
-	if (!parse_float(split[1], &light.intensity))
-	{
-		print_error("Light source: invalid float format\n");
-		return (0);
-	}
-	if (!check_range_double(light.intensity, 0, 1,
-			"Light source: brightness out of range [0, 1]\n"))
+		|| !parse_color(split[2], &light.color)
+		|| !parse_float(split[1], &light.intensity)
+		|| !check_frange(light.intensity, 0, 1))
 		return (0);
 	scene->lights[scene->lights_len++] = light;
 	return (1);

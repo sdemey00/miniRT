@@ -12,24 +12,10 @@
 
 #include "minirt.h"
 
-void	ft_free_split(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-	tab = NULL;
-}
-
 t_bool	parse_float(char *src, float *out)
 {
 	if (!is_valid_float(src))
-		return (0);
+		return (print_error("Invalid float format\n"), 0);
 	*out = ft_atof(src);
 	return (1);
 }
@@ -37,7 +23,7 @@ t_bool	parse_float(char *src, float *out)
 t_bool	parse_int(char *src, int *out)
 {
 	if (!is_valid_int(src))
-		return (0);
+		return (print_error("Invalid float format\n"), 0);
 	*out = ft_atoi(src);
 	return (1);
 }
@@ -60,7 +46,6 @@ t_bool	parse_vec(char *str, t_vec *v)
 		|| !parse_float(tab[2], &v->z))
 	{
 		ft_free_split(tab);
-		print_error("Invalid vector format: invalid float format\n");
 		return (0);
 	}
 	ft_free_split(tab);
@@ -84,12 +69,27 @@ t_bool	parse_color(char *str, t_color *c)
 		|| !parse_float(tab[2], &c->z))
 	{
 		ft_free_split(tab);
-		print_error("Invalid color format: invalid float format\n");
 		return (0);
 	}
-	if (!check_range_int(c->x, 0, 255, "Invalid color range [0, 255]\n")
-		|| !check_range_int(c->y, 0, 255, "Invalid color range [0, 255]\n")
-		|| !check_range_int(c->z, 0, 255, "Invalid color range [0, 255]\n"))
+	if (!check_irange(c->x, 0, 255.0)
+		|| !check_irange(c->y, 0, 255.0)
+		|| !check_irange(c->z, 0, 255.0))
 		return (ft_free_split(tab), 0);
 	return (ft_free_split(tab), 1);
+}
+
+t_bool	parse_dir(char *str, t_vec *v)
+{
+	if (!parse_vec(str, v))
+		return (0);
+	if (!check_frange(v->x, -1, 1)
+		|| !check_frange(v->y, -1, 1)
+		|| !check_frange(v->z, -1, 1))
+		return (0);
+	if (vec_mag(*v) != 1.0)
+	{
+		print_error("Invalid direction vector format\n");
+		return (0);
+	}
+	return (1);
 }

@@ -52,6 +52,11 @@
 # define WIN_CLOSE	17
 # define K_ESC		65307
 
+// Default optionnal obj args
+# define DFLT_BRIGHT 0.4
+# define DFLT_REFLECT 0
+# define OPTION_ARGS 3
+
 /* MLX pixel grid manipulation */
 typedef struct s_image
 {

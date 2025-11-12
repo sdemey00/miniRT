@@ -15,22 +15,21 @@
 t_bool	parse_plane(char **split, t_scene *scene)
 {
 	t_obj	plane;
+	const t_ssuint min_args = 3;
+	const t_ssuint max_args = min_args + OPTION_ARGS;
 
-	if (!check_args_count(split, 3))
+	if (!check_args_range(split, min_args, max_args))
 	{
 		print_error("Plane: invalid number of arguments\n");
 		return (0);
-	}
+	}	
+	plane.brightness = DFLT_BRIGHT;
+	plane.reflection = DFLT_REFLECT;
+	plane.checkboard = 0;
 	if (!parse_vec(split[0], &plane.pos)
-		|| !parse_vec(split[1], &plane.dir)
-		|| !parse_color(split[2], &plane.color))
-		return (0);
-	if (!check_range_int(plane.dir.x, -1, 1,
-			"Plane: dir vector out of range [-1,1]\n")
-		|| !check_range_int(plane.dir.y, -1, 1,
-			"Plane: dir vector out of range [-1,1]\n")
-		|| !check_range_int(plane.dir.z, -1, 1,
-			"Plane: dir vector out of range [-1,1]\n"))
+		|| !parse_dir(split[1], &plane.dir)
+		|| !parse_color(split[2], &plane.color)
+		|| !parse_optional_args(&split[min_args], &plane))
 		return (0);
 	plane.e_type = PLA;
 	scene->objs[scene->objs_len++] = plane;
@@ -47,4 +46,6 @@ void	plane_print(t_obj plane)
 		plane.dir.z);
 	ft_printf("Plane color: %d, %d, %d\n", (t_ssuint)plane.color.x,
 		(t_ssuint)plane.color.y, (t_ssuint)plane.color.z);
+	ft_printf("Plane: b=%.2f, r=%.2f, c=%d\n", plane.brightness,
+		plane.reflection, plane.checkboard);
 }

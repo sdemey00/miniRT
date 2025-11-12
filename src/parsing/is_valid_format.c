@@ -51,29 +51,3 @@ t_bool	is_valid_float(char *s)
 	}
 	return (1);
 }
-
-t_bool	check_range_double(double val, double min, double max, char *msg)
-{
-	if (val < min || val > max)
-		return (print_error(msg), 0);
-	return (1);
-}
-
-t_bool	check_range_int(int val, int min, int max, char *msg)
-{
-	if (val < min || val > max)
-		return (print_error(msg), 0);
-	return (1);
-}
-
-t_bool	check_args_count(char **tab, const unsigned int count)
-{
-	t_idx	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	if ((const unsigned int)i != count)
-		return (0);
-	return (1);
-}

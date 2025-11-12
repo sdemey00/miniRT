@@ -15,22 +15,20 @@
 t_bool	parse_cone(char **split, t_scene *scene)
 {
 	t_obj	cone;
+	const t_ssuint min_args = 3;
+	const t_ssuint max_args = min_args + OPTION_ARGS;
 
-	if (!check_args_count(split, 3))
+	if (!check_args_range(split, min_args, max_args))
 	{
 		print_error("Cone: invalid number of arguments\n");
 		return (0);
 	}
+	cone.brightness = DFLT_BRIGHT;
+	cone.reflection = DFLT_REFLECT;
+	cone.checkboard = 0;
 	if (!parse_vec(split[0], &cone.pos)
-		|| !parse_vec(split[1], &cone.dir)
+		|| !parse_dir(split[1], &cone.dir)
 		|| !parse_color(split[2], &cone.color))
-		return (0);
-	if (!check_range_int(cone.dir.x, -1, 1,
-			"Cone: dir vector out of range [-1,1]\n")
-		|| !check_range_int(cone.dir.y, -1, 1,
-			"Cone: dir vector out of range [-1,1]\n")
-		|| !check_range_int(cone.dir.z, -1, 1,
-			"Cone: dir vector out of range [-1,1]\n"))
 		return (0);
 	cone.e_type = CON;
 	scene->objs[scene->objs_len++] = cone;
@@ -47,4 +45,6 @@ void	cone_print(t_obj cone)
 		cone.dir.z);
 	ft_printf("Cone color: %d, %d, %d\n", (t_ssuint)cone.color.x,
 		(t_ssuint)cone.color.y, (t_ssuint)cone.color.z);
+	ft_printf("Cone: b=%.2f, r=%.2f, c=%d\n", cone.brightness,
+		cone.reflection, cone.checkboard);
 }

@@ -64,6 +64,9 @@ typedef struct s_obj
 	t_color	color;
 	float	radius;
 	float	height;
+	float	brightness;
+	float	reflection;
+	t_bool	checkboard;
 }	t_obj;
 
 typedef struct s_scene
@@ -74,6 +77,8 @@ typedef struct s_scene
 	t_ssuint	lights_len;
 	t_obj		objs[128];
 	t_ssuint	objs_len;
+	t_color		bg;
+	t_bool		bg_set;
 }	t_scene;
 
 typedef struct s_eq2

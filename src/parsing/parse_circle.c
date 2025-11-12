@@ -15,22 +15,21 @@
 t_bool	parse_circle(char **split, t_scene *scene)
 {
 	t_obj	circle;
+	const t_ssuint min_args = 3;
+	const t_ssuint max_args = min_args + OPTION_ARGS;
 
-	if (!check_args_count(split, 3))
+	if (!check_args_range(split, min_args, max_args))
 	{
 		print_error("Circle: invalid number of arguments\n");
 		return (0);
 	}
+	circle.brightness = DFLT_BRIGHT;
+	circle.reflection = DFLT_REFLECT;
+	circle.checkboard = 0;
 	if (!parse_vec(split[0], &circle.pos)
-		|| !parse_vec(split[1], &circle.dir)
-		|| !parse_color(split[2], &circle.color))
-		return (0);
-	if (!check_range_int(circle.dir.x, -1, 1,
-			"Circle: dir vector out of range [-1,1]\n")
-		|| !check_range_int(circle.dir.y, -1, 1,
-			"Circle: dir vector out of range [-1,1]\n")
-		|| !check_range_int(circle.dir.z, -1, 1,
-			"Circle: dir vector out of range [-1,1]\n"))
+		|| !parse_dir(split[1], &circle.dir)
+		|| !parse_color(split[2], &circle.color)
+		|| !parse_optional_args(&split[min_args], &circle))
 		return (0);
 	circle.e_type = CIR;
 	scene->objs[scene->objs_len++] = circle;
@@ -45,6 +44,8 @@ void	circle_print(t_obj circle)
 	ft_printf("Circle dir: %.2f, %.2f, %.2f\n",
 		circle.dir.x, circle.dir.y,
 		circle.dir.z);
-	ft_printf("Cone color: %d, %d, %d\n", (t_ssuint)circle.color.x,
+	ft_printf("Circle color: %d, %d, %d\n", (t_ssuint)circle.color.x,
 		(t_ssuint)circle.color.y, (t_ssuint)circle.color.z);
+	ft_printf("Circle: b=%.2f, r=%.2f, c=%d\n", circle.brightness,
+		circle.reflection, circle.checkboard);
 }
