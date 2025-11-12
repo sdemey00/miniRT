@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 13:01:45 by sdemey            #+#    #+#             */
-/*   Updated: 2025/11/11 17:46:04 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/12 15:27:28 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,22 @@ int	key_release(int key, struct s_ctx *c)
 	if (key == K_ESC)
 		window_close(&c->w);
 	else if (key == 'p' && !c->rendering)
+		full_render(c);
+	else if (!c->s.controlled && ft_strchr("wasdc ijkl-=", key) >= 0)
+		camera_change(c, key);
+	else if (key == K_UP || key == K_DOWN)
 	{
-		ft_printf("Rendering ...");
-		c->rendering = 1;
-		window_draw(&c->w, &c->s, raytracing);
-		ft_printf("\n");
+		if (key == K_DOWN && c->s.blur > 10)
+			c->s.blur--;
+		else if (key == K_UP && c->s.blur < 50)
+			c->s.blur++;
+		window_draw(&c->w, &c->s);
 	}
-	else if (ft_strchr("wasdc ", key) >= 0)
-	{
-		camera_translate(&c->s.camera, key);
-		window_draw(&c->w, &c->s, blurtracing);
-		c->rendering = 0;
-	}
-	else if (ft_strchr("ijkl", key) >= 0)
-	{
-		camera_rotate(&c->s.camera, key);
-		window_draw(&c->w, &c->s, blurtracing);
-		c->rendering = 0;
-	}
+	else if (c->s.controlled && key == 'e')
+		c->s.controlled = 0;
+	else if (!c->s.controlled && key == 'e')
+		scene_take_control(&c->s, WIDTH / 2.0, HEIGHT / 2.0);
+	else if (c->s.controlled && ft_strchr("wasdc ijkluotgyh", key) >= 0)
+		obj_change(c->s.controlled, c, key);
 	return (0);
 }

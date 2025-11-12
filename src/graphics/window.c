@@ -45,9 +45,9 @@ t_bool	window_free(t_window *w)
 	return (0);
 }
 
-void	window_draw(t_window *w, t_scene *s, void (*f)(t_window *, t_scene *))
+void	window_draw(t_window *w, t_scene *s)
 {
-	f(w, s);
+	raytracing(w, s, s->blur);
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr, 0, 0);
 }
 

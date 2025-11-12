@@ -51,6 +51,9 @@
 /* MLX controller event codes */
 # define WIN_CLOSE	17
 # define K_ESC		65307
+# define K_BS		65288
+# define K_UP		65362
+# define K_DOWN		65364
 
 /* MLX pixel grid manipulation */
 typedef struct s_image
@@ -91,7 +94,7 @@ t_luint	time_now(void);
 
 // graphics/window.c
 t_bool	window_init(t_window *w);
-void	window_draw(t_window *w, t_scene *s, void (*f)(t_window *, t_scene *));
+void	window_draw(t_window *w, t_scene *s);
 void	window_draw_pixel(t_window *w, t_uint x, t_uint y, int color);
 t_bool	window_free(t_window *w);
 
@@ -99,8 +102,8 @@ t_bool	window_free(t_window *w);
 int		color_int(t_color *c);
 
 // graphics/raytracing.c
-void	blurtracing(t_window *w, t_scene *s);
-void	raytracing(t_window *w, t_scene *s);
+void	raytracing(t_window *w, t_scene *s, const t_suint blur);
+void	full_render(struct s_ctx *c);
 
 // graphics/ray.c
 t_obj	*get_closest_hit(const t_ray *r, float *closest_t, t_scene *s);
@@ -108,8 +111,7 @@ t_color	ray_color(t_ray *r, t_scene *s, int depth);
 
 // graphics/camera.c
 t_ray	camera_ray(t_camera *c, t_idx x, t_idx y);
-void	camera_translate(t_camera *c, const int key);
-void	camera_rotate(t_camera *c, const int key);
+void	camera_change(struct s_ctx *c, const int key);
 
 // graphics/ray_hits.c
 t_bool	ray_hit_sph(const t_ray *r, const t_obj *s, float *t);
@@ -142,5 +144,8 @@ t_bool	is_in_shadow(t_scene *s, t_vec hit_point, t_vec normal, t_light light);
 
 // graphics/checkboard_pattern.c
 t_color	checkboard_pattern(t_obj *obj, t_vec hit_point);
+
+// graphics/obj_change.c
+void	obj_change(t_obj *o, struct s_ctx *c, const int key);
 
 #endif // MINIRT_H

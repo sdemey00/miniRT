@@ -32,38 +32,61 @@ t_ray	camera_ray(t_camera *c, t_idx x, t_idx y)
 	return ((t_ray){c->pos, ray_dir});
 }
 
-void	camera_translate(t_camera *c, const int key)
+static void	camera_translate(t_camera *c, const int key)
 {
 	if (key == 'w')
-		vec_isum(&c->pos, c->dir);
+		vec_isum(&c->pos, vec_scal(c->dir, 0.5));
 	else if (key == 's')
-		vec_isub(&c->pos, c->dir);
+		vec_isub(&c->pos, vec_scal(c->dir, 0.5));
 	else if (key == 'd')
-		vec_isum(&c->pos, c->right);
+		vec_isum(&c->pos, vec_scal(c->right, 0.5));
 	else if (key == 'a')
-		vec_isub(&c->pos, c->right);
+		vec_isub(&c->pos, vec_scal(c->right, 0.5));
 	else if (key == ' ')
-		vec_isum(&c->pos, (t_vec){0, 1, 0});
+		vec_isum(&c->pos, vec_scal((t_vec){0, 1, 0}, 0.25));
 	else if (key == 'c')
-		vec_isub(&c->pos, (t_vec){0, 1, 0});
+		vec_isub(&c->pos, vec_scal((t_vec){0, 1, 0}, 0.25));
 }
 
-void	camera_rotate(t_camera *c, const int key)
+static void	camera_rotate(t_camera *c, const int key)
 {
-	const float	angle = FT_PI / 16;
+	const float	angle = FT_PI / 17;
 
-	// TODO Bound the max and min of direction vector when looking up or down.
 	if (key == 'i')
-	{
 		c->dir = vec_rot(&c->dir, &c->right, -angle);
-	}
 	else if (key == 'k')
-	{
 		c->dir = vec_rot(&c->dir, &c->right, angle);
-	}
 	else if (key == 'l')
 		vec_iroty(&c->dir, angle);
 	else if (key == 'j')
 		vec_iroty(&c->dir, -angle);
-	vec_inorm(&c->dir);
+}
+
+static void camera_change_fov(t_camera *c, t_bool zoom_in)
+{
+	if (zoom_in)
+	{
+		if (c->fov > 0)
+			c->fov--;
+	}
+	else
+	{
+		if (c->fov < 180)
+			c->fov++;
+	}
+	c->flen = tan(c->fov * FT_PI / 180 / 2);
+}
+
+void	camera_change(struct s_ctx *c, const int key)
+{
+	if (ft_strchr("wasdc ", key) >= 0)
+		camera_translate(&c->s.camera, key);
+	else if (ft_strchr("ijkl", key) >= 0)
+		camera_rotate(&c->s.camera, key);
+	else if (ft_strchr("-=", key) >= 0)
+		camera_change_fov(&c->s.camera, key == '=');
+	if (VERBOSE)
+		camera_print(c->s.camera);
+	window_draw(&c->w, &c->s);
+	c->rendering = 0;
 }

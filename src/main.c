@@ -12,16 +12,33 @@
 
 #include "minirt.h"
 
+void	print_bindings()
+{
+	ft_printf("OVERALL\n");
+	ft_printf("%-18s : Quit\n", "<ESC>");
+	ft_printf("%-18s : Full render\n", "<p>");
+	ft_printf("%-18s : Movements\n", "<w,a,s,d,SPACE,c>");
+	ft_printf("CAMERA MODE\n");
+	ft_printf("%-18s : Orientation\n", "<i,j,k,l>");
+	ft_printf("%-18s : FOV\n", "<-,=>");
+	ft_printf("%-18s : Take control of object\n", "<e,MOUSE>");
+	ft_printf("OBJECT MODE\n");
+	ft_printf("%-18s : Orientation\n", "<i,j,k,l,u,o>");
+	ft_printf("%-18s : Radius\n", "<t,g>");
+	ft_printf("%-18s : Height\n", "<y,h>");
+}
+
 int	main(int argc, char **argv)
 {
 	struct s_ctx	c;
 
 	c.rendering = 0;
 	if (argc != 2)
-		return (!!dprintf(2, "Usage: %s <scene.rt>\n", argv[0]));
+		return (!!dprintf(2, "Error\nUsage: %s <scene.rt>\n", argv[0]));
 	if (!scene_init(&c.s, argv[1]) || !window_init(&c.w))
 		return (1);
-	window_draw(&c.w, &c.s, blurtracing);
+	print_bindings();
+	window_draw(&c.w, &c.s);
 	mlx_hook(c.w.win, WIN_CLOSE, 0, window_close, &c.w);
 	mlx_hook(c.w.win, 3, 2, key_release, &c);
 	mlx_hook(c.w.win, 4, 1L << 2, mouse_press, &c);

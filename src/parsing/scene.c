@@ -30,6 +30,8 @@ t_bool	scene_init(t_scene *s, const char *fpath)
 	s->camera.set = 0;
 	s->lights_len = 0;
 	s->objs_len = 0;
+	s->controlled = 0;
+	s->blur = 20;
 	if (!parse_file(fpath, s))
 		return (0);
 	s->camera.ratio = (float)WIDTH / (float)HEIGHT;
@@ -39,4 +41,14 @@ t_bool	scene_init(t_scene *s, const char *fpath)
 	if (VERBOSE)
 		scene_print(s);
 	return (1);
+}
+
+void	scene_take_control(t_scene *s, const int x, const int y)
+{
+	t_ray	r;
+	float	t;
+
+	t = INFINITY;
+	r = camera_ray(&s->camera, x, y);
+	s->controlled = get_closest_hit(&r, &t, s);
 }

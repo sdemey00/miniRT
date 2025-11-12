@@ -6,23 +6,23 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:31:38 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/11 17:28:54 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/12 15:19:36 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 static void	draw_grid(t_window *w, const t_idx c[2], int color, \
-	const t_suint ppp)
+	const t_suint blur)
 {
 	t_idx	i;
 	t_idx	j;
 
 	j = 0;
-	while (j <= ppp)
+	while (j <= blur)
 	{
 		i = 0;
-		while (i <= ppp)
+		while (i <= blur)
 		{
 			window_draw_pixel(w, c[0] + i, c[1] + j, color);
 			i++;
@@ -31,9 +31,8 @@ static void	draw_grid(t_window *w, const t_idx c[2], int color, \
 	}
 }
 
-void	blurtracing(t_window *w, t_scene *s)
+void	raytracing(t_window *w, t_scene *s, const t_suint blur)
 {
-	const t_suint	ppp = 15;
 	t_idx			i;
 	t_idx			j;
 	t_color			c;
@@ -47,31 +46,21 @@ void	blurtracing(t_window *w, t_scene *s)
 		{
 			r = camera_ray(&s->camera, i, j);
 			c = ray_color(&r, s, 0);
-			draw_grid(w, (const t_idx[2]){i, j}, color_int(&c), ppp);
-			i += ppp;
+			draw_grid(w, (const t_idx[2]){i, j}, color_int(&c), blur);
+			i += blur;
 		}
-		j += ppp;
+		j += blur;
 	}
 }
 
-void	raytracing(t_window *w, t_scene *s)
+void	full_render(struct s_ctx *c)
 {
-	t_idx	i;
-	t_idx	j;
-	t_color	c;
-	t_ray	r;
+	const t_ssuint	temp_blur = c->s.blur;
 
-	j = 0;
-	while (j < HEIGHT)
-	{
-		i = 0;
-		while (i < WIDTH)
-		{
-			r = camera_ray(&s->camera, i, j);
-			c = ray_color(&r, s, 0);
-			window_draw_pixel(w, i, j, color_int(&c));
-			i++;
-		}
-		j++;
-	}
+	c->rendering = 1;
+	c->s.blur = 1;
+	ft_printf("Rendering ...");
+	window_draw(&c->w, &c->s);
+	c->s.blur = temp_blur;
+	ft_printf("\n");
 }

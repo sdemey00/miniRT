@@ -74,6 +74,8 @@ typedef struct s_scene
 	t_ssuint	lights_len;
 	t_obj		objs[128];
 	t_ssuint	objs_len;
+	t_obj		*controlled;
+	t_ssuint	blur;
 }	t_scene;
 
 typedef struct s_eq2
