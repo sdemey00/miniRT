@@ -32,8 +32,9 @@ t_bool	parse_line(char *line, t_scene *scene)
 	t_idx				i;
 	const t_obj_build	objects[] = {
 	{"A", parse_ambiant}, {"C", parse_camera}, {"L", parse_light},
-	{"sp", parse_sphere}, {"pl", parse_plane}, {"cy", parse_cylinder},
-	{"co", parse_cone}, {"ci", parse_circle}, {NULL, NULL}};
+	{"B", parse_bg}, {"sp", parse_sphere}, {"pl", parse_plane},
+	{"cy", parse_cylinder}, {"co", parse_cone}, {"ci", parse_circle},
+	{NULL, NULL}};
 
 	i = 0;
 	status = -1;

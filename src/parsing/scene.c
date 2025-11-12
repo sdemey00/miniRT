@@ -32,6 +32,8 @@ t_bool	scene_init(t_scene *s, const char *fpath)
 	s->objs_len = 0;
 	s->controlled = 0;
 	s->blur = 20;
+	s->bg = (t_color){0, 0, 0};
+	s->bg_set = 0;
 	if (!parse_file(fpath, s))
 		return (0);
 	s->camera.ratio = (float)WIDTH / (float)HEIGHT;

@@ -66,19 +66,28 @@ void	cone_print(t_obj cone);
 t_bool	parse_circle(char **split, t_scene *scene);
 void	circle_print(t_obj circle);
 
+// parsing/parse_optional_args.c
+t_bool	parse_optional_args(char **split, t_obj *obj);
+
+// parsing/parse_background.c
+t_bool	parse_bg(char **split, t_scene *scene);
+
 // parsing/is_valid_format.c
-t_bool	check_range_double(double val, double min, double max, char *msg);
-t_bool	check_range_int(int val, int min, int max, char *msg);
-t_bool	check_args_count(char **tab, const unsigned int count);
 t_bool	is_valid_float(char *s);
 t_bool	is_valid_int(char *s);
 
 // parsing/parse_utils.c
-void	ft_free_split(char **tab);
 t_bool	parse_vec(char *str, t_vec *v);
 t_bool	parse_color(char *str, t_color *c);
 t_bool	parse_float(char *src, float *out);
 t_bool	parse_int(char *src, int *out);
+t_bool	parse_dir(char *str, t_vec *v);
+
+// parsing/check_range.c
+t_bool	check_frange(float val, float min, float max);
+t_bool	check_irange(int val, int min, int max);
+t_bool	check_args_count(char **tab, const unsigned int count);
+t_bool	check_args_range(char **tab, const unsigned int min, const unsigned int max);
 
 // parsing/print_scene_infos.c
 void	print_error(char *msg);
@@ -87,5 +96,7 @@ void	scene_print(t_scene *scene);
 
 // parsing/ft_atof.c
 double	ft_atof(const char *str);
+// parsing/free_split.c
+void	ft_free_split(char **tab);
 
 #endif // PARSING_H

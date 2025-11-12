@@ -55,6 +55,11 @@
 # define K_UP		65362
 # define K_DOWN		65364
 
+// Default optionnal obj args
+# define DFLT_BRIGHT 0.4
+# define DFLT_REFLECT 0
+# define OPTION_ARGS 3
+
 /* MLX pixel grid manipulation */
 typedef struct s_image
 {

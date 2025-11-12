@@ -40,7 +40,9 @@ static t_bool	parse_all_lines(int fd, t_scene *scene)
 {
 	char	*line;
 	t_idx	i;
+	t_idx	j;
 
+	j = 1;
 	line = ft_gnl(fd);
 	if (!line)
 	{
@@ -61,10 +63,12 @@ static t_bool	parse_all_lines(int fd, t_scene *scene)
 				{
 					free(line);
 					close(fd);
+					ft_dprintf(2, "Line: %d\n", j);
 					return (0);
 				}
 			}
 		}
+		j++;
 		free(line);
 		line = ft_gnl(fd);
 	}

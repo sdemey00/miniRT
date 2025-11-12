@@ -88,7 +88,7 @@ t_color	ray_light_color(t_scene *s, t_ray *r, t_obj *hit_obj, float closest_t)
 	surface_normal = get_surface_normal(hit_obj, hit_point);
 	light_color = compute_lights(s, hit_point, surface_normal, r);
 	base_color = hit_obj->color;
-	if (1) //checkboard
+	if (hit_obj->checkboard) //checkboard
 		base_color = checkboard_pattern(hit_obj, hit_point);
 	color = (t_color){
 		base_color.x * light_color.x,
