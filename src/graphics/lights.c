@@ -81,7 +81,7 @@ t_color	ray_light_color(t_scene *s, t_ray *r, t_obj *hit_obj, float closest_t)
 	t_vec	surface_normal;
 	t_vec	hit_point;
 	t_color	light_color;
-	t_color base_color;
+	t_color	base_color;
 	t_color	color;
 
 	hit_point = vec_sum(r->origin, vec_scal(r->dir, closest_t));

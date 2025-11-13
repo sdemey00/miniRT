@@ -14,7 +14,7 @@
 
 t_bool	parse_circle(char **split, t_scene *scene)
 {
-	const t_ssuint	min_args = 3;
+	const t_ssuint	min_args = 4;
 	const t_ssuint	max_args = min_args + OPTION_ARGS;
 	t_obj			circle;
 
@@ -28,9 +28,11 @@ t_bool	parse_circle(char **split, t_scene *scene)
 	circle.checkboard = 0;
 	if (!parse_vec(split[0], &circle.pos)
 		|| !parse_dir(split[1], &circle.dir)
-		|| !parse_color(split[2], &circle.color)
+		|| !parse_float(split[2], &circle.radius)
+		|| !parse_color(split[3], &circle.color)
 		|| !parse_optional_args(&split[min_args], &circle))
 		return (0);
+	circle.radius /= 2;
 	circle.e_type = CIR;
 	scene->objs[scene->objs_len++] = circle;
 	return (1);
@@ -44,6 +46,7 @@ void	circle_print(const t_obj *circle)
 	ft_printf("Circle dir: %.2f, %.2f, %.2f\n",
 		circle->dir.x, circle->dir.y,
 		circle->dir.z);
+	ft_printf("Circle radius: %.2f\n", circle->radius);
 	ft_printf("Circle color: %d, %d, %d\n", (t_ssuint)circle->color.x,
 		(t_ssuint)circle->color.y, (t_ssuint)circle->color.z);
 	ft_printf("Circle: b=%.2f, r=%.2f, c=%d\n", circle->brightness,
