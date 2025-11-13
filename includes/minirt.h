@@ -94,6 +94,17 @@ struct s_ctx
 	t_bool		rendering;
 };
 
+typedef struct s_hit
+{
+	t_obj	*obj;
+	float	dist;
+	t_vec	point;
+	t_vec	normal;
+	t_vec	uv;
+}	t_hit;
+
+// graphics/t_hit.c
+
 // events/mouse.c
 int		mouse_press(int key, int x, int y, struct s_ctx *c);
 
@@ -120,7 +131,7 @@ void	raytracing(t_window *w, t_scene *s, const t_suint blur);
 void	full_render(struct s_ctx *c);
 
 // graphics/ray.c
-t_obj	*get_closest_hit(const t_ray *r, float *closest_t, t_scene *s);
+t_hit	get_closest_hit(const t_ray *r, t_scene *s);
 t_color	ray_color(t_ray *r, t_scene *s, int depth);
 
 // graphics/camera.c
@@ -137,7 +148,7 @@ t_bool	ray_hit_con(const t_ray *r, const t_obj *cy, float *t);
 t_bool	ray_hit_cyl(const t_ray *r, const t_obj *cy, float *t);
 
 // graphics/lights.c
-t_color	ray_light_color(t_scene *s, t_ray *r, t_obj *hit_obj, float closest_t);
+t_color	compute_lights(t_scene *s, t_hit *hitten, t_ray *r);
 
 // maths/vec_utils.c
 t_vec	vec_proj(const t_vec v, const t_vec w);
@@ -151,8 +162,7 @@ void	eq2_set(t_eq2 *e);
 
 // graphics/reflection.c
 t_vec	get_surface_normal(t_obj *obj, t_vec hit_point);
-t_color	compute_reflection(t_ray *r, t_scene *s, float closest_t, \
-	t_obj *hit_obj, int depth);
+t_color	compute_reflection(t_ray *r, t_scene *s, t_hit *hitten, int depth);
 
 // graphics/shadows.c
 t_bool	is_in_shadow(t_scene *s, t_vec hit_point, t_vec normal, t_light light);

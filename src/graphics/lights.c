@@ -48,8 +48,7 @@ static t_color	compute_specular(t_vec normal, t_light light,
 	return (vec_scal(light.light_norm, spec_angle * light.intensity));
 }
 
-static t_color	compute_lights(t_scene *s, t_vec hit_point,
-		t_vec normal, t_ray *r)
+t_color	compute_lights(t_scene *s, t_hit *hitten, t_ray *r)
 {
 	t_color	i;
 	t_idx	idx;
@@ -61,41 +60,18 @@ static t_color	compute_lights(t_scene *s, t_vec hit_point,
 	i = compute_ambiant(s->ambiant);
 	while (idx < s->lights_len)
 	{
-		if (is_in_shadow(s, hit_point, normal, s->lights[idx]))
+		if (is_in_shadow(s, hitten->point, hitten->normal, s->lights[idx]))
 		{
 			idx++;
 			continue ;
 		}
-		light_dir = vec_norm(vec_sub(s->lights[idx].pos, hit_point));
-		diffuse = compute_diffuse(normal, s->lights[idx], light_dir);
-		specular = compute_specular(normal, s->lights[idx], light_dir, r);
+		light_dir = vec_norm(vec_sub(s->lights[idx].pos, hitten->point));
+		diffuse = compute_diffuse(hitten->normal, s->lights[idx], light_dir);
+		specular = compute_specular(hitten->normal, s->lights[idx], light_dir, \
+			r);
 		i = vec_sum(i, vec_sum(diffuse, specular));
 		idx++;
 	}
 	vec_fmin((t_vec *)&i, 1.0);
 	return (i);
-}
-
-t_color	ray_light_color(t_scene *s, t_ray *r, t_obj *hit_obj, float closest_t)
-{
-	t_vec	surface_normal;
-	t_vec	hit_point;
-	t_color	light_color;
-	t_color	base_color;
-	t_color	color;
-
-	hit_point = vec_sum(r->origin, vec_scal(r->dir, closest_t));
-	surface_normal = get_surface_normal(hit_obj, hit_point);
-	// if (1)
-	// 	surface_normal = perturbe_normal(surface_normal, 2.0);
-	light_color = compute_lights(s, hit_point, surface_normal, r);
-	base_color = hit_obj->color;
-	if (hit_obj->checkboard) //checkboard
-		base_color = checkboard_pattern(hit_obj, hit_point);
-	color = (t_color){
-		base_color.x * light_color.x,
-		base_color.y * light_color.y,
-		base_color.z * light_color.z};
-	vec_fmin((t_vec *)&color, 255.0);
-	return (color);
 }

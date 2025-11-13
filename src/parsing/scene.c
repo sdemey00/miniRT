@@ -48,9 +48,7 @@ t_bool	scene_init(t_scene *s, const char *fpath)
 void	scene_take_control(t_scene *s, const int x, const int y)
 {
 	t_ray	r;
-	float	t;
 
-	t = INFINITY;
 	r = camera_ray(&s->camera, x, y);
-	s->controlled = get_closest_hit(&r, &t, s);
+	s->controlled = get_closest_hit(&r, s).obj;
 }
