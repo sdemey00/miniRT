@@ -1,6 +1,7 @@
 Mandatory :
 - PDF
 - Remove file wildcard in Makefile
+- Norm
 
 Bonus :
 - Bump map textures
@@ -9,17 +10,18 @@ Bonus ++ :
 - Deep test parsing
 - Export scene
 
-
 FIX :
-- Camera problem on reaching abs(dir.y) == 1 and when angle is out of [0:pi]
+- Shadow have the color of emiting light.
+- No lights when 2 planes above each other ? Not able to make a closed room ?
+- Check range values in parsing
 
 sdemey :
+- Checkerboard pattern
 - Check MAX_OBJS in the parsing.
 - reflection and shininess
-- camera_print() function taking a camera copy as parameter ?
 
 mmichele :
-- Be able to toggle the functionalities, and the quality of image rendering.
 - Be able to cycle trough the light with the arrows.
-- Make a cursor at screen center, togglable with a key.
+- Be able to toggle the functionalities, and the quality of image rendering.
+- Make a cursor at screen center, togglable with a key. ('x')
 - Rotation of an object does not rotates as expected.

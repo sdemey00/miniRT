@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 11:37:17 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/12 16:04:29 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/13 10:35:54 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	obj_resize(t_obj *o, const int key)
 		o->height -= 0.5;
 }
 
-static void	obj_translate(t_obj *o, t_camera* c, const int key)
+static void	obj_translate(t_obj *o, t_camera *c, const int key)
 {
 	if (key == 'w')
 		vec_isum(&o->pos, vec_scal(c->dir, 0.5));
@@ -47,7 +47,7 @@ static void	obj_rotate(t_obj *o, const int key)
 	if (key == 'i')
 		vec_irotx(&o->dir, angle);
 	else if (key == 'k')
-		vec_irotx(&o->dir, angle);
+		vec_irotx(&o->dir, -angle);
 	else if (key == 'l')
 		vec_iroty(&o->dir, angle);
 	else if (key == 'j')
@@ -58,6 +58,12 @@ static void	obj_rotate(t_obj *o, const int key)
 		vec_irotz(&o->dir, -angle);
 }
 
+static void	obj_set_render(t_obj *o, const int key)
+{
+	(void)o;
+	(void)key;
+}
+
 void	obj_change(t_obj *o, struct s_ctx *c, const int key)
 {
 	if (ft_strchr("wasdc ", key) >= 0)
@@ -66,6 +72,8 @@ void	obj_change(t_obj *o, struct s_ctx *c, const int key)
 		obj_rotate(o, key);
 	else if (ft_strchr("tgyh", key) >= 0)
 		obj_resize(o, key);
+	else if (ft_strchr("12345678", key) >= 0)
+		obj_set_render(o, key);
 	if (VERBOSE)
 		objs_print(o, 1);
 	window_draw(&c->w, &c->s);

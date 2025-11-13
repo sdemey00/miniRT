@@ -62,7 +62,7 @@ static void	camera_rotate(t_camera *c, const int key)
 		vec_iroty(&c->dir, -angle);
 }
 
-static void camera_change_fov(t_camera *c, t_bool zoom_in)
+static void	camera_change_fov(t_camera *c, t_bool zoom_in)
 {
 	if (zoom_in)
 	{

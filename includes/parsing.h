@@ -86,8 +86,8 @@ t_bool	parse_dir(char *str, t_vec *v);
 // parsing/check_range.c
 t_bool	check_frange(float val, float min, float max);
 t_bool	check_irange(int val, int min, int max);
-t_bool	check_args_count(char **tab, const unsigned int count);
-t_bool	check_args_range(char **tab, const unsigned int min, const unsigned int max);
+t_bool	check_args_count(char **tab, const t_uint count);
+t_bool	check_args_range(char **tab, const t_uint min, const t_uint max);
 
 // parsing/print_scene_infos.c
 void	print_error(char *msg);

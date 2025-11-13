@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 13:01:45 by sdemey            #+#    #+#             */
-/*   Updated: 2025/11/12 15:27:28 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/13 10:17:21 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ int	key_release(int key, struct s_ctx *c)
 			c->s.blur++;
 		window_draw(&c->w, &c->s);
 	}
-	else if (c->s.controlled && key == 'e')
+	else if (c->s.controlled && key == 'f')
 		c->s.controlled = 0;
-	else if (!c->s.controlled && key == 'e')
+	else if (!c->s.controlled && key == 'f')
 		scene_take_control(&c->s, WIDTH / 2.0, HEIGHT / 2.0);
-	else if (c->s.controlled && ft_strchr("wasdc ijkluotgyh", key) >= 0)
+	else if (c->s.controlled && ft_strchr("wasdc ijkluotgyh12345678", key) >= 0)
 		obj_change(c->s.controlled, c, key);
 	return (0);
 }
