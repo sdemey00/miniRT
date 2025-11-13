@@ -25,7 +25,8 @@ t_obj	*get_closest_hit(const t_ray *r, float *closest_t, t_scene *s)
 		if ((s->objs[i].e_type == SPH && ray_hit_sph(r, &s->objs[i], &t)) || \
 			(s->objs[i].e_type == PLA && ray_hit_pla(r, &s->objs[i], &t)) || \
 			(s->objs[i].e_type == CYL && ray_hit_cyl(r, &s->objs[i], &t)) || \
-			(s->objs[i].e_type == CON && ray_hit_con(r, &s->objs[i], &t)))
+			(s->objs[i].e_type == CON && ray_hit_con(r, &s->objs[i], &t)) || \
+			(s->objs[i].e_type == CIR && ray_hit_cir(r, &s->objs[i], &t)))
 		{
 			if (t < *closest_t)
 			{

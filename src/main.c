@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-void	print_bindings()
+void	print_bindings(void)
 {
 	ft_printf("OVERALL\n");
 	ft_printf("%-18s : Quit\n", "<ESC>");

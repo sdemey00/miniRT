@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 17:35:03 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/11 17:35:03 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/13 10:30:06 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	map_cylinder(float *u, float *v, t_vec hit_point)
 t_color	checkboard_pattern(t_obj *obj, t_vec hit_point)
 {
 	const float	scale = 15.0;
-	float	u;
-	float	v;
-	t_color color1;
-	t_color color2;
+	float		u;
+	float		v;
+	t_color		color1;
+	t_color		color2;
 
 	u = 0;
 	v = 0;
