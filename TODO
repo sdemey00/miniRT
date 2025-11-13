@@ -2,26 +2,30 @@ Mandatory :
 - PDF
 - Remove file wildcard in Makefile
 - Norm
+- Deep test parsing
+	- Check input ranges
 
 Bonus :
 - Bump map textures
 
 Bonus ++ :
-- Deep test parsing
 - Export scene
 
 FIX :
 - Shadow have the color of emiting light.
 - No lights when 2 planes above each other ? Not able to make a closed room ?
-- Check range values in parsing
 
 sdemey :
 - Checkerboard pattern
 - Check MAX_OBJS in the parsing.
-- reflection and shininess
+- Reflection and shininess
+- Rendering load progression in the terminal.
 
 mmichele :
 - Be able to cycle trough the light with the arrows.
+- Rotation of an object does not rotates as expected.
 - Be able to toggle the functionalities, and the quality of image rendering.
 - Make a cursor at screen center, togglable with a key. ('x')
-- Rotation of an object does not rotates as expected.
+- Show the rendering time.
+- Optimize blur to full rendering, with an array of booleans to remember, which
+pixel has already been rendered.
