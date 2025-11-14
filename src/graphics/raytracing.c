@@ -54,6 +54,7 @@ void	raytracing(t_window *w, t_scene *s, const t_suint blur)
 		{
 			r = camera_ray(&s->camera, i, j);
 			c = ray_color(&r, s, 0);
+			c = vec_scal(c, 255.0);
 			draw_grid(w, (const t_idx[2]){i, j}, color_int(&c), blur);
 			i += blur;
 		}

@@ -23,7 +23,7 @@ t_bool	parse_sphere(char **split, t_scene *scene)
 		print_error("Sphere: invalid number of arguments\n");
 		return (0);
 	}
-	sp.brightness = DFLT_BRIGHT;
+	sp.shininess = DFLT_BRIGHT;
 	sp.reflection = DFLT_REFLECT;
 	sp.checkboard = 0;
 	if (!parse_vec(split[0], &sp.pos)
@@ -45,6 +45,6 @@ void	sphere_print(const t_obj *sphere)
 	ft_printf("Sphere radius: %.2f\n", sphere->radius);
 	ft_printf("Sphere color: %d, %d, %d\n", (t_ssuint)sphere->color.x,
 		(t_ssuint)sphere->color.y, (t_ssuint)sphere->color.z);
-	ft_printf("Sphere: b=%.2f, r=%.2f, c=%d\n", sphere->brightness,
+	ft_printf("Sphere: b=%.2f, r=%.2f, c=%d\n", sphere->shininess,
 		sphere->reflection, sphere->checkboard);
 }

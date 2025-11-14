@@ -65,7 +65,7 @@
 # define K_DOWN		65364
 
 // Default optionnal obj args
-# define DFLT_BRIGHT 0.4
+# define DFLT_BRIGHT 32
 # define DFLT_REFLECT 0
 # define OPTION_ARGS 3
 
@@ -154,7 +154,7 @@ t_color	compute_lights(t_scene *s, t_hit *hitten, t_ray *r);
 t_vec	vec_proj(const t_vec v, const t_vec w);
 t_vec	vec_perp(const t_vec v, const t_vec w);
 t_vec	vec_rot(const t_vec *v, const t_vec *w, const t_rad a);
-void	vec_fmin(t_vec *v, float f);
+t_vec	vec_fmin(const t_vec *v, const float f);
 
 // maths/eq2.c
 t_eq2	eq2_init(const t_vec oc, const t_vec rdir, const float r);

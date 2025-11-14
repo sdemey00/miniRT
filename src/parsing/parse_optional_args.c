@@ -21,13 +21,13 @@ t_bool	parse_optional_args(char **split, t_obj *obj)
 	{
 		if (!split[i][0] || !split[i][1] || split[i][1] != '=')
 			return (print_error("Invalid key=value format\n"), 0);
-		if (split[i][0] == 'b')
-			if (!parse_float(&split[i][2], &obj->brightness) || \
-				!check_frange(obj->brightness, 0.0, 1.0))
-				return (print_error("Invalid brightness format\n"), 0);
+		if (split[i][0] == 's')
+			if (!parse_int(&split[i][2], &obj->shininess) || \
+				!check_frange(obj->shininess, 0, 255))
+				return (print_error("Invalid shininess format\n"), 0);
 		if (split[i][0] == 'r')
 			if (!parse_float(&split[i][2], &obj->reflection) || \
-				!check_frange(obj->brightness, 0.0, 1.0))
+				!check_frange(obj->reflection, 0.0, 1.0))
 				return (print_error("Invalid reflection format\n"), 0);
 		if (split[i][0] == 'c')
 		{

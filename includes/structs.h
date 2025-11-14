@@ -46,7 +46,9 @@ typedef struct s_light
 	t_vec	pos;
 	float	intensity;
 	t_color	color;
-	t_color	light_norm;
+	t_color	norm;
+	t_vec	dir;
+	float	ndotl;
 }	t_light;
 
 typedef struct s_obj
@@ -64,7 +66,7 @@ typedef struct s_obj
 	t_color	color;
 	float	radius;
 	float	height;
-	float	brightness;
+	int		shininess;
 	float	reflection;
 	t_bool	checkboard;
 }	t_obj;
