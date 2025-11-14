@@ -124,11 +124,11 @@ void	window_draw_pixel(t_window *w, t_uint x, t_uint y, int color);
 t_bool	window_free(t_window *w);
 
 // graphics/color.c
-int		color_int(t_color *c);
+int		color_int(const t_color *c);
 
 // graphics/raytracing.c
 void	raytracing(t_window *w, t_scene *s, const t_suint blur);
-void	full_render(struct s_ctx *c);
+int		full_render(struct s_ctx *c);
 
 // graphics/ray.c
 t_hit	get_closest_hit(const t_ray *r, t_scene *s);

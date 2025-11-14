@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 11:37:17 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/13 10:35:54 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/14 10:03:32 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,4 @@ void	obj_change(t_obj *o, struct s_ctx *c, const int key)
 		obj_set_render(o, key);
 	if (VERBOSE)
 		objs_print(o, 1);
-	window_draw(&c->w, &c->s);
-	c->rendering = 0;
 }

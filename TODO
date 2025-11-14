@@ -25,7 +25,6 @@ mmichele :
 - Be able to cycle trough the light with the arrows.
 - Rotation of an object does not rotates as expected.
 - Be able to toggle the functionalities, and the quality of image rendering.
-- Make a cursor at screen center, togglable with a key. ('x')
 - Show the rendering time.
 - Optimize blur to full rendering, with an array of booleans to remember, which
 pixel has already been rendered.

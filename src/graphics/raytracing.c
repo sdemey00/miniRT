@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:31:38 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/12 15:19:36 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/14 10:09:23 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ static void	draw_grid(t_window *w, const t_idx c[2], int color, \
 	}
 }
 
+void	draw_reticle(t_window *w)
+{
+	const unsigned int	center[2] = {WIDTH / 2, HEIGHT / 2};
+	const t_color		c = (t_color){0, 255, 0};
+
+	draw_grid(w, (const t_idx[2]){center[0] - 2, center[1] - 2}, color_int(&c), 4);
+}
+
 void	raytracing(t_window *w, t_scene *s, const t_suint blur)
 {
 	t_idx			i;
@@ -51,16 +59,22 @@ void	raytracing(t_window *w, t_scene *s, const t_suint blur)
 		}
 		j += blur;
 	}
+	if (s->reticle && !s->controlled)
+		draw_reticle(w);
 }
 
-void	full_render(struct s_ctx *c)
+int	full_render(struct s_ctx *c)
 {
 	const t_ssuint	temp_blur = c->s.blur;
+	const t_bool	temp_reticle = c->s.reticle;
 
+	c->s.reticle = 0;
 	c->rendering = 1;
 	c->s.blur = 1;
 	ft_printf("Rendering ...");
 	window_draw(&c->w, &c->s);
 	c->s.blur = temp_blur;
+	c->s.reticle = temp_reticle;
 	ft_printf("\n");
+	return (0);
 }

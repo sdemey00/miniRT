@@ -21,7 +21,8 @@ void	print_bindings(void)
 	ft_printf("CAMERA MODE\n");
 	ft_printf("%-18s : Orientation\n", "<i,j,k,l>");
 	ft_printf("%-18s : FOV\n", "<-,=>");
-	ft_printf("%-18s : Take control of object\n", "<e,MOUSE>");
+	ft_printf("%-18s : Take or release, control of object\n", "<e,MOUSE>");
+	ft_printf("%-18s : Toggle reticle\n", "<x>");
 	ft_printf("OBJECT MODE\n");
 	ft_printf("%-18s : Orientation\n", "<i,j,k,l,u,o>");
 	ft_printf("%-18s : Radius\n", "<t,g>");

@@ -81,6 +81,7 @@ typedef struct s_scene
 	t_ssuint	blur;
 	t_color		bg;
 	t_bool		bg_set;
+	t_bool		reticle;
 }	t_scene;
 
 typedef struct s_eq2

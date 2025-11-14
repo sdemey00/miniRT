@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-int	color_int(t_color *c)
+int	color_int(const t_color *c)
 {
 	return (((t_ssuint)c->x << 16) | ((t_ssuint)c->y << 8) | (t_ssuint)c->z);
 }
