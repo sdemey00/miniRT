@@ -19,7 +19,7 @@ static void	normalize_lights(t_scene *s)
 	i = 0;
 	while (i < s->lights_len)
 	{
-		s->lights[i].light_norm = vec_rscal(s->lights[i].color, 255.0);
+		s->lights[i].norm = vec_rscal(s->lights[i].color, 255.0);
 		i++;
 	}
 }

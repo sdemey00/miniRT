@@ -12,6 +12,21 @@
 
 #include "minirt.h"
 
+static t_color	get_obj_color(t_hit *hitten)
+{
+	if (hitten->obj->checkboard)
+		return (checkboard_pattern(hitten));
+	return (hitten->obj->color);
+}
+
+static t_color	color_mix(t_color *base_color, t_color *light_color)
+{
+	return ((t_color){
+		base_color->x * light_color->x,
+		base_color->y * light_color->y,
+		base_color->z * light_color->z});
+}
+
 static t_obj	*get_closest_hit_obj(const t_ray *r, float *closest_t, \
 	t_scene *s)
 {
@@ -52,53 +67,34 @@ t_hit	get_closest_hit(const t_ray *r, t_scene *s)
 	res.dist = closest_t;
 	res.point = vec_sum(r->origin, vec_scal(r->dir, res.dist));
 	res.normal = get_surface_normal(res.obj, res.point);
-	// TODO res.uv = 
+	res.uv = map_obj(&res);
+	res.p_offset = vec_sum(res.point, vec_scal(res.normal, EPSILON));
 	return (res);
 }
-
-// static void apply_gamma(t_color *color, float gamma)
-// {
-//     color->x = ft_pow(color->x / 255.0, 1.0 / gamma) * 255.0;
-//     color->y = ft_pow(color->y / 255.0, 1.0 / gamma) * 255.0;
-//     color->z = ft_pow(color->z / 255.0, 1.0 / gamma) * 255.0;
-// }
 
 t_color	ray_color(t_ray *r, t_scene *s, int depth)
 {
 	t_hit	hitten;
 	t_color	color;
-	t_color	reflected_color;
+	t_color	reflect_color;
 	t_color	light_color;
 	t_color	base_color;
-	//float	attenuation;
 
 	if (depth > 3)
 		return ((t_color){0, 0, 0});
 	hitten = get_closest_hit(r, s);
 	if (!hitten.obj)
 		return (s->bg);
+	base_color = get_obj_color(&hitten);
+	base_color = vec_rscal(base_color, 255.0);
 	light_color = compute_lights(s, &hitten, r);
-	base_color = hitten.obj->color;
-	if (hitten.obj->checkboard)
-		base_color = checkboard_pattern(hitten.obj, hitten.point);
-	color = (t_color){
-		base_color.x * light_color.x,
-		base_color.y * light_color.y,
-		base_color.z * light_color.z};
-	vec_fmin((t_vec *)&color, 255.0);
-	// attenuation = 1.0 / (1.0 + 0.09 * closest_t + 0.032 * closest_t * closest_t);
-	// color = vec_scal(color, attenuation);
-	// color = vec_scal(color, 1.7);
-	if (hitten.obj->reflection) // hitten.reflection
+	color = color_mix(&base_color, &light_color);
+	if (hitten.obj->reflection)
 	{
-		reflected_color = compute_reflection(r, s, &hitten, depth);
-		color = vec_sum(
-				vec_scal(color, 1 - hitten.obj->reflection), // hitten.reflection
-				vec_scal(reflected_color, hitten.obj->reflection) //same
-				);
+		reflect_color = compute_reflection(r, s, &hitten, depth);
+		color = vec_sum(vec_scal(color, 1 - hitten.obj->reflection),
+				vec_scal(reflect_color, hitten.obj->reflection));
 	}
-	//apply_gamma(&color, 1.7);
-	//vec_print(&color);
-	vec_fmin((t_vec *)&color, 255.0);
+	color = vec_fmin((t_vec *)&color, 1.0);
 	return (color);
 }

@@ -65,7 +65,7 @@
 # define K_DOWN		65364
 
 // Default optionnal obj args
-# define DFLT_BRIGHT 0.4
+# define DFLT_BRIGHT 32
 # define DFLT_REFLECT 0
 # define OPTION_ARGS 3
 
@@ -101,6 +101,7 @@ typedef struct s_hit
 	t_vec	point;
 	t_vec	normal;
 	t_vec	uv;
+	t_vec	p_offset;
 }	t_hit;
 
 // graphics/t_hit.c
@@ -154,7 +155,7 @@ t_color	compute_lights(t_scene *s, t_hit *hitten, t_ray *r);
 t_vec	vec_proj(const t_vec v, const t_vec w);
 t_vec	vec_perp(const t_vec v, const t_vec w);
 t_vec	vec_rot(const t_vec *v, const t_vec *w, const t_rad a);
-void	vec_fmin(t_vec *v, float f);
+t_vec	vec_fmin(const t_vec *v, const float f);
 
 // maths/eq2.c
 t_eq2	eq2_init(const t_vec oc, const t_vec rdir, const float r);
@@ -164,15 +165,11 @@ void	eq2_set(t_eq2 *e);
 t_vec	get_surface_normal(t_obj *obj, t_vec hit_point);
 t_color	compute_reflection(t_ray *r, t_scene *s, t_hit *hitten, int depth);
 
-// graphics/shadows.c
-t_bool	is_in_shadow(t_scene *s, t_vec hit_point, t_vec normal, t_light light);
-
-// graphics/checkboard_pattern.c
-t_color	checkboard_pattern(t_obj *obj, t_vec hit_point);
-
 // graphics/obj_change.c
 void	obj_change(t_obj *o, struct s_ctx *c, const int key);
 
-void	map_sphere(float *u, float *v, t_vec hit_point);
+// graphics/map_obj.c
+t_vec	map_obj(t_hit *hitten);
+t_color	checkboard_pattern(t_hit *hitten);
 
 #endif // MINIRT_H

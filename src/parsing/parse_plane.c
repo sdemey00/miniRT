@@ -23,7 +23,7 @@ t_bool	parse_plane(char **split, t_scene *scene)
 		print_error("Plane: invalid number of arguments\n");
 		return (0);
 	}
-	plane.brightness = DFLT_BRIGHT;
+	plane.shininess = DFLT_BRIGHT;
 	plane.reflection = DFLT_REFLECT;
 	plane.checkboard = 0;
 	if (!parse_vec(split[0], &plane.pos)
@@ -46,6 +46,6 @@ void	plane_print(const t_obj *plane)
 		plane->dir.z);
 	ft_printf("Plane color: %d, %d, %d\n", (t_ssuint)plane->color.x,
 		(t_ssuint)plane->color.y, (t_ssuint)plane->color.z);
-	ft_printf("Plane: b=%.2f, r=%.2f, c=%d\n", plane->brightness,
+	ft_printf("Plane: b=%.2f, r=%.2f, c=%d\n", plane->shininess,
 		plane->reflection, plane->checkboard);
 }

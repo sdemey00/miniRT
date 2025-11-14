@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-void	map_sphere(float *u, float *v, t_vec hit_point)
+static void	map_sphere(float *u, float *v, t_vec hit_point)
 {
 	t_vec	p;
 	float	theta;
@@ -25,7 +25,7 @@ void	map_sphere(float *u, float *v, t_vec hit_point)
 	*v = phi / FT_PI;
 }
 
-void	map_plane(float *u, float *v, t_vec hit_point, t_obj *obj)
+static void	map_plane(float *u, float *v, t_vec hit_point, t_obj *obj)
 {
 	t_vec	tmp_up;
 	t_vec	right;
@@ -40,7 +40,7 @@ void	map_plane(float *u, float *v, t_vec hit_point, t_obj *obj)
 	*v = vec_dot(hit_point, up) * 0.2;
 }
 
-void	map_cylinder(float *u, float *v, t_vec hit_point, t_obj *obj)
+static void	map_cylinder(float *u, float *v, t_vec hit_point, t_obj *obj)
 {
 	float	theta;
 
@@ -51,27 +51,33 @@ void	map_cylinder(float *u, float *v, t_vec hit_point, t_obj *obj)
 		*v += 1.0;
 }
 
-t_color	checkboard_pattern(t_obj *obj, t_vec hit_point)
+t_vec	map_obj(t_hit *hitten)
 {
 	t_vec	local_hit;
-	float	scale;
 	float	u;
 	float	v;
 
-	scale = 30.0;
 	u = 0.0;
 	v = 0.0;
-	local_hit = vec_sub(hit_point, obj->pos);
-	if (obj->e_type == SPH)
+	local_hit = vec_sub(hitten->point, hitten->obj->pos);
+	if (hitten->obj->e_type == SPH)
 		map_sphere(&u, &v, local_hit);
-	else if (obj->e_type == PLA)
-	{
+	else if (hitten->obj->e_type == PLA)
+		map_plane(&u, &v, local_hit, hitten->obj);
+	else if (hitten->obj->e_type == CYL)
+		map_cylinder(&u, &v, local_hit, hitten->obj);
+	return ((t_vec){u, v, 0});
+}
+
+t_color	checkboard_pattern(t_hit *hitten)
+{
+	float	scale;
+
+	scale = 30.0;
+	if (hitten->obj->e_type == PLA)
 		scale = 5.0;
-		map_plane(&u, &v, local_hit, obj);
-	}
-	else if (obj->e_type == CYL)
-		map_cylinder(&u, &v, local_hit, obj);
-	if (((int)floor(u * scale) + (int)floor(v * scale)) % 2 == 0)
-		return (obj->color);
+	if (((int)floor(hitten->uv.x * scale)
+			+ (int)floor(hitten->uv.y * scale)) % 2 == 0)
+		return (hitten->obj->color);
 	return ((t_color){255, 255, 255});
 }
