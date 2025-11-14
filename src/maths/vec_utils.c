@@ -32,7 +32,7 @@ inline t_vec	vec_rot(const t_vec *v, const t_vec *w, const t_rad a)
 
 t_vec	vec_fmin(const t_vec *v, const float f)
 {
-	t_vec res;
+	t_vec	res;
 
 	res.x = fminf(v->x, f);
 	res.y = fminf(v->y, f);

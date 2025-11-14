@@ -45,6 +45,18 @@ static t_color	compute_specular(t_hit *hitten, t_light *light, t_ray *ray)
 	return (vec_scal(light->norm, spec_angle * light->intensity));
 }
 
+static t_bool	is_in_shadow(t_scene *s, t_hit *hitten, t_light *light)
+{
+	t_ray	shadow_ray;
+	t_obj	*shadow_obj;
+
+	shadow_ray = (t_ray){hitten->p_offset, light->dir};
+	shadow_obj = get_closest_hit(&shadow_ray, s).obj;
+	if (!shadow_obj)
+		return (0);
+	return (1);
+}
+
 t_color	compute_lights(t_scene *s, t_hit *hitten, t_ray *r)
 {
 	t_color	i;
@@ -57,10 +69,10 @@ t_color	compute_lights(t_scene *s, t_hit *hitten, t_ray *r)
 	i = compute_ambiant(s->ambiant);
 	while (idx < s->lights_len)
 	{
-		if (!is_in_shadow(s, hitten->point, hitten->normal, s->lights[idx]))
+		delta = vec_sub(s->lights[idx].pos, hitten->point);
+		s->lights[idx].dir = vec_norm(delta);
+		if (!is_in_shadow(s, hitten, &s->lights[idx]))
 		{
-			delta = vec_sub(s->lights[idx].pos, hitten->point);
-			s->lights[idx].dir = vec_norm(delta);
 			s->lights[idx].ndotl = vec_dot(hitten->normal, s->lights[idx].dir);
 			diffuse = compute_diffuse(&s->lights[idx]);
 			specular = compute_specular(hitten, &s->lights[idx], r);

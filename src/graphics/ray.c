@@ -12,6 +12,21 @@
 
 #include "minirt.h"
 
+static t_color	get_obj_color(t_hit *hitten)
+{
+	if (hitten->obj->checkboard)
+		return (checkboard_pattern(hitten));
+	return (hitten->obj->color);
+}
+
+static t_color	color_mix(t_color *base_color, t_color *light_color)
+{
+	return ((t_color){
+		base_color->x * light_color->x,
+		base_color->y * light_color->y,
+		base_color->z * light_color->z});
+}
+
 static t_obj	*get_closest_hit_obj(const t_ray *r, float *closest_t, \
 	t_scene *s)
 {
@@ -52,23 +67,9 @@ t_hit	get_closest_hit(const t_ray *r, t_scene *s)
 	res.dist = closest_t;
 	res.point = vec_sum(r->origin, vec_scal(r->dir, res.dist));
 	res.normal = get_surface_normal(res.obj, res.point);
-	// TODO res.uv = 
+	res.uv = map_obj(&res);
+	res.p_offset = vec_sum(res.point, vec_scal(res.normal, EPSILON));
 	return (res);
-}
-
-t_color	get_obj_color(t_hit *hitten)
-{
-	if (hitten->obj->checkboard)
-		return (checkboard_pattern(hitten->obj, hitten->point));
-	return (hitten->obj->color);
-}
-
-t_color	color_mix(t_color *base_color, t_color *light_color)
-{
-	return ((t_color){
-		base_color->x * light_color->x,
-		base_color->y * light_color->y,
-		base_color->z * light_color->z});
 }
 
 t_color	ray_color(t_ray *r, t_scene *s, int depth)
