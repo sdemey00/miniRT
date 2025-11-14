@@ -41,7 +41,7 @@
 #  endif
 # endif
 # ifndef MAX_OBJS
-#  define MAX_OBJS 16
+#  define MAX_OBJS 128
 # endif
 
 # include <math.h>

@@ -14,22 +14,15 @@
 
 t_vec	get_surface_normal(t_obj *obj, t_vec hit_point)
 {
-	t_vec	normal;
-	t_vec	tmp;
-
 	if (obj->e_type == SPH)
-	{
-		tmp = vec_sub(hit_point, obj->pos);
-		normal = vec_norm(tmp);
-	}
-	else if (obj->e_type == PLA)
-		normal = vec_norm(obj->dir);
+		return (vec_norm(vec_sub(hit_point, obj->pos)));
+	else if (obj->e_type == PLA || obj->e_type == CIR)
+		return (vec_norm(obj->dir));
 	else if (obj->e_type == CYL)
-	{
-		tmp = (t_vec){hit_point.x - obj->pos.x, 0, hit_point.z - obj->pos.z};
-		normal = vec_norm(tmp);
-	}
-	else
-		normal = (t_vec){0, 1, 0};
-	return (normal);
+		return (vec_norm((t_vec){hit_point.x - obj->pos.x, 0, hit_point.z - obj->pos.z}));
+	// else if (obj->e_type == CON)
+	// {
+	// 	return (vec_norm(vec_sub(vec_scal(obj->dir, (vec_dot(vec_sub(hit_point, obj->pos), obj->dir))), vec_scal(vec_sub(hit_point, obj->pos), cos(FT_PI / 4.0) * cos(FT_PI / 4.0)))));
+	// }
+	return ((t_vec){0, 1, 0});
 }

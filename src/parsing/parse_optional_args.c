@@ -33,7 +33,7 @@ t_bool	parse_optional_args(char **split, t_obj *obj)
 		{
 			if (ft_strcmp(&split[i][2], "1") == 0)
 				obj->checkboard = 1;
-			else if (ft_strcmp(&split[i][2], "0") == 0)
+			else if (ft_strcmp(&split[i][2], "0") != 0)
 				return (print_error("Invalid checkboard format\n"), 0);
 		}
 		i++;

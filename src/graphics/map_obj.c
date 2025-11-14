@@ -62,7 +62,7 @@ t_vec	map_obj(t_hit *hitten)
 	local_hit = vec_sub(hitten->point, hitten->obj->pos);
 	if (hitten->obj->e_type == SPH)
 		map_sphere(&u, &v, local_hit);
-	else if (hitten->obj->e_type == PLA)
+	else if (hitten->obj->e_type == PLA || hitten->obj->e_type == CIR)
 		map_plane(&u, &v, local_hit, hitten->obj);
 	else if (hitten->obj->e_type == CYL)
 		map_cylinder(&u, &v, local_hit, hitten->obj);
@@ -74,7 +74,7 @@ t_color	checkboard_pattern(t_hit *hitten)
 	float	scale;
 
 	scale = 30.0;
-	if (hitten->obj->e_type == PLA)
+	if (hitten->obj->e_type == PLA || hitten->obj->e_type == CIR)
 		scale = 5.0;
 	if (((int)floor(hitten->uv.x * scale)
 			+ (int)floor(hitten->uv.y * scale)) % 2 == 0)

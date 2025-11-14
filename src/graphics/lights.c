@@ -74,6 +74,7 @@ t_color	compute_lights(t_scene *s, t_hit *hitten, t_ray *r)
 		if (!is_in_shadow(s, hitten, &s->lights[idx]))
 		{
 			s->lights[idx].ndotl = vec_dot(hitten->normal, s->lights[idx].dir);
+			// if (get_bitmap(s->effect, DIFFUSE) && get_bitmap(s->obj->effects, DIFFUSE))
 			diffuse = compute_diffuse(&s->lights[idx]);
 			specular = compute_specular(hitten, &s->lights[idx], r);
 			i = vec_sum(i, vec_sum(diffuse, specular));
