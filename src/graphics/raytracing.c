@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:31:38 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/14 10:09:23 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/14 12:36:02 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,16 @@ int	full_render(struct s_ctx *c)
 {
 	const t_ssuint	temp_blur = c->s.blur;
 	const t_bool	temp_reticle = c->s.reticle;
+	double			start_time;
 
 	c->s.reticle = 0;
 	c->rendering = 1;
 	c->s.blur = 1;
-	ft_printf("Rendering ...");
+	ft_printf("Render");
+	start_time = time_now();
 	window_draw(&c->w, &c->s);
+	ft_printf("ed in %.2fs\n", (time_now() - start_time) / 1000);
 	c->s.blur = temp_blur;
 	c->s.reticle = temp_reticle;
-	ft_printf("\n");
 	return (0);
 }

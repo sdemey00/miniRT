@@ -115,7 +115,7 @@ int		key_release(int key, struct s_ctx *c);
 int		window_close(t_window *w);
 
 // time.c
-t_luint	time_now(void);
+double	time_now(void);
 
 // graphics/window.c
 t_bool	window_init(t_window *w);
