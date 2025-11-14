@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 11:37:17 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/14 10:03:32 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/14 17:37:00 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,9 @@ static void	obj_rotate(t_obj *o, const int key)
 		vec_irotz(&o->dir, -angle);
 }
 
-static void	obj_set_render(t_obj *o, const int key)
+static inline void	obj_set_render(t_obj *o, const int key)
 {
-	(void)o;
-	(void)key;
+	bitmap_switch(&o->effects, (key - '0') - 1);
 }
 
 void	obj_change(t_obj *o, struct s_ctx *c, const int key)

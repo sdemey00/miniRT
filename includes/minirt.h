@@ -65,9 +65,9 @@
 # define K_DOWN		65364
 
 // Default optionnal obj args
-# define DFLT_BRIGHT 32
-# define DFLT_REFLECT 0
-# define OPTION_ARGS 3
+# define DFLT_BRIGHT	32
+# define DFLT_REFLECT	0
+# define OPTION_ARGS	3
 
 /* MLX pixel grid manipulation */
 typedef struct s_image
@@ -103,8 +103,6 @@ typedef struct s_hit
 	t_vec	uv;
 	t_vec	p_offset;
 }	t_hit;
-
-// graphics/t_hit.c
 
 // events/mouse.c
 int		mouse_press(int key, int x, int y, struct s_ctx *c);
@@ -171,5 +169,10 @@ void	obj_change(t_obj *o, struct s_ctx *c, const int key);
 // graphics/map_obj.c
 t_vec	map_obj(t_hit *hitten);
 t_color	checkboard_pattern(t_hit *hitten);
+
+// bitmap.c
+void	bitmap_switch(t_bitmap *b, const t_ssuint i);
+t_bool	bitmap_get(const t_bitmap *b, const t_ssuint i);
+void	bitmap_print(const t_bitmap *b);
 
 #endif // MINIRT_H

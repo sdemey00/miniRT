@@ -53,3 +53,8 @@ void	scene_take_control(t_scene *s, const int x, const int y)
 	r = camera_ray(&s->camera, x, y);
 	s->controlled = get_closest_hit(&r, s).obj;
 }
+
+void	scene_change(t_scene *s, const int key)
+{
+	bitmap_switch(&s->effects, (key - '0') - 1);
+}

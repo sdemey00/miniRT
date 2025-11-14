@@ -26,6 +26,7 @@ typedef struct s_obj_build
 // parsing/scene.c
 t_bool	scene_init(t_scene *s, const char *fpath);
 void	scene_take_control(t_scene *s, const int x, const int y);
+void	scene_change(t_scene *s, const int key);
 
 // parsing/parse_file.c
 t_bool	parse_file(const char *fpath, t_scene *scene);

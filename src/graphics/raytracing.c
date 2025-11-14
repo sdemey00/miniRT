@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:31:38 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/14 12:36:02 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/14 15:20:25 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	draw_reticle(t_window *w)
 	const unsigned int	center[2] = {WIDTH / 2, HEIGHT / 2};
 	const t_color		c = (t_color){0, 255, 0};
 
-	draw_grid(w, (const t_idx[2]){center[0] - 2, center[1] - 2}, color_int(&c), 4);
+	draw_grid(w, (const t_idx[2]){center[0] - 2, center[1] - 2}, \
+		color_int(&c), 4);
 }
 
 void	raytracing(t_window *w, t_scene *s, const t_suint blur)
