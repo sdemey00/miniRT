@@ -12,21 +12,6 @@
 
 #include "minirt.h"
 
-static t_color	get_obj_color(t_hit *hitten)
-{
-	if (hitten->obj->checkboard)
-		return (checkboard_pattern(hitten));
-	return (hitten->obj->color);
-}
-
-static t_color	color_mix(t_color *base_color, t_color *light_color)
-{
-	return ((t_color){
-		base_color->x * light_color->x,
-		base_color->y * light_color->y,
-		base_color->z * light_color->z});
-}
-
 static t_obj	*get_closest_hit_obj(const t_ray *r, float *closest_t, \
 	t_scene *s)
 {
@@ -72,6 +57,22 @@ t_hit	get_closest_hit(const t_ray *r, t_scene *s)
 	return (res);
 }
 
+static t_color	get_obj_color(t_scene *s, t_hit *hitten)
+{
+	if (bitmap_get(&s->effects, CHECKER_PATTERN)
+		&& bitmap_get(&hitten->obj->effects, CHECKER_PATTERN))
+		return (checkboard_pattern(hitten));
+	return (hitten->obj->color);
+}
+
+static t_color	color_mix(t_color *base_color, t_color *light_color)
+{
+	return ((t_color){
+		base_color->x * light_color->x,
+		base_color->y * light_color->y,
+		base_color->z * light_color->z});
+}
+
 t_color	ray_color(t_ray *r, t_scene *s, int depth)
 {
 	t_hit	hitten;
@@ -85,11 +86,12 @@ t_color	ray_color(t_ray *r, t_scene *s, int depth)
 	hitten = get_closest_hit(r, s);
 	if (!hitten.obj)
 		return (s->bg);
-	base_color = get_obj_color(&hitten);
+	base_color = get_obj_color(s, &hitten);
 	base_color = vec_rscal(base_color, 255.0);
 	light_color = compute_lights(s, &hitten, r);
 	color = color_mix(&base_color, &light_color);
-	if (hitten.obj->reflection)
+	if (hitten.obj->reflection && bitmap_get(&s->effects, REFLEXION)
+		&& bitmap_get(&hitten.obj->effects, REFLEXION))
 	{
 		reflect_color = compute_reflection(r, s, &hitten, depth);
 		color = vec_sum(vec_scal(color, 1 - hitten.obj->reflection),

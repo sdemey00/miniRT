@@ -24,6 +24,17 @@ static void	normalize_lights(t_scene *s)
 	}
 }
 
+void	obj_init(t_obj *o)
+{
+	o->shininess = DFLT_BRIGHT;
+	o->reflection = DFLT_REFLECT;
+	o->effects = 0b11101111;
+}
+
+// void	scene_add_obj()
+// {
+// }
+
 t_bool	scene_init(t_scene *s, const char *fpath)
 {
 	s->ambiant.set = 0;
@@ -35,6 +46,7 @@ t_bool	scene_init(t_scene *s, const char *fpath)
 	s->blur = 20;
 	s->bg = (t_color){0, 0, 0};
 	s->bg_set = 0;
+	s->effects = 0b11111111;
 	if (!parse_file(fpath, s))
 		return (0);
 	s->camera.ratio = (float)WIDTH / (float)HEIGHT;

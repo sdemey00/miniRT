@@ -23,9 +23,7 @@ t_bool	parse_cylinder(char **split, t_scene *scene)
 		print_error("Cylinder: invalid number of arguments\n");
 		return (0);
 	}
-	cy.shininess = DFLT_BRIGHT;
-	cy.reflection = DFLT_REFLECT;
-	cy.checkboard = 0;
+	obj_init(&cy);
 	if (!parse_vec(split[0], &cy.pos)
 		|| !parse_dir(split[1], &cy.dir)
 		|| !parse_color(split[4], &cy.color)
@@ -54,6 +52,6 @@ void	cylinder_print(const t_obj *cylinder)
 	ft_printf("Cylinder color: %d, %d, %d\n",
 		(t_ssuint)cylinder->color.x, (t_ssuint)cylinder->color.y,
 		(t_ssuint)cylinder->color.z);
-	ft_printf("Cylinder: b=%.2f, r=%.2f, c=%d\n", cylinder->shininess,
-		cylinder->reflection, cylinder->checkboard);
+	ft_printf("Cylinder: b=%.2f, r=%.2f\n", cylinder->shininess,
+		cylinder->reflection);
 }

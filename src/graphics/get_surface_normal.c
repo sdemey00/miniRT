@@ -19,10 +19,7 @@ t_vec	get_surface_normal(t_obj *obj, t_vec hit_point)
 	else if (obj->e_type == PLA || obj->e_type == CIR)
 		return (vec_norm(obj->dir));
 	else if (obj->e_type == CYL)
-		return (vec_norm((t_vec){hit_point.x - obj->pos.x, 0, hit_point.z - obj->pos.z}));
-	// else if (obj->e_type == CON)
-	// {
-	// 	return (vec_norm(vec_sub(vec_scal(obj->dir, (vec_dot(vec_sub(hit_point, obj->pos), obj->dir))), vec_scal(vec_sub(hit_point, obj->pos), cos(FT_PI / 4.0) * cos(FT_PI / 4.0)))));
-	// }
+		return (vec_norm((t_vec){
+				hit_point.x - obj->pos.x, 0, hit_point.z - obj->pos.z}));
 	return ((t_vec){0, 1, 0});
 }

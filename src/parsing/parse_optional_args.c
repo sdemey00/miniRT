@@ -32,7 +32,7 @@ t_bool	parse_optional_args(char **split, t_obj *obj)
 		if (split[i][0] == 'c')
 		{
 			if (ft_strcmp(&split[i][2], "1") == 0)
-				obj->checkboard = 1;
+				bitmap_switch(&obj->effects, CHECKER_PATTERN);
 			else if (ft_strcmp(&split[i][2], "0") != 0)
 				return (print_error("Invalid checkboard format\n"), 0);
 		}

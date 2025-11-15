@@ -22,19 +22,26 @@ static t_color	compute_ambiant(t_ambiant a)
 	return (vec_scal(a_norm, a.intensity));
 }
 
-static t_color	compute_diffuse(t_light *light)
+static t_color	compute_diffuse(t_scene *s, t_hit *hitten, t_light *light)
 {
+	if (!bitmap_get(&s->effects, DIFFUSE_LIGHT)
+		|| !bitmap_get(&hitten->obj->effects, DIFFUSE_LIGHT))
+		return ((t_color){0, 0, 0});
 	if (light->ndotl <= 0)
 		return ((t_color){0, 0, 0});
 	return (vec_scal(light->norm, light->ndotl * light->intensity));
 }
 
-static t_color	compute_specular(t_hit *hitten, t_light *light, t_ray *ray)
+static t_color	compute_specular(t_scene *s, t_hit *hitten,
+		t_light *light, t_ray *ray)
 {
 	t_vec	r_dir;
 	t_vec	view_dir;
 	float	spec_angle;
 
+	if (!bitmap_get(&s->effects, SPECULAR_LIGHT)
+		|| !bitmap_get(&hitten->obj->effects, SPECULAR_LIGHT))
+		return ((t_color){0, 0, 0});
 	r_dir = vec_sub(vec_scal(hitten->normal, 2 * light->ndotl), light->dir);
 	r_dir = vec_norm(r_dir);
 	view_dir = vec_scal(ray->dir, -1);
@@ -71,12 +78,13 @@ t_color	compute_lights(t_scene *s, t_hit *hitten, t_ray *r)
 	{
 		delta = vec_sub(s->lights[idx].pos, hitten->point);
 		s->lights[idx].dir = vec_norm(delta);
-		if (!is_in_shadow(s, hitten, &s->lights[idx]))
+		if (!is_in_shadow(s, hitten, &s->lights[idx])
+			|| !bitmap_get(&s->effects, SHADOWS)
+			|| !bitmap_get(&hitten->obj->effects, SHADOWS))
 		{
 			s->lights[idx].ndotl = vec_dot(hitten->normal, s->lights[idx].dir);
-			// if (get_bitmap(s->effect, DIFFUSE) && get_bitmap(s->obj->effects, DIFFUSE))
-			diffuse = compute_diffuse(&s->lights[idx]);
-			specular = compute_specular(hitten, &s->lights[idx], r);
+			diffuse = compute_diffuse(s, hitten, &s->lights[idx]);
+			specular = compute_specular(s, hitten, &s->lights[idx], r);
 			i = vec_sum(i, vec_sum(diffuse, specular));
 		}
 		idx++;

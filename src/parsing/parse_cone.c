@@ -23,9 +23,7 @@ t_bool	parse_cone(char **split, t_scene *scene)
 		print_error("Cone: invalid number of arguments\n");
 		return (0);
 	}
-	cone.shininess = DFLT_BRIGHT;
-	cone.reflection = DFLT_REFLECT;
-	cone.checkboard = 0;
+	obj_init(&cone);
 	if (!parse_vec(split[0], &cone.pos)
 		|| !parse_dir(split[1], &cone.dir)
 		|| !parse_color(split[2], &cone.color))
@@ -45,6 +43,6 @@ void	cone_print(const t_obj *cone)
 		cone->dir.z);
 	ft_printf("Cone color: %d, %d, %d\n", (t_ssuint)cone->color.x,
 		(t_ssuint)cone->color.y, (t_ssuint)cone->color.z);
-	ft_printf("Cone: b=%.2f, r=%.2f, c=%d\n", cone->shininess,
-		cone->reflection, cone->checkboard);
+	ft_printf("Cone: b=%.2f, r=%.2f\n", cone->shininess,
+		cone->reflection);
 }

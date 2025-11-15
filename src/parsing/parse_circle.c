@@ -23,9 +23,7 @@ t_bool	parse_circle(char **split, t_scene *scene)
 		print_error("Circle: invalid number of arguments\n");
 		return (0);
 	}
-	circle.shininess = DFLT_BRIGHT;
-	circle.reflection = DFLT_REFLECT;
-	circle.checkboard = 0;
+	obj_init(&circle);
 	if (!parse_vec(split[0], &circle.pos)
 		|| !parse_dir(split[1], &circle.dir)
 		|| !parse_float(split[2], &circle.radius)
@@ -49,6 +47,6 @@ void	circle_print(const t_obj *circle)
 	ft_printf("Circle radius: %.2f\n", circle->radius);
 	ft_printf("Circle color: %d, %d, %d\n", (t_ssuint)circle->color.x,
 		(t_ssuint)circle->color.y, (t_ssuint)circle->color.z);
-	ft_printf("Circle: b=%.2f, r=%.2f, c=%d\n", circle->shininess,
-		circle->reflection, circle->checkboard);
+	ft_printf("Circle: b=%.2f, r=%.2f\n", circle->shininess,
+		circle->reflection);
 }
