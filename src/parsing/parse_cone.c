@@ -44,5 +44,5 @@ void	cone_print(const t_obj *cone)
 	ft_printf("Cone color: %d, %d, %d\n", (t_ssuint)cone->color.x,
 		(t_ssuint)cone->color.y, (t_ssuint)cone->color.z);
 	ft_printf("Cone: b=%.2f, r=%.2f\n", cone->shininess,
-		cone->reflection);
+		cone->reflexion);
 }

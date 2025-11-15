@@ -27,7 +27,7 @@ static void	normalize_lights(t_scene *s)
 void	obj_init(t_obj *o)
 {
 	o->shininess = DFLT_BRIGHT;
-	o->reflection = DFLT_REFLECT;
+	o->reflexion = DFLT_REFLECT;
 	o->effects = 0b11101111;
 }
 

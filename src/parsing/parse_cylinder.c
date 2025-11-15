@@ -53,5 +53,5 @@ void	cylinder_print(const t_obj *cylinder)
 		(t_ssuint)cylinder->color.x, (t_ssuint)cylinder->color.y,
 		(t_ssuint)cylinder->color.z);
 	ft_printf("Cylinder: b=%.2f, r=%.2f\n", cylinder->shininess,
-		cylinder->reflection);
+		cylinder->reflexion);
 }

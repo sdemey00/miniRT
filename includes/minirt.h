@@ -159,9 +159,9 @@ t_vec	vec_fmin(const t_vec *v, const float f);
 t_eq2	eq2_init(const t_vec oc, const t_vec rdir, const float r);
 void	eq2_set(t_eq2 *e);
 
-// graphics/reflection.c
+// graphics/reflexion.c
 t_vec	get_surface_normal(t_obj *obj, t_vec hit_point);
-t_color	compute_reflection(t_ray *r, t_scene *s, t_hit *hitten, int depth);
+t_color	compute_reflexion(t_ray *r, t_scene *s, t_hit *hitten, int depth);
 
 // graphics/obj_change.c
 void	obj_change(t_obj *o, struct s_ctx *c, const int key);

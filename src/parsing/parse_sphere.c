@@ -44,5 +44,5 @@ void	sphere_print(const t_obj *sphere)
 	ft_printf("Sphere color: %d, %d, %d\n", (t_ssuint)sphere->color.x,
 		(t_ssuint)sphere->color.y, (t_ssuint)sphere->color.z);
 	ft_printf("Sphere: b=%.2f, r=%.2f\n", sphere->shininess,
-		sphere->reflection);
+		sphere->reflexion);
 }

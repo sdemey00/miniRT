@@ -48,5 +48,5 @@ void	circle_print(const t_obj *circle)
 	ft_printf("Circle color: %d, %d, %d\n", (t_ssuint)circle->color.x,
 		(t_ssuint)circle->color.y, (t_ssuint)circle->color.z);
 	ft_printf("Circle: b=%.2f, r=%.2f\n", circle->shininess,
-		circle->reflection);
+		circle->reflexion);
 }

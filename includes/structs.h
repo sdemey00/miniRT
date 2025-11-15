@@ -77,7 +77,7 @@ typedef struct s_obj
 	float		radius;
 	float		height;
 	int			shininess;
-	float		reflection;
+	float		reflexion;
 	t_bitmap	effects;
 }	t_obj;
 

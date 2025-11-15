@@ -26,9 +26,9 @@ t_bool	parse_optional_args(char **split, t_obj *obj)
 				!check_frange(obj->shininess, 0, 255))
 				return (print_error("Invalid shininess format\n"), 0);
 		if (split[i][0] == 'r')
-			if (!parse_float(&split[i][2], &obj->reflection) || \
-				!check_frange(obj->reflection, 0.0, 1.0))
-				return (print_error("Invalid reflection format\n"), 0);
+			if (!parse_float(&split[i][2], &obj->reflexion) || \
+				!check_frange(obj->reflexion, 0.0, 1.0))
+				return (print_error("Invalid reflexion format\n"), 0);
 		if (split[i][0] == 'c')
 		{
 			if (ft_strcmp(&split[i][2], "1") == 0)

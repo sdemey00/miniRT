@@ -90,12 +90,12 @@ t_color	ray_color(t_ray *r, t_scene *s, int depth)
 	base_color = vec_rscal(base_color, 255.0);
 	light_color = compute_lights(s, &hitten, r);
 	color = color_mix(&base_color, &light_color);
-	if (hitten.obj->reflection && bitmap_get(&s->effects, REFLEXION)
+	if (hitten.obj->reflexion && bitmap_get(&s->effects, REFLEXION)
 		&& bitmap_get(&hitten.obj->effects, REFLEXION))
 	{
-		reflect_color = compute_reflection(r, s, &hitten, depth);
-		color = vec_sum(vec_scal(color, 1 - hitten.obj->reflection),
-				vec_scal(reflect_color, hitten.obj->reflection));
+		reflect_color = compute_reflexion(r, s, &hitten, depth);
+		color = vec_sum(vec_scal(color, 1 - hitten.obj->reflexion),
+				vec_scal(reflect_color, hitten.obj->reflexion));
 	}
 	color = vec_fmin((t_vec *)&color, 1.0);
 	return (color);

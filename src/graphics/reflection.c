@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reflection.c                                       :+:      :+:    :+:   */
+/*   reflexion.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-t_color	compute_reflection(t_ray *r, t_scene *s, t_hit *hitten, int depth)
+t_color	compute_reflexion(t_ray *r, t_scene *s, t_hit *hitten, int depth)
 {
 	t_vec	reflect_dir;
 	t_ray	reflect_ray;

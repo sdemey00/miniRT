@@ -44,5 +44,5 @@ void	plane_print(const t_obj *plane)
 		plane->dir.z);
 	ft_printf("Plane color: %d, %d, %d\n", (t_ssuint)plane->color.x,
 		(t_ssuint)plane->color.y, (t_ssuint)plane->color.z);
-	ft_printf("Plane: b=%.2f, r=%.2f\n", plane->shininess, plane->reflection);
+	ft_printf("Plane: b=%.2f, r=%.2f\n", plane->shininess, plane->reflexion);
 }
