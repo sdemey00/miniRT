@@ -26,7 +26,8 @@ t_bool	parse_cone(char **split, t_scene *scene)
 	obj_init(&cone);
 	if (!parse_vec(split[0], &cone.pos)
 		|| !parse_dir(split[1], &cone.dir)
-		|| !parse_color(split[2], &cone.color))
+		|| !parse_color(split[2], &cone.color)
+		|| !parse_optional_args(&split[min_args], &cone))
 		return (0);
 	cone.e_type = CON;
 	if (!scene_add_obj(scene, &cone))

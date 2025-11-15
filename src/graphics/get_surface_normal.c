@@ -21,5 +21,8 @@ t_vec	get_surface_normal(t_obj *obj, t_vec hit_point)
 	else if (obj->e_type == CYL)
 		return (vec_norm((t_vec){
 				hit_point.x - obj->pos.x, 0, hit_point.z - obj->pos.z}));
+	// else if (obj->e_type == CON)
+	// {
+	// }
 	return ((t_vec){0, 1, 0});
 }

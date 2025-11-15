@@ -170,6 +170,8 @@ void	obj_change(t_obj *o, struct s_ctx *c, const int key);
 
 // graphics/map_obj.c
 t_vec	map_obj(t_hit *hitten);
+
+// graphics/texture.c
 t_color	checkboard_pattern(t_hit *hitten);
 
 // bitmap.c

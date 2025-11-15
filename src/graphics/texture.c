@@ -12,6 +12,19 @@
 
 #include "minirt.h"
 
+t_color	checkboard_pattern(t_hit *hitten)
+{
+	float	scale;
+
+	scale = 30.0;
+	if (hitten->obj->e_type == PLA || hitten->obj->e_type == CIR)
+		scale = 5.0;
+	if (((int)floor(hitten->uv.x * scale)
+			+ (int)floor(hitten->uv.y * scale)) % 2 == 0)
+		return (hitten->obj->color);
+	return ((t_color){255, 255, 255});
+}
+
 // typedef struct s_tex
 // {
 // 	void	*img;
