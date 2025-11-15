@@ -6,7 +6,7 @@
 %%   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        %%
 %%                                                +#+#+#+#+#+   +#+           %%
 %%   Created: 2025/11/08 00:54:32 by mmichele          #+#    #+#             %%
-%%   Updated: 2025/11/10 00:13:53 by mmichele         ###   ########.fr       %%
+%%   Updated: 2025/11/15 21:00:43 by mmichele         ###   ########.fr       %%
 %%                                                                            %%
 %% ************************************************************************** %%
 
@@ -24,29 +24,80 @@
 \maketitle
 \tableofcontents
 \newpage
-
-\section{Camera}
-	Given informations :
-	\List {
-		\ListItem $\textbf{C}_{\textbf{pos}}$ : 3D Position as a point.
-		\ListItem $\textbf{C}_{\textbf{dir}}$ : 3D Direction as a normalized vector.
-		\ListItem fov$^\circ$ : Vertical field of view in degrees,
-			ranging from $0^\circ$ to $180^\circ$. 
-	}
-	Deduced informations :
-	\List {
-		\ListItem $\textbf{C}_{\textbf{fov}}$ : Vertical field of view in radians,
-			ranging from $0$ to $\pi$ radians
-			We can define it with the following fomula :
-			\[ \text{C}_{\text{fov}} = \text{fov}^\circ \cdot \dfrac{\pi}{180^\circ} \]
-		\ListItem $\textbf{C}_\textbf{flen}$ : Focal length that can be calculated as follows :
-			\[ \text{C}_\text{flen} = \tan\left(\dfrac{\textbf{C}_{\textbf{fov}}}{2}\right) \]
-	}
-	
-\section{Ray intersections}
+\section{Linear algebra}
+	\subsection{Vector}
+		A vector is a mathematical object described by it's components, it has 
+		1 component for each dimension, so a 3D vector has 3 components.\\It 
+		has the following operations for 2 vectors, $\vec{v}$, $\vec{w} \in 
+		\mathbb{R}^3$ and a scalar $\lambda \in \mathbb{R}$.\\
+		\Table{l c c l} {\\
+			Addition & $\vec{v} + \vec{w}$ & $ = $ & $(v_x + w_x, v_y + w_y, v_z + w_z)$\\
+			Substraction & $\vec{v} - \vec{w}$ & $ = $ & $(v_x - w_x, v_y - w_y, v_z - w_z)$\\
+			Scale & $\lambda \vec{v}$ & $ = $ & $(v_x \cdot \lambda, v_y \cdot \lambda, v_z \cdot \lambda)$\\
+			Dot product & $\vec{v} \cdot \vec{w}$ & $ = $ & $v_x w_x + v_y w_y + v_z w_z$\\
+			Inner-product & $\langle\vec{v}, \vec{w}\rangle$ & $ = $ & $\vec{v} \cdot \vec{w}$\\
+			Cross product & $\vec{v} \times \vec{w}$ & $ = $ & $(v_y w_z - v_z w_y, v_z w_x - v_x w_z, v_x w_y - v_y w_x)$\\
+			Magnitude & $||\vec{v}||$ & $ = $ & $\sqrt{v_x^2 + v_y^2 + v_z^2}$\\
+			Normalization & $\hat{v}$ & $ = $ & $\vec{v}\,/\,||\vec{v}||$
+		}
+	\subsection{Matrix}
+\section{Vector space objects}
+	\subsection{Ray}
+		For a point $\dot{O} \in \mathbb{R}^3$, the origin of the ray, a vector 
+		$\hat{N} \in \mathbb{R}^3$, the normalalized direction vector of the ray, 
+		and a scalar for the direction vector, $t \in \mathbb{R}$. We define 
+		the normal equation of a line as :
+		$$P(t) = \dot{O} + t\hat{N}$$
 	\subsection{Plane}
+		For a point $\dot{O} \in \mathbb{R}^3$, the origin of the plane, 
+		a vector $\hat{N} \in \mathbb{R}^3$, the normalized orthogonal vector 
+		of the plane and a arbitrary point $\dot{P} \in \mathbb{R}^3$. 
+		$\dot{P}$ is a point of the plane if :
+		$$N_x(P_x - O_x) + N_y(P_y - O_y) + N_z(P_z - O_z) = 0$$
 	\subsection{Sphere}
+		For a point $\dot{O} \in \mathbb{R}^3$ the origin of the sphere, a scalar 
+		$r \in \mathbb{R}$, the radius of the sphere and an arbitrary point 
+		$P \in \mathbb{R}^3$. $\dot{P}$ is a point of the sphere if :
+		$$\langle (\dot{P} - \dot{O}), (\dot{P} - \dot{O}) \rangle = r^2$$
 	\subsection{Circle}
+		For a point $\dot{O} \in \mathbb{R}^3$, the origin of the circle, 
+		a vector $\hat{N} \in \mathbb{R}^3$, the normalized orthogonal vector 
+		of the circle and a arbitrary point $\dot{P} \in \mathbb{R}^3$. 
+		$\dot{P}$ is a point of the circle if :
+		% // TODO
 	\subsection{Cylinder}
+		For a point $\dot{O} \in \mathbb{R}^3$ the origin of the sphere, a 
+		a vector $\hat{N} \in \mathbb{R}^3$ the normalized direction vector, 
+		two scalars $r$ and $h \in \mathbb{R}$, respectively the radius and the 
+		height of the cylinder. We define the normal equation of a cylinder as :
+		$$||(P - O) - \langle (P - O), \hat{N} \rangle \hat{N}||^2 = r^2$$
+		where $$|\langle (P - O), \hat{N} \rangle| \leq \dfrac{h}{2}$$
+		% // TODO
+\section{Raytracer}
+	\subsection{Camera}
+		Given informations :
+		\List {
+			\ListItem $\textbf{C}_{\textbf{pos}}$ : 3D Position as a point.
+			\ListItem $\textbf{C}_{\textbf{dir}}$ : 3D Direction as a normalized vector.
+			\ListItem fov$^\circ$ : Vertical field of view in degrees,
+				ranging from $0^\circ$ to $180^\circ$. 
+		}
+		Deduced informations :
+		\List {
+			\ListItem $\textbf{C}_{\textbf{fov}}$ : Vertical field of view in radians,
+				ranging from $0$ to $\pi$ radians
+				We can define it with the following fomula :
+				\[ \text{C}_{\text{fov}} = \text{fov}^\circ \cdot \dfrac{\pi}{180^\circ} \]
+			\ListItem $\textbf{C}_\textbf{flen}$ : Focal length that can be calculated as follows :
+				\[ \text{C}_\text{flen} = \tan\left(\dfrac{\text{C}_{\text{fov}}}{2}\right) \]
+		}
+		\subsection{Ray intersections}
+			\subsubsection{Plane}
+				% // TODO
+				$$P(t) = \dfrac{(\dot{P_o} - \dot{R_o}) \cdot \hat{P_d}}{\hat{R_d} \cdot \hat{P_d}}$$
+			\subsubsection{Circle}
+			\subsubsection{Sphere}
+			\subsubsection{Cylinder}
+			\subsubsection{Cone}
 
 \end{document}
