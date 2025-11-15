@@ -10,20 +10,25 @@ Bonus :
 
 Bonus ++ :
 - Export scene
+- Add objects to the scene
+- Remove object from the scene
+- Rendering load bar on screen.
 
 FIX :
-- Shadow have the color of emiting light.
+- Shadow have the color of emiting light. Investigate ?
 - No lights when 2 planes above each other ? Not able to make a closed room ?
+Shadows might overflow the world ?
 
 sdemey :
-- Checkerboard pattern
+- Fix checkerboard pattern on cylinder when rotated.
+- Surface normal and uv coordinates for the cone and the circle.
 - Check MAX_OBJS in the parsing.
-- Reflection and shininess
-- Rendering load progression in the terminal.
+- Be able to toggle the functionalities, and the quality of image rendering.
+	- Parsing
+	- Using in the rendering functions.
 
 mmichele :
 - Be able to cycle trough the light with the arrows.
-- Rotation of an object does not rotates as expected.
-- Be able to toggle the functionalities, and the quality of image rendering.
 - Optimize blur to full rendering, with an array of booleans to remember, which
 pixel has already been rendered.
+- Rotation of an object does not rotates as expected.

@@ -35,6 +35,7 @@ void	objs_print(const t_obj *objs, t_ssuint objs_len)
 			cone_print(&objs[i]);
 		if (objs[i].e_type == CIR)
 			circle_print(&objs[i]);
+		bitmap_print(&objs[i].effects);
 		if (i < objs_len - 1)
 			ft_printf("- - - - - - - - - - - - - - - - - - - -\n");
 		i++;
@@ -51,5 +52,7 @@ void	scene_print(const t_scene *scene)
 	lights_print(scene->lights, scene->lights_len);
 	ft_printf("________________________________________\n\n");
 	objs_print(scene->objs, scene->objs_len);
+	ft_printf("________________________________________\n\n");
+	bitmap_print(&scene->effects);
 	ft_printf("________________________________________\n\n");
 }

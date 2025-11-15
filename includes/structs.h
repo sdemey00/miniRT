@@ -19,7 +19,8 @@ typedef struct s_ray
 	t_vec	dir;
 }	t_ray;
 
-typedef t_vec	t_color;
+typedef t_vec			t_color;
+typedef unsigned char	t_bitmap;
 
 typedef struct s_ambiant
 {
@@ -33,7 +34,7 @@ typedef struct s_camera
 {
 	t_vec		pos;
 	t_vec		dir;
-	t_ssuint	fov;
+	t_ssuint	fov;		// Field of view
 	t_bool		set;
 	float		ratio;		// Screen ratio
 	float		flen;		// Focal length
@@ -51,6 +52,15 @@ typedef struct s_light
 	float	ndotl;
 }	t_light;
 
+enum	e_effects_map
+{
+	DIFFUSE_LIGHT = 0,
+	SPECULAR_LIGHT = 1,
+	SHADOWS = 2,
+	REFLEXION = 3,
+	CHECKER_PATTERN = 4
+};
+
 typedef struct s_obj
 {
 	enum
@@ -60,15 +70,16 @@ typedef struct s_obj
 		CYL,
 		CON,
 		CIR
-	}	e_type;
-	t_vec	pos;
-	t_vec	dir;
-	t_color	color;
-	float	radius;
-	float	height;
-	int		shininess;
-	float	reflection;
-	t_bool	checkboard;
+	}			e_type;
+	t_vec		pos;
+	t_vec		dir;
+	t_color		color;
+	float		radius;
+	float		height;
+	int			shininess;
+	float		reflection;
+	t_bool		checkboard;
+	t_bitmap	effects;
 }	t_obj;
 
 typedef struct s_scene
@@ -84,6 +95,7 @@ typedef struct s_scene
 	t_color		bg;
 	t_bool		bg_set;
 	t_bool		reticle;
+	t_bitmap	effects;
 }	t_scene;
 
 typedef struct s_eq2
