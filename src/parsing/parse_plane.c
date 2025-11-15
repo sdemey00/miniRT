@@ -30,7 +30,8 @@ t_bool	parse_plane(char **split, t_scene *scene)
 		|| !parse_optional_args(&split[min_args], &plane))
 		return (0);
 	plane.e_type = PLA;
-	scene->objs[scene->objs_len++] = plane;
+	if (!scene_add_obj(scene, &plane))
+		return (0);
 	return (1);
 }
 

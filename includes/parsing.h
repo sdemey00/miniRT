@@ -23,9 +23,12 @@ typedef struct s_obj_build
 	t_obj_build_fn	func;
 }					t_obj_build;
 
-// parsing/scene.c
+// parsing/scene_init.c
 void	obj_init(t_obj *o);
 t_bool	scene_init(t_scene *s, const char *fpath);
+
+// parsing/scene.c
+t_bool	scene_add_obj(t_scene *s, t_obj *obj);
 void	scene_take_control(t_scene *s, const int x, const int y);
 void	scene_change(t_scene *s, const int key);
 
@@ -74,31 +77,32 @@ t_bool	parse_optional_args(char **split, t_obj *obj);
 // parsing/parse_background.c
 t_bool	parse_bg(char **split, t_scene *scene);
 
-// parsing/is_valid_format.c
+// parsing/print_scene_infos.c
+void	print_error(char *msg);
+void	objs_print(const t_obj *objs, t_ssuint objs_len);
+void	scene_print(const t_scene *scene);
+
+// parsing/parse_utils/is_valid_format.c
 t_bool	is_valid_float(char *s);
 t_bool	is_valid_int(char *s);
 
-// parsing/parse_utils.c
+// parsing/parse_utils/parse_utils.c
 t_bool	parse_vec(char *str, t_vec *v);
 t_bool	parse_color(char *str, t_color *c);
 t_bool	parse_float(char *src, float *out);
 t_bool	parse_int(char *src, int *out);
 t_bool	parse_dir(char *str, t_vec *v);
 
-// parsing/check_range.c
-t_bool	check_frange(float val, float min, float max);
-t_bool	check_irange(int val, int min, int max);
+// parsing/parse_utils/check_range.c
+t_bool	check_frange(const float val, const float min, const float max);
+t_bool	check_irange(const int val, const int min, const int max);
 t_bool	check_args_count(char **tab, const t_uint count);
 t_bool	check_args_range(char **tab, const t_uint min, const t_uint max);
 
-// parsing/print_scene_infos.c
-void	print_error(char *msg);
-void	objs_print(const t_obj *objs, t_ssuint objs_len);
-void	scene_print(const t_scene *scene);
-
-// parsing/ft_atof.c
+// parsing/parse_utils/ft_atof.c
 double	ft_atof(const char *str);
-// parsing/free_split.c
+
+// parsing/parse_utils/free_split.c
 void	ft_free_split(char **tab);
 
 #endif // PARSING_H

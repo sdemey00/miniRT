@@ -26,6 +26,8 @@ t_bool	parse_light(char **split, t_scene *scene)
 		|| !parse_float(split[1], &light.intensity)
 		|| !check_frange(light.intensity, 0, 1))
 		return (0);
+	if (scene->lights_len == MAX_OBJS)
+		return (print_error("Too much lights\n"), 0);
 	scene->lights[scene->lights_len++] = light;
 	return (1);
 }

@@ -31,7 +31,8 @@ t_bool	parse_sphere(char **split, t_scene *scene)
 		return (0);
 	sp.radius /= 2;
 	sp.e_type = SPH;
-	scene->objs[scene->objs_len++] = sp;
+	if (!scene_add_obj(scene, &sp))
+		return (0);
 	return (1);
 }
 

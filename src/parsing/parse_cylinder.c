@@ -33,7 +33,8 @@ t_bool	parse_cylinder(char **split, t_scene *scene)
 		return (0);
 	cy.radius /= 2;
 	cy.e_type = CYL;
-	scene->objs[scene->objs_len++] = cy;
+	if (!scene_add_obj(scene, &cy))
+		return (0);
 	return (1);
 }
 

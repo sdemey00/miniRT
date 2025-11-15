@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-t_bool	check_frange(float val, float min, float max)
+t_bool	check_frange(const float val, const float min, const float max)
 {
 	if (val < min || val > max)
 	{
@@ -23,7 +23,7 @@ t_bool	check_frange(float val, float min, float max)
 	return (1);
 }
 
-t_bool	check_irange(int val, int min, int max)
+t_bool	check_irange(const int val, const int min, const int max)
 {
 	if (val < min || val > max)
 	{
@@ -34,7 +34,7 @@ t_bool	check_irange(int val, int min, int max)
 	return (1);
 }
 
-t_bool	check_vrange(t_vec *v, float min, float max)
+t_bool	check_vrange(const t_vec *v, const float min, const float max)
 {
 	if (!check_frange(v->x, min, max)
 		|| !check_frange(v->y, min, max)

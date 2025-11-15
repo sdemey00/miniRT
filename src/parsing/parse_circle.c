@@ -32,7 +32,8 @@ t_bool	parse_circle(char **split, t_scene *scene)
 		return (0);
 	circle.radius /= 2;
 	circle.e_type = CIR;
-	scene->objs[scene->objs_len++] = circle;
+	if (!scene_add_obj(scene, &circle))
+		return (0);
 	return (1);
 }
 

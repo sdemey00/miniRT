@@ -29,7 +29,8 @@ t_bool	parse_cone(char **split, t_scene *scene)
 		|| !parse_color(split[2], &cone.color))
 		return (0);
 	cone.e_type = CON;
-	scene->objs[scene->objs_len++] = cone;
+	if (!scene_add_obj(scene, &cone))
+		return (0);
 	return (1);
 }
 

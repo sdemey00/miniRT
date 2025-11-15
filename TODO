@@ -21,11 +21,7 @@ Shadows might overflow the world ?
 
 sdemey :
 - Fix checkerboard pattern on cylinder when rotated.
-- Surface normal and uv coordinates for the cone and the circle.
-- Check MAX_OBJS in the parsing.
-- Be able to toggle the functionalities, and the quality of image rendering.
-	- Parsing
-	- Using in the rendering functions.
+- Surface normal and uv coordinates for the cone.
 
 mmichele :
 - Be able to cycle trough the light with the arrows.
