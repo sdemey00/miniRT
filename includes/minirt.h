@@ -54,6 +54,7 @@
 
 # include "structs.h"
 # include "parsing.h"
+# include "export.h"
 
 # define EPSILON 1e-4
 
@@ -103,6 +104,9 @@ typedef struct s_hit
 	t_vec	uv;
 	t_vec	p_offset;
 }	t_hit;
+
+// parsing/parse_file.c
+t_bool	filepath_has_rt(const char *fpath);
 
 // events/mouse.c
 int		mouse_press(int key, int x, int y, struct s_ctx *c);

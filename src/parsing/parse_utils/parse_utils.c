@@ -80,16 +80,20 @@ t_bool	parse_color(char *str, t_color *c)
 
 t_bool	parse_dir(char *str, t_vec *v)
 {
+	float	mag;
+
 	if (!parse_vec(str, v))
 		return (0);
-	if (!check_frange(v->x, -1, 1)
-		|| !check_frange(v->y, -1, 1)
-		|| !check_frange(v->z, -1, 1))
-		return (0);
-	if (vec_mag(*v) != 1.0)
+	//if (!check_frange(v->x, -1, 1)
+	//	|| !check_frange(v->y, -1, 1)
+	//	|| !check_frange(v->z, -1, 1))
+	//	return (0);
+	mag = ft_abs(vec_mag(*v));
+	if (mag < 0.9999 || 1.0001 < mag)
 	{
-		print_error("Invalid direction vector format\n");
+		print_error("Direction vector is not normalized\n");
 		return (0);
 	}
+	vec_inorm(v);
 	return (1);
 }

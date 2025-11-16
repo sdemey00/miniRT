@@ -32,3 +32,40 @@ void	scene_change(t_scene *s, const int key)
 {
 	bitmap_switch(&s->effects, (key - '0') - 1);
 }
+
+static t_bool	create_file(int *fd)
+{
+	char	*filename;
+
+	ft_printf("Name of exported file : ");
+	filename = ft_gnl(0);
+	if (!filename)
+		return (!!ft_dprintf(2, "Read stdin failed\n"));
+	if (!filepath_has_rt(filename))
+		return ft_free((void **)&filename, 0);
+	filename[ft_strlen(filename) - 1] = 0;
+	*fd = open(filename, O_CREAT | O_EXCL | O_WRONLY);
+	if (*fd < 0)
+	{
+		ft_dprintf(2, "Unable to open : %s\n", filename);
+		free(filename);
+		return (0);
+	}
+	free(filename);
+	return (1);
+}
+
+void	scene_export(t_scene *s)
+{
+	int		fd;
+
+	(void)s;
+	if (!create_file(&fd))
+		return ;
+	export_ambiant(fd, &s->ambiant);
+	export_camera(fd, &s->camera);
+	export_lights(fd, s->lights, s->lights_len);
+	export_objects(fd, s->objs, s->objs_len);
+	ft_printf("Scene exported !\n");
+	close(fd);
+}

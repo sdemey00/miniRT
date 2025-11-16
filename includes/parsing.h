@@ -31,6 +31,7 @@ t_bool	scene_init(t_scene *s, const char *fpath);
 t_bool	scene_add_obj(t_scene *s, t_obj *obj);
 void	scene_take_control(t_scene *s, const int x, const int y);
 void	scene_change(t_scene *s, const int key);
+void	scene_export(t_scene *s);
 
 // parsing/parse_file.c
 t_bool	parse_file(const char *fpath, t_scene *scene);

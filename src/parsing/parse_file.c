@@ -12,21 +12,28 @@
 
 #include "minirt.h"
 
-static t_bool	open_file(const char *fpath, int *fd)
+t_bool	filepath_has_rt(const char *fpath)
 {
 	char	*ext;
 
-	if (!fpath || !*fpath)
-	{
-		print_error("No fpath\n");
-		return (0);
-	}
 	ext = ft_strrchr(fpath, '.');
 	if (!ext || ft_strcmp(ext, ".rt") != 0)
 	{
 		ft_dprintf(2, "Error\n%s: not a .rt file\n", fpath);
 		return (0);
 	}
+	return (1);
+}
+
+static t_bool	open_file(const char *fpath, int *fd)
+{
+	if (!fpath || !*fpath)
+	{
+		print_error("No fpath\n");
+		return (0);
+	}
+	if (!filepath_has_rt(fpath))
+		return (0);
 	*fd = open(fpath, O_RDONLY);
 	if (*fd < 0)
 	{

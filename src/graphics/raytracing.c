@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:31:38 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/14 15:20:25 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/16 13:45:42 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	full_render(struct s_ctx *c)
 	window_draw(&c->w, &c->s);
 	ft_printf("ed in %.2fs\n", (time_now() - start_time) / 1000);
 	c->s.blur = temp_blur;
+	c->rendering = 0;
 	c->s.reticle = temp_reticle;
 	return (0);
 }
