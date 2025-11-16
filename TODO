@@ -10,7 +10,6 @@ Bonus :
 
 Bonus ++ :
 - Add objects to the scene
-- Remove object from the scene
 - Rendering load bar on screen.
 
 FIX :
@@ -23,6 +22,7 @@ sdemey :
 - Surface normal and uv coordinates for the cone.
 
 mmichele :
+- Remove object from the scene
 - Be able to cycle trough the light with the arrows.
 - Optimize blur to full rendering, with an array of booleans to remember, which
 pixel has already been rendered.

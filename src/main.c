@@ -28,6 +28,7 @@ void	print_bindings(void)
 	ft_printf("%-18s : Orientation\n", "<i,j,k,l,u,o>");
 	ft_printf("%-18s : Radius\n", "<t,g>");
 	ft_printf("%-18s : Height\n", "<y,h>");
+	//ft_printf("%-18s : Remove object\n", "<r>");
 }
 
 int	main(int argc, char **argv)

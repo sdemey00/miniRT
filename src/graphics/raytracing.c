@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:31:38 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/16 13:45:42 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/16 23:47:58 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	draw_reticle(t_window *w)
 
 void	raytracing(t_window *w, t_scene *s, const t_suint blur)
 {
-	t_idx			i;
-	t_idx			j;
-	t_color			c;
-	t_ray			r;
+	t_idx	i;
+	t_idx	j;
+	t_color	c;
+	t_ray	r;
 
 	j = 0;
 	while (j < HEIGHT)
@@ -54,8 +54,7 @@ void	raytracing(t_window *w, t_scene *s, const t_suint blur)
 		while (i < WIDTH)
 		{
 			r = camera_ray(&s->camera, i, j);
-			c = ray_color(&r, s, 0);
-			c = vec_scal(c, 255.0);
+			c = vec_scal(ray_color(&r, s, 0), 255);
 			draw_grid(w, (const t_idx[2]){i, j}, color_int(&c), blur);
 			i += blur;
 		}
