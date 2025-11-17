@@ -67,6 +67,10 @@ static t_color	get_obj_color(t_scene *s, t_hit *hitten)
 
 static t_color	color_mix(t_color *base_color, t_color *light_color)
 {
+	// return ((t_color){
+	// 	ft_sqrt(base_color->x) * light_color->x,
+	// 	ft_sqrt(base_color->y) * light_color->y,
+	// 	ft_sqrt(base_color->z) * light_color->z});
 	return ((t_color){
 		base_color->x * light_color->x,
 		base_color->y * light_color->y,

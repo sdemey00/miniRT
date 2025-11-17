@@ -74,10 +74,12 @@ static void	map_cone(float *u, float *v, t_vec hit_point, t_obj *obj)
 	right = vec_norm(vec_cross(tmp_up, obj->dir));
 	up = vec_cross(obj->dir, right);
 	local = (t_vec){vec_dot(hit_point, right), vec_dot(hit_point, obj->dir), vec_dot(hit_point, up)};
-	*u = atan2(local.z, local.x) / (2.0 * FT_PI);
+	*u = atan2(local.x, local.z) / (2.0 * FT_PI);
 	if (*u < 0.0)
 		*u += 1.0;
-	*v = local.y * 0.2;
+	*v = fmodf(local.y * 0.002, 1.0);
+	if (*v < 0)
+		*v += 1.0;
 }
 
 t_vec	map_obj(t_hit *hitten)
