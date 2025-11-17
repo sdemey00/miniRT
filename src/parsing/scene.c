@@ -28,7 +28,7 @@ void	scene_take_control(t_scene *s, const int x, const int y)
 	s->controlled = get_closest_hit(&r, s).obj;
 }
 
-void	scene_change(t_scene *s, const int key)
+inline void	scene_change(t_scene *s, const int key)
 {
 	bitmap_switch(&s->effects, (key - '0') - 1);
 }
@@ -40,7 +40,7 @@ static t_bool	create_file(int *fd)
 	ft_printf("Name of exported file : ");
 	filename = ft_gnl(0);
 	if (!filename)
-		return (!!ft_dprintf(2, "Read stdin failed\n"));
+		return (!ft_dprintf(2, "Read stdin failed\n"));
 	filename[ft_strlen(filename) - 1] = 0;
 	if (!filepath_has_rt(filename))
 		return (ft_free((void **)&filename, 0));
@@ -59,13 +59,12 @@ void	scene_export(t_scene *s)
 {
 	int		fd;
 
-	(void)s;
 	if (!create_file(&fd))
 		return ;
 	export_ambiant(fd, &s->ambiant);
 	export_camera(fd, &s->camera);
 	export_lights(fd, s->lights, s->lights_len);
 	export_objects(fd, s->objs, s->objs_len);
-	ft_printf("Scene exported !\n");
 	close(fd);
+	ft_printf("Scene exported !\n");
 }

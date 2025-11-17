@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdemey <sdemey@student.s19.be>             +#+  +:+       +#+        */
+/*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 12:37:08 by sdemey            #+#    #+#             */
-/*   Updated: 2025/11/15 12:37:16 by sdemey           ###   ########.fr       */
+/*   Updated: 2025/11/17 14:41:11 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_bool	scene_init(t_scene *s, const char *fpath)
 	s->objs_len = 0;
 	s->controlled = 0;
 	s->reticle = 0;
-	s->blur = 20;
+	s->blur = 30;
 	s->bg = (t_color){0, 0, 0};
 	s->bg_set = 0;
 	s->effects = 0b11111111;

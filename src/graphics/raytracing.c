@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:31:38 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/16 23:47:58 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/17 17:18:27 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	draw_grid(t_window *w, const t_idx c[2], int color, \
 	}
 }
 
-void	draw_reticle(t_window *w)
+static void	draw_reticle(t_window *w)
 {
 	const unsigned int	center[2] = {WIDTH / 2, HEIGHT / 2};
 	const t_color		c = (t_color){0, 255, 0};
@@ -55,7 +55,10 @@ void	raytracing(t_window *w, t_scene *s, const t_suint blur)
 		{
 			r = camera_ray(&s->camera, i, j);
 			c = vec_scal(ray_color(&r, s, 0), 255);
-			draw_grid(w, (const t_idx[2]){i, j}, color_int(&c), blur);
+			if (blur > 1)
+				draw_grid(w, (const t_idx[2]){i, j}, color_int(&c), blur);
+			else
+				mlx_pixel_put(w->mlx, w->win, i, j, color_int(&c));
 			i += blur;
 		}
 		j += blur;
@@ -64,21 +67,18 @@ void	raytracing(t_window *w, t_scene *s, const t_suint blur)
 		draw_reticle(w);
 }
 
-int	full_render(struct s_ctx *c)
+t_bool	full_render(struct s_ctx *c)
 {
-	const t_ssuint	temp_blur = c->s.blur;
 	const t_bool	temp_reticle = c->s.reticle;
 	double			start_time;
 
-	c->s.reticle = 0;
 	c->rendering = 1;
-	c->s.blur = 1;
+	c->s.reticle = 0;
 	ft_printf("Render");
 	start_time = time_now();
-	window_draw(&c->w, &c->s);
+	raytracing(&c->w, &c->s, 1);
 	ft_printf("ed in %.2fs\n", (time_now() - start_time) / 1000);
-	c->s.blur = temp_blur;
-	c->rendering = 0;
 	c->s.reticle = temp_reticle;
+	c->rendering = 0;
 	return (0);
 }

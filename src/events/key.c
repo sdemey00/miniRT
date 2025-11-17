@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 13:01:45 by sdemey            #+#    #+#             */
-/*   Updated: 2025/11/16 22:24:44 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/17 16:55:15 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ void	change_blur(struct s_ctx *c, const int key)
 int	key_release(int key, struct s_ctx *c)
 {
 	if (VERBOSE)
-		ft_printf("key released : %d\n", key);
+		return (!!ft_printf("key released : %d\n", key));
 	if (key == K_ESC)
 		window_close(&c->w);
-	else if (key == 'p' && !c->rendering)
+	else if (c->rendering)
+		return (1);
+	else if (key == 'p')
 		return (full_render(c));
 	else if (!c->s.controlled && ft_strchr("wasdc ijkl-=", key) >= 0)
 		camera_change(c, key);
@@ -40,10 +42,12 @@ int	key_release(int key, struct s_ctx *c)
 		obj_change(c->s.controlled, c, key);
 	else if (!c->s.controlled && ('1' <= key && key <= '8'))
 		scene_change(&c->s, key);
-	else if (key == 'x')
-		c->s.reticle = !c->s.reticle;
 	else if (key == 'e')
 		scene_export(&c->s);
+	else if (key == 'x')
+		c->s.reticle = !c->s.reticle;
+	else
+		return (1);
 	window_draw(&c->w, &c->s);
 	return (0);
 }
