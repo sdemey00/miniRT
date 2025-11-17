@@ -41,9 +41,9 @@ static t_bool	create_file(int *fd)
 	filename = ft_gnl(0);
 	if (!filename)
 		return (!!ft_dprintf(2, "Read stdin failed\n"));
+	filename[ft_strlen(filename) - 1] = 0;
 	if (!filepath_has_rt(filename))
 		return (ft_free((void **)&filename, 0));
-	filename[ft_strlen(filename) - 1] = 0;
 	*fd = open(filename, O_CREAT | O_EXCL | O_WRONLY);
 	if (*fd < 0)
 	{
