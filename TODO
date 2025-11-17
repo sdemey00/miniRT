@@ -6,24 +6,23 @@ Mandatory :
 	- Check input ranges
 
 Bonus :
-- Bump map textures
 
 Bonus ++ :
 - Add objects to the scene
-- Rendering load bar on screen.
+- Sensitivity for translations
+- Controller
 
 FIX :
 - Shadow have the color of emiting light. Investigate ?
 - No lights when 2 planes above each other ? Not able to make a closed room ?
 Shadows might overflow the world ?
+- Rotation of an object might not rotate as you'd expect. Even though it has 
+it's logic of behaving.
 
 sdemey :
-- Fix checkerboard pattern on cylinder when rotated.
-- Surface normal and uv coordinates for the cone.
+- Bump map textures
 
 mmichele :
 - Remove object from the scene
-- Be able to cycle trough the light with the arrows.
 - Optimize blur to full rendering, with an array of booleans to remember, which
 pixel has already been rendered.
-- Rotation of an object does not rotates as expected.

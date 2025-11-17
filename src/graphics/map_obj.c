@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_obj.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdemey <sdemey@student.s19.be>             +#+  +:+       +#+        */
+/*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 16:50:17 by sdemey            #+#    #+#             */
-/*   Updated: 2025/11/15 16:50:19 by sdemey           ###   ########.fr       */
+/*   Updated: 2025/11/17 19:17:23 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static void	map_cylinder(float *u, float *v, t_vec hit_point, t_obj *obj)
 		tmp_up = (t_vec){1, 0, 0};
 	right = vec_norm(vec_cross(tmp_up, obj->dir));
 	up = vec_cross(obj->dir, right);
-	local = (t_vec){vec_dot(hit_point, right), vec_dot(hit_point, obj->dir), vec_dot(hit_point, up)};
+	local = (t_vec){vec_dot(hit_point, right), vec_dot(hit_point, obj->dir), \
+		vec_dot(hit_point, up)};
 	theta = atan2(local.z, local.x);
 	*u = (theta + FT_PI) / (2.0 * FT_PI);
 	*v = fmodf(local.y / obj->height, 1.0);
@@ -73,7 +74,8 @@ static void	map_cone(float *u, float *v, t_vec hit_point, t_obj *obj)
 		tmp_up = (t_vec){1, 0, 0};
 	right = vec_norm(vec_cross(tmp_up, obj->dir));
 	up = vec_cross(obj->dir, right);
-	local = (t_vec){vec_dot(hit_point, right), vec_dot(hit_point, obj->dir), vec_dot(hit_point, up)};
+	local = (t_vec){vec_dot(hit_point, right), vec_dot(hit_point, obj->dir), \
+		vec_dot(hit_point, up)};
 	*u = atan2(local.z, local.x) / (2.0 * FT_PI);
 	if (*u < 0.0)
 		*u += 1.0;
