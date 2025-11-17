@@ -12,6 +12,18 @@
 
 #include "minirt.h"
 
+static t_vec	cone_normal(t_obj *obj, t_vec hit_point)
+{
+	t_vec	ap;
+	float	h;
+	t_vec	normal;
+
+	ap = vec_sub(hit_point, obj->pos);
+	h = vec_dot(ap, obj->dir);
+	normal = vec_sub(ap, vec_scal(obj->dir, 2.0 * h));
+	return (vec_norm(normal));
+}
+
 t_vec	get_surface_normal(t_obj *obj, t_vec hit_point)
 {
 	if (obj->e_type == SPH)
@@ -21,8 +33,7 @@ t_vec	get_surface_normal(t_obj *obj, t_vec hit_point)
 	else if (obj->e_type == CYL)
 		return (vec_norm((t_vec){
 				hit_point.x - obj->pos.x, 0, hit_point.z - obj->pos.z}));
-	// else if (obj->e_type == CON)
-	// {
-	// }
+	else if (obj->e_type == CON)
+		return (cone_normal(obj, hit_point));
 	return ((t_vec){0, 1, 0});
 }
