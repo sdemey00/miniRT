@@ -18,6 +18,17 @@ static void	map_sphere(float *u, float *v, t_vec hit_point)
 	float	theta;
 	float	phi;
 
+	// t_vec	tmp_up;
+	// t_vec	right;
+	// t_vec	up;
+	// t_vec	local;
+	//
+	// tmp_up = (t_vec){0, 1, 0};
+	// if (ft_abs(obj->dir.y) > 0.999)
+	// 	tmp_up = (t_vec){1, 0, 0};
+	// right = vec_norm(vec_cross(tmp_up, obj->dir));
+	// up = vec_cross(obj->dir, right);
+	// local = (t_vec){vec_dot(hit_point, right), vec_dot(hit_point, obj->dir), vec_dot(hit_point, up)};
 	p = vec_norm(hit_point);
 	theta = atan2(p.z, p.x);
 	phi = acos(p.y);
@@ -53,7 +64,10 @@ static void	map_cylinder(float *u, float *v, t_vec hit_point, t_obj *obj)
 		tmp_up = (t_vec){1, 0, 0};
 	right = vec_norm(vec_cross(tmp_up, obj->dir));
 	up = vec_cross(obj->dir, right);
-	local = (t_vec){vec_dot(hit_point, right), vec_dot(hit_point, obj->dir), vec_dot(hit_point, up)};
+	local = (t_vec){
+		vec_dot(hit_point, right),
+		vec_dot(hit_point, obj->dir),
+		vec_dot(hit_point, up)};
 	theta = atan2(local.z, local.x);
 	*u = (theta + FT_PI) / (2.0 * FT_PI);
 	*v = fmodf(local.y / obj->height, 1.0);
@@ -73,11 +87,14 @@ static void	map_cone(float *u, float *v, t_vec hit_point, t_obj *obj)
 		tmp_up = (t_vec){1, 0, 0};
 	right = vec_norm(vec_cross(tmp_up, obj->dir));
 	up = vec_cross(obj->dir, right);
-	local = (t_vec){vec_dot(hit_point, right), vec_dot(hit_point, obj->dir), vec_dot(hit_point, up)};
+	local = (t_vec){
+		vec_dot(hit_point, right),
+		vec_dot(hit_point, obj->dir),
+		vec_dot(hit_point, up)};
 	*u = atan2(local.x, local.z) / (2.0 * FT_PI);
 	if (*u < 0.0)
 		*u += 1.0;
-	*v = fmodf(local.y * 0.002, 1.0);
+	*v = fmodf(local.y * 0.001, 1.0);
 	if (*v < 0)
 		*v += 1.0;
 }

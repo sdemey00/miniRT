@@ -18,8 +18,7 @@ FIX :
 Shadows might overflow the world ?
 
 sdemey :
-- Fix checkerboard pattern on cylinder when rotated.
-- Surface normal and uv coordinates for the cone.
+- Bumping texture / perturbed normal
 
 mmichele :
 - Remove object from the scene

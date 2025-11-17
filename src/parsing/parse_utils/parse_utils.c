@@ -84,10 +84,6 @@ t_bool	parse_dir(char *str, t_vec *v)
 
 	if (!parse_vec(str, v))
 		return (0);
-	//if (!check_frange(v->x, -1, 1)
-	//	|| !check_frange(v->y, -1, 1)
-	//	|| !check_frange(v->z, -1, 1))
-	//	return (0);
 	mag = ft_abs(vec_mag(*v));
 	if (mag < 0.9999 || 1.0001 < mag)
 	{
