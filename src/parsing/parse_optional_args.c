@@ -23,7 +23,7 @@ t_bool	parse_optional_args(char **split, t_obj *obj)
 			return (print_error("Invalid key=value format\n"), 0);
 		if (split[i][0] == 's')
 			if (!parse_int(&split[i][2], &obj->shininess) || \
-				!check_frange(obj->shininess, 0, 255))
+				!check_frange(obj->shininess, 0, 320))
 				return (print_error("Invalid shininess format\n"), 0);
 		if (split[i][0] == 'r')
 			if (!parse_float(&split[i][2], &obj->reflexion) || \

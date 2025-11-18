@@ -12,6 +12,23 @@
 
 #include "minirt.h"
 
+t_vec	get_local_hit(t_hit *hitten, t_vec local_hit)
+{
+	t_vec	tmp_up;
+	t_vec	right;
+	t_vec	up;
+
+	tmp_up = (t_vec){0, 1, 0};
+	if (ft_abs(hitten->obj->dir.y) > 0.999)
+		tmp_up = (t_vec){1, 0, 0};
+	right = vec_norm(vec_cross(tmp_up, hitten->obj->dir));
+	up = vec_cross(hitten->obj->dir, right);
+	return ((t_vec){
+		vec_dot(local_hit, right),
+		vec_dot(local_hit, hitten->obj->dir),
+		vec_dot(local_hit, up)});
+}
+
 static t_vec	cone_normal(t_obj *obj, t_vec hit_point)
 {
 	t_vec	ap;

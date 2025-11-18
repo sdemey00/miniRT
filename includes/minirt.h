@@ -70,31 +70,6 @@
 # define DFLT_REFLECT	0
 # define OPTION_ARGS	3
 
-/* MLX pixel grid manipulation */
-typedef struct s_image
-{
-	void	*ptr;
-	char	*address;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-}	t_image;
-
-/* Graphical library context -> MLX */
-typedef struct s_window
-{
-	void	*mlx;
-	void	*win;
-	t_image	img;
-}	t_window;
-
-struct s_ctx
-{
-	t_window	w;
-	t_scene		s;
-	t_bool		rendering;
-};
-
 typedef struct s_hit
 {
 	t_obj	*obj;
@@ -164,6 +139,7 @@ t_eq2	eq2_init(const t_vec oc, const t_vec rdir, const float r);
 void	eq2_set(t_eq2 *e);
 
 // graphics/get_surface_normal.c
+t_vec	get_local_hit(t_hit *hitten, t_vec local_hit);
 t_vec	get_surface_normal(t_obj *obj, t_vec hit_point);
 
 // graphics/reflexion.c
@@ -172,11 +148,13 @@ t_color	compute_reflexion(t_ray *r, t_scene *s, t_hit *hitten, int depth);
 // graphics/obj_change.c
 void	obj_change(t_obj *o, struct s_ctx *c, const int key);
 
-// graphics/map_obj.c
+// graphics/map_uv.c
 t_vec	map_obj(t_hit *hitten);
 
 // graphics/texture.c
 t_color	checkboard_pattern(t_hit *hitten);
+void	load_texture(t_tex *tex, void *mlx, char *path);
+t_color	texture_color(t_tex *tex, t_hit *hitten);
 
 // bitmap.c
 void	bitmap_switch(t_bitmap *b, const t_ssuint i);

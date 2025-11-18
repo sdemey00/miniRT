@@ -61,6 +61,19 @@ enum	e_effects_map
 	CHECKER_PATTERN = 4
 };
 
+typedef struct s_tex
+{
+	void	*img;
+	char	*addr;
+	int		w;
+	int		h;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	char	*path;
+	t_bool	loaded;
+}	t_tex;
+
 typedef struct s_obj
 {
 	enum
@@ -79,7 +92,26 @@ typedef struct s_obj
 	int			shininess;
 	float		reflexion;
 	t_bitmap	effects;
+	t_tex		texture;
 }	t_obj;
+
+/* MLX pixel grid manipulation */
+typedef struct s_image
+{
+	void	*ptr;
+	char	*address;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+}	t_image;
+
+/* Graphical library context -> MLX */
+typedef struct s_window
+{
+	void	*mlx;
+	void	*win;
+	t_image	img;
+}	t_window;
 
 typedef struct s_scene
 {
@@ -95,7 +127,15 @@ typedef struct s_scene
 	t_bool		bg_set;
 	t_bool		reticle;
 	t_bitmap	effects;
+	t_window	*w;
 }	t_scene;
+
+struct s_ctx
+{
+	t_window	w;
+	t_scene		s;
+	t_bool		rendering;
+};
 
 typedef struct s_eq2
 {
