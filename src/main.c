@@ -71,14 +71,14 @@ int	main(int argc, char **argv)
 	if (!scene_init(&c.s, argv[1]) || !window_init(&c.w))
 		return (1);
 	// ==> TODO load texture in parsing
-	c.s.w = &c.w;
 	for (int i = 0; i< c.s.objs_len; i++)
 	{
 		if (c.s.objs[i].e_type == SPH)
-			load_texture(&c.s.objs[i].texture, c.s.w->mlx, "textures/earth_col.xpm"); 
+			load_texture(&c.s.objs[i].texture, c.w.mlx, "textures/earth_col.xpm"); 
 		else if (c.s.objs[i].e_type == CYL)
-			load_texture(&c.s.objs[i].texture, c.s.w->mlx, "textures/stained_rfl.xpm");
+			load_texture(&c.s.objs[i].texture, c.w.mlx, "textures/stained_rfl.xpm");
 	}
+	// end
 	print_bindings();
 	window_draw(&c.w, &c.s);
 	mlx_hook(c.w.win, WIN_CLOSE, 0, window_close, &c.w);

@@ -20,6 +20,7 @@ Shadows might overflow the world ?
 it's logic of behaving.
 
 sdemey :
+- Parse XPM texture
 - Bumping texture / perturbed normal
 
 mmichele :

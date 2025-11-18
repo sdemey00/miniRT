@@ -156,6 +156,9 @@ t_color	checkboard_pattern(t_hit *hitten);
 void	load_texture(t_tex *tex, void *mlx, char *path);
 t_color	texture_color(t_tex *tex, t_hit *hitten);
 
+// graphics/perturbation.c
+void	apply_perturbation(t_vec *normal, float u, float v);
+
 // bitmap.c
 void	bitmap_switch(t_bitmap *b, const t_ssuint i);
 t_bool	bitmap_get(const t_bitmap *b, const t_ssuint i);

@@ -36,6 +36,11 @@ t_bool	parse_optional_args(char **split, t_obj *obj)
 			else if (ft_strcmp(&split[i][2], "0") != 0)
 				return (print_error("Invalid checkboard format\n"), 0);
 		}
+		// if (split[i][0] == 'x')
+		// {
+		// //parse XPM
+		// 	load_texture()
+		// }
 		i++;
 	}
 	return (1);

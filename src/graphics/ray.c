@@ -40,10 +40,6 @@ static t_obj	*get_closest_hit_obj(const t_ray *r, float *closest_t, \
 	return (hit_obj);
 }
 
-// void	apply_perturbation(t_vec *normal, float u, float v)
-// {
-// }
-
 t_hit	get_closest_hit(const t_ray *r, t_scene *s)
 {
 	t_hit	res;
@@ -64,7 +60,8 @@ t_hit	get_closest_hit(const t_ray *r, t_scene *s)
 
 static t_color	get_obj_color(t_scene *s, t_hit *hitten)
 {
-	if (hitten->obj->e_type == SPH || hitten->obj->e_type == CYL) // if obj.texture
+	// if (hitten->obj->e_type == SPH || hitten->obj->e_type == CYL) // if obj.texture
+	if (1 < 0)
 		return (texture_color(&hitten->obj->texture, hitten));
 	if (bitmap_get(&s->effects, CHECKER_PATTERN)
 		&& bitmap_get(&hitten->obj->effects, CHECKER_PATTERN))
