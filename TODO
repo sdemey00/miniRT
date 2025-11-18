@@ -20,7 +20,7 @@ Shadows might overflow the world ?
 it's logic of behaving.
 
 sdemey :
-- Bump map textures
+- Bumping texture / perturbed normal
 
 mmichele :
 - Remove object from the scene

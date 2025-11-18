@@ -29,7 +29,7 @@ static t_obj	*get_closest_hit_obj(const t_ray *r, float *closest_t, \
 			(s->objs[i].e_type == CON && ray_hit_con(r, &s->objs[i], &t)) || \
 			(s->objs[i].e_type == CIR && ray_hit_cir(r, &s->objs[i], &t)))
 		{
-			if (t < *closest_t)
+			if (t > EPSILON && t < *closest_t)
 			{
 				*closest_t = t;
 				hit_obj = &s->objs[i];
