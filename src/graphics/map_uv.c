@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   map_uv.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
+/*   By: sdemey <sdemey@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 16:50:17 by sdemey            #+#    #+#             */
 /*   Updated: 2025/11/18 18:24:11 by sdemey           ###   ########.fr       */
