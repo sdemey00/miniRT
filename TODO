@@ -4,13 +4,15 @@ Mandatory :
 - Norm
 - Deep test parsing
 	- Check input ranges
+- Re-organizing the files
 
 Bonus :
 
 Bonus ++ :
+- Remove object from the scene
 - Add objects to the scene
+- Duplicate current controlled object
 - Sensitivity for translations
-- Controller
 
 FIX :
 - Shadow have the color of emiting light. Investigate ?
@@ -23,6 +25,6 @@ sdemey :
 - Bumping texture / perturbed normal
 
 mmichele :
-- Remove object from the scene
+- Controller
 - Optimize blur to full rendering, with an array of booleans to remember, which
 pixel has already been rendered.

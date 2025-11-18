@@ -86,6 +86,7 @@ typedef struct s_window
 	void	*mlx;
 	void	*win;
 	t_image	img;
+	int		fd_controller;
 }	t_window;
 
 struct s_ctx
@@ -182,5 +183,35 @@ t_color	checkboard_pattern(t_hit *hitten);
 void	bitmap_switch(t_bitmap *b, const t_ssuint i);
 t_bool	bitmap_get(const t_bitmap *b, const t_ssuint i);
 void	bitmap_print(const t_bitmap *b);
+
+// Event type
+# define RT_ET_BUTTON	1
+# define RT_ET_AXIS		2
+# define RT_ET_INIT		129
+# define RT_ET_CALIBR	130
+
+// Event value
+# define RT_EV_RELEASE	0
+# define RT_EV_PRESS	1
+
+// Event number
+# define RT_EN_SOUTH	0
+# define RT_EN_EAST		1
+# define RT_EN_NORTH	2
+# define RT_EN_WEST		3
+# define RT_EN_L_BACK	4
+# define RT_EN_R_BACK	5
+# define RT_EN_L_TRIG	6
+# define RT_EN_R_TRIG	7
+# define RT_EN_OPT		8
+# define RT_EN_START	9
+# define RT_EN_HOME		10
+# define RT_EN_L_JS		11
+# define RT_EN_R_JS		12
+
+# define INT16_MAX		32767
+
+// events/controller.c
+int		controller_loop(struct s_ctx *c);
 
 #endif // MINIRT_H

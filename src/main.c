@@ -30,37 +30,6 @@ void	print_bindings(void)
 	ft_printf("%-18s : Height\n", "<y,h>");
 }
 
-/*
-#include <linux/input.h>
-
-int	controller_loop(struct s_ctx *c)
-{
-	if (c->rendering)
-		return (0);
-    int					fd = open("/dev/input/event6", O_RDONLY);
-    struct input_event	ev;
-
-    while (read(fd, &ev, sizeof(ev)) > 0)
-	{
-    	if (ev.type == EV_ABS)
-    	    ft_printf("ABS event: code %d value %d\n", ev.code, ev.value);
-    	if (ev.type == EV_KEY && ev.code == 305 && ev.value == 1)
-		{
-    	    c->rendering = 1;
-			full_render(c);
-			break ;
-		}
-		else
-			printf("%d %d %d\n", ev.type, ev.code, ev.value);
-	}
-	close(fd);
-	return (0);
-}
-
-// in the main :
-mlx_loop_hook(c.w.mlx, controller_loop, &c);
-*/
-
 int	main(int argc, char **argv)
 {
 	struct s_ctx	c;
@@ -75,6 +44,7 @@ int	main(int argc, char **argv)
 	mlx_hook(c.w.win, WIN_CLOSE, 0, window_close, &c.w);
 	mlx_hook(c.w.win, 3, 2, key_release, &c);
 	mlx_hook(c.w.win, 4, 1L << 2, mouse_press, &c);
+	mlx_loop_hook(c.w.mlx, controller_loop, &c);
 	mlx_loop(c.w.mlx);
 	return (0);
 }

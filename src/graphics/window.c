@@ -23,6 +23,7 @@ t_bool	window_init(t_window *w)
 	w->img.ptr = mlx_new_image(w->mlx, WIDTH, HEIGHT);
 	w->img.address = mlx_get_data_addr(w->img.ptr, &w->img.bits_per_pixel, \
 		&w->img.size_line, &w->img.endian);
+	w->fd_controller = open("/dev/input/js0", O_RDONLY);
 	if (!w->img.address)
 		return (window_free(w));
 	return (1);
@@ -43,6 +44,7 @@ t_bool	window_free(t_window *w)
 		w->mlx = 0;
 	}
 	return (0);
+	close(w->fd_controller);
 }
 
 void	window_draw(t_window *w, t_scene *s)
