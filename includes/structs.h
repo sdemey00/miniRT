@@ -32,8 +32,8 @@ typedef struct s_ambiant
 
 typedef struct s_camera
 {
-	t_vec		pos;
-	t_vec		dir;
+	t_vec		pos;		// Position
+	t_vec		dir;		// Normalized direction vector
 	t_ssuint	fov;		// Field of view
 	t_bool		set;
 	float		ratio;		// Screen ratio
@@ -97,6 +97,18 @@ typedef struct s_scene
 	t_bitmap	effects;
 }	t_scene;
 
+/* Structure with useful informations on ray closest hit point */
+typedef struct s_hit
+{
+	t_obj	*obj;
+	float	dist;
+	t_vec	point;
+	t_vec	normal;
+	t_vec	uv;
+	t_vec	p_offset;
+}	t_hit;
+
+/* Structure with 2nd degree equation roots variables */
 typedef struct s_eq2
 {
 	float	a;
@@ -105,5 +117,31 @@ typedef struct s_eq2
 	float	d;
 	float	t[2];
 }	t_eq2;
+
+/* MLX pixel grid manipulation */
+typedef struct s_image
+{
+	void	*ptr;
+	char	*address;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+}	t_image;
+
+/* Graphical library context -> MLX */
+typedef struct s_window
+{
+	void	*mlx;
+	void	*win;
+	t_image	img;
+	int		fd_controller;
+}	t_window;
+
+struct s_ctx
+{
+	t_window	w;
+	t_scene		s;
+	t_bool		rendering;
+};
 
 #endif // STRUCTS_H

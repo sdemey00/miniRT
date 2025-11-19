@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 
 	c.rendering = 0;
 	if (argc != 2)
-		return (!!dprintf(2, "Error\nUsage: %s <scene.rt>\n", argv[0]));
+		return (!!ft_dprintf(2, "Error\nUsage: %s <scene.rt>\n", argv[0]));
 	if (!scene_init(&c.s, argv[1]) || !window_init(&c.w))
 		return (1);
 	print_bindings();

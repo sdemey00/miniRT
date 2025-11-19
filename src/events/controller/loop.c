@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controller.c                                       :+:      :+:    :+:   */
+/*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 14:42:34 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/18 17:48:20 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/19 01:19:44 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "controller.h"
 #include <linux/joystick.h>
 
 /*
@@ -42,33 +42,50 @@ int	controller_loop(struct s_ctx *c)
 			window_draw(&c->w, &c->s);
 			break ;
 		}
-		else if (e.type == RT_ET_AXIS && (e.number == 6 || e.number == 7))
+		else if (e.type == RT_ET_AXIS)
 		{
-			coords[e.number - 6] = e.value;
-			if (coords[1] == -INT16_MAX)
-				vec_isum(&c->s.camera.pos, vec_scal((t_vec){0, 1, 0}, 0.25));
-			else if (coords[1] == INT16_MAX)
-				vec_isum(&c->s.camera.pos, vec_scal((t_vec){0, -1, 0}, 0.25));
-			else if (coords[0] == -INT16_MAX)
-				ft_printf("LEFT");
-			else if (coords[0] == INT16_MAX)
-				ft_printf("RIGHT");
-			window_draw(&c->w, &c->s);
-			return (0);
-		}
-		else if (e.type == RT_ET_AXIS && (e.number == 0 || e.number == 1))
-		{
-			coords[e.number] = e.value;
-			a = (t_vec){coords[0] / (float)INT16_MAX, coords[1] / (float)INT16_MAX, 0};
-			if (cooldown == 3)
+			if (e.number == 0 || e.number == 1)
 			{
-				//vec_isum(&c->s.camera.pos, vec_scal(c->dir, 0.5));
-				vec_isum(&c->s.camera.pos, vec_scal((t_vec){-a.x, 0, a.y}, 0.1));
+				coords[e.number] = e.value;
+				a = (t_vec){coords[0] / (float)INT16_MAX, coords[1] / (float)INT16_MAX, 0};
+				if (cooldown == 1)
+				{
+					//vec_isum(&c->s.camera.pos, vec_scal(c->dir, 0.5));
+					vec_isum(&c->s.camera.pos, vec_scal((t_vec){-a.x, 0, a.y}, 0.1));
+					window_draw(&c->w, &c->s);
+					cooldown = 0;
+					return (0);
+				}
+				cooldown++;
+			}
+			else if (e.number == 2)
+			{
+				//ft_printf("left trigger\n");
+			}
+			else if (e.number == 3 || e.number == 4)
+			{
+				//ft_printf("right js\n");
+			}
+			else if (e.number == 5)
+			{
+				//ft_printf("right trigger\n");
+			}
+			else if (e.number == 6 || e.number == 7)
+			{
+				coords[e.number - 6] = e.value;
+				if (coords[1] == -INT16_MAX)
+					vec_isum(&c->s.camera.pos, vec_scal((t_vec){0, 1, 0}, 0.25));
+				else if (coords[1] == INT16_MAX)
+					vec_isum(&c->s.camera.pos, vec_scal((t_vec){0, -1, 0}, 0.25));
+				else if (coords[0] == -INT16_MAX)
+					ft_printf("LEFT");
+				else if (coords[0] == INT16_MAX)
+					ft_printf("RIGHT");
 				window_draw(&c->w, &c->s);
-				cooldown = 0;
 				return (0);
 			}
-			cooldown++;
+			else
+				ft_printf("%d\n", e.number);
 		}
 		else if (e.type == RT_ET_AXIS || e.type == RT_ET_BUTTON)
 			ft_printf("%d %d %d\n", e.value, e.type, e.number);
