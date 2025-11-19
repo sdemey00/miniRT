@@ -137,11 +137,19 @@ typedef struct s_window
 	int		fd_controller;
 }	t_window;
 
+/* Context render state */
+enum	e_rstate
+{
+	NONE,
+	RENDERING,
+	RENDERED
+};
+
 struct s_ctx
 {
-	t_window	w;
-	t_scene		s;
-	t_bool		rendering;
+	t_window		w;
+	t_scene			s;
+	enum e_rstate	state;
 };
 
 #endif // STRUCTS_H

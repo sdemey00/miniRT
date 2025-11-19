@@ -34,13 +34,13 @@ int	main(int argc, char **argv)
 {
 	struct s_ctx	c;
 
-	c.rendering = 0;
+	c.state = RENDERING;
 	if (argc != 2)
 		return (!!ft_dprintf(2, "Error\nUsage: %s <scene.rt>\n", argv[0]));
 	if (!scene_init(&c.s, argv[1]) || !window_init(&c.w))
 		return (1);
 	print_bindings();
-	window_draw(&c.w, &c.s);
+	window_draw(&c);
 	mlx_hook(c.w.win, WIN_CLOSE, 0, window_close, &c.w);
 	mlx_hook(c.w.win, 3, 2, key_release, &c);
 	mlx_hook(c.w.win, 4, 1L << 2, mouse_press, &c);

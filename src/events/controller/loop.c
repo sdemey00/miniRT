@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 14:42:34 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/19 17:46:29 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/20 00:21:07 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	controller_loop(struct s_ctx *c)
 			refresh = controller_camera(c, &e);
 		if (refresh)
 		{
-			window_draw(&c->w, &c->s);
+			window_draw(c);
 			return (0);
 		}
 	}

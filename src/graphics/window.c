@@ -47,10 +47,11 @@ t_bool	window_free(t_window *w)
 	close(w->fd_controller);
 }
 
-void	window_draw(t_window *w, t_scene *s)
+void	window_draw(struct s_ctx *c)
 {
-	raytracing(w, s, s->blur);
-	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr, 0, 0);
+	c->state = NONE;
+	blurtracing(&c->w, &c->s);
+	mlx_put_image_to_window(c->w.mlx, c->w.win, c->w.img.ptr, 0, 0);
 }
 
 void	window_draw_pixel(t_window *w, t_uint x, t_uint y, int color)
