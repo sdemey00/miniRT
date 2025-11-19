@@ -6,89 +6,67 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 14:42:34 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/19 01:19:44 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:46:29 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "controller.h"
-#include <linux/joystick.h>
 
-/*
-make a function that returns 1 if needs to window draw and break
-0 otherwise
-*/
+t_bool	handle_cooldown(void)
+{
+	static t_ssuint		cooldown;
 
-/*
-Need to set the correct moving directions based on camera direction,
-not space coordinates
-*/
+	cooldown++;
+	if (cooldown == 10)
+	{
+		cooldown = 0;
+		return (1);
+	}
+	return (0);
+}
+
+static t_bool	controller_overall(struct s_ctx *c, const struct js_event *e)
+{
+	float	zoom;
+
+	if (e->type == ET_BUTTON && e->value == PRESS && e->number == ENT1_START)
+		return (window_close(&c->w));
+	else if (e->type == ET_BUTTON && e->value == PRESS && e->number == ENT1_OPT)
+		return (full_render(c));
+	else if (e->type == ET_AXIS && (e->number == ENT2_TRIG_L || \
+		e->number == ENT2_TRIG_R))
+	{
+		zoom = (e->value + INT16_MAX) / (2.0 * INT16_MAX);
+		if (e->number == ENT2_TRIG_L)
+			c->s.camera.flen = tan(((c->s.camera.fov - (zoom * \
+				c->s.camera.fov))) * FT_PI / 180 / 2);
+		else if (e->number == ENT2_TRIG_R)
+			c->s.camera.flen = tan((c->s.camera.fov + (zoom * \
+				(180 - c->s.camera.fov))) * FT_PI / 180 / 2);
+		return (1);
+	}
+	return (0);
+}
+
 int	controller_loop(struct s_ctx *c)
 {
 	struct js_event	e;
-	short int		coords[2] = {0, 0};
-	t_vec			a;
-	t_ssuint		cooldown;
+	t_bool			refresh;
 
-	cooldown = 0;
+	refresh = 0;
 	while (read(c->w.fd_controller, &e, sizeof(e)) > 0)
 	{
-		if (e.type == RT_ET_BUTTON && e.value == RT_EV_PRESS && e.number == RT_EN_START)
-			return (window_close(&c->w));
-		else if (e.type == RT_ET_BUTTON && e.value == RT_EV_PRESS && e.number == RT_EN_OPT)
-			return (full_render(c));
-		else if (e.type == RT_ET_BUTTON && e.value == RT_EV_PRESS && e.number == RT_EN_NORTH)
+		if (controller_overall(c, &e))
+			refresh = handle_cooldown();
+		else if (c->s.controlled)
+			refresh = controller_object(c, &e);
+		else
+			refresh = controller_camera(c, &e);
+		if (refresh)
 		{
-			c->s.reticle = !c->s.reticle;
 			window_draw(&c->w, &c->s);
-			break ;
+			return (0);
 		}
-		else if (e.type == RT_ET_AXIS)
-		{
-			if (e.number == 0 || e.number == 1)
-			{
-				coords[e.number] = e.value;
-				a = (t_vec){coords[0] / (float)INT16_MAX, coords[1] / (float)INT16_MAX, 0};
-				if (cooldown == 1)
-				{
-					//vec_isum(&c->s.camera.pos, vec_scal(c->dir, 0.5));
-					vec_isum(&c->s.camera.pos, vec_scal((t_vec){-a.x, 0, a.y}, 0.1));
-					window_draw(&c->w, &c->s);
-					cooldown = 0;
-					return (0);
-				}
-				cooldown++;
-			}
-			else if (e.number == 2)
-			{
-				//ft_printf("left trigger\n");
-			}
-			else if (e.number == 3 || e.number == 4)
-			{
-				//ft_printf("right js\n");
-			}
-			else if (e.number == 5)
-			{
-				//ft_printf("right trigger\n");
-			}
-			else if (e.number == 6 || e.number == 7)
-			{
-				coords[e.number - 6] = e.value;
-				if (coords[1] == -INT16_MAX)
-					vec_isum(&c->s.camera.pos, vec_scal((t_vec){0, 1, 0}, 0.25));
-				else if (coords[1] == INT16_MAX)
-					vec_isum(&c->s.camera.pos, vec_scal((t_vec){0, -1, 0}, 0.25));
-				else if (coords[0] == -INT16_MAX)
-					ft_printf("LEFT");
-				else if (coords[0] == INT16_MAX)
-					ft_printf("RIGHT");
-				window_draw(&c->w, &c->s);
-				return (0);
-			}
-			else
-				ft_printf("%d\n", e.number);
-		}
-		else if (e.type == RT_ET_AXIS || e.type == RT_ET_BUTTON)
-			ft_printf("%d %d %d\n", e.value, e.type, e.number);
 	}
-	return (0);
+	return (1);
 }
