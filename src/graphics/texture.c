@@ -39,7 +39,7 @@ void	load_texture(t_tex *tex, void *mlx, char *path)
 	tex->loaded = 1;
 }
 
-static int	get_tex_pixel(t_tex *tex, int x, int y)
+int	get_tex_pixel(t_tex *tex, int x, int y)
 {
 	const char	*px = tex->addr + (y * tex->size_line) + (x * (tex->bpp / 8));
 

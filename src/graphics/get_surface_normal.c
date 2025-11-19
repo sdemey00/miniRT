@@ -12,6 +12,41 @@
 
 #include "minirt.h"
 
+void compute_tangent_space(t_hit *h)
+{
+    t_vec up;
+	t_vec tmp_up;
+	t_vec axis;
+
+	up = (t_vec){0, 1, 0};
+    if (ft_abs(h->normal.y) > 0.999)
+        up = (t_vec){1, 0, 0};
+    if (h->obj->e_type == SPH)
+    {
+        h->tangent = vec_norm((t_vec){-h->normal.z, 0.0, h->normal.x});
+        if (vec_mag(h->tangent) < EPSILON)
+            h->tangent = vec_norm(vec_cross(up, h->normal));
+    }
+    else if (h->obj->e_type == PLA || h->obj->e_type == CIR)
+    {
+        tmp_up = (t_vec){0, 1, 0};
+        if (ft_abs(h->obj->dir.y) > 0.999)
+            tmp_up = (t_vec){1, 0, 0};
+        h->tangent = vec_norm(vec_cross(tmp_up, h->obj->dir));
+    }
+    else
+    {
+        axis = h->obj->dir;
+        h->tangent = vec_norm(vec_cross(axis, h->normal));
+        if (vec_mag(h->tangent) < EPSILON)
+            h->tangent = vec_norm(vec_cross(up, h->normal));
+    }
+    h->bitangent = vec_cross(h->normal, h->tangent);
+    h->tangent = vec_norm(h->tangent);
+    h->bitangent = vec_norm(h->bitangent);
+}
+
+// TODO remplacer par compute_tangant_space
 t_vec	get_local_hit(t_hit *hitten, t_vec local_hit)
 {
 	t_vec	tmp_up;

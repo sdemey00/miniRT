@@ -53,7 +53,6 @@ t_hit	get_closest_hit(const t_ray *r, t_scene *s)
 	res.point = vec_sum(r->origin, vec_scal(r->dir, res.dist));
 	res.normal = get_surface_normal(res.obj, res.point);
 	res.uv = map_obj(&res);
-	apply_perturbation(&res.normal, res.uv.x, res.uv.y);
 	res.p_offset = vec_sum(res.point, vec_scal(res.normal, EPSILON));
 	return (res);
 }
@@ -89,6 +88,7 @@ t_color	ray_color(t_ray *r, t_scene *s, int depth)
 	hitten = get_closest_hit(r, s);
 	if (!hitten.obj)
 		return (s->bg);
+	apply_bump_from_height(&hitten, &hitten.obj->texture, 0.8);
 	base_color = get_obj_color(s, &hitten);
 	base_color = vec_rscal(base_color, 255.0);
 	light_color = compute_lights(s, &hitten, r);

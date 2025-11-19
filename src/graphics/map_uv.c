@@ -72,3 +72,12 @@ t_vec	map_obj(t_hit *hitten)
 		map_cone(&u, &v, local);
 	return ((t_vec){u, v, 0});
 }
+    // // wrap u,v into [0,1)
+    // u = fmodf(u, 1.0);
+    // v = fmodf(v, 1.0);
+    // if (u < 0) u += 1.0;
+    // if (v < 0) v += 1.0;
+
+
+    // float fx = u * (float)tex->w;
+    // float fy = (1.0f - v) * (float)tex->h; // flip v if needed

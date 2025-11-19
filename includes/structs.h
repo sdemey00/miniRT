@@ -95,6 +95,18 @@ typedef struct s_obj
 	t_tex		texture;
 }	t_obj;
 
+typedef struct s_hit
+{
+	t_obj	*obj;
+	float	dist;
+	t_vec	point;
+	t_vec	normal;
+	t_vec	uv;
+	t_vec	tangent;
+	t_vec	bitangent;
+	t_vec	p_offset;
+}	t_hit;
+
 /* MLX pixel grid manipulation */
 typedef struct s_image
 {

@@ -70,15 +70,6 @@
 # define DFLT_REFLECT	0
 # define OPTION_ARGS	3
 
-typedef struct s_hit
-{
-	t_obj	*obj;
-	float	dist;
-	t_vec	point;
-	t_vec	normal;
-	t_vec	uv;
-	t_vec	p_offset;
-}	t_hit;
 
 // parsing/parse_file.c
 t_bool	filepath_has_rt(const char *fpath);
@@ -157,11 +148,16 @@ void	load_texture(t_tex *tex, void *mlx, char *path);
 t_color	texture_color(t_tex *tex, t_hit *hitten);
 
 // graphics/perturbation.c
-void	apply_perturbation(t_vec *normal, float u, float v);
+//void	apply_perturbation(t_vec *normal, float u, float v);
 
 // bitmap.c
 void	bitmap_switch(t_bitmap *b, const t_ssuint i);
 t_bool	bitmap_get(const t_bitmap *b, const t_ssuint i);
 void	bitmap_print(const t_bitmap *b);
 
+void apply_bump_from_height(t_hit *h, t_tex *tex, float strength);
+void apply_normal_map(t_hit *h, t_tex *tex, float strength);
+void apply_procedural_bump(t_hit *h, float strength);
+void compute_tangent_space(t_hit *h);
+int	get_tex_pixel(t_tex *tex, int x, int y);
 #endif // MINIRT_H

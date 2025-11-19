@@ -74,9 +74,9 @@ int	main(int argc, char **argv)
 	for (int i = 0; i< c.s.objs_len; i++)
 	{
 		if (c.s.objs[i].e_type == SPH)
-			load_texture(&c.s.objs[i].texture, c.w.mlx, "textures/stained_rfl.xpm"); 
+			load_texture(&c.s.objs[i].texture, c.w.mlx, "textures/psy.xpm"); 
 		else if (c.s.objs[i].e_type == CYL)
-			load_texture(&c.s.objs[i].texture, c.w.mlx, "textures/cola.xpm");
+			load_texture(&c.s.objs[i].texture, c.w.mlx, "textures/pape.xpm");
 	}
 	// end (free at exit)
 	print_bindings();
