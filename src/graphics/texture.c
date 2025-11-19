@@ -28,8 +28,6 @@ t_color	checkboard_pattern(t_hit *hitten)
 void	load_texture(t_tex *tex, void *mlx, char *path)
 {
 	(void)path;
-	tex->h = 1080;
-	tex->w = 1080;
 	tex->img = mlx_xpm_file_to_image(mlx, path, &tex->w, &tex->h);
 	if (!tex->img)
 	{

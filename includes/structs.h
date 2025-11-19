@@ -127,7 +127,6 @@ typedef struct s_scene
 	t_bool		bg_set;
 	t_bool		reticle;
 	t_bitmap	effects;
-	t_window	*w;
 }	t_scene;
 
 struct s_ctx

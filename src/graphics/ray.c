@@ -53,15 +53,14 @@ t_hit	get_closest_hit(const t_ray *r, t_scene *s)
 	res.point = vec_sum(r->origin, vec_scal(r->dir, res.dist));
 	res.normal = get_surface_normal(res.obj, res.point);
 	res.uv = map_obj(&res);
-	// apply_perturbation(&res.normal, res.uv.x, res.uv.y);
+	apply_perturbation(&res.normal, res.uv.x, res.uv.y);
 	res.p_offset = vec_sum(res.point, vec_scal(res.normal, EPSILON));
 	return (res);
 }
 
 static t_color	get_obj_color(t_scene *s, t_hit *hitten)
 {
-	// if (hitten->obj->e_type == SPH || hitten->obj->e_type == CYL) // if obj.texture
-	if (1 < 0)
+	if (hitten->obj->e_type == SPH || hitten->obj->e_type == CYL) // if obj.texture
 		return (texture_color(&hitten->obj->texture, hitten));
 	if (bitmap_get(&s->effects, CHECKER_PATTERN)
 		&& bitmap_get(&hitten->obj->effects, CHECKER_PATTERN))

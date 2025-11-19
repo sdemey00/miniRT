@@ -74,11 +74,11 @@ int	main(int argc, char **argv)
 	for (int i = 0; i< c.s.objs_len; i++)
 	{
 		if (c.s.objs[i].e_type == SPH)
-			load_texture(&c.s.objs[i].texture, c.w.mlx, "textures/earth_col.xpm"); 
+			load_texture(&c.s.objs[i].texture, c.w.mlx, "textures/stained_rfl.xpm"); 
 		else if (c.s.objs[i].e_type == CYL)
-			load_texture(&c.s.objs[i].texture, c.w.mlx, "textures/stained_rfl.xpm");
+			load_texture(&c.s.objs[i].texture, c.w.mlx, "textures/cola.xpm");
 	}
-	// end
+	// end (free at exit)
 	print_bindings();
 	window_draw(&c.w, &c.s);
 	mlx_hook(c.w.win, WIN_CLOSE, 0, window_close, &c.w);

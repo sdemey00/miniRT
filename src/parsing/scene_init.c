@@ -26,6 +26,7 @@ static void	normalize_lights(t_scene *s)
 
 void	obj_init(t_obj *o)
 {
+	o->dir = (t_vec){0, 1, 0};
 	o->shininess = DFLT_BRIGHT;
 	o->reflexion = DFLT_REFLECT;
 	o->effects = 0b11101111;
