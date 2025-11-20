@@ -20,10 +20,11 @@ void	print_bindings(void)
 	ft_printf("%-18s : Export\n", "<e>");
 	ft_printf("%-18s : Movements\n", "<w,a,s,d,SPACE,c>");
 	ft_printf("%-18s : Skip to controller input\n", "<z>");
+	ft_printf("%-18s : Color picker and visualizer\n", "<Mouse-Right>");
 	ft_printf("CAMERA MODE\n");
 	ft_printf("%-18s : Orientation\n", "<i,j,k,l>");
 	ft_printf("%-18s : FOV\n", "<-,=>");
-	ft_printf("%-18s : Take or release, control of object\n", "<e,MOUSE>");
+	ft_printf("%-18s : Take or release, control of object\n", "<e,Mouse-Left>");
 	ft_printf("%-18s : Toggle reticle\n", "<x>");
 	ft_printf("OBJECT MODE\n");
 	ft_printf("%-18s : Orientation\n", "<i,j,k,l,u,o>");

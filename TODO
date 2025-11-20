@@ -2,26 +2,12 @@ Mandatory :
 - PDF
 - Remove file wildcard in Makefile
 - Norm
-- Deep test parsing
-	- Check input ranges
-- Re-organizing the files
-
-Bonus :
-
-Bonus ++ :
-- Remove object from the scene
-- Add objects to the scene
-- Duplicate current controlled object
-- Sensitivity for translations
 
 FIX :
-- Shadow have the color of emiting light. Investigate ?
-- No lights when 2 planes above each other ? Not able to make a closed room ?
-Shadows might overflow the world ?
-- Rotation of an object might not rotate as you'd expect. Even though it has 
-it's logic of behaving.
 
 sdemey :
-- Bumping texture / perturbed normal
+- Parse bumping texture
+- Deep test parsing
 
 mmichele :
+- Shadow have the color of emiting light. Investigate ?

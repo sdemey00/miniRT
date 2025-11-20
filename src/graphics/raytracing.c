@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:31:38 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/20 11:44:21 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/20 16:23:14 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,23 +74,29 @@ static void	raytracing(t_window *w, t_scene *s)
 	t_idx			j;
 	t_color			c;
 	t_ray			r;
+	unsigned int	k;
+	const t_uint	step = 6;
 
-	j = 0;
-	while (j < HEIGHT)
+	k = 0;
+	while (k < step)
 	{
-		i = 0;
-		while (i < WIDTH)
+		j = k;
+		while (j < HEIGHT)
 		{
-			if (!(i % s->blur == 0 && j % s->blur == 0))
+			i = 0;
+			while (i < WIDTH)
 			{
-				r = camera_ray(&s->camera, i + offset, j + offset);
-				c = vec_scal(ray_color(&r, s, 0), 255);
-				mlx_pixel_put(w->mlx, w->win, i + offset, j + offset, \
-					color_int(&c));
+				if (!((i % s->blur) - offset == 0 && (j % s->blur) - offset == 0))
+				{
+					r = camera_ray(&s->camera, i, j);
+					c = vec_scal(ray_color(&r, s, 0), 255);
+					mlx_pixel_put(w->mlx, w->win, i, j, color_int(&c));
+				}
+				i++;
 			}
-			i++;
+			j += step;
 		}
-		j++;
+		k++;
 	}
 }
 
@@ -103,7 +109,7 @@ t_bool	full_render(struct s_ctx *c)
 		return (0);
 	c->state = RENDERING;
 	c->s.reticle = 0;
-	ft_printf("Render\n");
+	ft_printf("Render");
 	start_time = time_now();
 	raytracing(&c->w, &c->s);
 	ft_printf("ed in %.3fs\n", (time_now() - start_time) / 1000);

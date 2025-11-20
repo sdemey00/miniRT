@@ -56,7 +56,7 @@
 # include "export.h"
 # include "controller.h"
 
-# define EPSILON 1e-4
+# define EPSILON 1e-2
 
 /* MLX controller event codes */
 # define WIN_CLOSE	17

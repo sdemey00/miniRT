@@ -29,7 +29,7 @@ static t_obj	*get_closest_hit_obj(const t_ray *r, float *closest_t, \
 			(s->objs[i].e_type == CON && ray_hit_con(r, &s->objs[i], &t)) || \
 			(s->objs[i].e_type == CIR && ray_hit_cir(r, &s->objs[i], &t)))
 		{
-			if (t > EPSILON && t < *closest_t)
+			if (EPSILON < t && t < *closest_t)
 			{
 				*closest_t = t;
 				hit_obj = &s->objs[i];
@@ -85,7 +85,7 @@ t_color	ray_color(t_ray *r, t_scene *s, int depth)
 		return ((t_color){0, 0, 0});
 	hitten = get_closest_hit(r, s);
 	if (!hitten.obj)
-		return (s->bg);
+		return (vec_norm(s->bg));
 	base_color = get_obj_color(s, &hitten);
 	base_color = vec_rscal(base_color, 255.0);
 	light_color = compute_lights(s, &hitten, r);
