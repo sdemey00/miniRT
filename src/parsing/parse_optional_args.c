@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-t_bool	parse_optional_args(char **split, t_obj *obj)
+t_bool	parse_optional_args(char **split, t_obj *obj, void *mlx)
 {
 	t_idx	i;
 
@@ -41,20 +41,24 @@ t_bool	parse_optional_args(char **split, t_obj *obj)
 				return (print_error("Invalid checkboard format\n"), 0);
 		}
 		else if (split[i][0] == 'x')
-		{;
-			//parse XPM
-			//load_texture()
+		{
+			if (!load_texture(&obj->texture, mlx, &split[i][2]))
+				return (print_error("XPM file loading failed\n"), 0);
 		}
 		else if (split[i][0] == 'b')
-		{;
-			// if (ft_strcmp(&split[i][2], "0") == 0)
-			// 	obj->bump.e_type = PROC_WAVE;
-			// else if (ft_strcmp(&split[i][2], "1") == 0)
-			// 	obj->bump.e_type = XPM_TEX;
-			// else
-			// 	print_error("Invalid bump format\n")
-			//parse bump
-			//load_texture() ??
+		{
+			if (ft_strcmp(&split[i][2], "1") == 0)
+				obj->bump.e_type = PROC_WAVE;
+			else if (ft_strcmp(&split[i][2], "tex") == 0)
+				obj->bump.e_type = XPM_TEX;
+			else if (ft_strcmp(&split[i][2], "xpm") == 0)
+			{
+				obj->bump.e_type = XPM_BUMP;
+				if (!load_texture(&obj->bump.texture, mlx, &split[i][2]))
+					return (print_error("XPM file loading failed\n"), 0);
+			}
+			else if (ft_strcmp(&split[i][2], "1") != 0)
+				print_error("Invalid bump format\n");
 		}
 		else
 			return (print_error("Unknown identifier\n"), 0);

@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-t_bool	parse_cylinder(char **split, t_scene *scene)
+t_bool	parse_cylinder(char **split, t_scene *scene, void *mlx)
 {
 	const t_ssuint	min_args = 5;
 	const t_ssuint	max_args = min_args + OPTION_ARGS;
@@ -29,7 +29,7 @@ t_bool	parse_cylinder(char **split, t_scene *scene)
 		|| !parse_color(split[4], &cy.color)
 		|| !parse_float(split[2], &cy.radius)
 		|| !parse_float(split[3], &cy.height)
-		|| !parse_optional_args(&split[min_args], &cy))
+		|| !parse_optional_args(&split[min_args], &cy, mlx))
 		return (0);
 	cy.radius /= 2;
 	cy.e_type = CYL;

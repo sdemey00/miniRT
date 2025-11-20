@@ -12,8 +12,9 @@
 
 #include "minirt.h"
 
-t_bool	parse_bg(char **split, t_scene *scene)
+t_bool	parse_bg(char **split, t_scene *scene, void *mlx)
 {
+	(void)mlx;
 	if (scene->bg_set)
 	{
 		print_error("Multiple background definitions are not allowed\n");

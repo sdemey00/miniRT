@@ -21,7 +21,7 @@ static void	map_sphere(float *u, float *v, t_vec hit_point)
 	p = vec_norm(hit_point);
 	theta = atan2(p.z, p.x);
 	phi = acos(p.y);
-	*u = (theta + FT_PI) / (2.0 * FT_PI);
+	*u = 1.0 - (theta + FT_PI) / (2.0 * FT_PI);
 	*v = phi / FT_PI;
 }
 

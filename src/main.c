@@ -68,17 +68,8 @@ int	main(int argc, char **argv)
 	c.rendering = 0;
 	if (argc != 2)
 		return (!!dprintf(2, "Error\nUsage: %s <scene.rt>\n", argv[0]));
-	if (!scene_init(&c.s, argv[1]) || !window_init(&c.w))
+	if (!window_init(&c.w) || !scene_init(&c.s, argv[1], c.w.mlx))
 		return (1);
-	// ==> TODO load texture in parsing
-	for (int i = 0; i< c.s.objs_len; i++)
-	{
-		if (c.s.objs[i].e_type == SPH)
-			load_texture(&c.s.objs[i].texture, c.w.mlx, "textures/earth_col.xpm"); 
-		else if (c.s.objs[i].e_type == CYL)
-			load_texture(&c.s.objs[i].texture, c.w.mlx, "textures/cola.xpm");
-	}
-	// end (free at exit)
 	print_bindings();
 	window_draw(&c.w, &c.s);
 	mlx_hook(c.w.win, WIN_CLOSE, 0, window_close, &c.w);

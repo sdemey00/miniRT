@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-t_bool	parse_circle(char **split, t_scene *scene)
+t_bool	parse_circle(char **split, t_scene *scene, void *mlx)
 {
 	const t_ssuint	min_args = 4;
 	const t_ssuint	max_args = min_args + OPTION_ARGS;
@@ -28,7 +28,7 @@ t_bool	parse_circle(char **split, t_scene *scene)
 		|| !parse_dir(split[1], &circle.dir)
 		|| !parse_float(split[2], &circle.radius)
 		|| !parse_color(split[3], &circle.color)
-		|| !parse_optional_args(&split[min_args], &circle))
+		|| !parse_optional_args(&split[min_args], &circle, mlx))
 		return (0);
 	circle.radius /= 2;
 	circle.e_type = CIR;

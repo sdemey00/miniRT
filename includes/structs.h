@@ -72,7 +72,7 @@ typedef struct s_tex
 	int		endian;
 	int		w;
 	int		h;
-	char	*path;
+	//char	*path;
 	t_bool	loaded;
 }	t_tex;
 
@@ -80,6 +80,7 @@ typedef struct s_bump
 {
 	enum
 	{
+		NONE,
 		PROC_WAVE,
 		PROC_NOISE,
 		XPM_TEX,

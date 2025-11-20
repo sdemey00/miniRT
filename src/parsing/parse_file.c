@@ -43,7 +43,7 @@ static t_bool	open_file(const char *fpath, int *fd)
 	return (1);
 }
 
-static t_bool	parse_all_lines(int fd, t_scene *scene)
+static t_bool	parse_all_lines(int fd, t_scene *scene, void *mlx)
 {
 	char	*line;
 	t_idx	i;
@@ -61,7 +61,7 @@ static t_bool	parse_all_lines(int fd, t_scene *scene)
 			while (ft_isspace(line[i]))
 				i++;
 			if (line[i])
-				if (!parse_line(line, scene))
+				if (!parse_line(line, scene, mlx))
 					return (free(line), close(fd),
 						ft_dprintf(2, "Line: %d\n", j), 0);
 		}
@@ -72,13 +72,13 @@ static t_bool	parse_all_lines(int fd, t_scene *scene)
 	return (close(fd), 1);
 }
 
-t_bool	parse_file(const char *fpath, t_scene *scene)
+t_bool	parse_file(const char *fpath, t_scene *scene, void *mlx)
 {
 	int		fd;
 
 	if (!open_file(fpath, &fd))
 		return (0);
-	if (!parse_all_lines(fd, scene))
+	if (!parse_all_lines(fd, scene, mlx))
 		return (0);
 	if (!scene->camera.set)
 	{

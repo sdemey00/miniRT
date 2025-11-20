@@ -40,13 +40,13 @@ static float	sample_height(t_tex *tex, float u, float v)
 	return (rgb.x / 100 + rgb.y / 100 + rgb.z / 100);
 }
 
-static void	apply_texture_bump(t_hit *h, float *dhdu, float *dhdv)
+static void	apply_texture_bump(t_hit *h, t_tex *tex, float *dhdu, float *dhdv)
 {
-	const float	eps_u = 1.0 / fmax(1, h->obj->texture.w);
-	const float	eps_v = 1.0 / fmax(1, h->obj->texture.h);
-	const float	hm = sample_height(&h->obj->texture, h->uv.x, h->uv.y);
-	const float	hu = sample_height(&h->obj->texture, h->uv.x + eps_u, h->uv.y);
-	const float	hv = sample_height(&h->obj->texture, h->uv.x, h->uv.y + eps_v);
+	const float	eps_u = 1.0 / fmax(1, tex->w);
+	const float	eps_v = 1.0 / fmax(1, tex->h);
+	const float	hm = sample_height(tex, h->uv.x, h->uv.y);
+	const float	hu = sample_height(tex, h->uv.x + eps_u, h->uv.y);
+	const float	hv = sample_height(tex, h->uv.x, h->uv.y + eps_v);
 
 	*dhdu = (hu - hm) / eps_u;
 	*dhdv = (hv - hm) / eps_v;
@@ -70,9 +70,11 @@ void	apply_bump(t_hit *h, float strength)
 	t_vec	pert;
 
 	compute_tangent_space(h);
-	if (1 > 0) //TEXTURE_BUMP
-		apply_texture_bump(h, &dhdu, &dhdv);
-	else if (1 < 0) //PROCEDURAL_BUMP
+	if (h->obj->bump.e_type == XPM_TEX)
+		apply_texture_bump(h, &h->obj->texture, &dhdu, &dhdv);
+	else if (h->obj->bump.e_type == XPM_BUMP)
+		apply_texture_bump(h, &h->obj->bump.texture, &dhdu, &dhdv);
+	else if (h->obj->bump.e_type == PROC_WAVE)
 		apply_procedural_bump(h, &dhdu, &dhdv);
 	else
 		return ;

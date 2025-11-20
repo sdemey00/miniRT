@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-t_bool	parse_sphere(char **split, t_scene *scene)
+t_bool	parse_sphere(char **split, t_scene *scene, void *mlx)
 {
 	const t_ssuint	min_args = 3;
 	const t_ssuint	max_args = min_args + OPTION_ARGS;
@@ -27,7 +27,7 @@ t_bool	parse_sphere(char **split, t_scene *scene)
 	if (!parse_vec(split[0], &sp.pos)
 		|| !parse_color(split[2], &sp.color)
 		|| !parse_float(split[1], &sp.radius)
-		|| !parse_optional_args(&split[min_args], &sp))
+		|| !parse_optional_args(&split[min_args], &sp, mlx))
 		return (0);
 	sp.radius /= 2;
 	sp.e_type = SPH;

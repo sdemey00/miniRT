@@ -25,7 +25,7 @@ static void	normalize_whitespace(char *line)
 	}
 }
 
-t_bool	parse_line(char *line, t_scene *scene)
+t_bool	parse_line(char *line, t_scene *scene, void *mlx)
 {
 	char				**split;
 	char				status;
@@ -45,7 +45,7 @@ t_bool	parse_line(char *line, t_scene *scene)
 	while (objects[i].id)
 	{
 		if (ft_strcmp(split[0], objects[i].id) == 0)
-			status = objects[i].func(&split[1], scene);
+			status = objects[i].func(&split[1], scene, mlx);
 		i++;
 	}
 	ft_free_split(split);

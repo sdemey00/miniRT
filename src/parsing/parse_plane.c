@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-t_bool	parse_plane(char **split, t_scene *scene)
+t_bool	parse_plane(char **split, t_scene *scene, void *mlx)
 {
 	const t_ssuint	min_args = 3;
 	const t_ssuint	max_args = min_args + OPTION_ARGS;
@@ -27,7 +27,7 @@ t_bool	parse_plane(char **split, t_scene *scene)
 	if (!parse_vec(split[0], &plane.pos)
 		|| !parse_dir(split[1], &plane.dir)
 		|| !parse_color(split[2], &plane.color)
-		|| !parse_optional_args(&split[min_args], &plane))
+		|| !parse_optional_args(&split[min_args], &plane, mlx))
 		return (0);
 	plane.e_type = PLA;
 	if (!scene_add_obj(scene, &plane))

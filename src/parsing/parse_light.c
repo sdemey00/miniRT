@@ -12,10 +12,11 @@
 
 #include "minirt.h"
 
-t_bool	parse_light(char **split, t_scene *scene)
+t_bool	parse_light(char **split, t_scene *scene, void *mlx)
 {
 	t_light	light;
 
+	(void)mlx;
 	if (!check_args_count(split, 3))
 	{
 		print_error("Light source: invalid number of arguments\n");

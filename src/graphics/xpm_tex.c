@@ -25,18 +25,21 @@ t_color	checkboard_pattern(t_hit *hitten)
 	return ((t_color){255, 255, 255});
 }
 
-void	load_texture(t_tex *tex, void *mlx, char *path)
+t_bool	load_texture(t_tex *tex, void *mlx, char *path)
 {
-	(void)path;
+	printf("%s\n", path);
+	if (!path)
+		return (0);
 	tex->img = mlx_xpm_file_to_image(mlx, path, &tex->w, &tex->h);
 	if (!tex->img)
 	{
 		tex->loaded = 0;
-		return ;
+		return (0);
 	}
 	tex->addr = mlx_get_data_addr(tex->img, &tex->bpp,
 			&tex->size_line, &tex->endian);
 	tex->loaded = 1;
+	return (1);
 }
 
 int	get_tex_pixel(t_tex *tex, int x, int y)
