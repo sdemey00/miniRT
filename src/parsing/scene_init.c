@@ -30,6 +30,7 @@ void	obj_init(t_obj *o)
 	o->shininess = DFLT_BRIGHT;
 	o->reflexion = DFLT_REFLECT;
 	o->effects = 0b11101111;
+	o->texture.loaded = 0;
 }
 
 t_bool	scene_init(t_scene *s, const char *fpath)

@@ -155,9 +155,7 @@ void	bitmap_switch(t_bitmap *b, const t_ssuint i);
 t_bool	bitmap_get(const t_bitmap *b, const t_ssuint i);
 void	bitmap_print(const t_bitmap *b);
 
-void apply_bump_from_height(t_hit *h, t_tex *tex, float strength);
-void apply_normal_map(t_hit *h, t_tex *tex, float strength);
-void apply_procedural_bump(t_hit *h, float strength);
+void apply_bump(t_hit *h, float strength);
 void compute_tangent_space(t_hit *h);
 int	get_tex_pixel(t_tex *tex, int x, int y);
 #endif // MINIRT_H

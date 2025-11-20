@@ -22,25 +22,42 @@ t_bool	parse_optional_args(char **split, t_obj *obj)
 		if (!split[i][0] || !split[i][1] || split[i][1] != '=')
 			return (print_error("Invalid key=value format\n"), 0);
 		if (split[i][0] == 's')
+		{
 			if (!parse_int(&split[i][2], &obj->shininess) || \
 				!check_frange(obj->shininess, 0, 320))
 				return (print_error("Invalid shininess format\n"), 0);
-		if (split[i][0] == 'r')
+		}
+		else if (split[i][0] == 'r')
+		{
 			if (!parse_float(&split[i][2], &obj->reflexion) || \
 				!check_frange(obj->reflexion, 0.0, 1.0))
 				return (print_error("Invalid reflexion format\n"), 0);
-		if (split[i][0] == 'c')
+		}
+		else if (split[i][0] == 'c')
 		{
 			if (ft_strcmp(&split[i][2], "1") == 0)
 				bitmap_switch(&obj->effects, CHECKER_PATTERN);
 			else if (ft_strcmp(&split[i][2], "0") != 0)
 				return (print_error("Invalid checkboard format\n"), 0);
 		}
-		// if (split[i][0] == 'x')
-		// {
-		// //parse XPM
-		// 	load_texture()
-		// }
+		else if (split[i][0] == 'x')
+		{;
+			//parse XPM
+			//load_texture()
+		}
+		else if (split[i][0] == 'b')
+		{;
+			// if (ft_strcmp(&split[i][2], "0") == 0)
+			// 	obj->bump.e_type = PROC_WAVE;
+			// else if (ft_strcmp(&split[i][2], "1") == 0)
+			// 	obj->bump.e_type = XPM_TEX;
+			// else
+			// 	print_error("Invalid bump format\n")
+			//parse bump
+			//load_texture() ??
+		}
+		else
+			return (print_error("Unknown identifier\n"), 0);
 		i++;
 	}
 	return (1);

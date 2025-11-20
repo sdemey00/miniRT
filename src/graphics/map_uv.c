@@ -37,20 +37,13 @@ static void	map_cylinder(float *u, float *v, t_vec local, t_obj *obj)
 
 	theta = atan2(local.z, local.x);
 	*u = (theta + FT_PI) / (2.0 * FT_PI);
-	// *v = fmodf(local.y / (obj->height / 2.0), 1.0);
-    *v = (local.y + obj->height / 2.0) / obj->height;
-	if (*v < 0.0)
-		*v += 1.0;
+	*v = (local.y + obj->height / 2.0) / obj->height;
 }
 
 static void	map_cone(float *u, float *v, t_vec local)
 {
 	*u = atan2(local.x, local.z) / (2.0 * FT_PI);
-	if (*u < 0.0)
-		*u += 1.0;
 	*v = fmodf(local.y * 0.001, 1.0);
-	if (*v < 0)
-		*v += 1.0;
 }
 
 t_vec	map_obj(t_hit *hitten)
@@ -70,14 +63,9 @@ t_vec	map_obj(t_hit *hitten)
 		map_cylinder(&u, &v, local, hitten->obj);
 	else if (hitten->obj->e_type == CON)
 		map_cone(&u, &v, local);
+	if (u < 0.0)
+		u += 1.0;
+	if (v < 0)
+		v += 1.0;
 	return ((t_vec){u, v, 0});
 }
-    // // wrap u,v into [0,1)
-    // u = fmodf(u, 1.0);
-    // v = fmodf(v, 1.0);
-    // if (u < 0) u += 1.0;
-    // if (v < 0) v += 1.0;
-
-
-    // float fx = u * (float)tex->w;
-    // float fy = (1.0f - v) * (float)tex->h; // flip v if needed

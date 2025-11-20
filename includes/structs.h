@@ -58,21 +58,35 @@ enum	e_effects_map
 	SPECULAR_LIGHT = 1,
 	SHADOWS = 2,
 	REFLEXION = 3,
-	CHECKER_PATTERN = 4
+	CHECKER_PATTERN = 4,
+	TEXTURE = 5,
+	BUMP = 6
 };
 
 typedef struct s_tex
 {
 	void	*img;
 	char	*addr;
-	int		w;
-	int		h;
 	int		bpp;
 	int		size_line;
 	int		endian;
+	int		w;
+	int		h;
 	char	*path;
 	t_bool	loaded;
 }	t_tex;
+
+typedef struct s_bump
+{
+	enum
+	{
+		PROC_WAVE,
+		PROC_NOISE,
+		XPM_TEX,
+		XPM_BUMP
+	}		e_type;
+	t_tex	texture;
+}	t_bump;
 
 typedef struct s_obj
 {
@@ -93,6 +107,7 @@ typedef struct s_obj
 	float		reflexion;
 	t_bitmap	effects;
 	t_tex		texture;
+	t_bump		bump;
 }	t_obj;
 
 typedef struct s_hit
