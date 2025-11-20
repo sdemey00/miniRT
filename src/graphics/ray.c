@@ -90,7 +90,7 @@ t_color	ray_color(t_ray *r, t_scene *s, int depth)
 	if (!hitten.obj)
 		return (vec_norm(s->bg));
 	if (bitmap_get(&s->effects, BUMP) && bitmap_get(&hitten.obj->effects, BUMP))
-		apply_bump(&hitten, 0.5);
+		apply_bump(&hitten, 0.8);
 	base_color = get_obj_color(s, &hitten);
 	base_color = vec_rscal(base_color, 255.0);
 	light_color = compute_lights(s, &hitten, r);

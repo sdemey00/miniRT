@@ -50,7 +50,6 @@ t_bool	parse_optional_args(char **split, t_obj *obj, void *mlx)
 			char *ext = ft_strrchr(&split[i][2], '.');
 			if (ext && ft_strcmp(ext, ".xpm") == 0)
 			{
-				printf("in\n");
 				obj->bump.e_type = XPM_BUMP;
 				if (!load_texture(&obj->bump.texture, mlx, &split[i][2]))
 					return (print_error("XPM file loading failed\n"), 0);

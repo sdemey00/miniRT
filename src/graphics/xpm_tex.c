@@ -27,7 +27,6 @@ t_color	checkboard_pattern(t_hit *hitten)
 
 t_bool	load_texture(t_tex *tex, void *mlx, char *path)
 {
-	printf("%s\n", path);
 	if (!path)
 		return (0);
 	tex->img = mlx_xpm_file_to_image(mlx, path, &tex->w, &tex->h);

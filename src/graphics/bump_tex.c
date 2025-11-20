@@ -78,7 +78,7 @@ void	apply_bump(t_hit *h, float strength)
 		apply_procedural_bump(h, &dhdu, &dhdv);
 	else
 		return ;
-	n_t = vec_norm((t_vec){-strength * dhdu, -strength * dhdv, 1.0});
+	n_t = vec_norm((t_vec){strength * dhdu, strength * dhdv, 1.0});
 	pert = vec_sum(vec_sum(vec_scal(h->tangent, n_t.x),
 				vec_scal(h->bitangent, n_t.y)),
 			vec_scal(h->normal, n_t.z));
