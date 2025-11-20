@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 14:42:34 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/20 00:21:07 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/20 11:43:52 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,13 @@ int	controller_loop(struct s_ctx *c)
 	struct js_event	e;
 	t_bool			refresh;
 
+	if (c->input == KBM)
+		return (0);
 	refresh = 0;
 	while (read(c->w.fd_controller, &e, sizeof(e)) > 0)
 	{
+		if (e.type == ET_BUTTON && e.value == PRESS && e.number == ENT1_WEST)
+			return (c->input = KBM);
 		if (controller_overall(c, &e))
 			refresh = handle_cooldown();
 		else if (c->s.controlled)

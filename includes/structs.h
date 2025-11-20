@@ -145,11 +145,19 @@ enum	e_rstate
 	RENDERED
 };
 
+/* Input method */
+enum	e_input_method
+{
+	CONTROLLER,
+	KBM
+};
+
 struct s_ctx
 {
-	t_window		w;
-	t_scene			s;
-	enum e_rstate	state;
+	t_window			w;
+	t_scene				s;
+	enum e_rstate		state;
+	enum e_input_method	input;
 };
 
 #endif // STRUCTS_H

@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 15:31:38 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/20 00:31:38 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/20 11:44:21 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,56 +50,48 @@ void	blurtracing(t_window *w, t_scene *s)
 	t_color			c;
 	t_ray			r;
 
-	ft_printf("%u\n", s->blur);
-	unsigned int count = 0;
 	j = offset;
-	while (j < HEIGHT + offset - 1)
+	while (j < HEIGHT + offset)
 	{
 		i = offset;
-		while (i < WIDTH + offset - 1)
+		while (i < WIDTH + offset)
 		{
 			r = camera_ray(&s->camera, i, j);
 			c = vec_scal(ray_color(&r, s, 0), 255);
 			draw_grid(w, (const t_idx[2]){i, j}, color_int(&c), s->blur);
-			count++;
-			//ft_printf("i=%u j=%u\n", i, j);
 			i += s->blur;
 		}
 		j += s->blur;
 	}
-	ft_printf("Shot %u rays\n", count);
 	if (s->reticle && !s->controlled)
 		draw_reticle(w);
 }
 
 static void	raytracing(t_window *w, t_scene *s)
 {
-	//const t_uint	offset = ceil(s->blur / 2.0);
+	const t_uint	offset = ceil(s->blur / 2.0);
 	t_idx			i;
 	t_idx			j;
 	t_color			c;
 	t_ray			r;
 
-	unsigned int count = 0;
 	j = 0;
 	while (j < HEIGHT)
 	{
 		i = 0;
 		while (i < WIDTH)
 		{
-			if (1)
+			if (!(i % s->blur == 0 && j % s->blur == 0))
 			{
-				r = camera_ray(&s->camera, i, j);
+				r = camera_ray(&s->camera, i + offset, j + offset);
 				c = vec_scal(ray_color(&r, s, 0), 255);
-				mlx_pixel_put(w->mlx, w->win, i, j, color_int(&c));
-				//ft_printf("i=%u j=%u\n", i, j);
-				count++;
+				mlx_pixel_put(w->mlx, w->win, i + offset, j + offset, \
+					color_int(&c));
 			}
 			i++;
 		}
 		j++;
 	}
-	ft_printf("Shot %u rays\n", count);
 }
 
 t_bool	full_render(struct s_ctx *c)

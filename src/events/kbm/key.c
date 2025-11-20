@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 13:01:45 by sdemey            #+#    #+#             */
-/*   Updated: 2025/11/20 00:31:24 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/20 11:19:44 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	key_release(int key, struct s_ctx *c)
 		ft_printf("key released : %d\n", key);
 	if (key == K_ESC)
 		window_close(&c->w);
+	if (key == 'z')
+		c->input = CONTROLLER;
 	else if (c->state == RENDERING)
 		return (1);
 	else if (key == 'p')

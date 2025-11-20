@@ -19,6 +19,7 @@ void	print_bindings(void)
 	ft_printf("%-18s : Full render\n", "<p>");
 	ft_printf("%-18s : Export\n", "<e>");
 	ft_printf("%-18s : Movements\n", "<w,a,s,d,SPACE,c>");
+	ft_printf("%-18s : Skip to controller input\n", "<z>");
 	ft_printf("CAMERA MODE\n");
 	ft_printf("%-18s : Orientation\n", "<i,j,k,l>");
 	ft_printf("%-18s : FOV\n", "<-,=>");
@@ -35,6 +36,7 @@ int	main(int argc, char **argv)
 	struct s_ctx	c;
 
 	c.state = RENDERING;
+	c.input = KBM;
 	if (argc != 2)
 		return (!!ft_dprintf(2, "Error\nUsage: %s <scene.rt>\n", argv[0]));
 	if (!scene_init(&c.s, argv[1]) || !window_init(&c.w))

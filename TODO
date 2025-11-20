@@ -25,6 +25,3 @@ sdemey :
 - Bumping texture / perturbed normal
 
 mmichele :
-- Controller : camera and object. -> norm
-- Optimize blur to full rendering, with an array of booleans to remember, which
-pixel has already been rendered.
