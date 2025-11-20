@@ -20,10 +20,8 @@ Shadows might overflow the world ?
 it's logic of behaving.
 
 sdemey :
-- Parse XPM texture
-- Bumping texture / perturbed normal
-- Fix textures on plane && cone
-- Destroy texture image at exit
+- SEGV on plane && cone
+- Destroy textures images at exit
 
 mmichele :
 - Remove object from the scene

@@ -47,18 +47,20 @@ t_bool	parse_optional_args(char **split, t_obj *obj, void *mlx)
 		}
 		else if (split[i][0] == 'b')
 		{
-			if (ft_strcmp(&split[i][2], "1") == 0)
-				obj->bump.e_type = PROC_WAVE;
-			else if (ft_strcmp(&split[i][2], "tex") == 0)
-				obj->bump.e_type = XPM_TEX;
-			else if (ft_strcmp(&split[i][2], "xpm") == 0)
+			char *ext = ft_strrchr(&split[i][2], '.');
+			if (ext && ft_strcmp(ext, ".xpm") == 0)
 			{
+				printf("in\n");
 				obj->bump.e_type = XPM_BUMP;
 				if (!load_texture(&obj->bump.texture, mlx, &split[i][2]))
 					return (print_error("XPM file loading failed\n"), 0);
 			}
-			else if (ft_strcmp(&split[i][2], "1") != 0)
-				print_error("Invalid bump format\n");
+			else if (ft_strcmp(&split[i][2], "tex") == 0)
+				obj->bump.e_type = XPM_TEX;
+			else if (ft_strcmp(&split[i][2], "1") == 0)
+				obj->bump.e_type = PROC_WAVE;
+			else if (ft_strcmp(&split[i][2], "0") != 0)
+				return (print_error("Invalid bump format\n"), 0);
 		}
 		else
 			return (print_error("Unknown identifier\n"), 0);
