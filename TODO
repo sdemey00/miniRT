@@ -4,10 +4,17 @@ Mandatory :
 - Norm
 
 FIX :
+- Destroy textures images at exit (obj.texture && obj.bump.texture)
 
 sdemey :
-- SEGV on plane && cone XPM and BUMP
-- Destroy textures images at exit
+- Deep test parsing
+- Clean maps folder and create maps to prepare evaluations -
+  - Maps for parsing
+  - Maps for objects
+  - Maps for lights
+  - Maps for textures
+  - Showcase
+- Limits test
 
 mmichele :
 - Shadow have the color of emiting light. Investigate ?
