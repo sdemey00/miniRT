@@ -6,11 +6,35 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 17:00:16 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/21 20:28:15 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/21 22:09:21 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "export.h"
+
+void	export_bump_textures(const int fd, t_obj *o)
+{
+	if (o->bump.e_type == PROC_WAVE)
+		ft_dprintf(fd, "b=1");
+	//else if (o->bump.e_type == PROC_NOISE)
+	//	ft_dprintf(fd, "");
+	else if (o->bump.e_type == XPM_TEX)
+		ft_dprintf(fd, "b=tex");
+	else if (o->bump.e_type == XPM_BUMP)
+		ft_dprintf(fd, "b=%s", o->bump.texture);
+}
+
+//void	export_visual_textures(const int fd, t_obj *o)
+//{
+//	if (o->texture.loaded)
+//		ft_dprintf("x=%s", o->texture.path);
+//}
+
+void	export_other_args(const int fd, t_obj *o)
+{
+	ft_dprintf(fd, " s=%d r=%.1f c=%u\n", (t_ssuint)o->shininess, \
+		o->reflexion, bitmap_get(&o->effects, CHECKER_PATTERN));
+}
 
 void	export_object(const int fd, t_obj *o)
 {
@@ -36,8 +60,9 @@ void	export_object(const int fd, t_obj *o)
 		ft_dprintf(fd, "co %.2f,%.2f,%.2f %f,%f,%f %d,%d,%d", \
 			o->pos.x, o->pos.y, o->pos.z, o->dir.x, o->dir.y, o->dir.z, \
 			(t_ssuint)o->color.x, (t_ssuint)o->color.y, (t_ssuint)o->color.z);
-	ft_dprintf(fd, " s=%d r=%.1f c=%u\n", (t_ssuint)o->shininess, \
-		o->reflexion, bitmap_get(&o->effects, CHECKER_PATTERN));
+	export_bump_textures(fd, o);
+	//export_visual_textures(fd, o);
+	export_other_args(fd, o);
 }
 
 void	export_objects(const int fd, t_obj o[], t_len len)
