@@ -31,7 +31,7 @@ void	obj_init(t_obj *o)
 	o->reflexion = DFLT_REFLECT;
 	o->effects = 0b11101111;
 	o->texture.loaded = 0;
-	o->bump.e_type = NONE;
+	o->bump.e_type = NO_BUMP;
 }
 
 t_bool	scene_init(t_scene *s, const char *fpath, void *mlx)

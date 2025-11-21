@@ -32,8 +32,8 @@ typedef struct s_ambiant
 
 typedef struct s_camera
 {
-	t_vec		pos;
-	t_vec		dir;
+	t_vec		pos;		// Position
+	t_vec		dir;		// Normalized direction vector
 	t_ssuint	fov;		// Field of view
 	t_bool		set;
 	float		ratio;		// Screen ratio
@@ -80,7 +80,7 @@ typedef struct s_bump
 {
 	enum
 	{
-		NONE,
+		NO_BUMP,
 		PROC_WAVE,
 		PROC_NOISE,
 		XPM_TEX,
@@ -111,6 +111,23 @@ typedef struct s_obj
 	t_bump		bump;
 }	t_obj;
 
+typedef struct s_scene
+{
+	t_ambiant	ambiant;
+	t_camera	camera;
+	t_light		lights[MAX_OBJS];
+	t_ssuint	lights_len;
+	t_obj		objs[MAX_OBJS];
+	t_ssuint	objs_len;
+	t_obj		*controlled;
+	t_ssuint	blur;
+	t_color		bg;
+	t_bool		bg_set;
+	t_bool		reticle;
+	t_bitmap	effects;
+}	t_scene;
+
+/* Structure with useful informations on ray closest hit point */
 typedef struct s_hit
 {
 	t_obj	*obj;
@@ -118,10 +135,20 @@ typedef struct s_hit
 	t_vec	point;
 	t_vec	normal;
 	t_vec	uv;
+	t_vec	p_offset;
 	t_vec	tangent;
 	t_vec	bitangent;
-	t_vec	p_offset;
 }	t_hit;
+
+/* Structure with 2nd degree equation roots variables */
+typedef struct s_eq2
+{
+	float	a;
+	float	b;
+	float	c;
+	float	d;
+	float	t[2];
+}	t_eq2;
 
 /* MLX pixel grid manipulation */
 typedef struct s_image
@@ -139,38 +166,30 @@ typedef struct s_window
 	void	*mlx;
 	void	*win;
 	t_image	img;
+	int		fd_controller;
 }	t_window;
 
-typedef struct s_scene
+/* Context render state */
+enum	e_rstate
 {
-	t_ambiant	ambiant;
-	t_camera	camera;
-	t_light		lights[MAX_OBJS];
-	t_ssuint	lights_len;
-	t_obj		objs[MAX_OBJS];
-	t_ssuint	objs_len;
-	t_obj		*controlled;
-	t_ssuint	blur;
-	t_color		bg;
-	t_bool		bg_set;
-	t_bool		reticle;
-	t_bitmap	effects;
-}	t_scene;
+	NONE,
+	RENDERING,
+	RENDERED
+};
+
+/* Input method */
+enum	e_input_method
+{
+	CONTROLLER,
+	KBM
+};
 
 struct s_ctx
 {
-	t_window	w;
-	t_scene		s;
-	t_bool		rendering;
+	t_window			w;
+	t_scene				s;
+	enum e_rstate		state;
+	enum e_input_method	input;
 };
-
-typedef struct s_eq2
-{
-	float	a;
-	float	b;
-	float	c;
-	float	d;
-	float	t[2];
-}	t_eq2;
 
 #endif // STRUCTS_H

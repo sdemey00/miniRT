@@ -35,13 +35,13 @@ t_ray	camera_ray(t_camera *c, t_idx x, t_idx y)
 static void	camera_translate(t_camera *c, const int key)
 {
 	if (key == 'w')
-		vec_isum(&c->pos, vec_scal(c->dir, 0.5));
+		vec_isum(&c->pos, vec_scal(c->dir, 0.8));
 	else if (key == 's')
-		vec_isub(&c->pos, vec_scal(c->dir, 0.5));
+		vec_isub(&c->pos, vec_scal(c->dir, 0.8));
 	else if (key == 'd')
-		vec_isum(&c->pos, vec_scal(c->right, 0.5));
+		vec_isum(&c->pos, vec_scal(c->right, 0.8));
 	else if (key == 'a')
-		vec_isub(&c->pos, vec_scal(c->right, 0.5));
+		vec_isub(&c->pos, vec_scal(c->right, 0.8));
 	else if (key == ' ')
 		vec_isum(&c->pos, vec_scal((t_vec){0, 1, 0}, 0.25));
 	else if (key == 'c')

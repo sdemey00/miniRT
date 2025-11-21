@@ -2,28 +2,12 @@ Mandatory :
 - PDF
 - Remove file wildcard in Makefile
 - Norm
-- Deep test parsing
-	- Check input ranges
-
-Bonus :
-
-Bonus ++ :
-- Add objects to the scene
-- Sensitivity for translations
-- Controller
 
 FIX :
-- Shadow have the color of emiting light. Investigate ?
-- No lights when 2 planes above each other ? Not able to make a closed room ?
-Shadows might overflow the world ?
-- Rotation of an object might not rotate as you'd expect. Even though it has 
-it's logic of behaving.
 
 sdemey :
-- SEGV on plane && cone
+- SEGV on plane && cone XPM and BUMP
 - Destroy textures images at exit
 
 mmichele :
-- Remove object from the scene
-- Optimize blur to full rendering, with an array of booleans to remember, which
-pixel has already been rendered.
+- Shadow have the color of emiting light. Investigate ?

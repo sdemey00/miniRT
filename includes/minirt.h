@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
+#ifndef MINIRT_Hs
 # define MINIRT_H
 
 # ifndef VERBOSE
@@ -45,7 +45,6 @@
 # endif
 
 # include <math.h>
-# include <stdio.h>
 # include <fcntl.h>
 # include <sys/time.h>
 
@@ -55,8 +54,9 @@
 # include "structs.h"
 # include "parsing.h"
 # include "export.h"
+# include "controller.h"
 
-# define EPSILON 1e-4
+# define EPSILON 1e-2
 
 /* MLX controller event codes */
 # define WIN_CLOSE	17
@@ -87,7 +87,7 @@ double	time_now(void);
 
 // graphics/window.c
 t_bool	window_init(t_window *w);
-void	window_draw(t_window *w, t_scene *s);
+void	window_draw(struct s_ctx *c);
 void	window_draw_pixel(t_window *w, t_uint x, t_uint y, int color);
 t_bool	window_free(t_window *w);
 
@@ -95,7 +95,7 @@ t_bool	window_free(t_window *w);
 int		color_int(const t_color *c);
 
 // graphics/raytracing.c
-void	raytracing(t_window *w, t_scene *s, const t_suint blur);
+void	blurtracing(t_window *w, t_scene *s);
 t_bool	full_render(struct s_ctx *c);
 
 // graphics/ray.c

@@ -55,13 +55,16 @@ static t_color	compute_specular(t_scene *s, t_hit *hitten,
 static t_bool	is_in_shadow(t_scene *s, t_hit *hitten, t_light *light)
 {
 	t_ray	shadow_ray;
-	t_obj	*shadow_obj;
+	t_hit	shadow_hit;
+	float	light_dist;
 
 	shadow_ray = (t_ray){hitten->p_offset, light->dir};
-	shadow_obj = get_closest_hit(&shadow_ray, s).obj;
-	if (!shadow_obj)
-		return (0);
-	return (1);
+	shadow_hit = get_closest_hit(&shadow_ray, s);
+	light_dist = vec_mag(vec_sub(light->pos, hitten->p_offset));
+	if (shadow_hit.obj && shadow_hit.dist > EPSILON && shadow_hit.dist < \
+		light_dist)
+		return (1);
+	return (0);
 }
 
 t_color	compute_lights(t_scene *s, t_hit *hitten, t_ray *r)
@@ -78,9 +81,9 @@ t_color	compute_lights(t_scene *s, t_hit *hitten, t_ray *r)
 	{
 		delta = vec_sub(s->lights[idx].pos, hitten->point);
 		s->lights[idx].dir = vec_norm(delta);
-		if (!is_in_shadow(s, hitten, &s->lights[idx])
-			|| !bitmap_get(&s->effects, SHADOWS)
-			|| !bitmap_get(&hitten->obj->effects, SHADOWS))
+		if (!bitmap_get(&s->effects, SHADOWS)
+			|| !bitmap_get(&hitten->obj->effects, SHADOWS)
+			|| !is_in_shadow(s, hitten, &s->lights[idx]))
 		{
 			s->lights[idx].ndotl = vec_dot(hitten->normal, s->lights[idx].dir);
 			diffuse = compute_diffuse(s, hitten, &s->lights[idx]);
