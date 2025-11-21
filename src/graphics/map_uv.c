@@ -25,10 +25,10 @@ static void	map_sphere(float *u, float *v, t_vec hit_point)
 	*v = phi / FT_PI;
 }
 
-static void	map_plane(float *u, float *v, t_vec local)
+static void	map_plane(float *u, float *v, t_vec local, const float scale)
 {
-	*u = local.x * 0.2;
-	*v = local.z * 0.2;
+	*u = local.x * scale;
+	*v = local.z * scale;
 }
 
 static void	map_cylinder(float *u, float *v, t_vec local, t_obj *obj)
@@ -57,12 +57,16 @@ t_vec	map_obj(t_hit *hitten)
 	v = 0.0;
 	if (hitten->obj->e_type == SPH)
 		map_sphere(&u, &v, local);
-	else if (hitten->obj->e_type == PLA || hitten->obj->e_type == CIR)
-		map_plane(&u, &v, local);
+	else if (hitten->obj->e_type == PLA)
+		map_plane(&u, &v, local, 0.01);
+	else if (hitten->obj->e_type == CIR)
+		map_plane(&u, &v, local, 0.2);
 	else if (hitten->obj->e_type == CYL)
 		map_cylinder(&u, &v, local, hitten->obj);
 	else if (hitten->obj->e_type == CON)
 		map_cone(&u, &v, local);
+	u = fmodf(u, 1.0);
+	v = fmodf(v, 1.0);
 	if (u < 0.0)
 		u += 1.0;
 	if (v < 0)

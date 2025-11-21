@@ -60,9 +60,10 @@ t_hit	get_closest_hit(const t_ray *r, t_scene *s)
 static t_color	get_obj_color(t_scene *s, t_hit *hitten)
 {
 	if (bitmap_get(&s->effects, TEXTURE)
+		&& bitmap_get(&hitten->obj->effects, TEXTURE)
 		&& hitten->obj->texture.loaded)
 		return (texture_color(&hitten->obj->texture, hitten));
-	if (bitmap_get(&s->effects, CHECKER_PATTERN)
+	else if (bitmap_get(&s->effects, CHECKER_PATTERN)
 		&& bitmap_get(&hitten->obj->effects, CHECKER_PATTERN))
 		return (checkboard_pattern(hitten));
 	return (hitten->obj->color);

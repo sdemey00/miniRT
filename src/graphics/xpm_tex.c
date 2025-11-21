@@ -43,8 +43,11 @@ t_bool	load_texture(t_tex *tex, void *mlx, char *path)
 
 int	get_tex_pixel(t_tex *tex, int x, int y)
 {
-	const char	*px = tex->addr + (y * tex->size_line) + (x * (tex->bpp / 8));
+	char	*px;
 
+	if (x < 0 || x >= tex->w || y < 0 || y >= tex->h)
+		return (0);
+	px = tex->addr + (y * tex->size_line) + (x * (tex->bpp / 8));
 	return (*(int *)px);
 }
 
