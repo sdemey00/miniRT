@@ -12,10 +12,11 @@
 
 #include "minirt.h"
 
-t_bool	parse_camera(char **split, t_scene *scene)
+t_bool	parse_camera(char **split, t_scene *scene, void *mlx)
 {
 	t_camera	cam;
 
+	(void)mlx;
 	if (scene->camera.set)
 	{
 		print_error("Multiple camera definitions are not allowed\n");

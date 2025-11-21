@@ -59,6 +59,9 @@ t_hit	get_closest_hit(const t_ray *r, t_scene *s)
 
 static t_color	get_obj_color(t_scene *s, t_hit *hitten)
 {
+	if (bitmap_get(&s->effects, TEXTURE)
+		&& hitten->obj->texture.loaded)
+		return (texture_color(&hitten->obj->texture, hitten));
 	if (bitmap_get(&s->effects, CHECKER_PATTERN)
 		&& bitmap_get(&hitten->obj->effects, CHECKER_PATTERN))
 		return (checkboard_pattern(hitten));
@@ -86,6 +89,8 @@ t_color	ray_color(t_ray *r, t_scene *s, int depth)
 	hitten = get_closest_hit(r, s);
 	if (!hitten.obj)
 		return (vec_norm(s->bg));
+	if (bitmap_get(&s->effects, BUMP) && bitmap_get(&hitten.obj->effects, BUMP))
+		apply_bump(&hitten, 0.8);
 	base_color = get_obj_color(s, &hitten);
 	base_color = vec_rscal(base_color, 255.0);
 	light_color = compute_lights(s, &hitten, r);
@@ -97,6 +102,5 @@ t_color	ray_color(t_ray *r, t_scene *s, int depth)
 		color = vec_sum(vec_scal(color, 1 - hitten.obj->reflexion),
 				vec_scal(reflect_color, hitten.obj->reflexion));
 	}
-	color = vec_fmin((t_vec *)&color, 1.0);
-	return (color);
+	return (vec_fmin((t_vec *)&color, 1.0));
 }

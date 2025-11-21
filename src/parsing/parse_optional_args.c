@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-t_bool	parse_optional_args(char **split, t_obj *obj)
+t_bool	parse_optional_args(char **split, t_obj *obj, void *mlx)
 {
 	t_idx	i;
 
@@ -22,20 +22,51 @@ t_bool	parse_optional_args(char **split, t_obj *obj)
 		if (!split[i][0] || !split[i][1] || split[i][1] != '=')
 			return (print_error("Invalid key=value format\n"), 0);
 		if (split[i][0] == 's')
+		{
 			if (!parse_int(&split[i][2], &obj->shininess) || \
-				!check_frange(obj->shininess, 0, 255))
+				!check_frange(obj->shininess, 0, 320))
 				return (print_error("Invalid shininess format\n"), 0);
-		if (split[i][0] == 'r')
+		}
+		else if (split[i][0] == 'r')
+		{
 			if (!parse_float(&split[i][2], &obj->reflexion) || \
 				!check_frange(obj->reflexion, 0.0, 1.0))
 				return (print_error("Invalid reflexion format\n"), 0);
-		if (split[i][0] == 'c')
+		}
+		else if (split[i][0] == 'c')
 		{
 			if (ft_strcmp(&split[i][2], "1") == 0)
 				bitmap_switch(&obj->effects, CHECKER_PATTERN);
 			else if (ft_strcmp(&split[i][2], "0") != 0)
 				return (print_error("Invalid checkboard format\n"), 0);
 		}
+		else if (split[i][0] == 'x')
+		{
+			if (!load_texture(&obj->texture, mlx, &split[i][2]))
+				return (print_error("XPM file loading failed\n"), 0);
+		}
+		else if (split[i][0] == 'b')
+		{
+			char *ext = ft_strrchr(&split[i][2], '.');
+			if (ext && ft_strcmp(ext, ".xpm") == 0)
+			{
+				obj->bump.e_type = XPM_BUMP;
+				if (!load_texture(&obj->bump.texture, mlx, &split[i][2]))
+					return (print_error("XPM file loading failed\n"), 0);
+			}
+			else if (ft_strcmp(&split[i][2], "tex") == 0)
+			{
+				if (!obj->texture.loaded)
+					return (print_error("No XPM file loaded as texture\n"), 0);
+				obj->bump.e_type = XPM_TEX;
+			}
+			else if (ft_strcmp(&split[i][2], "1") == 0)
+				obj->bump.e_type = PROC_WAVE;
+			else if (ft_strcmp(&split[i][2], "0") != 0)
+				return (print_error("Invalid bump format\n"), 0);
+		}
+		else
+			return (print_error("Unknown identifier\n"), 0);
 		i++;
 	}
 	return (1);

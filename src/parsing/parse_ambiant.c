@@ -12,10 +12,11 @@
 
 #include "minirt.h"
 
-t_bool	parse_ambiant(char **split, t_scene *scene)
+t_bool	parse_ambiant(char **split, t_scene *scene, void *mlx)
 {
 	t_ambiant	ambiant;
 
+	(void)mlx;
 	if (scene->ambiant.set)
 	{
 		print_error("Multiple ambiant light definitions are not allowed\n");

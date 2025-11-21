@@ -58,8 +58,36 @@ enum	e_effects_map
 	SPECULAR_LIGHT = 1,
 	SHADOWS = 2,
 	REFLEXION = 3,
-	CHECKER_PATTERN = 4
+	CHECKER_PATTERN = 4,
+	TEXTURE = 5,
+	BUMP = 6
 };
+
+typedef struct s_tex
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	int		w;
+	int		h;
+	//char	*path;
+	t_bool	loaded;
+}	t_tex;
+
+typedef struct s_bump
+{
+	enum
+	{
+		NO_BUMP,
+		PROC_WAVE,
+		PROC_NOISE,
+		XPM_TEX,
+		XPM_BUMP
+	}		e_type;
+	t_tex	texture;
+}	t_bump;
 
 typedef struct s_obj
 {
@@ -79,6 +107,8 @@ typedef struct s_obj
 	int			shininess;
 	float		reflexion;
 	t_bitmap	effects;
+	t_tex		texture;
+	t_bump		bump;
 }	t_obj;
 
 typedef struct s_scene
@@ -106,6 +136,8 @@ typedef struct s_hit
 	t_vec	normal;
 	t_vec	uv;
 	t_vec	p_offset;
+	t_vec	tangent;
+	t_vec	bitangent;
 }	t_hit;
 
 /* Structure with 2nd degree equation roots variables */

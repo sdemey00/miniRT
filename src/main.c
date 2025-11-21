@@ -40,7 +40,10 @@ int	main(int argc, char **argv)
 	c.input = KBM;
 	if (argc != 2)
 		return (!!ft_dprintf(2, "Error\nUsage: %s <scene.rt>\n", argv[0]));
-	if (!scene_init(&c.s, argv[1]) || !window_init(&c.w))
+	c.w.mlx = mlx_init();
+	if (!c.w.mlx)
+		return (0);
+	if (!scene_init(&c.s, argv[1], c.w.mlx) || !window_init(&c.w))
 		return (1);
 	print_bindings();
 	window_draw(&c);

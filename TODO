@@ -6,8 +6,8 @@ Mandatory :
 FIX :
 
 sdemey :
-- Parse bumping texture
-- Deep test parsing
+- SEGV on plane && cone XPM and BUMP
+- Destroy textures images at exit
 
 mmichele :
 - Shadow have the color of emiting light. Investigate ?

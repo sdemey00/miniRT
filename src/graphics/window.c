@@ -14,9 +14,6 @@
 
 t_bool	window_init(t_window *w)
 {
-	w->mlx = mlx_init();
-	if (!w->mlx)
-		return (0);
 	w->win = mlx_new_window(w->mlx, WIDTH, HEIGHT, "miniRT");
 	if (!w->win)
 		return (ft_free(w->mlx, 0));

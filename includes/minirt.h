@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
+#ifndef MINIRT_Hs
 # define MINIRT_H
 
 # ifndef VERBOSE
@@ -68,7 +68,7 @@
 // Default optionnal obj args
 # define DFLT_BRIGHT	32
 # define DFLT_REFLECT	0
-# define OPTION_ARGS	3
+# define OPTION_ARGS	5
 
 // parsing/parse_file.c
 t_bool	filepath_has_rt(const char *fpath);
@@ -128,7 +128,9 @@ t_vec	vec_fmin(const t_vec *v, const float f);
 t_eq2	eq2_init(const t_vec oc, const t_vec rdir, const float r);
 void	eq2_set(t_eq2 *e);
 
-// graphics/get_surface_normal.c
+// graphics/normal.c
+void	compute_tangent_space(t_hit *h);
+t_vec	get_local_hit(t_hit *hitten, t_vec local_hit);
 t_vec	get_surface_normal(t_obj *obj, t_vec hit_point);
 
 // graphics/reflexion.c
@@ -137,11 +139,17 @@ t_color	compute_reflexion(t_ray *r, t_scene *s, t_hit *hitten, int depth);
 // graphics/obj_change.c
 void	obj_change(t_obj *o, struct s_ctx *c, const int key);
 
-// graphics/map_obj.c
+// graphics/map_uv.c
 t_vec	map_obj(t_hit *hitten);
 
-// graphics/texture.c
+// graphics/xmp_tex.c
 t_color	checkboard_pattern(t_hit *hitten);
+t_bool	load_texture(t_tex *tex, void *mlx, char *path);
+t_color	texture_color(t_tex *tex, t_hit *hitten);
+int		get_tex_pixel(t_tex *tex, int x, int y);
+
+// graphics/bump_tex.c
+void	apply_bump(t_hit *h, float strength);
 
 // bitmap.c
 void	bitmap_switch(t_bitmap *b, const t_ssuint i);
