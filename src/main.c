@@ -16,7 +16,7 @@ void	print_bindings(void)
 {
 	ft_printf("OVERALL\n");
 	ft_printf("%-18s : Quit\n", "<ESC>");
-	ft_printf("%-18s : Full render\n", "<p>");
+	ft_printf("%-18s : Full render\n", "<p,[,]>");
 	ft_printf("%-18s : Export\n", "<e>");
 	ft_printf("%-18s : Movements\n", "<w,a,s,d,SPACE,c>");
 	ft_printf("%-18s : Skip to controller input\n", "<z>");

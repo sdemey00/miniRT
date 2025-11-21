@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 14:42:34 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/20 11:43:52 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/21 15:40:33 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_bool	controller_overall(struct s_ctx *c, const struct js_event *e)
 	if (e->type == ET_BUTTON && e->value == PRESS && e->number == ENT1_START)
 		return (window_close(&c->w));
 	else if (e->type == ET_BUTTON && e->value == PRESS && e->number == ENT1_OPT)
-		return (full_render(c));
+		return (full_render(c, 0));
 	else if (e->type == ET_AXIS && (e->number == ENT2_TRIG_L || \
 		e->number == ENT2_TRIG_R))
 	{

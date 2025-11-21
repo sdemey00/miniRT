@@ -61,3 +61,9 @@ void	window_draw_pixel(t_window *w, t_uint x, t_uint y, int color)
 		x * (w->img.bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
+
+void	window_clear(t_window *w)
+{
+	ft_bzero(w->img.address, HEIGHT * w->img.size_line);
+	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr, 0, 0);
+}
