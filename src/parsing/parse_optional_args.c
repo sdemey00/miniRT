@@ -55,11 +55,7 @@ t_bool	parse_optional_args(char **split, t_obj *obj, void *mlx)
 					return (print_error("XPM file loading failed\n"), 0);
 			}
 			else if (ft_strcmp(&split[i][2], "tex") == 0)
-			{
-				if (!obj->texture.loaded)
-					return (print_error("No XPM file loaded as texture\n"), 0);
 				obj->bump.e_type = XPM_TEX;
-			}
 			else if (ft_strcmp(&split[i][2], "1") == 0)
 				obj->bump.e_type = PROC_WAVE;
 			else if (ft_strcmp(&split[i][2], "0") != 0)

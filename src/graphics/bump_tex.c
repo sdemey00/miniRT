@@ -70,7 +70,7 @@ void	apply_bump(t_hit *h, float strength)
 	t_vec	pert;
 
 	compute_tangent_space(h);
-	if (h->obj->bump.e_type == XPM_TEX)
+	if (h->obj->bump.e_type == XPM_TEX && h->obj->texture.loaded)
 		apply_texture_bump(h, &h->obj->texture, &dhdu, &dhdv);
 	else if (h->obj->bump.e_type == XPM_BUMP)
 		apply_texture_bump(h, &h->obj->bump.texture, &dhdu, &dhdv);
