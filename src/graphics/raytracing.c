@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 14:02:07 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/21 16:59:10 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/21 17:14:29 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_bool	full_render(struct s_ctx *c, const t_idx i)
 	const t_bool		temp_reticle = c->s.reticle;
 	double				start_time;
 	static void (*const	rasterizer[3])(t_window *, t_scene *) = \
-		{raster_linear, raster_evenly, raster_grid};
+		{raster_evenly, raster_grid, raster_linear};
 
 	if (c->state == RENDERED)
 		return (0);
