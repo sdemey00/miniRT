@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 13:01:57 by sdemey            #+#    #+#             */
-/*   Updated: 2025/11/20 16:26:03 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/21 12:32:32 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,28 @@
 static void	parttracing(t_window *w, t_scene *s, const t_uint x, const t_uint y)
 {
 	const t_uint	offset = ceil(s->blur / 2.0);
-	const t_ridx	x_range = WIDTH / 20;
-	const t_ridx	y_range = HEIGHT / 20;
-	t_ridx			i;
-	t_ridx			j;
+	const t_ridx	ranges[2] = {WIDTH / 20, HEIGHT / 20};
+	t_ridx			i[2];
 	t_color			c;
 	t_ray			r;
 
-	j = -y_range;
-	while (j < HEIGHT && j <= y_range)
+	i[1] = -ranges[1];
+	while (i[1] < HEIGHT && i[1] <= ranges[1])
 	{
-		i = -x_range;
-		while (i < WIDTH && i <= x_range)
+		i[0] = -ranges[0];
+		while (i[0] < WIDTH && i[0] <= ranges[0])
 		{
-			if (!((i % s->blur) - offset == 0 && (j % s->blur) - offset == 0))
+			if (!((i[0] % s->blur) - offset == 0 && (i[1] % s->blur) - \
+				offset == 0))
 			{
-				r = camera_ray(&s->camera, x + i, y + j);
+				r = camera_ray(&s->camera, x + i[0], y + i[1]);
 				c = vec_scal(ray_color(&r, s, 0), 255);
-				mlx_pixel_put(w->mlx, w->win, x + i, y + j, color_int(&c));
+				mlx_pixel_put(w->mlx, w->win, x + i[0], y + i[1], \
+					color_int(&c));
 			}
-			i++;
+			i[0]++;
 		}
-		j++;
+		i[1]++;
 	}
 }
 
