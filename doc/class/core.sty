@@ -50,13 +50,14 @@
 
 % Make a vertical split in the page
 \newcommand{\Doublebox}[5] {
-	\begin{minipage}{#3\textwidth}{#1}
+	\begin{minipage}{#3\textwidth}
+		#1
 	\end{minipage}
-
-	\begin{minipage}{#4\textwidth}{\(\)}
+	\begin{minipage}{#4\textwidth}
+		\(\)
 	\end{minipage}
-
-	\begin{minipage}{#5\textwidth}{#2}
+	\begin{minipage}{#5\textwidth}
+		#2
 	\end{minipage}
 }
 
