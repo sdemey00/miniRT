@@ -59,7 +59,8 @@ MAKEFLAGS += --no-print-directory
 all: $(MLXN) $(LFTN) $(NAME)
 
 $(MLXN):
-	@ $(MAKE) -C $(MLXD) > /dev/null 2>&1
+	@ $(MAKE) -C $(MLXD) > /dev/null 2>&1 || \
+		$(MAKE) -C $(MLXD) -f Makefile.gen > /dev/null 2>&1
 
 $(LFTN):
 	@ $(MAKE) -C $(LFTD)
