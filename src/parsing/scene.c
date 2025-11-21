@@ -44,7 +44,7 @@ static t_bool	create_file(int *fd)
 	filename[ft_strlen(filename) - 1] = 0;
 	if (!filepath_has_rt(filename))
 		return (ft_free((void **)&filename, 0));
-	*fd = open(filename, O_CREAT | O_EXCL | O_WRONLY);
+	*fd = open(filename, O_CREAT | O_EXCL | O_WRONLY, 0600);
 	if (*fd < 0)
 	{
 		ft_dprintf(2, "Unable to open : %s\n", filename);

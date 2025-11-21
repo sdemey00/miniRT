@@ -5,105 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/01 15:31:38 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/20 16:23:14 by mmichele         ###   ########.fr       */
+/*   Created: 2025/11/21 14:02:07 by mmichele          #+#    #+#             */
+/*   Updated: 2025/11/21 17:14:29 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	draw_grid(t_window *w, const t_idx c[2], int color, \
-	const t_suint blur)
+t_bool	full_render(struct s_ctx *c, const t_idx i)
 {
-	const int	start = -ceil(blur / 2.0);
-	const int	stop = blur / 2.0;
-	t_ridx		i;
-	t_ridx		j;
-
-	j = start;
-	while (j < HEIGHT && j <= stop)
-	{
-		i = start;
-		while (i < WIDTH && i <= stop)
-		{
-			window_draw_pixel(w, c[0] + i, c[1] + j, color);
-			i++;
-		}
-		j++;
-	}
-}
-
-static void	draw_reticle(t_window *w)
-{
-	const unsigned int	center[2] = {WIDTH / 2, HEIGHT / 2};
-	const t_color		c = (t_color){0, 255, 0};
-
-	draw_grid(w, (const t_idx[2]){center[0] - 2, center[1] - 2}, \
-		color_int(&c), 4);
-}
-
-void	blurtracing(t_window *w, t_scene *s)
-{
-	const t_uint	offset = ceil(s->blur / 2.0);
-	t_idx			i;
-	t_idx			j;
-	t_color			c;
-	t_ray			r;
-
-	j = offset;
-	while (j < HEIGHT + offset)
-	{
-		i = offset;
-		while (i < WIDTH + offset)
-		{
-			r = camera_ray(&s->camera, i, j);
-			c = vec_scal(ray_color(&r, s, 0), 255);
-			draw_grid(w, (const t_idx[2]){i, j}, color_int(&c), s->blur);
-			i += s->blur;
-		}
-		j += s->blur;
-	}
-	if (s->reticle && !s->controlled)
-		draw_reticle(w);
-}
-
-static void	raytracing(t_window *w, t_scene *s)
-{
-	const t_uint	offset = ceil(s->blur / 2.0);
-	t_idx			i;
-	t_idx			j;
-	t_color			c;
-	t_ray			r;
-	unsigned int	k;
-	const t_uint	step = 6;
-
-	k = 0;
-	while (k < step)
-	{
-		j = k;
-		while (j < HEIGHT)
-		{
-			i = 0;
-			while (i < WIDTH)
-			{
-				if (!((i % s->blur) - offset == 0 && (j % s->blur) - offset == 0))
-				{
-					r = camera_ray(&s->camera, i, j);
-					c = vec_scal(ray_color(&r, s, 0), 255);
-					mlx_pixel_put(w->mlx, w->win, i, j, color_int(&c));
-				}
-				i++;
-			}
-			j += step;
-		}
-		k++;
-	}
-}
-
-t_bool	full_render(struct s_ctx *c)
-{
-	const t_bool	temp_reticle = c->s.reticle;
-	double			start_time;
+	const t_bool		temp_reticle = c->s.reticle;
+	double				start_time;
+	static void (*const	rasterizer[3])(t_window *, t_scene *) = \
+		{raster_evenly, raster_grid, raster_linear};
 
 	if (c->state == RENDERED)
 		return (0);
@@ -111,7 +25,7 @@ t_bool	full_render(struct s_ctx *c)
 	c->s.reticle = 0;
 	ft_printf("Render");
 	start_time = time_now();
-	raytracing(&c->w, &c->s);
+	rasterizer[i](&c->w, &c->s);
 	ft_printf("ed in %.3fs\n", (time_now() - start_time) / 1000);
 	c->s.reticle = temp_reticle;
 	c->state = RENDERED;

@@ -18,3 +18,7 @@ sdemey :
 
 mmichele :
 - Shadow have the color of emiting light. Investigate ?
+- Launch a full render on program start
+- Put images in between each complete vertical raster. To see if it goes
+  faster than pixel put.
+- Medium rastering method fast at start slow at the end, investigate why ?

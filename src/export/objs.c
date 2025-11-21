@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 17:00:16 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/16 23:12:07 by mmichele         ###   ########.fr       */
+/*   Updated: 2025/11/21 20:28:15 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@ void	export_object(const int fd, t_obj *o)
 			o->pos.y, o->pos.z, o->radius * 2.0, (t_ssuint)o->color.x, \
 			(t_ssuint)o->color.y, (t_ssuint)o->color.z);
 	else if (o->e_type == PLA)
-		ft_dprintf(fd, "pl %.2f,%.2f,%.2f %.4f,%.4f,%.4f %d,%d,%d", \
+		ft_dprintf(fd, "pl %.2f,%.2f,%.2f %f,%f,%f %d,%d,%d", \
 			o->pos.x, o->pos.y, o->pos.z, o->dir.x, o->dir.y, o->dir.z, \
 			(t_ssuint)o->color.x, (t_ssuint)o->color.y, (t_ssuint)o->color.z);
 	else if (o->e_type == CYL)
-		ft_dprintf(fd, "cy %.2f,%.2f,%.2f %.4f,%.4f,%.4f %.2f %.2f %d,%d,%d", \
+		ft_dprintf(fd, "cy %.2f,%.2f,%.2f %f,%f,%f %.2f %.2f %d,%d,%d", \
 			o->pos.x, o->pos.y, o->pos.z, o->dir.x, o->dir.y, o->dir.z, \
 			o->radius * 2.0, o->height, (t_ssuint)o->color.x, \
 			(t_ssuint)o->color.y, (t_ssuint)o->color.z);
 	else if (o->e_type == CIR)
-		ft_dprintf(fd, "ci %.2f,%.2f,%.2f %.4f,%.4f,%.4f %.2f %d,%d,%d", \
+		ft_dprintf(fd, "ci %.2f,%.2f,%.2f %f,%f,%f %.2f %d,%d,%d", \
 			o->pos.x, o->pos.y, o->pos.z, o->dir.x, o->dir.y, o->dir.z, \
 			o->radius * 2.0, (t_ssuint)o->color.x, (t_ssuint)o->color.y, \
 			(t_ssuint)o->color.z);
 	else if (o->e_type == CON)
-		ft_dprintf(fd, "co %.2f,%.2f,%.2f %.4f,%.4f,%.4f %d,%d,%d", \
+		ft_dprintf(fd, "co %.2f,%.2f,%.2f %f,%f,%f %d,%d,%d", \
 			o->pos.x, o->pos.y, o->pos.z, o->dir.x, o->dir.y, o->dir.z, \
 			(t_ssuint)o->color.x, (t_ssuint)o->color.y, (t_ssuint)o->color.z);
 	ft_dprintf(fd, " s=%d r=%.1f c=%u\n", (t_ssuint)o->shininess, \

@@ -90,13 +90,14 @@ t_bool	window_init(t_window *w);
 void	window_draw(struct s_ctx *c);
 void	window_draw_pixel(t_window *w, t_uint x, t_uint y, int color);
 t_bool	window_free(t_window *w);
+void	window_clear(t_window *w);
 
 // graphics/color.c
 int		color_int(const t_color *c);
 
 // graphics/raytracing.c
 void	blurtracing(t_window *w, t_scene *s);
-t_bool	full_render(struct s_ctx *c);
+t_bool	full_render(struct s_ctx *c, const t_idx i);
 
 // graphics/ray.c
 t_hit	get_closest_hit(const t_ray *r, t_scene *s);
@@ -155,5 +156,10 @@ void	apply_bump(t_hit *h, float strength);
 void	bitmap_switch(t_bitmap *b, const t_ssuint i);
 t_bool	bitmap_get(const t_bitmap *b, const t_ssuint i);
 void	bitmap_print(const t_bitmap *b);
+
+// graphics/rasterizers.c
+void	raster_linear(t_window *w, t_scene*s);
+void	raster_evenly(t_window *w, t_scene *s);
+void	raster_grid(t_window *w, t_scene *s);
 
 #endif // MINIRT_H
