@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_Hs
+#ifndef MINIRT_H
 # define MINIRT_H
 
 # ifndef VERBOSE
