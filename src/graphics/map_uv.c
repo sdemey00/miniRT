@@ -57,9 +57,9 @@ t_vec	map_obj(t_hit *hitten)
 	v = 0.0;
 	if (hitten->obj->e_type == SPH)
 		map_sphere(&u, &v, local);
-	else if (hitten->obj->e_type == PLA)
+	else if (hitten->obj->e_type == PLA && hitten->obj->texture.loaded)
 		map_plane(&u, &v, local, 0.01);
-	else if (hitten->obj->e_type == CIR)
+	else if (hitten->obj->e_type == PLA || hitten->obj->e_type == CIR)
 		map_plane(&u, &v, local, 0.2);
 	else if (hitten->obj->e_type == CYL)
 		map_cylinder(&u, &v, local, hitten->obj);
