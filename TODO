@@ -2,7 +2,6 @@ Mandatory :
 - PDF
 - Remove file wildcard in Makefile
 - Norm
-- Launch a full render on program start
 
 FIX :
 - Destroy textures images at exit (obj.texture && obj.bump.texture)
@@ -19,4 +18,3 @@ sdemey :
 
 mmichele :
 - Shadow have the color of emiting light. Investigate ?
-- Handle full export

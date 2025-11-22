@@ -13,37 +13,6 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# ifndef VERBOSE
-#  define VERBOSE 0
-# endif
-
-# ifdef WIDTH
-#  if WIDTH < 100 || 3800 < WIDTH
-#   undef WIDTH
-#  endif
-# endif
-# ifndef WIDTH
-#  define WIDTH 1600
-# endif
-
-# ifdef HEIGHT
-#  if HEIGHT < 100 || 2000 < HEIGHT
-#   undef HEIGHT
-#  endif
-# endif
-# ifndef HEIGHT
-#  define HEIGHT 900
-# endif
-
-# ifdef MAX_OBJS
-#  if MAX_OBJS < 1 || 512 < MAX_OBJS
-#   undef MAX_OBJS
-#  endif
-# endif
-# ifndef MAX_OBJS
-#  define MAX_OBJS 16
-# endif
-
 # include <math.h>
 # include <fcntl.h>
 # include <sys/time.h>
@@ -51,6 +20,7 @@
 # include "libft.h"
 # include "mlx.h"
 
+# include "compile.h"
 # include "structs.h"
 # include "parsing.h"
 # include "export.h"

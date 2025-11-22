@@ -19,13 +19,16 @@ NAME	= miniRT
 W		?= 0
 H		?= 0
 M		?= 0
+S		?= 1
+V		?= 0
 
 # Only used with "valgrind" target
 F		?=
 
 # Source program compiler settings
 CC		= cc
-FLAGS	= -Wall -Wextra -Werror -g -D WIDTH=$(W) -D HEIGHT=$(H) -D MAX_OBJS=$(M)
+FLAGS	= -Wall -Wextra -Werror -g -D WIDTH=$(W) -D HEIGHT=$(H) \
+			-D MAX_OBJS=$(M) -D VERBOSE=$(V) -D START_RENDER=$(S)
 
 # Directories
 BLDD	= build
@@ -52,7 +55,7 @@ DEPS	= $(OBJS:.o=.d)
 
 # Fake targets
 .PHONY: $(MLXN) $(LFTN) $(LFTN)-fast clean fclean re norm \
-		san valgrind verbose fast clear doc doc-clean
+		san valgrind fast clear doc doc-clean
 
 MAKEFLAGS += --no-print-directory
 
@@ -99,10 +102,7 @@ san: all
 valgrind:
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(F)
 
-verbose: FLAGS += -D VERBOSE
-verbose: all
-
-fast: FLAGS = -Ofast -D WIDTH=$(W) -D HEIGHT=$(H) -D MAX_OBJS=$(M)
+fast: FLAGS += -Ofast
 fast: $(MLXN) $(LFTN)-fast $(NAME)
 
 clear:
