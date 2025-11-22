@@ -27,8 +27,7 @@ F		?=
 
 # Source program compiler settings
 CC		= cc
-FLAGS	= -Wall -Wextra -Werror -g -D WIDTH=$(W) -D HEIGHT=$(H) \
-			-D MAX_OBJS=$(M) -D VERBOSE=$(V) -D START_RENDER=$(S)
+FLAGS	= -Wall -Wextra -Werror -g -D WIDTH=$(W) -D HEIGHT=$(H) -D MAX_OBJS=$(M) -D VERBOSE=$(V) -D START_RENDER=$(S)
 
 # Directories
 BLDD	= build
@@ -102,7 +101,7 @@ san: all
 valgrind:
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(F)
 
-fast: FLAGS += -Ofast
+fast: FLAGS = -Ofast -D WIDTH=$(W) -D HEIGHT=$(H) -D MAX_OBJS=$(M) -D VERBOSE=$(V) -D START_RENDER=$(S)
 fast: $(MLXN) $(LFTN)-fast $(NAME)
 
 clear:
