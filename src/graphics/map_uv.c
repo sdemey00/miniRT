@@ -27,8 +27,7 @@ static void	map_sphere(float *u, float *v, t_vec hit_point)
 
 static void	map_plane(float *u, float *v, t_vec local, t_hit *h)
 {
-	if ((h->obj->texture.loaded && bitmap_get(&h->obj->effects, TEXTURE)) \
-	|| (h->obj->bump.texture.loaded && bitmap_get(&h->obj->effects, BUMP)))
+	if ((h->obj->texture.loaded || (h->obj->bump.texture.loaded)))
 	{
 		*u = local.x * 0.01;
 		*v = local.z * 0.01;
