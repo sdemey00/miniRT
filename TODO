@@ -15,6 +15,7 @@ sdemey :
   - Maps for textures
   - Showcase
 - Limits test
+- Fix plane checkerpattern
 
 mmichele :
 - Shadow have the color of emiting light. Investigate ?
