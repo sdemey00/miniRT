@@ -15,6 +15,7 @@
 
 # include "minirt.h"
 
+void	export_background(const int fd, const t_color *c);
 void	export_ambiant(const int fd, const t_ambiant *a);
 void	export_camera(const int fd, t_camera *c);
 void	export_lights(const int fd, t_light l[], t_len len);

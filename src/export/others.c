@@ -12,6 +12,12 @@
 
 #include "export.h"
 
+void	export_background(const int fd, const t_color *c)
+{
+	ft_dprintf(fd, "B %d,%d,%d\n", \
+		(t_ssuint)c->x, (t_ssuint)c->y, (t_ssuint)c->z);
+}
+
 void	export_ambiant(const int fd, const t_ambiant *a)
 {
 	ft_dprintf(fd, "A %.2f %d,%d,%d\n", a->intensity, \
