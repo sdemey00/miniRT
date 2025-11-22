@@ -24,11 +24,17 @@ static t_bool	parse_checkboard(char *split, t_obj *obj)
 static t_bool	parse_bump(char *split, t_obj *obj, void *mlx)
 {
 	const char	*ext = ft_strrchr(&split[2], '.');
+	size_t		len;
 
+	len = ft_strlen(&split[2]);
 	if (ext && ft_strcmp(ext, ".xpm") == 0)
 	{
 		obj->bump.e_type = XPM_BUMP;
-		if (!load_texture(&obj->bump.texture, mlx, &split[2]))
+		if (len > 1023)
+			return (print_error("Path name is too long\n"), 0);
+		ft_memcpy(obj->bump.texture.path, &split[2], len);
+		obj->bump.texture.path[len] = '\0';
+		if (!load_texture(&obj->bump.texture, mlx, obj->bump.texture.path))
 			return (print_error("XPM file loading failed\n"), 0);
 	}
 	else if (ft_strcmp(&split[2], "tex") == 0)
@@ -37,6 +43,20 @@ static t_bool	parse_bump(char *split, t_obj *obj, void *mlx)
 		obj->bump.e_type = PROC_WAVE;
 	else if (ft_strcmp(&split[2], "0") != 0)
 		return (print_error("Invalid bump format\n"), 0);
+	return (1);
+}
+
+static t_bool	parse_texture(char *split, t_obj *obj, void *mlx)
+{
+	size_t	len;
+
+	len = ft_strlen(&split[2]);
+	if (len > 1023)
+		return (print_error("Path name is too long\n"), 0);
+	ft_memcpy(obj->texture.path, &split[2], len);
+	obj->texture.path[len] = '\0';
+	if (!load_texture(&obj->texture, mlx, obj->texture.path))
+		return (print_error("XPM file loading failed\n"), 0);
 	return (1);
 }
 
@@ -59,9 +79,8 @@ t_bool	parse_optional_args(char **split, t_obj *obj, void *mlx)
 			return (print_error("Invalid reflexion format\n"), 0);
 		if (split[i][0] == 'c' && !parse_checkboard(split[i], obj))
 			return (0);
-		if (split[i][0] == 'x'
-			&& !load_texture(&obj->texture, mlx, &split[i][2]))
-			return (print_error("XPM file loading failed\n"), 0);
+		if (split[i][0] == 'x' && !parse_texture(split[i], obj, mlx))
+			return (0);
 		if (split[i][0] == 'b' && !parse_bump(split[i], obj, mlx))
 			return (0);
 		i++;

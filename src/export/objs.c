@@ -14,21 +14,19 @@
 
 void	export_bump_textures(const int fd, t_obj *o)
 {
-	if (o->bump.e_type == PROC_WAVE)
-		ft_dprintf(fd, "b=1");
-	//else if (o->bump.e_type == PROC_NOISE)
-	//	ft_dprintf(fd, "");
+	if (o->bump.e_type == PROC_WAVE || o->bump.e_type == PROC_NOISE)
+		ft_dprintf(fd, " b=%d", (int)o->bump.e_type);
 	else if (o->bump.e_type == XPM_TEX)
-		ft_dprintf(fd, "b=tex");
+		ft_dprintf(fd, " b=tex");
 	else if (o->bump.e_type == XPM_BUMP)
-		ft_dprintf(fd, "b=%s", o->bump.texture);
+		ft_dprintf(fd, " b=%s", o->bump.texture.path);
 }
 
-//void	export_visual_textures(const int fd, t_obj *o)
-//{
-//	if (o->texture.loaded)
-//		ft_dprintf("x=%s", o->texture.path);
-//}
+void	export_visual_textures(const int fd, t_obj *o)
+{
+	if (o->texture.loaded)
+		ft_dprintf(fd, " x=%s", o->texture.path);
+}
 
 void	export_other_args(const int fd, t_obj *o)
 {
@@ -61,7 +59,7 @@ void	export_object(const int fd, t_obj *o)
 			o->pos.x, o->pos.y, o->pos.z, o->dir.x, o->dir.y, o->dir.z, \
 			(t_ssuint)o->color.x, (t_ssuint)o->color.y, (t_ssuint)o->color.z);
 	export_bump_textures(fd, o);
-	//export_visual_textures(fd, o);
+	export_visual_textures(fd, o);
 	export_other_args(fd, o);
 }
 

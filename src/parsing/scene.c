@@ -61,6 +61,7 @@ void	scene_export(t_scene *s)
 
 	if (!create_file(&fd))
 		return ;
+	export_background(fd, &s->bg);
 	export_ambiant(fd, &s->ambiant);
 	export_camera(fd, &s->camera);
 	export_lights(fd, s->lights, s->lights_len);

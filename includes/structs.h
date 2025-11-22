@@ -72,7 +72,7 @@ typedef struct s_tex
 	int		endian;
 	int		w;
 	int		h;
-	//char	*path;
+	char	path[1024];
 	t_bool	loaded;
 }	t_tex;
 
