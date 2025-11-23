@@ -6,7 +6,7 @@
 %%   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        %%
 %%                                                +#+#+#+#+#+   +#+           %%
 %%   Created: 2025/11/08 00:54:32 by mmichele          #+#    #+#             %%
-%%   Updated: 2025/11/21 11:56:27 by mmichele         ###   ########.fr       %%
+%%   Updated: 2025/11/23 17:30:26 by mmichele         ###   ########.fr       %%
 %%                                                                            %%
 %% ************************************************************************** %%
 
@@ -29,8 +29,8 @@
 		A vector is a mathematical object described by it's components, it has 
 		1 component for each dimension, so a 3D vector has 3 components.\\It 
 		has the following operations for 2 vectors, $\vec{v}$, $\vec{w} \in 
-		\mathbb{R}^3$ and a scalar $\lambda \in \mathbb{R}$.\\
-		\Table{l c c l} {\\
+		\mathbb{R}^3$ and a scalar $\lambda \in \mathbb{R}$.\\ \\
+		\Table{l c c l} {
 			Addition & $\vec{v} + \vec{w}$ & $ = $ & $(v_x + w_x, v_y + w_y, v_z + w_z)$\\
 			Substraction & $\vec{v} - \vec{w}$ & $ = $ & $(v_x - w_x, v_y - w_y, v_z - w_z)$\\
 			Scale & $\lambda \vec{v}$ & $ = $ & $(v_x \cdot \lambda, v_y \cdot \lambda, v_z \cdot \lambda)$\\
@@ -44,35 +44,40 @@
 	% //TODO
 \section{Vector space objects}
 	\subsection{Ray}
-		For a point $\dot{O} \in \mathbb{R}^3$, the origin of the ray, a vector 
-		$\hat{D} \in \mathbb{R}^3$, the normalalized direction vector of the ray, 
+		For a point $o \in \mathbb{R}^3$, the origin of the ray, a vector 
+		$\hat{d} \in \mathbb{R}^3$, the normalalized direction vector of the ray, 
 		and a scalar for the direction vector, $t \in \mathbb{R}$. We define 
 		the normal equation of a line as :
-		$$R(t) = \dot{O} + t\hat{D}$$
+		$$R(t) = o + t\hat{d}$$
 	\subsection{Plane}
-		For a point $\dot{P} \in \mathbb{R}^3$, the origin of the plane, 
-		a vector $\hat{D} \in \mathbb{R}^3$, the normalized orthogonal vector 
+		For a point $p \in \mathbb{R}^3$, the origin of the plane, 
+		a vector $\hat{v} \in \mathbb{R}^3$, the normalized orthogonal vector 
 		of the plane and a arbitrary point $x \in \mathbb{R}^3$, it is a point 
 		of the plane if :
-		$$(x - \dot{P}) \cdot \hat{D} = 0$$
+		$$(x - p) \cdot \hat{v} = 0$$
 	\subsection{Sphere}
-		For a point $\dot{C} \in \mathbb{R}^3$ the origin of the sphere, a scalar 
+		For a point $p \in \mathbb{R}^3$ the origin of the sphere, a scalar 
 		$r \in \mathbb{R}$, the radius of the sphere and an arbitrary point 
 		$x \in \mathbb{R}^3$., it is a point of the sphere if :
-		$$|| x - \dot{C} ||^2 = r^2$$
+		$$|| x - p ||^2 = r^2$$
 	\subsection{Circle}
-		For a point $\dot{O} \in \mathbb{R}^3$, the origin of the circle, 
-		a vector $\hat{N} \in \mathbb{R}^3$, the normalized orthogonal vector 
+		For a point $p \in \mathbb{R}^3$, the origin of the circle, 
+		a vector $\hat{v} \in \mathbb{R}^3$, the normalized orthogonal vector 
 		of the circle and a arbitrary point $x \in \mathbb{R}^3$, it is a point 
-		of the circle if :
-		% // TODO
+		of the circle if $|| x - p || \leq r|$ :
+		$$(x - p) \cdot \hat{v} = 0$$
 	\subsection{Cylinder}
-		For a point $\dot{O} \in \mathbb{R}^3$ the origin of the sphere, a 
-		a vector $\hat{N} \in \mathbb{R}^3$ the normalized direction vector, 
+		For a point $p \in \mathbb{R}^3$ the origin of the sphere, a 
+		a vector $\hat{v} \in \mathbb{R}^3$ the normalized direction vector, 
 		two scalars $r$ and $h \in \mathbb{R}$, respectively the radius and the 
-		height of the cylinder. We define the normal equation of a cylinder as :
-		$$||(P - O) - \langle (P - O), \hat{N} \rangle \hat{N}||^2 = r^2$$
-		where $$|\langle (P - O), \hat{N} \rangle| \leq \dfrac{h}{2}$$
+		height of the cylinder. We define the normal equation of an infinite 
+		cylinder as :
+		$$||(x - p) - ((x - p) \cdot \hat{v}) \hat{v}||^2 = r^2$$
+		Limit the height with :
+		$$-\dfrac{h}{2} \leq (r(t) - c) \cdot \hat{d} \leq \dfrac{h}{2}$$
+		And then use the previous formula for a circle to set the top and bottom 
+		cap of the cylinder.
+	\subsection{Cone}
 		% // TODO
 \section{Raytracer}
 	\subsection{Camera}
@@ -101,33 +106,49 @@
 		For the previously defined variables and object equations we can define 
 		the following intersection equations.
 		\subsubsection{Plane}
-			$$t = \dfrac{(\dot{P} - \dot{O}) \cdot \hat{N}}{\hat{D} \cdot \hat{N}}$$
+			$$t = \dfrac{(p - o) \cdot \hat{v}}{\hat{d} \cdot \hat{v}}$$
 			$t$ is the distance between the plane and the ray 
 			origin followed by it's direction vector if it is a finite 
 			result, and if $t < 0$ the plane lays behind the ray origin.
 		\subsubsection{Circle}
+			% // TODO
 		\subsubsection{Sphere}
-			If you substitute the equation of a ray into the one of the sphere, then 
-			substitute $L = \dot{O} - \dot{C}$, and by doing some operations you obtain this :
-			$$|| (\dot{O} + t\hat{D}) - \dot{C} ||^2 = r^2 \iff t^2(\hat{D} \cdot \hat{D}) + 2t(L \cdot \hat{D}) + (L \cdot L - r^2)= 0$$
+			If you substitute the equation of a ray into the one of the sphere :
+			$$|| (o + t\hat{d}) - p ||^2 = r^2 \iff (\hat{d} \cdot \hat{d})t^2 + 2((o - p) \cdot \hat{d})t + ((o - p) \cdot (o - p) - r^2)= 0$$
 			\Doublebox{
 				\List{
-					\item[$a$] $= \hat{D} \cdot \hat{D}$
-					\item[$b$] $= L \cdot \hat{D}$
-					\item[$c$] $= L \cdot L - r^2$
+					\item[$a$] $= \hat{d} \cdot \hat{d}$
+					\item[$b$] $= (o - p) \cdot \hat{d}$
+					\item[$c$] $= (o - p) \cdot (o - p) - r^2$
 				}
 			}{
 				\Custombox{
 					You can now easily find the intersection points with the ray 
 					by substituing the variables into :
 					\begin{center}
-						$t_1,t_2 = \dfrac{-b \pm \sqrt{\Delta}}{2a}$ where $\Delta = b^2 - 4ac$
+						$t = \text{min}\left\{\dfrac{-b - \sqrt{b^2 - 4ac}}{2a}, \dfrac{-b + \sqrt{b^2 - 4ac}}{2a}\right\}_{t > 0}$
 					\end{center}
 				}
-			}{0.18}{0.02}{0.78}
-		% //TODO
+			}{0.28}{0.02}{0.70}
 		\subsubsection{Cylinder}
+			$$||((o + t\hat{d}) - p) - (((o + t\hat{d}) - p) \cdot \hat{v}) \hat{v}||^2 = r^2 \iff (\hat{d} \cdot \hat{d})t^2 + 2((o - p) \cdot \hat{d})t + ((o - p) \cdot (o - p) - r^2) = 0$$
+						\Doublebox{
+				\List{
+					\item[$a$] $= \hat{d} \cdot \hat{d}$
+					\item[$b$] $= (o - p) \cdot \hat{d}$
+					\item[$c$] $= (o - p) \cdot (o - p) - r^2$
+				}
+			}{
+				\Custombox{
+					You can now easily find the intersection points with the ray 
+					by substituing the variables into :
+					\begin{center}
+						$t = \text{min}\left\{\dfrac{-b - \sqrt{b^2 - 4ac}}{2a}, \dfrac{-b + \sqrt{b^2 - 4ac}}{2a}\right\}_{t > 0}$
+					\end{center}
+				}
+			}{0.28}{0.02}{0.70}
 		\subsubsection{Cone}
+			% // TODO
 	\subsection{Hit point informations}
 		\subsubsection{Surface normal}
 		\subsubsection{UV coordinate}
