@@ -99,7 +99,7 @@ san: FLAGS += -g -fsanitize=address,leak,undefined
 san: all
 
 valgrind:
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(F)
+	valgrind --track-fds=yes --leak-check=full --show-leak-kinds=all ./$(NAME) $(F)
 
 fast: FLAGS = -Ofast -D WIDTH=$(W) -D HEIGHT=$(H) -D MAX_OBJS=$(M) -D VERBOSE=$(V) -D START_RENDER=$(S)
 fast: $(MLXN) $(LFTN)-fast $(NAME)
