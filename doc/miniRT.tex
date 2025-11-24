@@ -6,7 +6,7 @@
 %%   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        %%
 %%                                                +#+#+#+#+#+   +#+           %%
 %%   Created: 2025/11/08 00:54:32 by mmichele          #+#    #+#             %%
-%%   Updated: 2025/11/24 14:16:36 by mmichele         ###   ########.fr       %%
+%%   Updated: 2025/11/24 14:59:01 by mmichele         ###   ########.fr       %%
 %%                                                                            %%
 %% ************************************************************************** %%
 
@@ -66,6 +66,7 @@
 		of the circle and a arbitrary point $x \in \mathbb{R}^3$, it is a point 
 		of the circle if $|| x - p || \leq r|$ :
 		$$(x - p) \cdot \hat{v} = 0$$
+		$$||(x - p)|| \leq r$$
 	\subsection{Cylinder}
 		For a point $p \in \mathbb{R}^3$ the origin of the sphere, a 
 		a vector $\hat{v} \in \mathbb{R}^3$ the normalized direction vector, 
@@ -78,7 +79,10 @@
 		And then use the previous formula for a circle to set the top and bottom 
 		cap of the cylinder.
 	\subsection{Cone}
-		% // TODO
+		For a point $p \in \mathbb{R}^3$ the origin of the cone, a 
+		a vector $\hat{v} \in \mathbb{R}^3$ the normalized direction vector.
+		We define equation of an infinite cone as :
+		$$((x - p)\cdot \hat{v})^2 = \cos^2(\theta) ||x - c||^2$$
 \section{Raytracer}
 	\subsection{Camera}
 		Given informations :
@@ -134,22 +138,35 @@
 			origin followed by it's direction vector if it is a finite 
 			result, and if $t < 0$ the plane lays behind the ray origin.
 		\subsubsection{Circle}
-			% // TODO
+			Same as a plane but where you have to check wether or not the 
+			hitpoint - circle origin vector is less or equal to the radius of the circle.
 		\subsubsection{Sphere}
 			If you substitute the equation of a ray into the one of the sphere you obtain 
 			a second degree equation :
 			$$|| (o + t\hat{d}) - p ||^2 = r^2 \iff (\hat{d} \cdot \hat{d})t^2 + 2((o - p) \cdot \hat{d})t + ((o - p) \cdot (o - p) - r^2)= 0$$
-			%\List{
-			%	\item[$a$] $= \hat{d} \cdot \hat{d}$
-			%	\item[$b$] $= (o - p) \cdot \hat{d}$
-			%	\item[$c$] $= (o - p) \cdot (o - p) - r^2$
-			%}
+			\List{
+				\item[$a$] $= \hat{d} \cdot \hat{d}$
+				\item[$b$] $= (o - p) \cdot \hat{d}$
+				\item[$c$] $= (o - p) \cdot (o - p) - r^2$
+			}
 		\subsubsection{Cylinder}
 			If you substitute the equation of a ray into the one of the cylinder you obtain 
 			a second degree equation :
 			$$||((o + t\hat{d}) - p) - (((o + t\hat{d}) - p) \cdot \hat{v}) \hat{v}||^2 = r^2 \iff (\hat{d} \cdot \hat{d})t^2 + 2((o - p) \cdot \hat{d})t + ((o - p) \cdot (o - p) - r^2) = 0$$
+			\List{
+				\item[$a$] $= \hat{d} \cdot \hat{d}$
+				\item[$b$] $= (o - p) \cdot \hat{d}$
+				\item[$c$] $= (o - p) \cdot (o - p) - r^2$
+			}
 		\subsubsection{Cone}
-			% // TODO
+			If you substitute the equation of a ray into the one of the cone you obtain 
+			a second degree equation :
+			$$((o + t\hat{d} - p)\cdot \hat{v})^2 = \cos^2(\theta) ||o + t\hat{d} - c||^2 \iff $$
+			\List{
+				\item[$a$] $= (\hat{d} \cdot \hat{v})^2 - \cos^2(\theta)$
+				\item[$b$] $= 2((\hat{d} \cdot \hat{v})((o - p) \cdot \hat{v}) - \cos^2(\theta)(\hat{d}\cdot(o - p)))$
+				\item[$c$] $= ((o - p) \cdot \hat{v})^2 - \cos^2(\theta) ||(o - p)||^s$
+			}
 	\subsection{Hit point informations}
 		\subsubsection{Surface normal}
 		\subsubsection{UV coordinate}

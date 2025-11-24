@@ -48,7 +48,7 @@ LFTN	= $(LFTD)/libft.a
 SRCS	= src/bitmap.c \
 			src/parsing/parse_light.c \
 			src/parsing/parse_cylinder.c \
-			src/parsing/print_scene_infsrcos.c \
+			src/parsing/print_scene_infos.c \
 			src/parsing/parse_utils/check_range.c \
 			src/parsing/parse_utils/parse_utils.c \
 			src/parsing/parse_utils/ft_atof.c \
@@ -57,6 +57,7 @@ SRCS	= src/bitmap.c \
 			src/parsing/parse_cone.c \
 			src/parsing/scene_init.c \
 			src/parsing/scene.c \
+			src/parsing/textures_free.c \
 			src/parsing/parse_ambiant.c \
 			src/parsing/parse_camera.c \
 			src/parsing/parse_background.c \
@@ -95,7 +96,6 @@ SRCS	= src/bitmap.c \
 			src/events/kbm/obj_change.c \
 			src/main.c \
 			src/time.c
-
 OBJS	= $(patsubst %.c, $(BLDD)/%.o, $(SRCS))
 INCS	= -I $(SRCD) -I $(MLXD) -I $(LFTD) -I $(INCD)
 LNKS	= -L $(MLXD) -L $(LFTD)
