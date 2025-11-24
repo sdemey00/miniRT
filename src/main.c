@@ -42,9 +42,12 @@ int	main(int argc, char **argv)
 		return (!!ft_dprintf(2, "Error\nUsage: %s <scene.rt>\n", argv[0]));
 	c.w.mlx = mlx_init();
 	if (!c.w.mlx)
-		return (0);
-	if (!scene_init(&c.s, argv[1], c.w.mlx) || !window_init(&c.w))
 		return (1);
+	c.w.img.ptr = NULL;
+	c.w.win = NULL;
+	c.w.fd_controller = -1;
+	if (!scene_init(&c.s, argv[1], c.w.mlx) || !window_init(&c))
+		window_close(&c);
 	print_bindings();
 	if (START_RENDER)
 		full_render(&c, 0);

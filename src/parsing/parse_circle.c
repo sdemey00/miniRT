@@ -32,7 +32,7 @@ t_bool	parse_circle(char **split, t_scene *scene, void *mlx)
 		return (0);
 	circle.radius /= 2;
 	circle.e_type = CIR;
-	if (!scene_add_obj(scene, &circle))
+	if (!scene_add_obj(scene, &circle, mlx))
 		return (0);
 	return (1);
 }

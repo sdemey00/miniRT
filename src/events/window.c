@@ -12,8 +12,8 @@
 
 #include "minirt.h"
 
-int	window_close(t_window *w)
+int	window_close(struct s_ctx *c)
 {
-	window_free(w);
+	window_free(c);
 	exit(0);
 }

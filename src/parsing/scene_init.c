@@ -31,6 +31,7 @@ void	obj_init(t_obj *o)
 	o->reflexion = DFLT_REFLECT;
 	o->effects = 0b11101111;
 	o->texture.loaded = 0;
+	o->bump.texture.loaded = 0;
 	o->bump.e_type = NO_BUMP;
 }
 
