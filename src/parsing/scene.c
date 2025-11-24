@@ -12,10 +12,16 @@
 
 #include "parsing.h"
 
-t_bool	scene_add_obj(t_scene *s, t_obj *obj)
+t_bool	scene_add_obj(t_scene *s, t_obj *obj, void *mlx)
 {
 	if (s->objs_len == MAX_OBJS)
+	{
+		if (obj->texture.loaded)
+			mlx_destroy_image(mlx, obj->texture.img);
+		if (obj->bump.texture.loaded)
+			mlx_destroy_image(mlx, obj->bump.texture.img);
 		return (print_error("Too much objects declarations\n"), 0);
+	}
 	s->objs[s->objs_len++] = *obj;
 	return (1);
 }

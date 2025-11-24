@@ -12,36 +12,39 @@
 
 #include "minirt.h"
 
-t_bool	window_init(t_window *w)
+t_bool	window_init(struct s_ctx *c)
 {
-	w->win = mlx_new_window(w->mlx, WIDTH, HEIGHT, "miniRT");
-	if (!w->win)
-		return (ft_free(w->mlx, 0));
-	w->img.ptr = mlx_new_image(w->mlx, WIDTH, HEIGHT);
-	w->img.address = mlx_get_data_addr(w->img.ptr, &w->img.bits_per_pixel, \
-		&w->img.size_line, &w->img.endian);
-	w->fd_controller = open("/dev/input/js0", O_RDONLY);
-	if (!w->img.address)
-		return (window_free(w));
+	c->w.win = mlx_new_window(c->w.mlx, WIDTH, HEIGHT, "miniRT");
+	if (!c->w.win)
+		return (ft_free(c->w.mlx, 0));
+	c->w.img.ptr = mlx_new_image(c->w.mlx, WIDTH, HEIGHT);
+	c->w.img.address = mlx_get_data_addr(c->w.img.ptr, &c->w.img.bits_per_pixel,
+			&c->w.img.size_line, &c->w.img.endian);
+	c->w.fd_controller = open("/dev/input/js0", O_RDONLY);
+	if (!c->w.img.address)
+		return (window_free(c));
 	return (1);
 }
 
-t_bool	window_free(t_window *w)
+t_bool	window_free(struct s_ctx *c)
 {
-	mlx_destroy_image(w->mlx, w->img.ptr);
-	if (w->mlx && w->win)
+	textures_free(&c->w, &c->s);
+	if (c->w.img.ptr)
+		mlx_destroy_image(c->w.mlx, c->w.img.ptr);
+	if (c->w.mlx && c->w.win)
 	{
-		mlx_destroy_window(w->mlx, w->win);
-		w->win = 0;
+		mlx_destroy_window(c->w.mlx, c->w.win);
+		c->w.win = 0;
 	}
-	if (w->mlx)
+	if (c->w.mlx)
 	{
-		mlx_destroy_display(w->mlx);
-		free(w->mlx);
-		w->mlx = 0;
+		mlx_destroy_display(c->w.mlx);
+		free(c->w.mlx);
+		c->w.mlx = 0;
 	}
+	if (c->w.fd_controller >= 0)
+		close(c->w.fd_controller);
 	return (0);
-	close(w->fd_controller);
 }
 
 void	window_draw(struct s_ctx *c)

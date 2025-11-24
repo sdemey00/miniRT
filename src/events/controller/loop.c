@@ -30,7 +30,7 @@ static t_bool	controller_overall(struct s_ctx *c, const struct js_event *e)
 	float	zoom;
 
 	if (e->type == ET_BUTTON && e->value == PRESS && e->number == ENT1_START)
-		return (window_close(&c->w));
+		return (window_close(c));
 	else if (e->type == ET_BUTTON && e->value == PRESS && e->number == ENT1_OPT)
 		return (full_render(c, 0));
 	else if (e->type == ET_AXIS && (e->number == ENT2_TRIG_L || \

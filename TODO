@@ -2,7 +2,6 @@ Mandatory :
 - PDF
 
 FIX :
-- Destroy textures images at exit (obj.texture && obj.bump.texture)
 
 sdemey :
 - Deep test parsing

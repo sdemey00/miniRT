@@ -50,16 +50,16 @@ int		mouse_press(int key, int x, int y, struct s_ctx *c);
 int		key_release(int key, struct s_ctx *c);
 
 // events/window.c
-int		window_close(t_window *w);
+int		window_close(struct s_ctx *c);
 
 // time.c
 double	time_now(void);
 
 // graphics/window.c
-t_bool	window_init(t_window *w);
+t_bool	window_init(struct s_ctx *c);
 void	window_draw(struct s_ctx *c);
 void	window_draw_pixel(t_window *w, t_uint x, t_uint y, int color);
-t_bool	window_free(t_window *w);
+t_bool	window_free(struct s_ctx *c);
 void	window_clear(t_window *w);
 
 // graphics/color.c

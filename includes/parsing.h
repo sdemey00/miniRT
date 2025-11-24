@@ -28,7 +28,7 @@ void	obj_init(t_obj *o);
 t_bool	scene_init(t_scene *s, const char *fpath, void *mlx);
 
 // parsing/scene.c
-t_bool	scene_add_obj(t_scene *s, t_obj *obj);
+t_bool	scene_add_obj(t_scene *s, t_obj *obj, void *mlx);
 void	scene_take_control(t_scene *s, const int x, const int y);
 void	scene_change(t_scene *s, const int key);
 void	scene_export(t_scene *s);
@@ -105,5 +105,8 @@ double	ft_atof(const char *str);
 
 // parsing/parse_utils/free_split.c
 void	ft_free_split(char **tab);
+
+// parsing/textures_free.c
+void	textures_free(t_window *w, t_scene *s);
 
 #endif // PARSING_H

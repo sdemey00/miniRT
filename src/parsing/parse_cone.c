@@ -30,7 +30,7 @@ t_bool	parse_cone(char **split, t_scene *scene, void *mlx)
 		|| !parse_optional_args(&split[min_args], &cone, mlx))
 		return (0);
 	cone.e_type = CON;
-	if (!scene_add_obj(scene, &cone))
+	if (!scene_add_obj(scene, &cone, mlx))
 		return (0);
 	return (1);
 }

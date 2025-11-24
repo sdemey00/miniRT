@@ -40,7 +40,7 @@ int	key_release(int key, struct s_ctx *c)
 	if (VERBOSE)
 		ft_printf("key released : %d\n", key);
 	if (key == K_ESC)
-		window_close(&c->w);
+		window_close(c);
 	if (key == 'z')
 		c->input = CONTROLLER;
 	else if (c->state == RENDERING)
