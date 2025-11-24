@@ -1,7 +1,5 @@
 Mandatory :
 - PDF
-- Remove file wildcard in Makefile
-- Norm
 
 FIX :
 - Destroy textures images at exit (obj.texture && obj.bump.texture)
@@ -16,6 +14,3 @@ sdemey :
   - Showcase
 - Limits test
 - Fix plane checkerpattern
-
-mmichele :
-- Shadow have the color of emiting light. Investigate ?

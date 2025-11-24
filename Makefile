@@ -45,7 +45,57 @@ LFTD	= $(LIBD)/libft
 LFTN	= $(LFTD)/libft.a
 
 # Source compile variables
-SRCS	= $(shell find $(SRCD) -type f -name "*.c")
+SRCS	= src/bitmap.c \
+			src/parsing/parse_light.c \
+			src/parsing/parse_cylinder.c \
+			src/parsing/print_scene_infsrcos.c \
+			src/parsing/parse_utils/check_range.c \
+			src/parsing/parse_utils/parse_utils.c \
+			src/parsing/parse_utils/ft_atof.c \
+			src/parsing/parse_utils/free_split.c \
+			src/parsing/parse_utils/is_valid_format.c \
+			src/parsing/parse_cone.c \
+			src/parsing/scene_init.c \
+			src/parsing/scene.c \
+			src/parsing/parse_ambiant.c \
+			src/parsing/parse_camera.c \
+			src/parsing/parse_background.c \
+			src/parsing/parse_circle.c \
+			src/parsing/parse_optional_args.c \
+			src/parsing/parse_plane.c \
+			src/parsing/parse_sphere.c \
+			src/parsing/parse_line.c \
+			src/parsing/parse_file.c \
+			src/graphics/ray.c \
+			src/graphics/blurtracing.c \
+			src/graphics/color.c \
+			src/graphics/camera.c \
+			src/graphics/lights.c \
+			src/graphics/bump_tex.c \
+			src/graphics/rasterizers.c \
+			src/graphics/raytracing.c \
+			src/graphics/xpm_tex.c \
+			src/graphics/reflection.c \
+			src/graphics/window.c \
+			src/graphics/normal.c \
+			src/graphics/map_uv.c \
+			src/graphics/ray_hit_cyl.c \
+			src/graphics/ray_hits.c \
+			src/export/others.c \
+			src/export/lights.c \
+			src/export/objs.c \
+			src/maths/eq2.c \
+			src/maths/vec_utils.c \
+			src/events/controller/loop.c \
+			src/events/controller/camera.c \
+			src/events/controller/object.c \
+			src/events/window.c \
+			src/events/kbm/key.c \
+			src/events/kbm/mouse.c \
+			src/events/kbm/obj_change.c \
+			src/main.c \
+			src/time.c
+
 OBJS	= $(patsubst %.c, $(BLDD)/%.o, $(SRCS))
 INCS	= -I $(SRCD) -I $(MLXD) -I $(LFTD) -I $(INCD)
 LNKS	= -L $(MLXD) -L $(LFTD)
