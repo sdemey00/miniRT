@@ -6,7 +6,7 @@
 %%   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        %%
 %%                                                +#+#+#+#+#+   +#+           %%
 %%   Created: 2025/11/08 00:54:32 by mmichele          #+#    #+#             %%
-%%   Updated: 2025/11/24 14:59:01 by mmichele         ###   ########.fr       %%
+%%   Updated: 2025/11/25 10:04:20 by mmichele         ###   ########.fr       %%
 %%                                                                            %%
 %% ************************************************************************** %%
 
@@ -161,18 +161,19 @@
 		\subsubsection{Cone}
 			If you substitute the equation of a ray into the one of the cone you obtain 
 			a second degree equation :
-			$$((o + t\hat{d} - p)\cdot \hat{v})^2 = \cos^2(\theta) ||o + t\hat{d} - c||^2 \iff $$
+			$$((o + t\hat{d} - p)\cdot \hat{v})^2 = \cos^2(\theta) ||o + t\hat{d} - c||^2 \iff$$
+			$$((\hat{d} \cdot \hat{v})^2 - \cos^2(\theta))t^2 + (2((\hat{d} \cdot \hat{v})((o - p) \cdot \hat{v}) - \cos^2(\theta)(\hat{d}\cdot(o - p))))t + ((o - p) \cdot \hat{v})^2 - \cos^2(\theta) ||(o - p)||^2 = 0$$
 			\List{
 				\item[$a$] $= (\hat{d} \cdot \hat{v})^2 - \cos^2(\theta)$
 				\item[$b$] $= 2((\hat{d} \cdot \hat{v})((o - p) \cdot \hat{v}) - \cos^2(\theta)(\hat{d}\cdot(o - p)))$
-				\item[$c$] $= ((o - p) \cdot \hat{v})^2 - \cos^2(\theta) ||(o - p)||^s$
+				\item[$c$] $= ((o - p) \cdot \hat{v})^2 - \cos^2(\theta) ||(o - p)||^2$
 			}
-	\subsection{Hit point informations}
-		\subsubsection{Surface normal}
-		\subsubsection{UV coordinate}
-	\subsection{Surface lightning}
-	\subsection{Projected shadows}
-	\subsection{Visual textures}
-	\subsection{Bumping textures}
+	%\subsection{Hit point informations}
+	%	\subsubsection{Surface normal}
+	%	\subsubsection{UV coordinate}
+	%\subsection{Surface lightning}
+	%\subsection{Projected shadows}
+	%\subsection{Visual textures}
+	%\subsection{Bumping textures}
 
 \end{document}
