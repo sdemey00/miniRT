@@ -6,7 +6,7 @@
 %%   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        %%
 %%                                                +#+#+#+#+#+   +#+           %%
 %%   Created: 2025/11/08 00:54:32 by mmichele          #+#    #+#             %%
-%%   Updated: 2025/11/25 10:04:20 by mmichele         ###   ########.fr       %%
+%%   Updated: 2025/11/25 10:27:21 by mmichele         ###   ########.fr       %%
 %%                                                                            %%
 %% ************************************************************************** %%
 
@@ -41,7 +41,29 @@
 			Normalization & $\hat{v}$ & $ = $ & $\vec{v}\,/\,||\vec{v}||$
 		}
 	\subsection{Matrix}
-	% //TODO
+		Respectively yaw, pitch and roll matrices :
+		\[
+			R_z(\psi)=
+			\begin{bmatrix}
+				\cos\psi & -\sin\psi & 0 \\
+				\sin\psi & \cos\psi & 0 \\
+				0 & 0 & 1
+			\end{bmatrix}
+			\qquad
+			R_y(\theta)=
+			\begin{bmatrix}
+				\cos\theta & 0 & \sin\theta \\
+				0 & 1 & 0 \\
+				-\sin\theta & 0 & \cos\theta
+			\end{bmatrix}
+			\qquad
+			R_x(\phi)=
+			\begin{bmatrix}
+				1 & 0 & 0 \\
+				0 & \cos\phi & -\sin\phi \\
+				0 & \sin\phi & \cos\phi
+			\end{bmatrix}
+		\]
 \section{Vector space objects}
 	\subsection{Ray}
 		For a point $o \in \mathbb{R}^3$, the origin of the ray, a vector 
@@ -64,9 +86,10 @@
 		For a point $p \in \mathbb{R}^3$, the origin of the circle, 
 		a vector $\hat{v} \in \mathbb{R}^3$, the normalized orthogonal vector 
 		of the circle and a arbitrary point $x \in \mathbb{R}^3$, it is a point 
-		of the circle if $|| x - p || \leq r|$ :
+		of the circle if $|| x - o || \leq r$ :
 		$$(x - p) \cdot \hat{v} = 0$$
-		$$||(x - p)|| \leq r$$
+		Limit the surface of the plane to a radius of $r$ :
+		$$||(x - o)|| \leq r$$
 	\subsection{Cylinder}
 		For a point $p \in \mathbb{R}^3$ the origin of the sphere, a 
 		a vector $\hat{v} \in \mathbb{R}^3$ the normalized direction vector, 
@@ -101,34 +124,36 @@
 				\[ \text{C}_\text{flen} = \tan\left(\dfrac{\text{C}_{\text{fov}}}{2}\right) \]
 			\ListItem $\textbf{S}_{\textbf{ratio}}$ : Pixel screen ratio defined by $\dfrac{\text{Width}}{\text{Height}}$
 		}
-		Calculate a ray passing from the camera's origin and a pixel of the screen :
-		\begin{center}
-			$\text{\textbf{S}}_{\text{\textbf{dir}}} = \left[\left(2\left(\dfrac{x + 0.5}{\text{Width}}\right) - 1\right)\text{S}_{\text{ratio}}\text{C}_{\text{flen}}, 
-			\left(1 - 2\left(\dfrac{y + 0.5}{\text{Height}}\right) - 1\right)\text{C}_{\text{flen}}, 1 \right]$
-		\end{center}
-		Calculate camera's right and up vector :
-		\begin{center}
-			$\text{\textbf{C}}_{\text{\textbf{right}}} = (0, 1, 0) \times \text{C}_{\text{dir}}$ and $\text{\textbf{C}}_{\text{\textbf{up}}} = \text{C}_{\text{dir}} \times \text{C}_{\text{right}}$
-		\end{center}
-		Get the ray shot through the given screen coordinate in space where 
-		$\text{\textbf{R}}_{\text{\textbf{pos}}} = \text{C}_{\text{pos}}$ and
-		\begin{center}
-			$\text{\textbf{R}}_{\text{\textbf{dir}}} =$
-			\begin{bmatrix}
-				\hat{\text{C}}_{\text{right}_x} & \hat{\text{C}}_{\text{up}_x} & \hat{\text{C}}_{\text{dir}_x} \\
-				\hat{\text{C}}_{\text{right}_y} & \hat{\text{C}}_{\text{up}_y} & \hat{\text{C}}_{\text{dir}_y} \\
-				\hat{\text{C}}_{\text{right}_z} & \hat{\text{C}}_{\text{up}_z} & \hat{\text{C}}_{\text{dir}_z}
-			\end{bmatrix}
-			\begin{bmatrix}
-				\text{S}_{\text{dir}_x} \\
-				\text{S}_{\text{dir}_y} \\
-				1
-			\end{bmatrix}
-		\end{center}
+		\subsubsection{Camera rays}
+			Calculate a ray passing from the camera's origin and a pixel of the screen :
+			\begin{center}
+				$\text{\textbf{S}}_{\text{\textbf{dir}}} = \left[\left(2\left(\dfrac{x + 0.5}{\text{Width}}\right) - 1\right)\text{S}_{\text{ratio}}\text{C}_{\text{flen}}, 
+				\left(1 - 2\left(\dfrac{y + 0.5}{\text{Height}}\right) - 1\right)\text{C}_{\text{flen}}, 1 \right]$
+			\end{center}
+			Calculate camera's right and up vector :
+			\begin{center}
+				$\text{\textbf{C}}_{\text{\textbf{right}}} = (0, 1, 0) \times \text{C}_{\text{dir}}$ and $\text{\textbf{C}}_{\text{\textbf{up}}} = \text{C}_{\text{dir}} \times \text{C}_{\text{right}}$
+			\end{center}
+			Get the ray shot through the given screen coordinate in space where 
+			$\text{\textbf{R}}_{\text{\textbf{pos}}} = \text{C}_{\text{pos}}$ and
+			\begin{center}
+				$\text{\textbf{R}}_{\text{\textbf{dir}}} =$
+				\begin{bmatrix}
+					\hat{\text{C}}_{\text{right}_x} & \hat{\text{C}}_{\text{up}_x} & \hat{\text{C}}_{\text{dir}_x} \\
+					\hat{\text{C}}_{\text{right}_y} & \hat{\text{C}}_{\text{up}_y} & \hat{\text{C}}_{\text{dir}_y} \\
+					\hat{\text{C}}_{\text{right}_z} & \hat{\text{C}}_{\text{up}_z} & \hat{\text{C}}_{\text{dir}_z}
+				\end{bmatrix}
+				\begin{bmatrix}
+					\text{S}_{\text{dir}_x} \\
+					\text{S}_{\text{dir}_y} \\
+					1
+				\end{bmatrix}
+			\end{center}
 	\subsection{Ray intersections}
 		For the previously defined variables and object equations we can define 
 		the following intersection equations.\\
-		You can find the distance $t$ of the nearest positive root with :
+		For second degree equations, you can find the distance $t$ of the 
+		nearest positive root with :
 		\begin{center}
 			$t = \text{min}\left\{\dfrac{-b - \sqrt{b^2 - 4ac}}{2a}, \dfrac{-b + \sqrt{b^2 - 4ac}}{2a}\right\}_{t > 0}$
 		\end{center}
