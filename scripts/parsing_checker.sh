@@ -4,7 +4,7 @@ BLUE='\033[1;34m'
 CYAN='\033[1;36m'
 RESET='\033[0m'
 
-for f in ./static/*.rt; do
+for f in ./static/maps/*.rt; do
     echo -e "\n${CYAN}============================================${RESET}"
     echo -e "${BLUE}Testing file: $f${RESET}\n"
     echo -e "${GREEN}--- Map content ---${RESET}"

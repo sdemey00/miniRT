@@ -1,0 +1,45 @@
+
+A 0.2 255,255,255
+C 0,0,0 0,0,1 90
+L 0,1,15 0.5 255,255,255
+
+pl 0,-5,0 0,1,0 70,70,70 r=0.1
+pl 0,5,0 0,1,0 0,128,0 
+
+# pl 0,0,25 0,0,1 0,0,128 b=tex x=static/textures/stained_rfl.xpm
+# pl -15,0,0 1,0,0 0,0,64 b=tex x=static/textures/stained_rfl.xpm
+# pl 15,0,0 1,0,0 0,0,64 b=tex x=static/textures/stained_rfl.xpm
+
+sp -10,-1,15 1.5 250,250,250
+sp -5,-1,15 1.5 250,250,250 r=0.7
+sp 0,-1,15 1.5 255,0,0 x=static/textures/uv_test_blend.xpm 
+
+sp 5,-1,15 1.5 250,250,250 r=0 s=0 x=static/textures/stained_rfl.xpm 
+sp 10,-1,15 1.5 250,250,250 r=0 s=0 b=tex x=static/textures/stained_rfl.xpm 
+# sp 15,-1,15 1.5 250,250,250 r=0 s=0 b=tex x=static/textures/stained_rfl.xpm 
+#sp 0,-1,15 1.5 255,0,0 b=tex x=static/textures/stained_rfl.xpm
+
+
+sp 10,5,10 3 192,192,192
+cy 10,0,10 0,1,0 2 10 192,192,192
+sp 10,-5,10 3 192,192,192
+
+sp 10,5,20 3 50,50,50 r=0.6 s=310
+cy 10,0,20 0,1,0 2 10 50,50,50 r=0.6 s=310
+sp 10,-5,20 3 50,50,50 r=0.6 s=310
+
+sp -10,5,20 3 0,255,0  x=static/textures/uv_test_blend.xpm 
+cy -10,0,20 0,1,0 2 10 192,192,192 x=static/textures/uv_test_blend.xpm 
+sp -10,-5,20 3 0,255,0 x=static/textures/uv_test_blend.xpm 
+
+sp -10,5,10 3 0,255,0 b=tex x=static/textures/stained_rfl.xpm
+cy -10,0,10 0,1,0 2 10 192,192,192 b=tex x=static/textures/stained_rfl.xpm
+sp -10,-5,10 3 0,255,0 b=tex x=static/textures/stained_rfl.xpm
+
+
+# option args:
+# - shininess: s=n [0,256],
+# - reflexion: r=n [0,1],
+# - texture: x=path/file.xpm
+# - bump: b=1, b=tex (apply on base texture), b=path/file.xpm (apply on new texture)
+
