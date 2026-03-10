@@ -3,7 +3,7 @@
 
 # miniRT
 
-A minimal ray tracer built in C as part of the 42 School curriculum. This project renders 3D scenes using ray tracing techniques, supporting basic geometric shapes, lighting, and textures with camera controls.
+Educational ray tracer built in C as part of the 42 School curriculum. This project renders 3D scenes using ray tracing techniques, supporting basic geometric shapes, lighting, and textures with camera controls.
 
 ![42 Badge](https://img.shields.io/badge/42-Project-blue) ![Language](https://img.shields.io/badge/language-C-blue) ![Build](https://img.shields.io/badge/build-Makefile-green) ![Graphics](https://img.shields.io/badge/library-MiniLibX-orange)
 
@@ -31,7 +31,7 @@ A minimal ray tracer built in C as part of the 42 School curriculum. This projec
 **miniRT** is a minimal ray tracer written in **C** as part of the graphics curriculum at **42 School**.
 The objective of the project is to implement the fundamental concepts of ray tracing while working within the constraints of low-level graphics programming.
 
-The program renders simple 3D scenes described in a `.rt` file using ray–object intersection algorithms and basic lighting models. The implementation focuses on clarity, mathematical correctness, and modular design.
+The program renders simple 3D scenes described in a `.rt` file using ray–object intersection algorithms and basic lighting models.
 
 During the development of this project, we explored several core topics in computer graphics, including:
 
@@ -50,13 +50,13 @@ This project served as an introduction to the fundamentals of graphics engine de
 
 | Category | Description |
 |----------|-------------|
-| **Ray Tracing Engine** | Realistic 3D rendering with ray-object intersection calculations |
+| **Ray Tracing Engine** | 3D rendering with ray-object intersection calculations |
 | **Geometric Primitives** | Spheres, planes, cylinders, cones |
-| **Lighting System** | Ambient, point, reflection, colored, and multi-spot lights |
+| **Lighting System** | Ambient, point, Phong reflection, reflection, colored, and multi-spot lights |
 | **Checkerboard pattern** | Procedural checkerboard pattern |
 | **Textures & Bump Mapping** | Surface detail support using XPM files |
 | **Camera Controls** | Interactive scene navigation |
-| **Export** | Save rendered images to file |
+| **Export** | Save edited scene to `.rt` file |
 | **Scene Parsing** | Load scenes from `.rt` configuration files |
 
 ### Tech Stack
@@ -270,49 +270,12 @@ This creates a sphere with:
 * a texture map
 * a bump map derived from the texture
 
-
----
-## Project Structure
-
-```
-miniRT/
-├── doc/           		# Math documentation
-├── includes/           # Header files
-│   ├── minirt.h        # Main header
-│   ├── structs.h       # Object structures
-│   ├── parsing.h       # Scene parsing declarations
-│   └── ...
-├── src/
-│   ├── events /        # Input handling and camera controls
-│   ├── export /        # Export scene (in .rt)
-│   ├── graphics/       # Ray tracing core
-│   ├── maths/          # Helper math functions
-│   ├── parsing/        # Scene file parser
-│   └── main.c          # Entry point
-├── libs/
-│   ├── libft/          # Custom C library
-│   └── mlx/            # MiniLibX graphics library
-├── static/             # Example scene files (.rt) and textures images (XPM)
-├── Makefile
-└── README.md
-```
-## Rendering Pipeline
-
-The rendering process follows these steps:
-
-1. Parse the `.rt` scene file
-2. Initialize camera, lights, and objects
-3. Cast rays from the camera through each pixel
-4. Compute ray–object intersections
-5. Apply lighting calculations
-6. Render the final image to the window
----
-
 ## Resources
 
 | Topic | Links |
 |-------|-------|
-
+| wikipedia | https://en.wikipedia.org/wiki/Ray_tracing_(graphics) |
+| computer graphics |https://gabrielgambetta.com/computer-graphics-from-scratch/02-basic-raytracing.html |
 ### AI Usage
 
 AI tools were used exclusively for documentation assistance:
@@ -324,7 +287,7 @@ AI tools were used exclusively for documentation assistance:
 
 ## License
 
-This project is part of the 42 School curriculum and is 42 private property.
+This project is part of the 42 School curriculum and is 42 property.
 
 ---
 
