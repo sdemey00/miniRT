@@ -12,7 +12,7 @@ A minimal ray tracer built in C as part of the 42 School curriculum. This projec
 ## Table of Contents
 
 - [Description](#description)
-- [Rendering Showcase](#rendering-showcase)
+- [Render Gallery](#render-gallery)
 - [Installation](#installation)
 - [Compile-Time Options](#compile-time-options)
 - [Quick Start](#quick-start)
@@ -70,7 +70,7 @@ This project served as an introduction to the fundamentals of graphics engine de
 
 ---
 
-## Rendering Showcase
+## Render Gallery
 
 Below are several scenes rendered with **miniRT** demonstrating lighting, reflections, textures, and bump mapping.
 
@@ -188,16 +188,19 @@ make
 
 | Key | Action |
 |----|----|
+**Overall**
 | ESC              | Quit |
 | p, [,]            | Full render |
 | e                | Export |
 | w, a, s, d, SPACE, c  | Movements |
 | z                | Skip to controller input |
 | Mouse-Right      | Color picker and visualizer |
+**Camera mode**
 | i, j, k, l          | Orientation |
 | -, =              | FOV |
 | e, Mouse-Left     | Take or release, control of object |
 | x                | Toggle reticle |
+**Object mode**
 | i, j, k, l, u, o      | Orientation |
 | t, g              | Radius |
 | y, h              | Height |
@@ -330,6 +333,5 @@ This project is part of the 42 School curriculum and is 42 private property.
 
 
 <!-- TODO :
-	- Add screnshots
 	- Ressources
 	 -->
