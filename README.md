@@ -186,25 +186,25 @@ make
 
 ## Controls
 
-| Key | Action |
-|----|----|
+| Key                   | Action                                |
+| --------------------- | ------------------------------------- |
 **Overall**
-| ESC              | Quit |
-| p, [,]            | Full render |
-| e                | Export |
-| w, a, s, d, SPACE, c  | Movements |
-| z                | Skip to controller input |
-| Mouse-Right      | Color picker and visualizer |
-| up, down     |  Increase or decrease, render resolution |
+| ESC                   | Quit                                  |
+| p, [,]                | Full render                           |
+| e                     | Export                                |
+| w, a, s, d, SPACE, c  | Movements                             |
+| z                     | Skip to controller input              |
+| Mouse-Right           | Color picker and visualizer           |
+| up, down              |  Increase or decrease, resolution     |
 **Camera mode**
-| i, j, k, l          | Orientation |
-| -, =              | FOV |
-| e, Mouse-Left     | Take or release, control of object |
-| x                | Toggle reticle |
+| i, j, k, l            | Orientation                           |
+| -, =                  | FOV                                   |
+| e, Mouse-Left         | Take or release, control of object    |
+| x                     | Toggle reticle                        |
 **Object mode**
-| i, j, k, l, u, o      | Orientation |
-| t, g              | Radius |
-| y, h              | Height |
+| i, j, k, l, u, o      | Orientation                           |
+| t, g                  | Radius                                |
+| y, h                  | Height                                |
 
 
 Click on an object to take control of it.
