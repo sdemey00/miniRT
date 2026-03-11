@@ -119,7 +119,7 @@ Complex scene combining cylinders and spheres with optional material parameters.
 The project is compiled with **GCC** and the standard C flags: **-Wall -Wextra -Werror**
 ```sh
 # Clone the repository
-git clone https://github.com/your-username/miniRT.git
+git clone https://github.com/sdemey00/miniRT.git
 cd miniRT
 
 # Compile the project
@@ -171,10 +171,10 @@ This will override the default values defined in the `Makefile`.
 ## Quick Start
 
 ```bash
-git clone https://github.com/your-username/miniRT.git
+git clone https://github.com/sdemey00/miniRT.git
 cd miniRT
 make
-./miniRT static/example.rt
+./miniRT static/maps/demo.rt
 ```
 
 ## Usage
