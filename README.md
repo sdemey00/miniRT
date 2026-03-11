@@ -195,12 +195,12 @@ make
 | w, a, s, d, SPACE, c  | Movements |
 | z                | Skip to controller input |
 | Mouse-Right      | Color picker and visualizer |
+| up, down     |  Increase or decrease, render resolution |
 **Camera mode**
 | i, j, k, l          | Orientation |
 | -, =              | FOV |
 | e, Mouse-Left     | Take or release, control of object |
 | x                | Toggle reticle |
-| up, down     |  Increase or decrease, render resolution |
 **Object mode**
 | i, j, k, l, u, o      | Orientation |
 | t, g              | Radius |
