@@ -34,6 +34,7 @@ t_bool	parse_line(char *line, t_scene *scene, void *mlx)
 	{"A", parse_ambiant}, {"C", parse_camera}, {"L", parse_light},
 	{"B", parse_bg}, {"sp", parse_sphere}, {"pl", parse_plane},
 	{"cy", parse_cylinder}, {"co", parse_cone}, {"ci", parse_circle},
+	{"bh", parse_blackhole},
 	{NULL, NULL}};
 
 	i = 0;

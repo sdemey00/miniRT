@@ -35,6 +35,8 @@ void	objs_print(const t_obj *objs, t_ssuint objs_len)
 			cone_print(&objs[i]);
 		if (objs[i].e_type == CIR)
 			circle_print(&objs[i]);
+		if (objs[i].e_type == BH)
+			blackhole_print(&objs[i]);
 		bitmap_print(&objs[i].effects);
 		if (i < objs_len - 1)
 			ft_printf("- - - - - - - - - - - - - - - - - - - -\n");

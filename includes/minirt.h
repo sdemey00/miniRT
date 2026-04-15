@@ -83,6 +83,9 @@ t_bool	ray_hit_pla(const t_ray *r, const t_obj *p, float *t);
 t_bool	ray_hit_cir(const t_ray *r, const t_obj *ci, float *t);
 t_bool	ray_hit_con(const t_ray *r, const t_obj *cy, float *t);
 
+// graphics/ray_hit_bh.c
+t_bool	ray_hit_bh(const t_ray *r, const t_obj *bh, float *t);
+
 // graphics/ray_hit_cyl.c
 t_bool	ray_hit_cyl(const t_ray *r, const t_obj *cy, float *t);
 

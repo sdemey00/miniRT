@@ -32,51 +32,26 @@ static t_color	color_lerp(const t_color a, const t_color b, const float t)
 	});
 }
 
-static t_bool	find_blackhole_and_disk(t_scene *s, t_obj **bh, t_obj **disk)
+static t_obj	*find_blackhole_obj(t_scene *s)
 {
 	t_idx	i;
-	t_idx	j;
-	float	best_dist;
-	float	d;
 
-	*bh = NULL;
-	*disk = NULL;
-	best_dist = INFINITY;
 	i = 0;
 	while (i < s->objs_len)
 	{
-		if (s->objs[i].e_type == SPH && s->objs[i].radius > EPSILON
-			&& (s->objs[i].color.x + s->objs[i].color.y + s->objs[i].color.z) <= 5)
-		{
-			j = 0;
-			while (j < s->objs_len)
-			{
-				if (s->objs[j].e_type == CIR && s->objs[j].radius > s->objs[i].radius && \
-					s->objs[i].pos.x == s->objs[j].pos.x && s->objs[i].pos.y == s->objs[j].pos.y && \
-					s->objs[i].pos.z == s->objs[j].pos.z)
-				{
-					d = vec_mag(vec_sub(s->objs[j].pos, s->objs[i].pos));
-					if (d < best_dist)
-					{
-						best_dist = d;
-						*bh = &s->objs[i];
-						*disk = &s->objs[j];
-					}
-				}
-				j++;
-			}
-		}
+		if (s->objs[i].e_type == BH)
+			return (&s->objs[i]);
 		i++;
 	}
-	return (*bh && *disk);
+	return (NULL);
 }
 
 static t_bool	segment_disk_crossing(const t_vec p0, const t_vec p1,
-		const t_obj *bh, const t_obj *disk, t_vec *x)
+		const t_obj *bh, t_vec *x)
 {
 	const t_vec	seg = vec_sub(p1, p0);
-	const float	num = vec_dot(vec_sub(bh->pos, p0), disk->dir);
-	const float	den = vec_dot(seg, disk->dir);
+	const float	num = vec_dot(vec_sub(bh->pos, p0), bh->dir);
+	const float	den = vec_dot(seg, bh->dir);
 	float		t;
 	float		rho;
 	t_vec		r;
@@ -88,18 +63,20 @@ static t_bool	segment_disk_crossing(const t_vec p0, const t_vec p1,
 		return (0);
 	*x = vec_sum(p0, vec_scal(seg, t));
 	r = vec_sub(*x, bh->pos);
-	r = vec_sub(r, vec_scal(disk->dir, vec_dot(r, disk->dir)));
+	r = vec_sub(r, vec_scal(bh->dir, vec_dot(r, bh->dir)));
 	rho = vec_mag(r);
-	if (rho < bh->radius * 1.2f || rho > disk->radius)
+	if (rho < bh->radius * 1.2f || rho > bh->height)
 		return (0);
 	return (1);
 }
 
-static t_color	disk_emission_color(const t_obj *bh, const t_obj *disk,
-		const t_vec x, const t_vec ray_dir)
+static t_color	disk_emission_color(const t_obj *bh, const t_vec x,
+		const t_vec ray_dir)
 {
 	const float	rin = bh->radius * 1.2f;
-	const float	rout = disk->radius;
+	const float	rout = bh->height;
+	const t_color	hot = vec_rscal(bh->color, 255.0f);
+	const t_color	cool = vec_scal(hot, 0.3f);
 	t_vec		r;
 	t_vec		rdir;
 	t_vec		vdir;
@@ -111,9 +88,9 @@ static t_color	disk_emission_color(const t_obj *bh, const t_obj *disk,
 	float		boost;
 
 	r = vec_sub(x, bh->pos);
-	r = vec_sub(r, vec_scal(disk->dir, vec_dot(r, disk->dir)));
+	r = vec_sub(r, vec_scal(bh->dir, vec_dot(r, bh->dir)));
 	rdir = vec_norm(r);
-	vdir = vec_norm(vec_cross(disk->dir, rdir));
+	vdir = vec_norm(vec_cross(bh->dir, rdir));
 	u = (vec_mag(r) - rin) / fmaxf(rout - rin, 1e-4f);
 	u = clampf(u, 0.0f, 1.0f);
 	beta = 0.65f * sqrtf(clampf(rin / fmaxf(vec_mag(r), rin), 0.0f, 1.0f));
@@ -123,11 +100,11 @@ static t_color	disk_emission_color(const t_obj *bh, const t_obj *disk,
 	doppler = 1.0f / (gamma * fmaxf(1.0f - beta * mu, 0.15f));
 	boost = ft_pow(fmaxf(doppler, 0.0f), 3);
 	return (vec_fmin(&(t_color){
-		color_lerp((t_color){1.3f, 1.1f, 0.9f}, (t_color){1.0f, 0.4f, 0.12f}, u)
+		color_lerp(hot, cool, u)
 			.x * fminf(4.0f, boost * (1.3f / (0.2f + u * u))),
-		color_lerp((t_color){1.3f, 1.1f, 0.9f}, (t_color){1.0f, 0.4f, 0.12f}, u)
+		color_lerp(hot, cool, u)
 			.y * fminf(4.0f, boost * (1.3f / (0.2f + u * u))),
-		color_lerp((t_color){1.3f, 1.1f, 0.9f}, (t_color){1.0f, 0.4f, 0.12f}, u)
+		color_lerp(hot, cool, u)
 			.z * fminf(4.0f, boost * (1.3f / (0.2f + u * u)))
 	}, 1.0f));
 }
@@ -135,7 +112,6 @@ static t_color	disk_emission_color(const t_obj *bh, const t_obj *disk,
 static t_bool	trace_blackhole_disk(t_ray *r, t_scene *s, t_color *out)
 {
 	t_obj	*bh;
-	t_obj	*disk;
 	t_vec	p;
 	t_vec	d;
 	t_vec	prev;
@@ -146,7 +122,8 @@ static t_bool	trace_blackhole_disk(t_ray *r, t_scene *s, t_color *out)
 	float	k;
 	t_idx	i;
 
-	if (!find_blackhole_and_disk(s, &bh, &disk))
+	bh = find_blackhole_obj(s);
+	if (!bh)
 		return (0);
 	p = r->origin;
 	d = vec_norm(r->dir);
@@ -161,14 +138,13 @@ static t_bool	trace_blackhole_disk(t_ray *r, t_scene *s, t_color *out)
 			return (*out = (t_color){0, 0, 0}, 1);
 		prev = p;
 		p = vec_sum(p, vec_scal(d, ds));
-		if (segment_disk_crossing(prev, p, bh, disk, &x))
-			return (*out = disk_emission_color(bh, disk, x, d), 1);
+		if (bh->height > 0.0f && segment_disk_crossing(prev, p, bh, &x))
+			return (*out = disk_emission_color(bh, x, d), 1);
 		d = vec_norm(vec_sum(d, vec_scal(rvec,
 				(-k * ds) / (dist * dist * dist + 1e-4f))));
-		if (dist > fmaxf(1500.0f, disk->radius * 18.0f))
+		if (dist > fmaxf(1500.0f, bh->height * 18.0f))
 			break ;
 	}
-	r->origin = p;
 	r->dir = d;
 	return (0);
 }
@@ -188,7 +164,8 @@ static t_obj	*get_closest_hit_obj(const t_ray *r, float *closest_t, \
 			(s->objs[i].e_type == PLA && ray_hit_pla(r, &s->objs[i], &t)) || \
 			(s->objs[i].e_type == CYL && ray_hit_cyl(r, &s->objs[i], &t)) || \
 			(s->objs[i].e_type == CON && ray_hit_con(r, &s->objs[i], &t)) || \
-			(s->objs[i].e_type == CIR && ray_hit_cir(r, &s->objs[i], &t)))
+			(s->objs[i].e_type == CIR && ray_hit_cir(r, &s->objs[i], &t)) /* || \
+			(s->objs[i].e_type == BH && ray_hit_bh(r, &s->objs[i], &t)) */)
 		{
 			if (EPSILON < t && t < *closest_t)
 			{

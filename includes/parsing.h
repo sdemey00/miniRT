@@ -72,6 +72,10 @@ void	cone_print(const t_obj *cone);
 t_bool	parse_circle(char **split, t_scene *scene, void *mlx);
 void	circle_print(const t_obj *circle);
 
+// parsing/parse_blackhole.c
+t_bool	parse_blackhole(char **split, t_scene *scene, void *mlx);
+void	blackhole_print(const t_obj *blackhole);
+
 // parsing/parse_optional_args.c
 t_bool	parse_optional_args(char **split, t_obj *obj, void *mlx);
 

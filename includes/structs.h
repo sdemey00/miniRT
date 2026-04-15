@@ -97,7 +97,8 @@ typedef struct s_obj
 		PLA,
 		CYL,
 		CON,
-		CIR
+		CIR,
+		BH
 	}			e_type;
 	t_vec		pos;
 	t_vec		dir;

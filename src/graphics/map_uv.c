@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_uv.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdemey <sdemey@student.s19.be>             +#+  +:+       +#+        */
+/*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 16:50:17 by sdemey            #+#    #+#             */
-/*   Updated: 2025/11/18 18:24:11 by sdemey           ###   ########.fr       */
+/*   Updated: 2026/04/15 23:22:39 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_vec	map_obj(t_hit *hitten)
 	local = get_local_hit(hitten, vec_sub(hitten->point, hitten->obj->pos));
 	u = 0.0;
 	v = 0.0;
-	if (hitten->obj->e_type == SPH)
+	if (hitten->obj->e_type == SPH || hitten->obj->e_type == BH)
 		map_sphere(&u, &v, local);
 	else if (hitten->obj->e_type == PLA && hitten->obj->texture.loaded)
 		map_plane(&u, &v, local, hitten);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_surface_normal.c                               :+:      :+:    :+:   */
+/*   normal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdemey <sdemey@student.s19.be>             +#+  +:+       +#+        */
+/*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 17:34:52 by sdemey            #+#    #+#             */
-/*   Updated: 2025/11/18 18:28:47 by sdemey           ###   ########.fr       */
+/*   Updated: 2026/04/15 23:22:39 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	compute_tangent_space(t_hit *h)
 	up = (t_vec){0, 1, 0};
 	if (ft_abs(h->normal.y) > 0.999)
 		up = (t_vec){1, 0, 0};
-	if (h->obj->e_type == SPH)
+	if (h->obj->e_type == SPH || h->obj->e_type == BH)
 	{
 		h->tangent = vec_norm((t_vec){-h->normal.z, 0.0, h->normal.x});
 		if (vec_mag(h->tangent) < EPSILON)
@@ -71,7 +71,7 @@ static t_vec	cone_normal(t_obj *obj, t_vec hit_point)
 
 t_vec	get_surface_normal(t_obj *obj, t_vec hit_point)
 {
-	if (obj->e_type == SPH)
+	if (obj->e_type == SPH || obj->e_type == BH)
 		return (vec_norm(vec_sub(hit_point, obj->pos)));
 	else if (obj->e_type == PLA || obj->e_type == CIR)
 		return (vec_norm(obj->dir));

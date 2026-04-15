@@ -62,6 +62,7 @@ SRCS	= src/bitmap.c \
 			src/parsing/parse_camera.c \
 			src/parsing/parse_background.c \
 			src/parsing/parse_circle.c \
+			src/parsing/parse_blackhole.c \
 			src/parsing/parse_optional_args.c \
 			src/parsing/parse_plane.c \
 			src/parsing/parse_sphere.c \
@@ -81,6 +82,7 @@ SRCS	= src/bitmap.c \
 			src/graphics/normal.c \
 			src/graphics/map_uv.c \
 			src/graphics/ray_hit_cyl.c \
+			src/graphics/ray_hit_bh.c \
 			src/graphics/ray_hits.c \
 			src/export/others.c \
 			src/export/lights.c \

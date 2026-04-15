@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 17:00:16 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/21 22:09:21 by mmichele         ###   ########.fr       */
+/*   Updated: 2026/04/15 23:22:39 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ void	export_object(const int fd, t_obj *o)
 		ft_dprintf(fd, "co %.2f,%.2f,%.2f %f,%f,%f %d,%d,%d", \
 			o->pos.x, o->pos.y, o->pos.z, o->dir.x, o->dir.y, o->dir.z, \
 			(t_ssuint)o->color.x, (t_ssuint)o->color.y, (t_ssuint)o->color.z);
+	else if (o->e_type == BH)
+		ft_dprintf(fd, "bh %.2f,%.2f,%.2f %f,%f,%f %.2f %.2f %d,%d,%d", \
+			o->pos.x, o->pos.y, o->pos.z, o->dir.x, o->dir.y, o->dir.z, \
+			o->radius * 2.0, o->height * 2.0, (t_ssuint)o->color.x, \
+			(t_ssuint)o->color.y, (t_ssuint)o->color.z);
 	export_bump_textures(fd, o);
 	export_visual_textures(fd, o);
 	export_other_args(fd, o);
