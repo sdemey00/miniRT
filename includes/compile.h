@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 11:45:03 by mmichele          #+#    #+#             */
-/*   Updated: 2025/11/22 11:58:39 by mmichele         ###   ########.fr       */
+/*   Updated: 2026/04/16 17:05:25 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,15 @@
 # endif
 # ifndef MAX_OBJS
 #  define MAX_OBJS 16
+# endif
+
+# ifdef RENDER_THREADS
+#  if RENDER_THREADS < 1 || 128 < RENDER_THREADS
+#   undef RENDER_THREADS
+#  endif
+# endif
+# ifndef RENDER_THREADS
+#  define RENDER_THREADS 1
 # endif
 
 # ifndef START_RENDER

@@ -19,15 +19,16 @@ NAME	= miniRT
 W		?= 0
 H		?= 0
 M		?= 0
-S		?= 1
+S		?= 0
 V		?= 0
+T		?= 1
 
 # Only used with "valgrind" target
 F		?=
 
 # Source program compiler settings
 CC		= cc
-FLAGS	= -Wall -Wextra -Werror -g -D WIDTH=$(W) -D HEIGHT=$(H) -D MAX_OBJS=$(M) -D VERBOSE=$(V) -D START_RENDER=$(S)
+FLAGS	= -Wall -Wextra -Werror -g -D WIDTH=$(W) -D HEIGHT=$(H) -D MAX_OBJS=$(M) -D VERBOSE=$(V) -D START_RENDER=$(S) -D RENDER_THREADS=$(T)
 
 # Directories
 BLDD	= build
@@ -153,7 +154,7 @@ san: all
 valgrind:
 	valgrind --track-fds=yes --leak-check=full --show-leak-kinds=all ./$(NAME) $(F)
 
-fast: FLAGS = -Ofast -D WIDTH=$(W) -D HEIGHT=$(H) -D MAX_OBJS=$(M) -D VERBOSE=$(V) -D START_RENDER=$(S)
+fast: FLAGS = -Ofast -D WIDTH=$(W) -D HEIGHT=$(H) -D MAX_OBJS=$(M) -D VERBOSE=$(V) -D START_RENDER=$(S) -D RENDER_THREADS=$(T)
 fast: $(MLXN) $(LFTN)-fast $(NAME)
 
 clear:

@@ -20,8 +20,3 @@ sp 160.00,0.00,0.00 3 255,0,0 s=16 r=0.0 b=tex x=static/textures/jupiter.xpm
 sp 180.00,0.00,0.00 2 255,0,0 s=16 r=0.0 b=tex x=static/textures/uranus.xpm
 
 pl 100,-200,-100 0,0,1 180,180,180 x=static/textures/milky_way.xpm
-
-
-
-
-

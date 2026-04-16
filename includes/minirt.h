@@ -25,6 +25,7 @@
 # include "parsing.h"
 # include "export.h"
 # include "controller.h"
+# include "threading.h"
 
 # define EPSILON 1e-2
 
@@ -132,8 +133,8 @@ t_bool	bitmap_get(const t_bitmap *b, const t_ssuint i);
 void	bitmap_print(const t_bitmap *b);
 
 // graphics/rasterizers.c
-void	raster_linear(t_window *w, t_scene*s);
-void	raster_evenly(t_window *w, t_scene *s);
-void	raster_grid(t_window *w, t_scene *s);
+void	*raster_linear(void *ctx);
+void	*raster_evenly(void *ctx);
+void	*raster_grid(void *ctx);
 
 #endif // MINIRT_H
