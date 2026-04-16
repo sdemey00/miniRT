@@ -12,6 +12,19 @@
 
 #include "minirt.h"
 
+void	camera_update_basis(t_camera *c)
+{
+	t_vec	up;
+
+	up = (t_vec){0, 1, 0};
+	if (fabsf(c->dir.y) > 0.999f)
+		up = (t_vec){1, 0, 0};
+	c->right = vec_cross(up, c->dir);
+	vec_inorm(&c->right);
+	c->up = vec_cross(c->dir, c->right);
+	vec_inorm(&c->up);
+}
+
 t_ray	camera_ray(t_camera *c, t_idx x, t_idx y)
 {
 	const float	u = (2.0 * ((x + 0.5) / WIDTH) - 1.0) * c->ratio * c->flen;
@@ -19,10 +32,6 @@ t_ray	camera_ray(t_camera *c, t_idx x, t_idx y)
 	const t_vec	cam_dir = (t_vec){u, v, 1.0};
 	t_vec		ray_dir;
 
-	c->right = vec_cross((t_vec){0, 1, 0}, c->dir);
-	vec_inorm(&c->right);
-	c->up = vec_cross(c->dir, c->right);
-	vec_inorm(&c->up);
 	ray_dir = (t_vec){
 		c->right.x * cam_dir.x + c->up.x * cam_dir.y + c->dir.x * cam_dir.z,
 		c->right.y * cam_dir.x + c->up.y * cam_dir.y + c->dir.y * cam_dir.z,
@@ -85,6 +94,7 @@ void	camera_change(struct s_ctx *c, const int key)
 		camera_rotate(&c->s.camera, key);
 	else if (ft_strchr("-=", key) >= 0)
 		camera_change_fov(&c->s.camera, key == '=');
+	camera_update_basis(&c->s.camera);
 	if (VERBOSE)
 		camera_print(&c->s.camera);
 }

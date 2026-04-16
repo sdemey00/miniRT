@@ -86,6 +86,8 @@ static t_color	disk_emission_color(const t_obj *bh, const t_vec x,
 	float		doppler;
 	float		gamma;
 	float		boost;
+	t_color		tint;
+	float		gain;
 
 	r = vec_sub(x, bh->pos);
 	r = vec_sub(r, vec_scal(bh->dir, vec_dot(r, bh->dir)));
@@ -99,13 +101,12 @@ static t_color	disk_emission_color(const t_obj *bh, const t_vec x,
 	gamma = 1.0f / sqrtf(fmaxf(1.0f - beta * beta, 1e-4f));
 	doppler = 1.0f / (gamma * fmaxf(1.0f - beta * mu, 0.15f));
 	boost = ft_pow(fmaxf(doppler, 0.0f), 3);
+	tint = color_lerp(hot, cool, u);
+	gain = fminf(4.0f, boost * (1.3f / (0.2f + u * u)));
 	return (vec_fmin(&(t_color){
-		color_lerp(hot, cool, u)
-			.x * fminf(4.0f, boost * (1.3f / (0.2f + u * u))),
-		color_lerp(hot, cool, u)
-			.y * fminf(4.0f, boost * (1.3f / (0.2f + u * u))),
-		color_lerp(hot, cool, u)
-			.z * fminf(4.0f, boost * (1.3f / (0.2f + u * u)))
+		tint.x * gain,
+		tint.y * gain,
+		tint.z * gain
 	}, 1.0f));
 }
 
@@ -117,9 +118,16 @@ static t_bool	trace_blackhole_disk(t_ray *r, t_scene *s, t_color *out)
 	t_vec	prev;
 	t_vec	x;
 	t_vec	rvec;
+	t_vec	oc;
 	float	dist;
+	float	dist2;
 	float	ds;
+	float	step;
 	float	k;
+	float	max_r;
+	float	influence;
+	float	tca;
+	float	line_dist2;
 	t_idx	i;
 
 	bh = find_blackhole_obj(s);
@@ -129,20 +137,34 @@ static t_bool	trace_blackhole_disk(t_ray *r, t_scene *s, t_color *out)
 	d = vec_norm(r->dir);
 	ds = fmaxf(bh->radius * 0.12f, 0.03f);
 	k = 0.55f * bh->radius * bh->radius;
+	max_r = fmaxf(bh->radius, bh->height);
+	influence = fmaxf(max_r * 10.0f, bh->radius * 20.0f);
+	oc = vec_sub(bh->pos, p);
+	tca = vec_dot(oc, d);
+	line_dist2 = vec_dot(oc, oc) - tca * tca;
+	if (line_dist2 > influence * influence && tca < 0.0f)
+		return (0);
+	if (bh->height <= 0.0f && line_dist2 > influence * influence)
+		return (0);
 	i = 0;
 	while (i++ < 700)
 	{
 		rvec = vec_sub(p, bh->pos);
-		dist = vec_mag(rvec);
-		if (dist < bh->radius)
+		dist2 = vec_dot(rvec, rvec);
+		if (dist2 < bh->radius * bh->radius)
 			return (*out = (t_color){0, 0, 0}, 1);
+		dist = sqrtf(dist2);
+		step = fmaxf(ds, dist * 0.04f);
+		step = fminf(step, fmaxf(bh->radius * 1.5f, 0.2f));
 		prev = p;
-		p = vec_sum(p, vec_scal(d, ds));
+		p = vec_sum(p, vec_scal(d, step));
 		if (bh->height > 0.0f && segment_disk_crossing(prev, p, bh, &x))
 			return (*out = disk_emission_color(bh, x, d), 1);
 		d = vec_norm(vec_sum(d, vec_scal(rvec,
-				(-k * ds) / (dist * dist * dist + 1e-4f))));
-		if (dist > fmaxf(1500.0f, bh->height * 18.0f))
+				(-k * step) / (dist2 * dist + 1e-4f))));
+		if (vec_dot(rvec, d) > 0.0f && dist > influence)
+			break ;
+		if (dist > fmaxf(1500.0f, influence * 3.0f))
 			break ;
 	}
 	r->dir = d;

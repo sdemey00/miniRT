@@ -6,7 +6,7 @@
 /*   By: mmichele <mmichele@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 12:37:08 by sdemey            #+#    #+#             */
-/*   Updated: 2025/11/17 14:41:11 by mmichele         ###   ########.fr       */
+/*   Updated: 2026/04/16 01:55:34 by mmichele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_bool	scene_init(t_scene *s, const char *fpath, void *mlx)
 		return (0);
 	s->camera.ratio = (float)WIDTH / (float)HEIGHT;
 	s->camera.flen = tan(s->camera.fov * FT_PI / 180 / 2);
+	camera_update_basis(&s->camera);
 	s->ambiant.light_norm = vec_rscal(s->ambiant.color, 255.0);
 	normalize_lights(s);
 	if (VERBOSE)

@@ -75,6 +75,7 @@ t_color	ray_color(t_ray *r, t_scene *s, int depth);
 
 // graphics/camera.c
 t_ray	camera_ray(t_camera *c, t_idx x, t_idx y);
+void	camera_update_basis(t_camera *c);
 void	camera_change(struct s_ctx *c, const int key);
 
 // graphics/ray_hits.c
